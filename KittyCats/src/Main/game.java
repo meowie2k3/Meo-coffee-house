@@ -10,5 +10,6 @@ public class game{
         window.setResizable(false);
         window.pack();
         window.setVisible(true);
+        
     }
 }
