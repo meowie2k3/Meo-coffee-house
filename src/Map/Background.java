@@ -39,6 +39,13 @@ public class Background {
         y += dy;
     }
     public void draw(Graphics2D g){
+
+        //print bug
+        if(g == null){
+            System.out.println("graphics is null");
+            System.exit(0);
+        }
+
         g.drawImage(image, (int)x, (int)y, null);
 
         if(x < 0){

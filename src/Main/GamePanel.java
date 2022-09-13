@@ -50,7 +50,7 @@ public class GamePanel extends JPanel
         image = new BufferedImage(
         WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 
-        g = (Graphics2D) g;
+        g = (Graphics2D) image.getGraphics();
         IsRun = true;
 
         gsm = new GameStateManager();
@@ -94,7 +94,7 @@ public class GamePanel extends JPanel
 
     private void drawToScreen(){
         Graphics g2 = getGraphics();
-        g2.drawImage(image, 0, 0,null);
+        g2.drawImage(image, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
         g2.dispose();
     }
 
