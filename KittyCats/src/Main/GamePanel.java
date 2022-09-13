@@ -5,6 +5,9 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.event.*;
 
+import GameState.GameStateManager;
+
+
 public class GamePanel extends JPanel 
     implements Runnable, KeyListener {
     //dimension
@@ -15,12 +18,16 @@ public class GamePanel extends JPanel
     //game threading
     private Thread thread;
     private boolean IsRun;
-    private int FPS = 60; // adjust fps
+    private int FPS = 60; // adjust fps limit
     private long targetTime = 1000 / FPS;
 
     //assets
     private BufferedImage image;
     private Graphics2D g;
+
+    //state manager
+    private GameStateManager gsm;
+
 
     public GamePanel() {
         super();
@@ -45,6 +52,8 @@ public class GamePanel extends JPanel
 
         g = (Graphics2D) g;
         IsRun = true;
+
+        gsm = new GameStateManager();
     }
 
     public void run(){
@@ -76,11 +85,11 @@ public class GamePanel extends JPanel
     }
 
     private void update(){
-
+        gsm.update();
     }
 
     private void draw(){
-
+        gsm.draw(g);
     }
 
     private void drawToScreen(){
@@ -94,9 +103,9 @@ public class GamePanel extends JPanel
     }
 
     public void keyPressed(KeyEvent key) {
-
+        gsm.keyPressed(key.getKeyCode());
     }
     public void keyReleased(KeyEvent key) {
-
+        gsm.keyReleased(key.getKeyCode());
     }
 }  
