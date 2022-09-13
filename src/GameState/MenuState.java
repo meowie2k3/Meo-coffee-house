@@ -49,15 +49,15 @@ public class MenuState extends GameState {
         //draw title
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("Cats Aventure", 80, 70);
+        g.drawString("Cats Adventure", 50, 70);
         //draw menu options
         g.setFont(font);
         for(int i = 0; i < options.length; i++){
             if(i == currentChoice){
-                g.setColor(Color.GREEN);
+                g.setColor(Color.RED);
             }
             else{
-                g.setColor(Color.PINK);
+                g.setColor(new Color(128,0,128));
             }
             g.drawString(options[i], 145, 140 + i * 15);
             //draw one after another

@@ -1,10 +1,10 @@
 package Map;
 
+import Main.GamePanel;
+
 import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
-
-import Main.GamePanel;
 
 public class Background {
     private BufferedImage image;

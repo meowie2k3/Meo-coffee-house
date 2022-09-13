@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 import GameState.GameStateManager;
 
-
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel 
     implements Runnable, KeyListener {
     //dimension
@@ -61,6 +61,7 @@ public class GamePanel extends JPanel
         long start;
         long elapsed;
         long wait;
+        
         //looping
         while(IsRun){
 
