@@ -95,6 +95,16 @@ public class MenuState extends GameState {
                 currentChoice++;
             }
         }
+        if(k == KeyEvent.VK_UP){
+            if(currentChoice > 0){
+                currentChoice--;
+            }
+        }
+        if(k == KeyEvent.VK_DOWN){
+            if(currentChoice < options.length - 1){
+                currentChoice++;
+            }
+        }
     }
     public void keyReleased(int k){
 
