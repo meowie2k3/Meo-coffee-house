@@ -1,9 +1,8 @@
 # CatAventure
-# A cat game
-built with java swing
+A cat game built with java swing
 # Member:
-Minh Huy
-Tri Dung
-Yen Chi
-Tan Hung
-Khanh Quynh
+Minh Huy,
+Tri Dung,
+Yen Chi,
+Tan Hung,
+Khanh Quynh.
