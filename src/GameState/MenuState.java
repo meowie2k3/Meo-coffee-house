@@ -11,7 +11,8 @@ public class MenuState extends GameState {
     private int currentChoice = 0;
 
     private String[] options = {
-        "Start", 
+        "Continue",
+        "New game", 
         "Help", 
         "Quit"
     };
@@ -59,19 +60,22 @@ public class MenuState extends GameState {
             else{
                 g.setColor(new Color(128,0,128));
             }
-            g.drawString(options[i], 145, 140 + i * 15);
+            g.drawString(options[i], 135, 140 + i * 20);
             //draw one after another
         }
     }
 
-    private void selectMenu(){
+    private void selectedMenu(){
         if(currentChoice == 0){
-            //start
+            //continue
         }
         if(currentChoice == 1){
-            //help
+            //new game
         }
         if(currentChoice == 2){
+            //help
+        }
+        if(currentChoice == 3){
             //quit
             System.exit(0);
         }
@@ -79,7 +83,7 @@ public class MenuState extends GameState {
 
     public void keyPressed(int k){
         if(k == KeyEvent.VK_ENTER){
-            selectMenu();
+            selectedMenu();
         }
         if(k == KeyEvent.VK_W){
             if(currentChoice > 0){
