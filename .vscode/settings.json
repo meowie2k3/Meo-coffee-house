@@ -1,7 +1,7 @@
 {
     "java.project.sourcePaths": [
-        "Resources",
-        "src"
+        "src",
+        "Resources"
     ],
     "java.project.outputPath": "out"
 }
