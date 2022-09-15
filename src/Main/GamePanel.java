@@ -1,15 +1,16 @@
 package Main;
 
 import javax.swing.*;
+
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.event.*;
 
 import GameState.GameStateManager;
 
-@SuppressWarnings("serial")
+
 public class GamePanel extends JPanel 
-    implements Runnable, KeyListener {
+    implements Runnable, KeyListener,MouseMotionListener{
     //dimension
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
@@ -99,6 +100,8 @@ public class GamePanel extends JPanel
         g2.dispose();
     }
 
+    
+
     public void keyTyped(KeyEvent key) {
 
     }
@@ -108,5 +111,12 @@ public class GamePanel extends JPanel
     }
     public void keyReleased(KeyEvent key) {
         gsm.keyReleased(key.getKeyCode());
+    }
+    
+    public void mouseMoved(MouseEvent e) {
+        gsm.mouseMoved(e);
+    }
+    public void mouseDragged(MouseEvent e) {
+        gsm.mouseDragged(e);
     }
 }  

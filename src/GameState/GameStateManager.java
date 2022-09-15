@@ -2,6 +2,9 @@ package GameState;
 
 import java.util.ArrayList;
 
+import java.awt.event.*;
+import java.awt.*;
+
 
 public class GameStateManager {
     
@@ -34,5 +37,10 @@ public class GameStateManager {
     public void keyReleased(int k){
         gameStates.get(currentState).keyReleased(k);
     }
-    
+    public void mouseMoved(MouseEvent e){
+        gameStates.get(currentState).mouseMoved(e);
+    }
+    public void mouseDragged(MouseEvent e){
+        gameStates.get(currentState).mouseDragged(e);
+    }
 }
