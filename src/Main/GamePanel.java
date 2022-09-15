@@ -42,6 +42,7 @@ public class GamePanel extends JPanel
         if (thread == null) {
             thread = new Thread(this);
             addKeyListener(this);
+            addMouseMotionListener(this);
             thread.start();
         }
     }

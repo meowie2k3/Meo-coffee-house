@@ -61,7 +61,7 @@ public class MenuState extends GameState {
                 g.setColor(new Color(128,0,128));
             }
             g.drawString(options[i], 135, 140 + i * 20);
-            g.drawRect(130, 140 + (i-1) * 20, 70, 20);
+            //g.drawRect(135, 140 + (i-1) * 20, 70, 20);
             //draw one after another
         }
     }
@@ -114,22 +114,22 @@ public class MenuState extends GameState {
     public void mouseMoved(MouseEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
-        System.out.println(x + " " + y);
+        //System.out.println(x + " " + y);
         if(e.getButton() == MouseEvent.BUTTON1){
             
             System.out.println("Mouse clicked");
             selectedMenu();
         }
-        if(x > 130 && x < 130 + 70 && y > 140 && y < 140 + 20){
+        if(x > 270 && x < 370 && y > 260 && y < 280){
             currentChoice = 0;
         }
-        if(x > 130 && x < 130 + 70 && y > 160 && y < 160 + 20){
+        if(x > 270 && x < 380 && y > 300 && y < 320){
             currentChoice = 1;
         }
-        if(x > 130 && x < 130 + 70 && y > 180 && y < 180 + 20){
+        if(x > 270 && x < 320 && y > 340 && y < 360){
             currentChoice = 2;
         }
-        if(x > 130 && x < 130 + 70 && y > 200 && y < 200 + 20){
+        if(x > 270 && x < 315 && y > 380 && y < 400){
             currentChoice = 3;
         }
     }
