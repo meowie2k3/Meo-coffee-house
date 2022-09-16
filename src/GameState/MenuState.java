@@ -1,7 +1,11 @@
 package GameState;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
 import Map.Background;
 
 public class MenuState extends GameState {
@@ -72,6 +76,7 @@ public class MenuState extends GameState {
         }
         if(currentChoice == 1){
             //new game
+            gsm.setState(GameStateManager.LEVEL1STATE);
         }
         if(currentChoice == 2){
             //help

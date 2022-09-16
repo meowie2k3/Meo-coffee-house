@@ -3,7 +3,6 @@ package GameState;
 import java.util.ArrayList;
 
 import java.awt.event.*;
-import java.awt.*;
 
 
 public class GameStateManager {
@@ -17,7 +16,8 @@ public class GameStateManager {
     public GameStateManager(){
         gameStates = new ArrayList<GameState>();
         currentState = MENUSTATE;
-        gameStates.add(new MenuState(this));
+        gameStates.add(new MenuState(this));//add menu state
+        gameStates.add(new Level1State(this));//add level 1 state
     }
 
     public void setState(int state){
