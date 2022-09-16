@@ -10,7 +10,8 @@ import GameState.GameStateManager;
 
 
 public class GamePanel extends JPanel 
-    implements Runnable, KeyListener,MouseMotionListener{
+    implements Runnable, KeyListener,MouseListener, MouseMotionListener{
+
     //dimension
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel
     //state manager
     private GameStateManager gsm;
 
-
+        //constructor
     public GamePanel() {
         super();
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
@@ -41,12 +42,14 @@ public class GamePanel extends JPanel
         super.addNotify();
         if (thread == null) {
             thread = new Thread(this);
+            //important: add event listener
             addKeyListener(this);
+            addMouseListener(this);
             addMouseMotionListener(this);
             thread.start();
         }
     }
-
+    //create game window
     private void init(){
 
         image = new BufferedImage(
@@ -57,7 +60,7 @@ public class GamePanel extends JPanel
 
         gsm = new GameStateManager();
     }
-
+    //game loop
     public void run(){
         init();
         long start;
@@ -90,7 +93,7 @@ public class GamePanel extends JPanel
     private void update(){
         gsm.update();
     }
-
+    //draw to buffer
     private void draw(){
         gsm.draw(g);
     }
@@ -102,18 +105,33 @@ public class GamePanel extends JPanel
     }
 
     
-
+    //key listener methods
     public void keyTyped(KeyEvent key) {
 
     }
-
     public void keyPressed(KeyEvent key) {
         gsm.keyPressed(key.getKeyCode());
     }
     public void keyReleased(KeyEvent key) {
         gsm.keyReleased(key.getKeyCode());
     }
-    
+    //mouse listener methods
+    public void mousePressed(MouseEvent e) {
+        gsm.mousePressed(e);
+    }
+    public void mouseReleased(MouseEvent e) {
+        gsm.mouseReleased(e);
+    }
+    public void mouseEntered(MouseEvent e) {
+        gsm.mouseEntered(e);
+    }
+    public void mouseClicked(MouseEvent e) {
+        gsm.mouseClicked(e);
+    }
+    public void mouseExited(MouseEvent e) {
+        gsm.mouseExited(e);
+    }
+    //mouse motion listener methods
     public void mouseMoved(MouseEvent e) {
         gsm.mouseMoved(e);
     }

@@ -111,15 +111,23 @@ public class MenuState extends GameState {
     public void keyReleased(int k){
 
     }
+    public void mousePressed(MouseEvent e) {
+    }
+    public void mouseReleased(MouseEvent e) {
+    }
+    public void mouseEntered(MouseEvent e) {
+    }
+    public void mouseClicked(MouseEvent e) {
+        //System.out.println("Mouse Clicked");
+        selectedMenu();
+    }
+    public void mouseExited(MouseEvent e) {
+    }
     public void mouseMoved(MouseEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
         //System.out.println(x + " " + y);
-        if(e.getButton() == MouseEvent.BUTTON1){
-            
-            System.out.println("Mouse clicked");
-            selectedMenu();
-        }
+        
         if(x > 270 && x < 370 && y > 260 && y < 280){
             currentChoice = 0;
         }
