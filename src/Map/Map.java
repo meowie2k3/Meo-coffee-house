@@ -20,7 +20,7 @@ public class Map {
 
     private double tween;//smooth camera movement
 
-    //map
+    //map instance
     private int[][] map;
     private int blockSize;
     private int numRows;
@@ -126,11 +126,11 @@ public class Map {
     //load map files into memory
     public void loadMap(String s){
         try{
-            InputStream in = getClass().getResourceAsStream(s);
+            InputStream in = getClass().getResourceAsStream(s);//read file from link
             BufferedReader br = new BufferedReader(
                 new InputStreamReader(in)
                 );
-
+            
             numCols = Integer.parseInt(br.readLine());
             numRows = Integer.parseInt(br.readLine());
             map = new int[numRows][numCols];
