@@ -34,9 +34,9 @@ public class MenuState extends GameState {
             bg.setVector(-0.1, 0);
 
             titleColor = new Color(102, 0, 204);
-            titleFont = new Font("Century Gothic", Font.PLAIN, 28);
+            titleFont = new Font("Consolas", Font.PLAIN, 28);
 
-            font = new Font("Arial", Font.PLAIN, 12);
+            font = new Font("Cambria Math", Font.PLAIN, 12);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class MenuState extends GameState {
         //draw title
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("Cats Adventure", 50, 70);
+        g.drawString("Cats'Adventure", 50, 70);
         //draw menu options
         g.setFont(font);
         for(int i = 0; i < options.length; i++){
