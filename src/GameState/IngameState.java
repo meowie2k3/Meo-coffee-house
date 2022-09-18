@@ -4,12 +4,12 @@ import Main.*;
 
 import Map.*;
 
-public class Level1State extends GameState{
+public class IngameState extends GameState{
 
     private Map map;
     
     //constructor
-    public Level1State(GameStateManager gsm){
+    public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
     }
