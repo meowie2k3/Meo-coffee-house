@@ -11,7 +11,7 @@ public class GameStateManager {
     private int currentState;
 
     public static final int MENUSTATE = 0;
-    public static final int LEVEL1STATE = 1;
+    public static final int INGAMESTATE = 1;
 
     public GameStateManager(){
         gameStates = new ArrayList<GameState>();
