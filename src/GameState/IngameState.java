@@ -13,12 +13,19 @@ public class IngameState extends GameState{
         this.gsm = gsm;
         init();
     }
+    public IngameState(GameStateManager gsm, int userID){
+        this.gsm = gsm;
+        init(userID);
+    }
     //file abstract method
-    public void init() {
+    public void init(int userID) {
         map = new Map(30); //set map block size to 30
         map.loadBlocks("/Blocks/BlockCollection.gif");
-        map.loadMap("/Maps/level1-1.map");
+        map.loadUserSavedGame("/SavedGame/User.map");
         map.setPosition(0, 0);
+    }
+    public void init(){
+        map = new Map(30);
     }
     //update
     public void update() {

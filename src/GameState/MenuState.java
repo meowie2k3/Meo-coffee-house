@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import Main.GamePanel;
 import Map.Background;
 
 public class MenuState extends GameState {
@@ -132,17 +133,21 @@ public class MenuState extends GameState {
         int x = (int) e.getX();
         int y = (int) e.getY();
         //System.out.println(x + " " + y);
+        int scale = GamePanel.SCALE;
+        int left = 135 * scale;
+        int right = 190 * scale;
+        int top = 140 * scale;
         
-        if(x > 270 && x < 370 && y > 260 && y < 280){
+        if(x > left && x < right && y > 0*scale*20 + top -20 && y < 0*scale*20 + top){
             currentChoice = 0;
         }
-        if(x > 270 && x < 380 && y > 300 && y < 320){
+        if(x > left && x < right && y > 1*scale*20 + top - 20 && y < 1*scale*20 + top){
             currentChoice = 1;
         }
-        if(x > 270 && x < 320 && y > 340 && y < 360){
+        if(x > left && x < right && y > 2*scale*20 + top - 20 && y < 2*scale*20 + top){
             currentChoice = 2;
         }
-        if(x > 270 && x < 315 && y > 380 && y < 400){
+        if(x > left && x < right && y > 3*scale*20 + top - 20 && y < 3*scale*20 + top){
             currentChoice = 3;
         }
     }
