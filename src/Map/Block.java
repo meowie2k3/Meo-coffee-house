@@ -6,6 +6,8 @@ public class Block {
 
     private BufferedImage image;
     private int type;
+    private String name;
+    private String function;
 
     //block type
     public static final int NORMAL = 0;
@@ -22,5 +24,11 @@ public class Block {
     }
     public int getType(){
         return type;
+    }
+    public String name(){
+        return name;
+    }
+    public String function(){
+        return function;
     }
 }

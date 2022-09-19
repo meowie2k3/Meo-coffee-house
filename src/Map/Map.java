@@ -124,7 +124,7 @@ public class Map {
 
     }
     //load map files into memory
-    public void loadMap(String s){
+    public void loadUserSavedGame(String s){
         try{
             InputStream in = getClass().getResourceAsStream(s);//read file from link
             BufferedReader br = new BufferedReader(
@@ -169,10 +169,10 @@ public class Map {
                 int c = rc % numBlockAcross;
                 //start drawing
                 g.drawImage(
-                    blocks[r][c].getImage(),
-                    (int)x + col * blockSize,
-                    (int)y + row * blockSize,
-                    null
+                    blocks[r][c].getImage(),//image
+                    (int)x + col * blockSize,//x
+                    (int)y + row * blockSize,//y
+                    null//observer
                 );
             }
         }
