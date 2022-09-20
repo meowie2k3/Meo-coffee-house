@@ -19,13 +19,13 @@ public class IngameState extends GameState{
     }
     //file abstract method
     public void init(int userID) {
-        map = new Map(30); //set map block size to 30
-        map.loadBlocks("/Blocks/BlockCollection.gif");
+        map = new Map(); //set map block size to 30
+        map.loadBlocks("/Character and Furniture/House asset blackcat.png");
         map.loadUserSavedGame("/SavedGame/User.map");
         map.setPosition(0, 0);
     }
     public void init(){
-        map = new Map(30);
+        map = new Map();
     }
     //update
     public void update() {
