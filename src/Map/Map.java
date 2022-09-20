@@ -22,9 +22,9 @@ public class Map {
 
     //map instance
     private int[][] map;
-    private int blockSize = 48;
+    private int blockSize = 66;
     private int catSize = 32;
-    private int drinksSize = 16;
+    private int drinkSize = 16;
     private int numRows;
     private int numCols;
     private int width;
@@ -45,8 +45,8 @@ public class Map {
     //constructor
     public Map(){
         
-        numRowsToDraw = GamePanel.HEIGHT / blockSize + 2; //add 2 to avoid black line
-        numColsToDraw = GamePanel.WIDTH / blockSize + 2;
+        numRowsToDraw = GamePanel.HEIGHT / blockSize; //add 2 to avoid black line
+        numColsToDraw = GamePanel.WIDTH / blockSize;
         tween = 0.07;//test multiple value
     }
 

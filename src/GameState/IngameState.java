@@ -7,26 +7,26 @@ import Map.*;
 public class IngameState extends GameState{
 
     private Map map;
+    private Background bg;
     
     //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
     }
-    public IngameState(GameStateManager gsm, int userID){
-        this.gsm = gsm;
-        init(userID);
-    }
+    
     //file abstract method
-    public void init(int userID) {
+    public void init() {
         map = new Map(); //set map block size to 30
         map.loadBlocks("/Character and Furniture/House asset blackcat.png");
         map.loadUserSavedGame("/SavedGame/User.map");
         map.setPosition(0, 0);
+        bg = new Background("/Backgrounds/grassbg1.gif", 0);
     }
-    public void init(){
-        map = new Map();
-    }
+    // public void init(){
+    //     map = new Map();
+    // }
+
     //update
     public void update() {
         
@@ -34,9 +34,10 @@ public class IngameState extends GameState{
     public void draw(java.awt.Graphics2D g) {
         //draw map
         //clear screen
-        g.setColor(java.awt.Color.WHITE);
-        g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
-
+        //g.setColor(java.awt.Color.WHITE);
+        //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+        //draw background
+        bg.draw(g);
         //draw map
         map.draw(g);
     }
