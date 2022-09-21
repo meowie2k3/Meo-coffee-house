@@ -25,46 +25,37 @@ public class Cat extends Entity {
     private ArrayList<BufferedImage[]> sprites;
 
     //direction translate
-    private final int downLeft = 0;
-    private final int down = 1;
-    private final int downRight = 2;
-    private final int right = 3;
-    private final int upRight = 4;
-    private final int up = 5;
-    private final int upLeft = 6;
-    private final int left = 7;
+    private static final int[] walkArr ={0,1,2,3,4,5,6,7};
+    private static final int leftDown = 0;
+    private static final int down = 1;
+    private static final int rightDown = 2;
+    private static final int right = 3;
+    private static final int rightUp = 4;
+    private static final int up = 5;
+    private static final int leftUp = 6;
+    private static final int left = 7;
+    private static final int[] standArr ={0,1,2,3,4,5,6,7};
 
     //number of frames in each animation
     private final int[] numFrames = {
         8, 1, 4, 6, 
-        4,4,4,4,4,4,4,4, 
-        1,1,1,1,1,1,1,1, 
+        4,
+        1,
         20};
-
+    
     //animation actions
     private static final int SITTOSLEEP = 0;
     private static final int SLEEP = 1;
     private static final int SIT = 2;
     private static final int STANDTOSIT = 3;
-    private static final int walkDownLeft = 4;
-    private static final int walkDown = 5;
-    private static final int walkDownRight = 6;
-    private static final int walkRight = 7;
-    private static final int walkUpRight = 8;
-    private static final int walkUp = 9;
-    private static final int walkUpLeft = 10;
-    private static final int walkLeft = 11;
-    private static final int standDownLeft = 12;
-    private static final int standDown = 13;
-    private static final int standDownRight = 14;
-    private static final int standRight = 15;
-    private static final int standUpRight = 16;
-    private static final int standUp = 17;
-    private static final int standUpLeft = 18;
-    private static final int standLeft = 19;
-    private static final int SITTOSCRATCH = 20;
+    private static final int WALK = 4;
+    private static final int STAND = 5;
+    private static final int SITTOSCRATCH = 6;
+    //reversible animation
+    private static final int SLEEPTOSIT = 7;
+    private static final int SITTOSTAND = 8;
 
-
+    //constructor
     public Cat(Map map, String address){
         super(map);
 
@@ -94,19 +85,48 @@ public class Cat extends Entity {
             sprites = new ArrayList<BufferedImage[]>();
 
             //get sitting animation
-            BufferedImage[] sit = new BufferedImage[SITTING];
+            BufferedImage[] sitToSleep = new BufferedImage[numFrames[SITTOSLEEP]];
+            int tmp =0;
             for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 2; j++){
-                sit[j] = spritesheet.getSubimage(
+                    sitToSleep[tmp] = spritesheet.getSubimage(
                         j * width, 
                         i * height, 
                         width, 
                         height);
+                    tmp++;
+                }
+            }
+            sprites.add(sitToSleep);
+            //get sleep animation
+            BufferedImage[] sleep = new BufferedImage[numFrames[SLEEP]];
+            tmp = 0;
+            sleep[tmp]= spritesheet.getSubimage(
+                0 * width, 
+                3 * height, 
+                width, 
+                height);
+            sprites.add(sleep);
+            //get sit animation
+            BufferedImage[] sit = new BufferedImage[numFrames[SIT]];
+            tmp = 0;
+            for(int i=3; i<4;i++){
+                for(int j=0; j<1;j++){
+                    sit[tmp] = spritesheet.getSubimage(
+                        j * width, 
+                        i * height, 
+                        width, 
+                        height);
+                    tmp++;
                 }
             }
             sprites.add(sit);
+            //get standToSit animation
+            BufferedImage[] standToSit = new BufferedImage[numFrames[STANDTOSIT]];
+            tmp = 0;
+            
 
-            //get standing up animation
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -137,7 +157,13 @@ public class Cat extends Entity {
 
     public void update(int action){
         //set animation
-        if(currentAction == )
+        if(action == SLEEP){
+            if(currentAction == SLEEP) return;
+            else if(currentAction == SIT){
+                currentAction = SITTOSLEEP;
+            }
+            else if(currentAction == )
+        }
         
     }
 }
