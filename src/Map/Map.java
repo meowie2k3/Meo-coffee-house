@@ -93,7 +93,7 @@ public class Map {
 
 
     //load blockCollection into memory
-    public void loadBlocks(String s){
+    public void hashImage(String s){
 
         try{
             blockCollection = ImageIO.read(

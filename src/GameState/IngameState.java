@@ -18,7 +18,7 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         map = new Map(); //set map block size to 30
-        map.loadBlocks("/Character and Furniture/House asset blackcat.png");
+        map.hashImage("/Character and Furniture/House asset blackcat.png");
         map.loadUserSavedGame("/SavedGame/User.map");
         map.setPosition(0, 0);
         bg = new Background("/Backgrounds/grassbg1.gif", 0);
@@ -36,6 +36,7 @@ public class IngameState extends GameState{
         //clear screen
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+
         //draw background
         bg.draw(g);
         //draw map

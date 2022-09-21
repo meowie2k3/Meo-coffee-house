@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 import GameState.GameStateManager;
 
+@SuppressWarnings("serial") //shut up vs code :>
 
 public class GamePanel extends JPanel 
     implements Runnable, KeyListener,MouseListener, MouseMotionListener{
