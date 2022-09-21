@@ -60,7 +60,7 @@ public class IngameState extends GameState{
         //draw map
         map.draw(g);
         //draw cat
-        //cat.draw(g);
+        cat.draw(g);
     }
     //key event listener
     public void keyPressed(int k) {

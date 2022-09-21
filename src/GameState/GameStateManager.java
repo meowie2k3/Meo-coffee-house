@@ -17,7 +17,7 @@ public class GameStateManager {
         gameStates = new ArrayList<GameState>();
         currentState = MENUSTATE;
         gameStates.add(new MenuState(this));//add menu state
-        //gameStates.add(new IngameState(this));//add ingame state
+        gameStates.add(new IngameState(this));//add ingame state
     }
 
     public void setState(int state){
@@ -48,6 +48,7 @@ public class GameStateManager {
     public void mouseEntered(MouseEvent e) {
         gameStates.get(currentState).mouseEntered(e);
     }
+    
     public void mouseClicked(MouseEvent e) {
         gameStates.get(currentState).mouseClicked(e);
     }

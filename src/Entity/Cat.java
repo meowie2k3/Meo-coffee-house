@@ -113,6 +113,7 @@ public class Cat extends Entity {
             for(int i=4; i<6;i++){
                 for(int j=0; j<4;j++){
                     if(i==5 && j==3) break;
+                    if(i==5 && j == 2) break;
                     standToSit[tmp] = spritesheet.getSubimage(
                         j * width, 
                         i * height, 
@@ -185,7 +186,7 @@ public class Cat extends Entity {
             //get sitToStand animation
             BufferedImage[] sitToStand = new BufferedImage[6];
             tmp = 0;
-            for(int i=6; i>=4;i--){
+            for(int i=5; i>=4;i--){
                 for(int j=3; j>=0;j--){
                     if(i==5 && j==2) continue;
                     if(i==5 && j==3) continue;
@@ -201,6 +202,9 @@ public class Cat extends Entity {
             e.printStackTrace();
         }
         animation = new Animation();
+        currentAction = SIT;
+        animation.setFrames(sprites.get(SIT));
+        animation.setDelay(50);
     }
 
     //getters
@@ -377,10 +381,12 @@ public class Cat extends Entity {
     //draw
     public void draw(Graphics2D g){
         setMapPosition();
+        // System.out.println(x + xmap - width /2);
+        // System.out.println(y + ymap - height / 2);
         
         g.drawImage(
             animation.getImage(),
-            (int)(x + xmap - width / 2),
+            (int)(x + xmap - width /2),
             (int)(y + ymap - height / 2),
             null
         );
