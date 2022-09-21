@@ -10,17 +10,17 @@ public class Animation {
     private long startTime;
     private long delay;
 
-    private boolean playedOnce;
+    private int playNumber;
 
     public Animation(){
-        playedOnce = false;
+        playNumber = 0;
     }
 
     public void setFrames(BufferedImage[] frames){
         this.frames = frames;
         currentFrame = 0;
         startTime = System.nanoTime();
-        playedOnce = false;
+        playNumber = 0;
     }
 
     public void setDelay(long d){
@@ -34,15 +34,30 @@ public class Animation {
         if(delay == -1) return;
 
         long elapsed = (System.nanoTime() - startTime) / 1000000;
-        if(elapsed > delay){
-            currentFrame++;
-            startTime = System.nanoTime();
-        }
+        //System.out.println("Time elapses" +elapsed);
 
-        if(currentFrame == frames.length){
-            currentFrame = 0;
-            playedOnce = true;
+        //reverse animation when playNumber is odd
+        if(playNumber % 2 == 0){
+            if(elapsed > delay){
+                currentFrame++;
+                startTime = System.nanoTime();
+            }
+            if(currentFrame == frames.length){
+                currentFrame = frames.length - 1;
+                playNumber++;
+            }
         }
+        else{
+            if(elapsed > delay){
+                currentFrame--;
+                startTime = System.nanoTime();
+            }
+            if(currentFrame == -1){
+                currentFrame = 0;
+                playNumber++;
+            }
+        }
+        
     }
 
     public int getFrame(){
@@ -51,8 +66,11 @@ public class Animation {
     public BufferedImage getImage(){
         return frames[currentFrame];
     }
-    public boolean hasPlayedOnce(){
-        return playedOnce;
+    public int getLength(){
+        return frames.length;
+    }
+    public int getPlayNumber(){
+        return playNumber;
     }
     
 }

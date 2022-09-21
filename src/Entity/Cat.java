@@ -27,17 +27,17 @@ public class Cat extends Entity {
 
     
     //animation actions
-    private static final int SITTOSLEEP = 0;
+    private static final int SIT_TO_SLEEP = 0;
     private static final int SLEEP = 1;
     private static final int SIT = 2;
-    private static final int STANDTOSIT = 3;
+    private static final int STAND_TO_SIT = 3;
     private static final int WALK = 4;
     private static final int STAND = 12;
     private static final int SCRATCH = 20;
-    private static final int SITTOSCRATCH = 20;
+    private static final int SIT_TO_SCRATCH = 20;
     //reversible animation
-    private static final int SLEEPTOSIT = 7;
-    private static final int SITTOSTAND = 8;
+    private static final int SLEEP_TO_SIT = 21;
+    private static final int SIT_TO_STAND = 22;
 
     //constructor
     public Cat(Map map, String address){
@@ -198,13 +198,16 @@ public class Cat extends Entity {
                     tmp++;
                 }
             }
+            sprites.add(sitToStand);
+
+
         }catch(Exception e){
             e.printStackTrace();
         }
         animation = new Animation();
         currentAction = SIT;
         animation.setFrames(sprites.get(SIT));
-        animation.setDelay(50);
+        animation.setDelay(120);
     }
 
     //getters
@@ -229,153 +232,146 @@ public class Cat extends Entity {
     public boolean isBored(){
         return isBored;
     }
-
-    public void update(){
-
+    public int getDirection(){
+        return currentDirection;
     }
+    //setters
+    public void setHungry(boolean b){
+        isHungry = b;
+    }
+    public void setSleepy(boolean b){
+        isSleepy = b;
+    }
+    public void setBored(boolean b){
+        isBored = b;
+    }
+    public void setDirection(int i){
+        currentDirection = i;
+    }
+    public void setAction(int i){
+        currentAction = i;
+    }
+    
 
     public void update(int nextAction){
 
-        int delay = 50;
+        int delay = 120;
         //set animation
         if(nextAction == SLEEP){
-            if(currentAction == SLEEP){
-                animation.setFrames(sprites.get(SLEEP));
-                animation.setDelay(delay);
-            }
-
-            else if(currentAction == SIT){
-                currentAction = SLEEP;
-                animation.setFrames(sprites.get(SITTOSLEEP));
-                animation.setDelay(delay);
-            }
-
-            else if(currentAction == STAND){
-                update(SIT);
-                currentAction = SLEEP;
-                animation.setFrames(sprites.get(SITTOSLEEP));
-                animation.setDelay(delay);
-            }
-            else if(currentAction == WALK){
-                update(STAND);
-                update(SIT);
-                currentAction = SLEEP;
-                animation.setFrames(sprites.get(SITTOSLEEP));
-                animation.setDelay(delay);
-            }
-        }
-
-        else if(nextAction == SIT){
+            if(currentAction == SLEEP){}
             if(currentAction == SIT){
-                animation.setFrames(sprites.get(SIT));
-                animation.setDelay(delay);
-            }
-
-            else if(currentAction == SLEEP){
                 currentAction = SIT;
-                animation.setFrames(sprites.get(SLEEPTOSIT));
+                animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(delay);
+                
             }
-
-            else if(currentAction == STAND){
+            if(currentAction == STAND){
+                update(SIT);
                 currentAction = SIT;
-                animation.setFrames(sprites.get(STANDTOSIT));
+                animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(delay);
             }
-            else if(currentAction == WALK){
+            if(currentAction == WALK){
+                update(STAND);
+                update(SIT);
+                currentAction = SIT;
+                animation.setFrames(sprites.get(SIT_TO_SLEEP));
+                animation.setDelay(delay);
+            }
+        }
+    
+        if(nextAction == SIT){
+            if(currentAction == SIT) {}
+            if(currentAction == SLEEP){
+                currentAction = SIT;
+                animation.setFrames(sprites.get(SLEEP_TO_SIT));
+                animation.setDelay(delay);
+            }
+            if(currentAction == STAND){
+                currentAction = SIT;
+                animation.setFrames(sprites.get(STAND_TO_SIT));
+                animation.setDelay(delay);
+            }
+            if(currentAction == WALK){
                 update(STAND);
                 currentAction = SIT;
-                animation.setFrames(sprites.get(STANDTOSIT));
+                animation.setFrames(sprites.get(STAND_TO_SIT));
                 animation.setDelay(delay);
             }
         }
 
-        else if(nextAction == STAND){
-            if(currentAction == STAND){
+        if(nextAction == STAND){
+            if(currentAction == STAND){}
+            if(currentAction == SIT){
+                currentAction = STAND;
+                animation.setFrames(sprites.get(SIT_TO_STAND));
+                animation.setDelay(delay);
+            }
+            if(currentAction == SLEEP){
+                update(SIT);
+                currentAction = STAND;
+                animation.setFrames(sprites.get(SIT_TO_STAND));
+                animation.setDelay(delay);
+            }
+            if(currentAction == WALK){
+                currentAction = STAND;
                 animation.setFrames(sprites.get(STAND));
                 animation.setDelay(delay);
             }
-
-            else if(currentAction ==SIT){
-                currentAction = STAND;
-                animation.setFrames(sprites.get(SITTOSTAND));
-                animation.setDelay(delay);
-            }
-
-            else if(currentAction == WALK){
-                currentAction = STAND;
-                animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(delay);
-            }
-            else if(currentAction == SLEEP){
-                update(SIT);
-                currentAction = STAND;
-                animation.setFrames(sprites.get(SITTOSTAND));
-                animation.setDelay(delay);
-            }
         }
 
-        else if(nextAction == WALK){
-            if(currentAction == WALK){
-                animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(delay);
-            }
-
-            else if(currentAction == STAND){
+        if(nextAction == WALK){
+            if(currentAction == WALK) {}
+            if(currentAction == SIT){
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(delay);
             }
-            else if(currentAction == SIT){
-                update(STAND);
-                currentAction = WALK;
-                animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(delay);
-            }
-            else if(currentAction == SLEEP){
+            if(currentAction == SLEEP){
                 update(SIT);
-                update(STAND);
+                currentAction = WALK;
+                animation.setFrames(sprites.get(WALK + currentDirection));
+                animation.setDelay(delay);
+            }
+            if(currentAction == STAND){
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(delay);
             }
         }
-        else if(nextAction == SCRATCH){
-            if(currentAction == SCRATCH){
+
+        if(nextAction == SCRATCH){
+            if(currentAction == SIT){
                 animation.setFrames(sprites.get(SCRATCH));
                 animation.setDelay(delay);
+                for(int i=0;i< animation.getLength();i++){
+                    animation.update();
+                }
             }
-
-            else if(currentAction == SIT){
-                currentAction = SCRATCH;
-                animation.setFrames(sprites.get(SITTOSCRATCH));
-                animation.setDelay(delay);
-            }
-            else if(currentAction == STAND){
+            else if(currentAction == SLEEP || currentAction == STAND){
                 update(SIT);
-                currentAction = SCRATCH;
-                animation.setFrames(sprites.get(SITTOSCRATCH));
+                animation.setFrames(sprites.get(SCRATCH));
                 animation.setDelay(delay);
+                for(int i=0;i< animation.getLength();i++){
+                    animation.update();
+                }
             }
             else if(currentAction == WALK){
                 update(STAND);
                 update(SIT);
-                currentAction = SCRATCH;
-                animation.setFrames(sprites.get(SITTOSCRATCH));
+                animation.setFrames(sprites.get(SCRATCH));
                 animation.setDelay(delay);
-            }
-            else if(currentAction == SLEEP){
-                update(SIT);
-                currentAction = SCRATCH;
-                animation.setFrames(sprites.get(SITTOSCRATCH));
-                animation.setDelay(delay);
+                for(int i=0;i< animation.getLength();i++){
+                    animation.update();
+                }
             }
         }
 
         animation.update();
-        currentAction = SIT;
-        animation.setFrames(sprites.get(SIT));
-        animation.setDelay(delay);
+        // System.out.println("currentFrame: " + animation.getFrame() + " " 
+        // + animation.hasPlayedOnce() + " " 
+        // + currentAction + " "
+        // + animation.getLength());
     }
 
     //draw
@@ -392,8 +388,5 @@ public class Cat extends Entity {
         );
     }
 
-    //getters
-    public int getCurrentAction(){
-        return currentAction;
-    }
+    
 }

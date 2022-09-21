@@ -10,8 +10,14 @@ public class IngameState extends GameState{
 
     private Map map;
     private Background bg;
-    //cat
+
+    //cat properties
     private Cat cat;
+    private static final int SLEEP = 1;
+    private static final int SIT = 2;
+    private static final int WALK = 4;
+    private static final int STAND = 12;
+    private static final int SCRATCH = 20;
     //private ArrayList<String> catAddress;
     
 
@@ -46,7 +52,7 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
-        cat.update(cat.getCurrentAction());
+        cat.update(SIT); // SIT, SLEEP, STAND, WALK, SCRATCH
         
     }
     public void draw(java.awt.Graphics2D g) {
