@@ -24,22 +24,7 @@ public class Cat extends Entity {
     //animation
     private ArrayList<BufferedImage[]> sprites;
 
-    //direction translate
-    private static final int leftDown = 0;
-    private static final int down = 1;
-    private static final int rightDown = 2;
-    private static final int right = 3;
-    private static final int rightUp = 4;
-    private static final int up = 5;
-    private static final int leftUp = 6;
-    private static final int left = 7;
 
-    //number of frames in each animation
-    private final int[] numFrames = {
-        8, 1, 4, 6, 
-        4,
-        1,
-        20};
     
     //animation actions
     private static final int SITTOSLEEP = 0;
@@ -83,7 +68,7 @@ public class Cat extends Entity {
             sprites = new ArrayList<BufferedImage[]>();
 
             //get sitToSleep animation
-            BufferedImage[] sitToSleep = new BufferedImage[numFrames[SITTOSLEEP]];
+            BufferedImage[] sitToSleep = new BufferedImage[8];
             int tmp =0;
             for(int i = 0; i < 2; i++){
                 for(int j = 0; j < 4; j++){
@@ -98,7 +83,7 @@ public class Cat extends Entity {
             sprites.add(sitToSleep);
 
             //get sleep animation
-            BufferedImage[] sleep = new BufferedImage[numFrames[SLEEP]];
+            BufferedImage[] sleep = new BufferedImage[1];
             tmp = 0;
             sleep[tmp]= spritesheet.getSubimage(
                 0 * width, 
@@ -108,7 +93,7 @@ public class Cat extends Entity {
             sprites.add(sleep);
 
             //get sit animation
-            BufferedImage[] sit = new BufferedImage[numFrames[SIT]];
+            BufferedImage[] sit = new BufferedImage[4];
             tmp = 0;
             for(int i=3; i<4;i++){
                 for(int j=0; j<4;j++){
@@ -123,7 +108,7 @@ public class Cat extends Entity {
             sprites.add(sit);
 
             //get standToSit animation
-            BufferedImage[] standToSit = new BufferedImage[numFrames[STANDTOSIT]];
+            BufferedImage[] standToSit = new BufferedImage[6];
             tmp = 0;
             for(int i=4; i<6;i++){
                 for(int j=0; j<4;j++){
@@ -140,7 +125,7 @@ public class Cat extends Entity {
 
             //get walk animation
             for(int i=6;i<14;i++){
-                BufferedImage[] walk = new BufferedImage[numFrames[WALK]];
+                BufferedImage[] walk = new BufferedImage[4];
                 tmp = 0;
                 for(int j=0;j<4;j++){
                     walk[tmp] = spritesheet.getSubimage(
@@ -156,7 +141,7 @@ public class Cat extends Entity {
             //get stand animation
             for(int i=14; i<16;i++){
                 for(int j=0;j<4;j++){
-                    BufferedImage[] stand = new BufferedImage[numFrames[STAND]];
+                    BufferedImage[] stand = new BufferedImage[1];
                     tmp = 0;
                     stand[tmp] = spritesheet.getSubimage(
                         j * width, 
@@ -168,7 +153,7 @@ public class Cat extends Entity {
             }
 
             //get sitToScratch animation
-            BufferedImage[] sitToScratch = new BufferedImage[numFrames[SITTOSCRATCH]];
+            BufferedImage[] sitToScratch = new BufferedImage[20];
             tmp = 0;
             for(int i=16; i<21;i++){
                 for(int j=0; j<4;j++){
@@ -183,7 +168,7 @@ public class Cat extends Entity {
             sprites.add(sitToScratch);
 
             //get sleepToSit animation
-            BufferedImage[] sleepToSit = new BufferedImage[numFrames[SLEEPTOSIT]];
+            BufferedImage[] sleepToSit = new BufferedImage[8];
             tmp = 0;
             for(int i=1; i>=0;i--){
                 for(int j=3; j>=0;j--){
@@ -198,7 +183,7 @@ public class Cat extends Entity {
             sprites.add(sleepToSit);
 
             //get sitToStand animation
-            BufferedImage[] sitToStand = new BufferedImage[numFrames[SITTOSTAND]];
+            BufferedImage[] sitToStand = new BufferedImage[6];
             tmp = 0;
             for(int i=6; i>=4;i--){
                 for(int j=3; j>=0;j--){

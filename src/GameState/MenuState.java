@@ -31,8 +31,8 @@ public class MenuState extends GameState {
         this.gsm = gsm;
 
         try {
-            bg = new Background("/Backgrounds/menubg.gif", 1);
-            bg.setVector(-0.1, 0);
+            bg = new Background("/Backgrounds/bg.png", 1);
+            bg.setVector(0, 0.1);
 
             titleColor = new Color(102, 0, 204);
             titleFont = new Font("Consolas", Font.PLAIN, 28);

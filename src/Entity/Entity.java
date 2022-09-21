@@ -18,6 +18,18 @@ public abstract class Entity {
     protected double y=100;
     protected int currentDirection=3;
 
+    /* leftDown = 0;
+    down = 1;
+    rightDown = 2;
+    right = 3;
+    rightUp = 4;
+    up = 5;
+    leftUp = 6;
+    left = 7; */
+
+    //direction translate
+
+
     //dimensions
     protected int width;
     protected int height;

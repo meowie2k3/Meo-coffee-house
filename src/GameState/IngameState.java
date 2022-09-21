@@ -46,7 +46,7 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
-        //cat.update(cat.getCurrentAction());
+        cat.update(cat.getCurrentAction());
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -60,7 +60,7 @@ public class IngameState extends GameState{
         //draw map
         map.draw(g);
         //draw cat
-        cat.draw(g);
+        //cat.draw(g);
     }
     //key event listener
     public void keyPressed(int k) {
