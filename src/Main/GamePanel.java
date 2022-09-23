@@ -1,14 +1,13 @@
 package Main;
 
 import javax.swing.*;
-
-import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.awt.image.BufferedImage;
 import GameState.GameStateManager;
 
-@SuppressWarnings("serial") //shut up vs code :>
+@SuppressWarnings("serial") //shut up Vscode :>
 
 public class GamePanel extends JPanel 
     implements Runnable, KeyListener,MouseListener, MouseMotionListener{
@@ -18,7 +17,7 @@ public class GamePanel extends JPanel
     public static final int HEIGHT = 240;
     public static final int SCALE = 3;
 
-    //game threading
+    //game threading, set FPS to 60
     private Thread thread;
     private boolean IsRun;
     private int FPS = 60; // adjust fps limit
@@ -31,7 +30,7 @@ public class GamePanel extends JPanel
     //state manager
     private GameStateManager gsm;
 
-        //constructor
+    //constructor
     public GamePanel() {
         super();
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));

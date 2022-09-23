@@ -54,6 +54,13 @@ public class Background {
         if(x > 0){
             g.drawImage(image, (int)x - GamePanel.WIDTH, (int)y, null);
         }//if the background is moving to the right, draw another background to the left of it
+        
+        // if(y < 0){
+        //     g.drawImage(image, (int)y + GamePanel.HEIGHT, (int)x, null);
+        // }//if the background is moving to the left, draw another background to the right of it
+        // if(y > 0){
+        //     g.drawImage(image, (int)y - GamePanel.HEIGHT, (int)x, null);
+        // }//if the background is moving to the right, draw another background to the left of it
     }
 
 }

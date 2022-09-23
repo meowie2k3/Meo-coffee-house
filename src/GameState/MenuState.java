@@ -6,8 +6,12 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JPanel;
+
 import Main.GamePanel;
 import Map.Background;
+
+
 
 public class MenuState extends GameState {
 
@@ -17,8 +21,8 @@ public class MenuState extends GameState {
 
     private String[] options = {
         "Continue",
-        "New game", 
-        "Help", 
+        // "New game", 
+        // "Help", 
         "Quit"
     };
 
@@ -31,10 +35,10 @@ public class MenuState extends GameState {
         this.gsm = gsm;
 
         try {
-            bg = new Background("/Backgrounds/menubg.gif", 1);
+            bg = new Background("/Backgrounds/bg.png", 1);
             bg.setVector(-0.1, 0);
 
-            titleColor = new Color(102, 0, 204);
+            titleColor = new Color(251, 219, 101);
             titleFont = new Font("Consolas", Font.PLAIN, 28);
 
             font = new Font("Cambria Math", Font.PLAIN, 12);
@@ -49,13 +53,24 @@ public class MenuState extends GameState {
     public void update(){
         bg.update();
     }
+
+    //...
+    JPanel panel1 = new JPanel();
+    JPanel panel2 = new JPanel();
+    JPanel panel = new JPanel();
+    //...
+    
     public void draw(Graphics2D g){
         //draw bg
         bg.draw(g);
+
         //draw title
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("Cats' Adventure", 50, 70);
+        g.drawString("MEOW COFFEE HOUSE", 28, 85);
+
+       
+
         //draw menu options
         g.setFont(font);
         for(int i = 0; i < options.length; i++){
@@ -125,14 +140,14 @@ public class MenuState extends GameState {
     }
     public void mouseClicked(MouseEvent e) {
         //System.out.println("Mouse Clicked");
-        selectedMenu();
+        // selectedMenu();
     }
     public void mouseExited(MouseEvent e) {
     }
     public void mouseMoved(MouseEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
-        //System.out.println(x + " " + y);
+        // System.out.println(x + " " + y);
         int scale = GamePanel.SCALE;
         int left = 135 * scale;
         int right = 190 * scale;
