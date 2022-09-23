@@ -2,8 +2,6 @@ package Entity;
 
 import java.awt.image.*;
 
-import org.omg.CORBA.BooleanSeqHolder;
-
 public class Animation {
 
     private BufferedImage[] frames;
