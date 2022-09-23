@@ -9,6 +9,13 @@
             "name": "Launch game",
             "request": "launch",
             "mainClass": "Main.game",
+            "projectName": "CatAventure_b005e020"
+        },
+        {
+            "type": "java",
+            "name": "Launch game",
+            "request": "launch",
+            "mainClass": "Main.game",
             "projectName": "CatAventure_49824c3f"
         },
         {
