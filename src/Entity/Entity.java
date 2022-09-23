@@ -14,8 +14,8 @@ public abstract class Entity {
     protected double ymap;
 
     //position and direction
-    protected double x=100;
-    protected double y=100;
+    protected double x;
+    protected double y;
     protected int currentDirection=3;
 
     /* leftDown = 0;
@@ -37,6 +37,7 @@ public abstract class Entity {
     //animation
     protected Animation animation;
     protected int currentAction;
+    protected int nextAction;
     protected int previousAction;//just in case
     protected int commandAction;//command for next action
 

@@ -206,7 +206,7 @@ public class Cat extends Entity {
         }
         animation = new Animation();
         currentAction = SIT;
-        animation.setFrames(sprites.get(SIT));
+        animation.setFrames(sprites.get(currentAction));
         animation.setDelay(120);
     }
 
@@ -249,13 +249,14 @@ public class Cat extends Entity {
         currentDirection = i;
     }
     public void setAction(int i){
-        currentAction = i;
+        nextAction = i;
+        update();
     }
     
 
-    public void update(int nextAction){
+    public void update(){
 
-        int delay = 120;
+        int delay = 100;
         //set animation
         if(nextAction == SLEEP){
             if(currentAction == SLEEP){}
@@ -266,14 +267,14 @@ public class Cat extends Entity {
                 
             }
             if(currentAction == STAND){
-                update(SIT);
+                setAction(SIT);
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(delay);
             }
             if(currentAction == WALK){
-                update(STAND);
-                update(SIT);
+                setAction(STAND);
+                setAction(SIT);
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(delay);
@@ -293,9 +294,14 @@ public class Cat extends Entity {
                 animation.setDelay(delay);
             }
             if(currentAction == WALK){
-                update(STAND);
+                setAction(STAND);
                 currentAction = SIT;
                 animation.setFrames(sprites.get(STAND_TO_SIT));
+                animation.setDelay(delay);
+            }
+            if(currentAction == SCRATCH){
+                currentAction = SIT;
+                animation.setFrames(sprites.get(SIT));
                 animation.setDelay(delay);
             }
         }
@@ -308,7 +314,7 @@ public class Cat extends Entity {
                 animation.setDelay(delay);
             }
             if(currentAction == SLEEP){
-                update(SIT);
+                setAction(SIT);
                 currentAction = STAND;
                 animation.setFrames(sprites.get(SIT_TO_STAND));
                 animation.setDelay(delay);
@@ -328,7 +334,7 @@ public class Cat extends Entity {
                 animation.setDelay(delay);
             }
             if(currentAction == SLEEP){
-                update(SIT);
+                setAction(SIT);
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(delay);
@@ -341,35 +347,37 @@ public class Cat extends Entity {
         }
 
         if(nextAction == SCRATCH){
-            if(currentAction == SIT){
-                animation.setFrames(sprites.get(SCRATCH));
-                animation.setDelay(delay);
-                for(int i=0;i< animation.getLength();i++){
-                    animation.update();
+            if(currentAction == SCRATCH){
+                if(animation.hasPlayedOnce()){
+                    setAction(SIT);
+                    animation.setFrames(sprites.get(SIT));
+                    animation.setDelay(delay);
                 }
+            }
+
+            if(currentAction == SIT){
+                currentAction = SCRATCH;
+                animation.setFrames(sprites.get(SIT_TO_SCRATCH));
+                animation.setDelay(delay);
             }
             else if(currentAction == SLEEP || currentAction == STAND){
-                update(SIT);
-                animation.setFrames(sprites.get(SCRATCH));
+                setAction(SIT);
+                currentAction = SCRATCH;
+                animation.setFrames(sprites.get(SIT_TO_SCRATCH));
                 animation.setDelay(delay);
-                for(int i=0;i< animation.getLength();i++){
-                    animation.update();
-                }
+                
             }
             else if(currentAction == WALK){
-                update(STAND);
-                update(SIT);
-                animation.setFrames(sprites.get(SCRATCH));
+                setAction(STAND);
+                setAction(SIT);
+                animation.setFrames(sprites.get(SIT_TO_SCRATCH));
                 animation.setDelay(delay);
-                for(int i=0;i< animation.getLength();i++){
-                    animation.update();
-                }
             }
         }
 
         animation.update();
-        // System.out.println("currentFrame: " + animation.getFrame() + " " 
-        // + animation.hasPlayedOnce() + " " 
+        // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() + " " 
+        // + animation.getPlayNumber() + " " 
         // + currentAction + " "
         // + animation.getLength());
     }

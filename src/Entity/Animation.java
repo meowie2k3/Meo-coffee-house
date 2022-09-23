@@ -2,6 +2,8 @@ package Entity;
 
 import java.awt.image.*;
 
+import org.omg.CORBA.BooleanSeqHolder;
+
 public class Animation {
 
     private BufferedImage[] frames;
@@ -10,6 +12,7 @@ public class Animation {
     private long startTime;
     private long delay;
 
+    private boolean playedOnce;
     private int playNumber;
 
     public Animation(){
@@ -21,6 +24,7 @@ public class Animation {
         currentFrame = 0;
         startTime = System.nanoTime();
         playNumber = 0;
+        playedOnce = false;
     }
 
     public void setDelay(long d){
@@ -45,6 +49,7 @@ public class Animation {
             if(currentFrame == frames.length){
                 currentFrame = frames.length - 1;
                 playNumber++;
+                playedOnce = true;
             }
         }
         else{
@@ -71,6 +76,9 @@ public class Animation {
     }
     public int getPlayNumber(){
         return playNumber;
+    }
+    public boolean hasPlayedOnce(){
+        return playedOnce;
     }
     
 }

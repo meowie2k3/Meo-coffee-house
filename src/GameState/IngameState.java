@@ -36,7 +36,8 @@ public class IngameState extends GameState{
         bg = new Background("/Backgrounds/grassbg1.gif", 0);
 
         
-        cat = new Cat(map, "/Cats/brown_000.png");
+        cat = new Cat(map, "/Cats/creme_000.png");
+        cat.setPosition(100, 150);
 
         
         
@@ -52,7 +53,7 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
-        cat.update(SIT); // SIT, SLEEP, STAND, WALK, SCRATCH
+        cat.update(); // SIT, SLEEP, STAND, WALK, SCRATCH
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -86,14 +87,30 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-        
+
     }
     public void mouseExited(MouseEvent e) {
         
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        
+        int scale = GamePanel.SCALE;
+        int x =(int) e.getX();
+        int y =(int) e.getY();
+        //System.out.println(x + " " + y + " " + x/scale + " " + y/scale);
+        //if click on the cat do scratch animation
+        if(x >= cat.getX() * scale - cat.getWidth() * scale / 2 && 
+        x <= cat.getX() * scale + cat.getWidth() * scale / 2 && 
+        y >= cat.getY() * scale - cat.getHeight() * scale / 2 && 
+        y <= cat.getY() * scale + cat.getHeight() * scale / 2)
+        {
+            //if click
+            
+                cat.setAction(SCRATCH);
+        }
+
+
+
     }
     public void mouseDragged(MouseEvent e) {
         
