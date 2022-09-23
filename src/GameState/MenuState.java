@@ -21,8 +21,6 @@ public class MenuState extends GameState {
 
     private String[] options = {
         "Continue",
-        // "New game", 
-        // "Help", 
         "Quit"
     };
 
@@ -91,15 +89,9 @@ public class MenuState extends GameState {
     private void selectedMenu(){
         if(currentChoice == 0){
             //continue
-        }
-        if(currentChoice == 1){
-            //new game
             gsm.setState(GameStateManager.INGAMESTATE);
         }
-        if(currentChoice == 2){
-            //help
-        }
-        if(currentChoice == 3){
+        if(currentChoice ==  1){
             //quit
             System.exit(0);
         }
@@ -142,7 +134,7 @@ public class MenuState extends GameState {
     }
     public void mouseClicked(MouseEvent e) {
         //System.out.println("Mouse Clicked");
-        // selectedMenu();
+        selectedMenu();
     }
     public void mouseExited(MouseEvent e) {
     }
@@ -160,12 +152,6 @@ public class MenuState extends GameState {
         }
         if(x > left && x < right && y > 1*scale*20 + top - 20 && y < 1*scale*20 + top){
             currentChoice = 1;
-        }
-        if(x > left && x < right && y > 2*scale*20 + top - 20 && y < 2*scale*20 + top){
-            currentChoice = 2;
-        }
-        if(x > left && x < right && y > 3*scale*20 + top - 20 && y < 3*scale*20 + top){
-            currentChoice = 3;
         }
     }
     public void mouseDragged(MouseEvent e) {
