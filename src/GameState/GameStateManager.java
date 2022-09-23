@@ -48,6 +48,7 @@ public class GameStateManager {
     public void mouseEntered(MouseEvent e) {
         gameStates.get(currentState).mouseEntered(e);
     }
+    
     public void mouseClicked(MouseEvent e) {
         gameStates.get(currentState).mouseClicked(e);
     }

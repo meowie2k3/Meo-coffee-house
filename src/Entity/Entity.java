@@ -13,11 +13,22 @@ public abstract class Entity {
     protected double xmap;
     protected double ymap;
 
-    //position and vector
+    //position and direction
     protected double x;
-    protected double y;//position
-    protected double dx;
-    protected double dy;//direction
+    protected double y;
+    protected int currentDirection=3;
+
+    /* leftDown = 0;
+    down = 1;
+    rightDown = 2;
+    right = 3;
+    rightUp = 4;
+    up = 5;
+    leftUp = 6;
+    left = 7; */
+
+    //direction translate
+
 
     //dimensions
     protected int width;
@@ -26,6 +37,7 @@ public abstract class Entity {
     //animation
     protected Animation animation;
     protected int currentAction;
+    protected int nextAction;
     protected int previousAction;//just in case
     protected int commandAction;//command for next action
 
@@ -41,6 +53,8 @@ public abstract class Entity {
 
     //movement physics :>
     protected double moveSpeed;
+    protected double dx;
+    protected double dy;
     protected double maxSpeed;//accelerating speed
     protected double stopSpeed;//deaccelerating speed
 
@@ -57,6 +71,9 @@ public abstract class Entity {
     public int getY(){
         return (int)y;
     }
+    public int getDirection(){
+        return currentDirection;
+    }
     public int getWidth(){
         return width;
     }
@@ -69,9 +86,8 @@ public abstract class Entity {
         this.x = x;
         this.y = y;
     }
-    public void setVector(double dx, double dy){
-        this.dx = dx;
-        this.dy = dy;
+    public void setDirection(int direction){
+        this.currentDirection = direction;
     }
     //map position (for drawing)
     public void setMapPosition(){

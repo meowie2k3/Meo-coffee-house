@@ -2,6 +2,8 @@ package Entity;
 
 import java.awt.image.*;
 
+import org.omg.CORBA.BooleanSeqHolder;
+
 public class Animation {
 
     private BufferedImage[] frames;
@@ -11,15 +13,17 @@ public class Animation {
     private long delay;
 
     private boolean playedOnce;
+    private int playNumber;
 
-    public void Animation(){
-        playedOnce = false;
+    public Animation(){
+        playNumber = 0;
     }
 
     public void setFrames(BufferedImage[] frames){
         this.frames = frames;
         currentFrame = 0;
         startTime = System.nanoTime();
+        playNumber = 0;
         playedOnce = false;
     }
 
@@ -34,14 +38,31 @@ public class Animation {
         if(delay == -1) return;
 
         long elapsed = (System.nanoTime() - startTime) / 1000000;
-        if(elapsed > delay){
-            currentFrame++;
-            startTime = System.nanoTime();
+        //System.out.println("Time elapses" +elapsed);
+
+        //reverse animation when playNumber is odd
+        if(playNumber % 2 == 0){
+            if(elapsed > delay){
+                currentFrame++;
+                startTime = System.nanoTime();
+            }
+            if(currentFrame == frames.length){
+                currentFrame = frames.length - 1;
+                playNumber++;
+                playedOnce = true;
+            }
         }
-        if(currentFrame == frames.length){
-            currentFrame = 0;
-            playedOnce = true;
+        else{
+            if(elapsed > delay){
+                currentFrame--;
+                startTime = System.nanoTime();
+            }
+            if(currentFrame == -1){
+                currentFrame = 0;
+                playNumber++;
+            }
         }
+        
     }
 
     public int getFrame(){
@@ -49,6 +70,12 @@ public class Animation {
     }
     public BufferedImage getImage(){
         return frames[currentFrame];
+    }
+    public int getLength(){
+        return frames.length;
+    }
+    public int getPlayNumber(){
+        return playNumber;
     }
     public boolean hasPlayedOnce(){
         return playedOnce;
