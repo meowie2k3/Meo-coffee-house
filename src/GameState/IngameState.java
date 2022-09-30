@@ -104,8 +104,6 @@ public class IngameState extends GameState{
         y >= cat.getY() * scale - cat.getHeight() * scale / 2 && 
         y <= cat.getY() * scale + cat.getHeight() * scale / 2)
         {
-            //if click
-            
                 cat.setAction(SCRATCH);
         }
 
