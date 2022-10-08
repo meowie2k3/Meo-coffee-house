@@ -321,7 +321,7 @@ public class Cat extends Entity {
             }
             if(currentAction == WALK){
                 currentAction = STAND;
-                animation.setFrames(sprites.get(STAND));
+                animation.setFrames(sprites.get(STAND + currentDirection));
                 animation.setDelay(delay);
             }
         }
