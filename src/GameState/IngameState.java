@@ -20,6 +20,7 @@ public class IngameState extends GameState{
     private static final int SCRATCH = 20;
     //private ArrayList<String> catAddress;
     
+    //Block properties
 
     //constructor
     public IngameState(GameStateManager gsm){
@@ -30,10 +31,10 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         map = new Map(); //set map block size to 30
-        map.hashImage("/Character and Furniture/House asset blackcat.png");
-        map.loadUserSavedGame("/SavedGame/User.map");
+        map.hashImage("/Character and Furniture/House asset main.png");
+        //map.loadUserSavedGame("/SavedGame/User.map");
         map.setPosition(0, 0);
-        bg = new Background("/Backgrounds/grassbg1.gif", 0);
+        bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
         
         cat = new Cat(map, "/Cats/creme_000.png");
@@ -53,7 +54,7 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
-        cat.update(); // SIT, SLEEP, STAND, WALK, SCRATCH
+        cat.update();
         
     }
     public void draw(java.awt.Graphics2D g) {
