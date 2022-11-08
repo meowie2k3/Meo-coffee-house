@@ -13,11 +13,11 @@ public class Animation {
     private boolean playedOnce;
     private int playNumber;
 
-    public Animation(){
+    public Animation() {
         playNumber = 0;
     }
 
-    public void setFrames(BufferedImage[] frames){
+    public void setFrames(BufferedImage[] frames) {
         this.frames = frames;
         currentFrame = 0;
         startTime = System.nanoTime();
@@ -25,58 +25,51 @@ public class Animation {
         playedOnce = false;
     }
 
-    public void setDelay(long d){
+    public void setDelay(long d) {
         delay = d;
     }
-    public void setFrame(int i){
+
+    public void setFrame(int i) {
         currentFrame = i;
     }
-    //whether go to next frame
-    public void update(){
-        if(delay == -1) return;
+
+    // whether go to next frame
+    public void update() {
+        if (delay == -1)
+            return;
 
         long elapsed = (System.nanoTime() - startTime) / 1000000;
-        //System.out.println("Time elapses" +elapsed);
+        // System.out.println("Time elapses" +elapsed);
+        if (elapsed > delay) {
+            currentFrame++;
+            startTime = System.nanoTime();
+        }
+        if (currentFrame == frames.length) {
+            currentFrame = 0;
+            playNumber++;
+            playedOnce = true;
+        }
 
-        //reverse animation when playNumber is odd
-        if(playNumber % 2 == 0){
-            if(elapsed > delay){
-                currentFrame++;
-                startTime = System.nanoTime();
-            }
-            if(currentFrame == frames.length){
-                currentFrame = frames.length - 1;
-                playNumber++;
-                playedOnce = true;
-            }
-        }
-        else{
-            if(elapsed > delay){
-                currentFrame--;
-                startTime = System.nanoTime();
-            }
-            if(currentFrame == -1){
-                currentFrame = 0;
-                playNumber++;
-            }
-        }
-        
     }
 
-    public int getFrame(){
+    public int getFrame() {
         return currentFrame;
     }
-    public BufferedImage getImage(){
+
+    public BufferedImage getImage() {
         return frames[currentFrame];
     }
-    public int getLength(){
+
+    public int getLength() {
         return frames.length;
     }
-    public int getPlayNumber(){
+
+    public int getPlayNumber() {
         return playNumber;
     }
-    public boolean hasPlayedOnce(){
+
+    public boolean hasPlayedOnce() {
         return playedOnce;
     }
-    
+
 }

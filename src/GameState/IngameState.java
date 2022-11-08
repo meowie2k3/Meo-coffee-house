@@ -87,6 +87,14 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
+        //get coordinate of mouse click
+        int x = e.getX();
+        int y = e.getY();
+        //System.out.println("Mouse Clicked at: " + x + ", " + y);
+        //if user click to a cat, cat will scratch then move randomly around the map
+        if(cat.contains(x, y)){
+            cat.setAction(SCRATCH);
+        }
 
     }
     public void mouseExited(MouseEvent e) {
@@ -94,21 +102,18 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        int scale = GamePanel.SCALE;
-        int x =(int) e.getX();
-        int y =(int) e.getY();
-        //System.out.println(x + " " + y + " " + x/scale + " " + y/scale);
-        //if click on the cat do scratch animation
-        if(x >= cat.getX() * scale - cat.getWidth() * scale / 2 && 
-        x <= cat.getX() * scale + cat.getWidth() * scale / 2 && 
-        y >= cat.getY() * scale - cat.getHeight() * scale / 2 && 
-        y <= cat.getY() * scale + cat.getHeight() * scale / 2)
-        {
-                cat.setAction(SCRATCH);
-        }
-
-
-
+        // int scale = GamePanel.SCALE;
+        // int x =(int) e.getX();
+        // int y =(int) e.getY();
+        // //System.out.println(x + " " + y + " " + x/scale + " " + y/scale);
+        // //if click on the cat do scratch animation
+        // if(x >= cat.getX() * scale - cat.getWidth() * scale / 2 && 
+        // x <= cat.getX() * scale + cat.getWidth() * scale / 2 && 
+        // y >= cat.getY() * scale - cat.getHeight() * scale / 2 && 
+        // y <= cat.getY() * scale + cat.getHeight() * scale / 2)
+        // {
+        //         cat.setAction(SCRATCH);
+        // }
     }
     public void mouseDragged(MouseEvent e) {
         

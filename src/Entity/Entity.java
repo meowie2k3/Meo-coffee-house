@@ -1,6 +1,9 @@
 package Entity;
 
 import java.awt.event.*;
+
+import org.w3c.dom.events.MouseEvent;
+
 import java.awt.*;
 
 import Map.*;
@@ -44,10 +47,6 @@ public abstract class Entity {
 
     //movement physics :>
     protected double moveSpeed;
-    protected double dx;
-    protected double dy;
-    protected double maxSpeed;//accelerating speed
-    protected double stopSpeed;//deaccelerating speed
 
     //constructor
     public Entity(Map map){
@@ -71,7 +70,6 @@ public abstract class Entity {
     public int getHeight(){
         return height;
     }
-    //setters
     //regular postion
     public void setPosition(double x, double y){
         this.x = x;
@@ -85,14 +83,53 @@ public abstract class Entity {
         xmap = map.getX();
         ymap = map.getY();
     }
-
-    //check if the entity is on the map
-    public boolean notOnScreen(){
-        return 
-        x + xmap + width < 0 
-        || x + xmap - width > GamePanel.WIDTH 
-        || y + ymap + height < 0 
-        || y + ymap - height > GamePanel.HEIGHT;
+    //check if x and y is on object
+    public boolean contains(int x, int y){
+        int scale = GamePanel.SCALE;
+        if(x >= this.getX() * scale - this.getWidth() * scale / 2 && 
+        x <= this.getX() * scale + this.getWidth() * scale / 2 && 
+        y >= this.getY() * scale - this.getHeight() * scale / 2 && 
+        y <= this.getY() * scale + this.getHeight() * scale / 2)
+        {
+            return true;
+        }
+        else return false;
     }
 
+    //command
+    public void move(int direction){
+        switch(direction){
+            case leftDown:
+                x -= moveSpeed;
+                y += moveSpeed;
+                break;
+            case down:
+                y += moveSpeed;
+                break;
+            case rightDown:
+                x += moveSpeed;
+                y += moveSpeed;
+                break;
+            case right:
+                x += moveSpeed;
+                break;
+            case rightUp:
+                x += moveSpeed;
+                y -= moveSpeed;
+                break;
+            case up:
+                y -= moveSpeed;
+                break;
+            case leftUp:
+                x -= moveSpeed;
+                y -= moveSpeed;
+                break;
+            case left:
+                x -= moveSpeed;
+                break;
+            default:
+                System.out.println("Invalid direction");
+                break;
+        }
+    }
 }

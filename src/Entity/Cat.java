@@ -49,8 +49,6 @@ public class Cat extends Entity {
 
         //physics
         moveSpeed = 0.3;
-        maxSpeed = 1.6;
-        stopSpeed = 0.4;
 
         //cost
         foodCost = 1;
@@ -207,7 +205,7 @@ public class Cat extends Entity {
         animation = new Animation();
         currentAction = SIT;
         animation.setFrames(sprites.get(currentAction));
-        animation.setDelay(120);
+        animation.setDelay(100);
     }
 
     //getters
@@ -253,31 +251,38 @@ public class Cat extends Entity {
         update();
     }
     
+    @Override
+    public void move(int direction){
+        setDirection(direction);
+        setAction(WALK);
+        super.move(direction);
+    }
 
     public void update(){
 
-        int delay = 100;
+        int slow = 100;
+        int fast = 60;
         //set animation
         if(nextAction == SLEEP){
             if(currentAction == SLEEP){}
             if(currentAction == SIT){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
                 
             }
             if(currentAction == STAND){
                 setAction(SIT);
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
-                animation.setDelay(delay);
+                animation.setDelay(fast);
             }
             if(currentAction == WALK){
                 setAction(STAND);
                 setAction(SIT);
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
             }
         }
     
@@ -286,23 +291,23 @@ public class Cat extends Entity {
             if(currentAction == SLEEP){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SLEEP_TO_SIT));
-                animation.setDelay(delay);
+                animation.setDelay(fast);
             }
             if(currentAction == STAND){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(STAND_TO_SIT));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
             }
             if(currentAction == WALK){
                 setAction(STAND);
                 currentAction = SIT;
                 animation.setFrames(sprites.get(STAND_TO_SIT));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
             }
             if(currentAction == SCRATCH){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
             }
         }
 
@@ -311,18 +316,18 @@ public class Cat extends Entity {
             if(currentAction == SIT){
                 currentAction = STAND;
                 animation.setFrames(sprites.get(SIT_TO_STAND));
-                animation.setDelay(delay);
+                animation.setDelay(fast);
             }
             if(currentAction == SLEEP){
                 setAction(SIT);
                 currentAction = STAND;
                 animation.setFrames(sprites.get(SIT_TO_STAND));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
             }
             if(currentAction == WALK){
                 currentAction = STAND;
                 animation.setFrames(sprites.get(STAND + currentDirection));
-                animation.setDelay(delay);
+                animation.setDelay(fast);
             }
         }
 
@@ -331,18 +336,18 @@ public class Cat extends Entity {
             if(currentAction == SIT){
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(delay);
+                animation.setDelay(fast);
             }
             if(currentAction == SLEEP){
                 setAction(SIT);
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(delay);
+                animation.setDelay(fast);
             }
             if(currentAction == STAND){
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(delay);
+                animation.setDelay(fast);
             }
         }
 
@@ -351,27 +356,27 @@ public class Cat extends Entity {
                 if(animation.hasPlayedOnce()){
                     setAction(SIT);
                     animation.setFrames(sprites.get(SIT));
-                    animation.setDelay(delay);
+                    animation.setDelay(slow);
                 }
             }
 
             if(currentAction == SIT){
                 currentAction = SCRATCH;
                 animation.setFrames(sprites.get(SIT_TO_SCRATCH));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
             }
             else if(currentAction == SLEEP || currentAction == STAND){
                 setAction(SIT);
                 currentAction = SCRATCH;
                 animation.setFrames(sprites.get(SIT_TO_SCRATCH));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
                 
             }
             else if(currentAction == WALK){
                 setAction(STAND);
                 setAction(SIT);
                 animation.setFrames(sprites.get(SIT_TO_SCRATCH));
-                animation.setDelay(delay);
+                animation.setDelay(slow);
             }
         }
 
