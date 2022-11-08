@@ -18,16 +18,7 @@ public abstract class Entity {
     protected double y;
     protected int currentDirection=3;
 
-    /* leftDown = 0;
-    down = 1;
-    rightDown = 2;
-    right = 3;
-    rightUp = 4;
-    up = 5;
-    leftUp = 6;
-    left = 7; */
 
-    //direction translate
 
 
     //dimensions
@@ -42,14 +33,14 @@ public abstract class Entity {
     protected int commandAction;//command for next action
 
     //movement
-    protected boolean downleft;
-    protected boolean down;
-    protected boolean downRight;
-    protected boolean right;
-    protected boolean upRight;
-    protected boolean up;
-    protected boolean upLeft;
-    protected boolean left;
+    protected final int leftDown = 0;
+    protected final int down = 1;
+    protected final int rightDown = 2;
+    protected final int right = 3;
+    protected final int rightUp = 4;
+    protected final int up = 5;
+    protected final int leftUp = 6;
+    protected final int left = 7;
 
     //movement physics :>
     protected double moveSpeed;
@@ -93,32 +84,6 @@ public abstract class Entity {
     public void setMapPosition(){
         xmap = map.getX();
         ymap = map.getY();
-    }
-
-    //setters for movement
-    public void setDownLeft(boolean b){
-        downleft = b;
-    }
-    public void setDown(boolean b){
-        down = b;
-    }
-    public void setDownRight(boolean b){
-        downRight = b;
-    }
-    public void setRight(boolean b){
-        right = b;
-    }
-    public void setUpRight(boolean b){
-        upRight = b;
-    }
-    public void setUp(boolean b){
-        up = b;
-    }
-    public void setUpLeft(boolean b){
-        upLeft = b;
-    }
-    public void setLeft(boolean b){
-        left = b;
     }
 
     //check if the entity is on the map
