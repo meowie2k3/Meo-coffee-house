@@ -38,6 +38,7 @@ public class Cat extends Entity {
     //reversible animation
     private static final int SLEEP_TO_SIT = 21;
     private static final int SIT_TO_STAND = 22;
+    private static final int REVERSE_SIT = 23;
 
     //constructor
     public Cat(Map map, String address){
@@ -198,12 +199,28 @@ public class Cat extends Entity {
             }
             sprites.add(sitToStand);
 
+            //get reverseSit animation
+            BufferedImage[] reverseSit = new BufferedImage[4];
+            tmp = 0;
+            for(int i=3; i>=3;i--){
+                for(int j=3; j>=0;j--){
+                    reverseSit[tmp] = spritesheet.getSubimage(
+                        j * width, 
+                        i * height, 
+                        width, 
+                        height);
+                    tmp++;
+                }
+            }
+            sprites.add(reverseSit);
+
 
         }catch(Exception e){
             e.printStackTrace();
         }
         animation = new Animation();
         currentAction = SIT;
+        nextAction = SIT;
         animation.setFrames(sprites.get(currentAction));
         animation.setDelay(100);
     }
@@ -260,34 +277,52 @@ public class Cat extends Entity {
 
     public void update(){
 
-        int slow = 100;
+        int slow = 120;
         int fast = 60;
         //set animation
         if(nextAction == SLEEP){
-            if(currentAction == SLEEP){}
-            if(currentAction == SIT){
-                currentAction = SIT;
+            if(currentAction == SLEEP){
+                if(animation.hasPlayedOnce()){
+                    animation.setFrames(sprites.get(SLEEP));
+                }
+            }
+            if(currentAction == SIT || currentAction == REVERSE_SIT){
+                currentAction = SLEEP;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(slow);
                 
             }
             if(currentAction == STAND){
                 setAction(SIT);
-                currentAction = SIT;
+                currentAction = SLEEP;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(fast);
             }
             if(currentAction == WALK){
                 setAction(STAND);
                 setAction(SIT);
-                currentAction = SIT;
+                currentAction = SLEEP;
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(slow);
             }
         }
     
         if(nextAction == SIT){
-            if(currentAction == SIT) {}
+            if(currentAction == SIT) {
+                //if it has been play once, set the animation to reverse sit
+                if(animation.hasPlayedOnce()){
+                    currentAction = REVERSE_SIT;
+                    animation.setFrames(sprites.get(REVERSE_SIT));
+                    animation.setDelay(slow);
+                }
+            }
+            if(currentAction == REVERSE_SIT){
+                if(animation.hasPlayedOnce()){
+                    currentAction = SIT;
+                    animation.setFrames(sprites.get(SIT));
+                    animation.setDelay(slow);
+                }
+            }
             if(currentAction == SLEEP){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SLEEP_TO_SIT));
@@ -312,8 +347,12 @@ public class Cat extends Entity {
         }
 
         if(nextAction == STAND){
-            if(currentAction == STAND){}
-            if(currentAction == SIT){
+            if(currentAction == STAND){
+                if(animation.hasPlayedOnce()){
+                    animation.setFrames(sprites.get(STAND));
+                }
+            }
+            if(currentAction == SIT || currentAction == REVERSE_SIT){
                 currentAction = STAND;
                 animation.setFrames(sprites.get(SIT_TO_STAND));
                 animation.setDelay(fast);
@@ -333,7 +372,7 @@ public class Cat extends Entity {
 
         if(nextAction == WALK){
             if(currentAction == WALK) {}
-            if(currentAction == SIT){
+            if(currentAction == SIT || currentAction == REVERSE_SIT){
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
@@ -360,7 +399,7 @@ public class Cat extends Entity {
                 }
             }
 
-            if(currentAction == SIT){
+            if(currentAction == SIT || currentAction == REVERSE_SIT){
                 currentAction = SCRATCH;
                 animation.setFrames(sprites.get(SIT_TO_SCRATCH));
                 animation.setDelay(slow);
@@ -379,12 +418,10 @@ public class Cat extends Entity {
                 animation.setDelay(slow);
             }
         }
-
         animation.update();
-        // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() + " " 
-        // + animation.getPlayNumber() + " " 
-        // + currentAction + " "
-        // + animation.getLength());
+
+        System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
+        + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
     }
 
     //draw
