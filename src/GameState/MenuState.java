@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
+import Entity.SoundEffect;
 import Main.GamePanel;
 import Map.Background;
 
@@ -31,7 +32,7 @@ public class MenuState extends GameState {
 
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
-
+        
         try {
             bg = new Background("/Backgrounds/bg.png", 1);
 
@@ -84,6 +85,8 @@ public class MenuState extends GameState {
             //g.drawRect(135, 140 + (i-1) * 20, 70, 20);
             //draw one after another
         }
+
+        
     }
 
     private void selectedMenu(){
