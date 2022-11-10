@@ -30,9 +30,7 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         map = new Map(); //set map block size to 30
-        //map.hashImage("/Character and Furniture/House asset blackcat.png");
-        //map.loadUserSavedGame("/SavedGame/User.map");
-        //map.setPosition(0, 0);
+        map.loadUserSavedGame("/UserSavedGame/User1.txt");
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
         
@@ -102,18 +100,7 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        // int scale = GamePanel.SCALE;
-        // int x =(int) e.getX();
-        // int y =(int) e.getY();
-        // //System.out.println(x + " " + y + " " + x/scale + " " + y/scale);
-        // //if click on the cat do scratch animation
-        // if(x >= cat.getX() * scale - cat.getWidth() * scale / 2 && 
-        // x <= cat.getX() * scale + cat.getWidth() * scale / 2 && 
-        // y >= cat.getY() * scale - cat.getHeight() * scale / 2 && 
-        // y <= cat.getY() * scale + cat.getHeight() * scale / 2)
-        // {
-        //         cat.setAction(SCRATCH);
-        // }
+        
     }
     public void mouseDragged(MouseEvent e) {
         
