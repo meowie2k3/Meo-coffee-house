@@ -1,3 +1,5 @@
 cat 32x32
 drinks 16x16
 character + furniture 66x66
+
+bound 960x720

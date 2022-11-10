@@ -219,8 +219,8 @@ public class Cat extends Entity {
             e.printStackTrace();
         }
         animation = new Animation();
-        currentAction = SIT;
-        nextAction = SIT;
+        currentAction = SLEEP;
+        nextAction = SLEEP;
         animation.setFrames(sprites.get(currentAction));
         animation.setDelay(100);
     }
@@ -249,6 +249,9 @@ public class Cat extends Entity {
     }
     public int getDirection(){
         return currentDirection;
+    }
+    public int getCurentAction(){
+        return currentAction;
     }
     //setters
     public void setHungry(boolean b){
@@ -295,8 +298,8 @@ public class Cat extends Entity {
             if(currentAction == STAND){
                 setAction(SIT);
                 currentAction = SLEEP;
-                animation.setFrames(sprites.get(SIT_TO_SLEEP));
-                animation.setDelay(fast);
+                //animation.setFrames(sprites.get(SIT_TO_SLEEP));
+                animation.setDelay(slow);
             }
             if(currentAction == WALK){
                 setAction(STAND);
@@ -326,7 +329,7 @@ public class Cat extends Entity {
             if(currentAction == SLEEP){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SLEEP_TO_SIT));
-                animation.setDelay(fast);
+                animation.setDelay(slow);
             }
             if(currentAction == STAND){
                 currentAction = SIT;
@@ -384,6 +387,11 @@ public class Cat extends Entity {
                 animation.setDelay(fast);
             }
             if(currentAction == STAND){
+                currentAction = WALK;
+                animation.setFrames(sprites.get(WALK + currentDirection));
+                animation.setDelay(fast);
+            }
+            if(currentAction == SCRATCH){
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);

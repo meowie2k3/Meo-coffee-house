@@ -54,7 +54,11 @@ public class IngameState extends GameState{
 
         //update cat
         cat.update(); // SIT, SLEEP, STAND, WALK, SCRATCH
-        
+        //0 -> 7
+        // for (int i = 0; i < 8; i++){
+        //     cat.move(i);
+        // }
+        //cat.move(3);
     }
     public void draw(java.awt.Graphics2D g) {
         //draw map
@@ -92,11 +96,19 @@ public class IngameState extends GameState{
         int y = e.getY();
         //System.out.println("Mouse Clicked at: " + x + ", " + y);
         //if user click to a cat, cat will scratch then move randomly around the map
-        if(cat.contains(x, y)){
-            cat.setAction(SCRATCH);
+        if (cat.getCurentAction()==SIT){
+            if(cat.contains(x, y)){
+                cat.setAction(SCRATCH);
+            }
         }
-
+        
+        if (cat.getCurentAction()==SLEEP){
+            if(cat.contains(x, y)){
+                cat.setAction(SIT);
+            }
+        }
     }
+
     public void mouseExited(MouseEvent e) {
         
     }
