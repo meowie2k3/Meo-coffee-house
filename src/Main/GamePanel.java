@@ -1,6 +1,9 @@
 package Main;
 
 import javax.swing.*;
+
+import Entity.SoundEffect;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -52,6 +55,7 @@ public class GamePanel extends JPanel
     //create game window
     private void init(){
 
+        
         image = new BufferedImage(
         WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 
@@ -86,6 +90,10 @@ public class GamePanel extends JPanel
             catch(Exception e){
                 e.printStackTrace();
             }
+
+            // SoundEffect themeSound = new SoundEffect();
+            // String audioFilePath = "/SoundEffects/meow.wav";
+            // themeSound.play(audioFilePath);
         }
         
     }
