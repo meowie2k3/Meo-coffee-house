@@ -17,3 +17,4 @@ public abstract class GameState {
     public abstract void mouseMoved(MouseEvent e);
     public abstract void mouseDragged(MouseEvent e);
 }
+   
