@@ -219,8 +219,8 @@ public class Cat extends Entity {
             e.printStackTrace();
         }
         animation = new Animation();
-        currentAction = SIT;
-        nextAction = SIT;
+        currentAction = SLEEP;
+        nextAction = SLEEP;
         animation.setFrames(sprites.get(currentAction));
         animation.setDelay(100);
     }
@@ -420,8 +420,8 @@ public class Cat extends Entity {
         }
         animation.update();
 
-        System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
-        + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
+        // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
+        // + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
     }
 
     //draw
