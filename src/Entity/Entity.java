@@ -12,7 +12,7 @@ import Main.*;
 public abstract class Entity {
     //block properties
     protected Map map;
-    protected int blockSize;
+    protected int catSize;
     protected double xmap;
     protected double ymap;
 
@@ -51,7 +51,7 @@ public abstract class Entity {
     //constructor
     public Entity(Map map){
         this.map = map;
-        blockSize = map.getBlockSize();
+        catSize = map.getCatSize();
     }
 
     //getters

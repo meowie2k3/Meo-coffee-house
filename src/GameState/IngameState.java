@@ -8,11 +8,12 @@ import Entity.*;
 
 public class IngameState extends GameState{
 
-    private Map map;
-    private Background bg;
+    public static Map map;
+    public static Background bg;
 
     //cat properties
-    private Cat cat;
+    public static ArrayList<Cat> catList;
+
     private static final int SLEEP = 1;
     private static final int SIT = 2;
     private static final int WALK = 4;
@@ -29,23 +30,14 @@ public class IngameState extends GameState{
     
     //file abstract method
     public void init() {
-        map = new Map(); //set map block size to 30
-        //map.hashImage("/Character and Furniture/House asset blackcat.png");
-        //map.loadUserSavedGame("/SavedGame/User.map");
-        //map.setPosition(0, 0);
+        catList = new ArrayList<Cat>();
+        map = new Map();
+
+        map.loadUserSavedGame("/UserSavedGame/User1.map");
+        
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
-        
-        cat = new Cat(map, "/Cats/creme_000.png");
-        cat.setPosition(100, 150);
-
-        
-        
-
     }
-    // public void init(){
-    //     map = new Map();
-    // }
 
     //update
     public void update() {
@@ -53,7 +45,9 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
-        cat.update(); // SIT, SLEEP, STAND, WALK, SCRATCH
+        for(int i=0;i<catList.size();i++){
+            catList.get(i).update();
+        }
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -63,11 +57,15 @@ public class IngameState extends GameState{
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
         //draw background
-        bg.draw(g);
+        try{bg.draw(g);
         //draw map
         map.draw(g);
         //draw cat
-        cat.draw(g);
+        for(int i=0;i<catList.size();i++){
+            catList.get(i).draw(g);
+        }}catch(Exception e){
+            e.printStackTrace();
+        }
     }
     //key event listener
     public void keyPressed(int k) {
@@ -87,14 +85,6 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-        //get coordinate of mouse click
-        int x = e.getX();
-        int y = e.getY();
-        //System.out.println("Mouse Clicked at: " + x + ", " + y);
-        //if user click to a cat, cat will scratch then move randomly around the map
-        if(cat.contains(x, y)){
-            cat.setAction(SCRATCH);
-        }
 
     }
     public void mouseExited(MouseEvent e) {
@@ -102,18 +92,7 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        // int scale = GamePanel.SCALE;
-        // int x =(int) e.getX();
-        // int y =(int) e.getY();
-        // //System.out.println(x + " " + y + " " + x/scale + " " + y/scale);
-        // //if click on the cat do scratch animation
-        // if(x >= cat.getX() * scale - cat.getWidth() * scale / 2 && 
-        // x <= cat.getX() * scale + cat.getWidth() * scale / 2 && 
-        // y >= cat.getY() * scale - cat.getHeight() * scale / 2 && 
-        // y <= cat.getY() * scale + cat.getHeight() * scale / 2)
-        // {
-        //         cat.setAction(SCRATCH);
-        // }
+        
     }
     public void mouseDragged(MouseEvent e) {
         
