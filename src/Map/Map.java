@@ -75,6 +75,13 @@ public class Map {
                 
                 IngameState.catList.add(tmp);
             }
+            for(int i=0;i< numRows;i++){
+                String curr = br.readLine();
+                String[] tokens = curr.split(delims);
+                for(int j=0;j< numCols;j++){
+                    map[i][j] = Integer.parseInt(tokens[j]);
+                }
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
