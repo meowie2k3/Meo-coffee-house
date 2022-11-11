@@ -428,8 +428,8 @@ public class Cat extends Entity {
         }
         animation.update();
 
-        System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
-        + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
+        // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
+        // + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
     }
 
     //draw
