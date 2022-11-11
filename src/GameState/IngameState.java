@@ -84,7 +84,13 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-
+        int x = e.getX();
+        int y = e.getY();
+        for(int i=0;i<catList.size();i++){
+            if(catList.get(i).contains(x, y)){
+                catList.get(i).setAction(SCRATCH);
+            }
+        }
     }
 
     public void mouseExited(MouseEvent e) {
