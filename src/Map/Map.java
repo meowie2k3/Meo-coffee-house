@@ -65,13 +65,14 @@ public class Map {
             String delims = "\\s++";
             for(int i=0;i< catNum;i++){
                 String curr = br.readLine();
-                System.out.println("address " + curr);
+                //System.out.println("address " + curr);
 
                 Cat tmp = new Cat(IngameState.map, curr);
                 String line = br.readLine();
                 String[] tokens = line.split(delims);
-                System.out.println("Position " + Integer.parseInt(tokens[0]) +" " + Integer.parseInt(tokens[1]));
+                //System.out.println("Position " + Integer.parseInt(tokens[0]) +" " + Integer.parseInt(tokens[1]));
                 tmp.setPosition(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+                
                 IngameState.catList.add(tmp);
             }
         }catch (Exception e){
