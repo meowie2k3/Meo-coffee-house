@@ -45,7 +45,7 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
-        for(int i=0;i<map.getCatNum();i++){
+        for(int i=0;i<catList.size();i++){
             catList.get(i).update();
         }
         
@@ -61,7 +61,7 @@ public class IngameState extends GameState{
         //draw map
         map.draw(g);
         //draw cat
-        for(int i=0;i<map.getCatNum();i++){
+        for(int i=0;i<catList.size();i++){
             catList.get(i).draw(g);
         }}catch(Exception e){
             e.printStackTrace();
