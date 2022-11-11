@@ -55,14 +55,15 @@ public class Map {
         return (int)y;
     }
     //load map files into memory
-    public void loadUserSavedGame(String s){
+    public void loadUserSavedGame(String address){
         try{
-            Scanner sc = new Scanner(new File(s));
-            int food = sc.nextInt();
-            int money = sc.nextInt();
-            int toy = sc.nextInt();
-            int catNum = sc.nextInt();
-            System.out.println(food + " " + money + " " + toy + " " + catNum);
+            InputStream in = getClass().getResourceAsStream(address);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            food = Integer.parseInt(br.readLine());
+            money = Integer.parseInt(br.readLine());
+            toy = Integer.parseInt(br.readLine());
+            catNum = Integer.parseInt(br.readLine());
+            System.out.println("user info" + food + " " + money + " " + toy + " " + catNum);
             for(int i=0;i< catNum;i++){
 
             }

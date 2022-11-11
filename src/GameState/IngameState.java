@@ -30,9 +30,8 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         map = new Map(); //set map block size to 30
-        map.loadUserSavedGame("/UserSavedGame/User1.txt");
+        map.loadUserSavedGame("/UserSavedGame/User1.map");
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
-
         
         cat = new Cat(map, "/Cats/creme_000.png");
         cat.setPosition(100, 150);
