@@ -1,8 +1,7 @@
 package Map;
 
-import Main.GamePanel;
-
-import java.util.Scanner;
+import GameState.IngameState;
+import Entity.*;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*; // for reader
@@ -37,8 +36,6 @@ public class Map {
 
     //constructor
     public Map(){
-
-
     }
 
     //getters
@@ -63,9 +60,19 @@ public class Map {
             money = Integer.parseInt(br.readLine());
             toy = Integer.parseInt(br.readLine());
             catNum = Integer.parseInt(br.readLine());
-            System.out.println("user info" + food + " " + money + " " + toy + " " + catNum);
-            for(int i=0;i< catNum;i++){
+            //System.out.println("user info" + food + " " + money + " " + toy + " " + catNum);
 
+            String delims = "\\s++";
+            for(int i=0;i< catNum;i++){
+                String curr = br.readLine();
+                System.out.println("address " + curr);
+
+                Cat tmp = new Cat(IngameState.map, curr);
+                String line = br.readLine();
+                String[] tokens = line.split(delims);
+                System.out.println("Position " + Integer.parseInt(tokens[0]) +" " + Integer.parseInt(tokens[1]));
+                tmp.setPosition(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+                IngameState.catList.add(tmp);
             }
         }catch (Exception e){
             e.printStackTrace();
