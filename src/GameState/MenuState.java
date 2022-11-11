@@ -12,8 +12,6 @@ import Entity.SoundEffect;
 import Main.GamePanel;
 import Map.Background;
 
-
-
 public class MenuState extends GameState {
 
     private Background bg;
@@ -156,6 +154,8 @@ public class MenuState extends GameState {
         if(x > left && x < right && y > 1*scale*20 + top - 20 && y < 1*scale*20 + top){
             currentChoice = 1;
         }
+
+        //System.out.println(x+" "+y);
     }
     public void mouseDragged(MouseEvent e) {
         

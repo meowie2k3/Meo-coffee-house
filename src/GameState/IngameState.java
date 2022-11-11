@@ -48,7 +48,6 @@ public class IngameState extends GameState{
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
         }
-        
     }
     public void draw(java.awt.Graphics2D g) {
         //draw map
@@ -87,6 +86,7 @@ public class IngameState extends GameState{
     public void mouseClicked(MouseEvent e) {
 
     }
+
     public void mouseExited(MouseEvent e) {
         
     }
