@@ -12,7 +12,7 @@ import Main.*;
 public abstract class Entity {
     //block properties
     protected Map map;
-    protected int blockSize;
+    protected int catSize;
     protected double xmap;
     protected double ymap;
 
@@ -20,9 +20,6 @@ public abstract class Entity {
     protected double x;
     protected double y;
     protected int currentDirection=3;
-
-
-
 
     //dimensions
     protected int width;
@@ -36,14 +33,14 @@ public abstract class Entity {
     protected int commandAction;//command for next action
 
     //movement
-    protected final int leftDown = 0;
-    protected final int down = 1;
-    protected final int rightDown = 2;
-    protected final int right = 3;
-    protected final int rightUp = 4;
-    protected final int up = 5;
-    protected final int leftUp = 6;
-    protected final int left = 7;
+    public final int leftDown = 0;
+    public final int down = 1;
+    public final int rightDown = 2;
+    public final int right = 3;
+    public final int rightUp = 4;
+    public final int up = 5;
+    public final int leftUp = 6;
+    public final int left = 7;
 
     //movement physics :>
     protected double moveSpeed;
@@ -51,7 +48,7 @@ public abstract class Entity {
     //constructor
     public Entity(Map map){
         this.map = map;
-        blockSize = map.getBlockSize();
+        catSize = map.getCatSize();
     }
 
     //getters
@@ -63,6 +60,9 @@ public abstract class Entity {
     }
     public int getDirection(){
         return currentDirection;
+    }
+    public int getCurentAction(){
+        return currentAction;
     }
     public int getWidth(){
         return width;
