@@ -87,6 +87,29 @@ public class Map {
         }
     }
 
+    public void SaveUserData(String address){
+        try{
+            PrintWriter writer = new PrintWriter(address, "UTF-8");
+            writer.println(food);
+            writer.println(money);
+            writer.println(toy);
+            writer.println(catNum);
+            for(int i=0;i< catNum;i++){
+                writer.println(IngameState.catList.get(i).getAddress());
+                writer.println(IngameState.catList.get(i).getX() + " " + IngameState.catList.get(i).getY());
+            }
+            for(int i=0;i< numRows;i++){
+                for(int j=0;j< numCols;j++){
+                    writer.print(map[i][j] + " ");
+                }
+                writer.println();
+            }
+            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     //draw function
     public void draw(Graphics2D g){
         

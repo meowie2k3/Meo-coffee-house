@@ -10,6 +10,7 @@ import java.awt.image.*;
 public class Cat extends Entity {
     //cat properties
     private String name;
+    private String address;
     
     //emotion
     private boolean isHungry;
@@ -43,6 +44,7 @@ public class Cat extends Entity {
     //constructor
     public Cat(Map map, String address){
         super(map);
+        this.address = address;
 
         //size for reading spritesheet
         width = 32;
@@ -249,6 +251,12 @@ public class Cat extends Entity {
     }
     public int getDirection(){
         return currentDirection;
+    }
+    public int getAction(){
+        return currentAction;
+    }
+    public String getAddress(){
+        return address;
     }
     //setters
     public void setHungry(boolean b){
