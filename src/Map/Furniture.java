@@ -18,7 +18,7 @@ public class Furniture {
     public BufferedImage getImage(){
         return image;
     }
-    public String name(){
+    public String getName(){
         return name;
     }
     public void setImage(BufferedImage image){

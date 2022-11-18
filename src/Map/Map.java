@@ -5,6 +5,7 @@ import Entity.*;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*; // for reader
+import java.util.ArrayList;
 
 import javax.imageio.*;
 
@@ -20,7 +21,7 @@ public class Map {
     private int numRows=6;
     private int numCols=8;
     //furiture
-    private Furniture[][] furniture;
+    private ArrayList<Furniture> furnitureList;
     public static final int Chair = 1;
     public static final int table =2;
     public static final int sink = 3;
@@ -51,7 +52,19 @@ public class Map {
     public int getY(){
         return (int)y;
     }
-    //load map files into memory
+
+    public void loadFurniture(){
+        try{
+            System.out.println("load furniture");
+            BufferedImage img = ImageIO.read(getClass().getResourceAsStream("/Furniture/PinkChair.png"));
+            Furniture tmp = new Furniture("chair", img);
+            furnitureList.add(tmp);
+            System.out.println("size: " + furnitureList.size());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    //load .map files into memory
     public void loadUserSavedGame(String address){
         try{
             InputStream in = getClass().getResourceAsStream(address);
@@ -112,6 +125,17 @@ public class Map {
 
     //draw function
     public void draw(Graphics2D g){
+        System.out.println("furniture " + furnitureList.size());
+        // for(int i=0;i< numRows;i++){
+        //     for(int j=0;j< numCols;j++){
+        //         if(furniture[map[i][j]] != null){
+        //             g.drawImage(furniture[map[i][j]].getImage(), 
+        //             j*furnitureSize, 
+        //             i*furnitureSize, 
+        //             null);
+        //         }
+        //     }
+        // }
         
     }
     

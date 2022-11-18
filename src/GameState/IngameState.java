@@ -32,8 +32,9 @@ public class IngameState extends GameState{
     public void init() {
         catList = new ArrayList<Cat>();
         map = new Map();
-
+        map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
+        
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
@@ -57,13 +58,15 @@ public class IngameState extends GameState{
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
         //draw background
-        try{bg.draw(g);
-        //draw map
-        map.draw(g);
-        //draw cat
-        for(int i=0;i<catList.size();i++){
-            catList.get(i).draw(g);
-        }}catch(Exception e){
+        try{
+            bg.draw(g);
+            //draw map
+            map.draw(g);
+            //draw cat
+            for(int i=0;i<catList.size();i++){
+                catList.get(i).draw(g);
+            }
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
