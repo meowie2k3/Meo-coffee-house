@@ -11,6 +11,7 @@ public class IngameState extends GameState{
 
     public static Map map;
     public static Background bg;
+    public static ArrayList<UxUi> uxui;
 
     //cat properties
     public static ArrayList<Cat> catList;
@@ -32,12 +33,20 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         catList = new ArrayList<Cat>();
+        uxui = new ArrayList<UxUi>();
         map = new Map();
-
+        //map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
+        String[] iconAddress = {"/Icon/coin.jpg"};
+        String[] iconName = {"money", "food", "toy", "cat"};
+        int[] iconValue = {map.getFood(), map.getMoney(), map.getToy(), map.getCatNum()};
+        for(int i=0;i<1;i++){
+            UxUi uiux = new UxUi(iconName[i],iconAddress[i], iconValue[i]);
+            uxui.add(uiux);
+        }
     }
 
     //update
@@ -49,6 +58,12 @@ public class IngameState extends GameState{
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
         }
+
+
+        //update uxui
+        for(int i=0;i<uxui.size();i++){
+            //uxui.get(i).update();
+        }
     }
     public void draw(java.awt.Graphics2D g) {
         //draw map
@@ -57,13 +72,15 @@ public class IngameState extends GameState{
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
         //draw background
-        try{bg.draw(g);
-        //draw map
-        map.draw(g);
-        //draw cat
-        for(int i=0;i<catList.size();i++){
-            catList.get(i).draw(g);
-        }}catch(Exception e){
+        try{
+            bg.draw(g);
+            //draw map
+            map.draw(g);
+            //draw cat
+            for(int i=0;i<catList.size();i++){
+                catList.get(i).draw(g);
+            }
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
