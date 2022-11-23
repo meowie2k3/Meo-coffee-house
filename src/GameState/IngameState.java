@@ -1,5 +1,6 @@
 package GameState;
 import java.awt.event.*;
+import java.lang.invoke.CallSite;
 import java.util.ArrayList;
 
 import Main.*;
@@ -84,7 +85,17 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-
+        for (int i=0;i<catList.size();i++){
+            if (catList.get(i).contains(e.getX(), e.getY())){
+                if (catList.get(i).getCurentAction() == SIT){
+                    catList.get(i).setAction(SCRATCH);
+                }
+                if (catList.get(i).getCurentAction() == SLEEP){
+                    catList.get(i).setAction(SIT);
+                }
+                
+            }
+        }
     }
 
     public void mouseExited(MouseEvent e) {
