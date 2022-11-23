@@ -431,20 +431,5 @@ public class Cat extends Entity {
         // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
         // + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
     }
-
-    //draw
-    public void draw(Graphics2D g){
-        setMapPosition();
-        // System.out.println(x + xmap - width /2);
-        // System.out.println(y + ymap - height / 2);
-        
-        g.drawImage(
-            animation.getImage(),
-            (int)(x + xmap - width /2),
-            (int)(y + ymap - height / 2),
-            null
-        );
-    }
-
     
 }

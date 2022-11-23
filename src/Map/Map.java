@@ -53,6 +53,17 @@ public class Map {
         return (int)y;
     }
 
+    //get user properties
+    public int getFood(){
+        return food;
+    }
+    public int getMoney(){
+        return money;
+    }
+    public int getToy(){
+        return toy;
+    }
+
     public void loadFurniture(){
         try{
             System.out.println("load furniture");
@@ -125,7 +136,7 @@ public class Map {
 
     //draw function
     public void draw(Graphics2D g){
-        System.out.println("furniture " + furnitureList.size());
+        //System.out.println("furniture " + furnitureList.size());
         // for(int i=0;i< numRows;i++){
         //     for(int j=0;j< numCols;j++){
         //         if(furniture[map[i][j]] != null){
