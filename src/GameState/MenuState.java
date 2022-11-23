@@ -1,46 +1,39 @@
 package GameState;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
 
-import javax.swing.JPanel;
-
-import Entity.SoundEffect;
 import Main.GamePanel;
 import Map.Background;
 
 public class MenuState extends GameState {
 
+    private BufferedImage p1, p2, e1, e2;
+
+    private BufferedImage[] Option = {
+        p1,
+        e1
+    };
+    
     private Background bg;
 
-    private int currentChoice = 0;
-
-    private String[] options = {
-        "Continue",
-        "Quit"
-    };
-
-    private Color titleColor;
-    private Font titleFont;
-
-    private Font font;
+    private int currentChoice = 2;
 
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
         
         try {
-            bg = new Background("/Backgrounds/bg.png", 1);
-
-            bg.setVector(-0.1, 0);
+            bg = new Background("/Backgrounds/bg.png", 0);
 
 
-            titleColor = new Color(251, 219, 101);
-            titleFont = new Font("Consolas", Font.PLAIN, 28);
+            p1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p1.png"));
+            p2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p2.png"));
+            e1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/e1.png"));
+            e2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/e2.png"));
 
-            font = new Font("Cambria Math", Font.PLAIN, 12);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,39 +45,30 @@ public class MenuState extends GameState {
     public void update(){
         bg.update();
     }
-
-    //...
-    JPanel panel1 = new JPanel();
-    JPanel panel2 = new JPanel();
-    JPanel panel = new JPanel();
-    //...
     
     public void draw(Graphics2D g){
         //draw bg
         bg.draw(g);
 
-        //draw title
-        g.setColor(titleColor);
-        g.setFont(titleFont);
-        g.drawString("MEOW COFFEE HOUSE", 28, 85);
+        //draw
+        g.drawImage(p1, 121, 120, null);
+        g.drawImage(e1, 121, 155, null);       
 
-       
-
-        //draw menu options
-        g.setFont(font);
-        for(int i = 0; i < options.length; i++){
-            if(i == currentChoice){
-                g.setColor(Color.RED);
+        // //draw menu options
+        for(int i = 0; i < Option.length; i++){
+            if  (currentChoice == 2) {
+                g.drawImage(p1, 121, 120, null);
+                g.drawImage(e1, 121, 155, null);
             }
-            else{
-                g.setColor(new Color(128,0,128));
+            else if (currentChoice == 0)    {
+                g.drawImage(p2, 121, 120, null);
+                g.drawImage(e1, 121, 155, null);
             }
-            g.drawString(options[i], 135, 140 + i * 20);
-            //g.drawRect(135, 140 + (i-1) * 20, 70, 20);
-            //draw one after another
-        }
-
-        
+            else if (currentChoice == 1)  {
+                g.drawImage(p1, 121, 120, null);
+                g.drawImage(e2, 121, 155, null);
+            }
+        }        
     }
 
     private void selectedMenu(){
@@ -108,7 +92,7 @@ public class MenuState extends GameState {
             }
         }
         if(k == KeyEvent.VK_S){
-            if(currentChoice < options.length - 1){
+            if(currentChoice < Option.length - 1){
                 currentChoice++;
             }
         }
@@ -118,7 +102,7 @@ public class MenuState extends GameState {
             }
         }
         if(k == KeyEvent.VK_DOWN){
-            if(currentChoice < options.length - 1){
+            if(currentChoice < Option.length - 1){
                 currentChoice++;
             }
         }
@@ -142,20 +126,20 @@ public class MenuState extends GameState {
     public void mouseMoved(MouseEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
-        // System.out.println(x + " " + y);
         int scale = GamePanel.SCALE;
         int left = 135 * scale;
         int right = 190 * scale;
         int top = 140 * scale;
         
-        if(x > left && x < right && y > 0*scale*20 + top -20 && y < 0*scale*20 + top){
+        if(x > left && x < right && y > 0*scale*20 + top - 45 && y < 0*scale*20 + top + 25){
             currentChoice = 0;
         }
-        if(x > left && x < right && y > 1*scale*20 + top - 20 && y < 1*scale*20 + top){
+        if(x > left && x < right && y > 1*scale*20 + top - 2 && y < 1*scale*20 + top + 68){
             currentChoice = 1;
         }
-
-        //System.out.println(x+" "+y);
+        if(x < left || x > right || y < 0*scale*20 + top - 45 || (y > 0*scale*20 + top + 25 && y < 1*scale*20 + top - 2) || y > 1*scale*20 + top + 68)   {
+            currentChoice = 2;
+        }
     }
     public void mouseDragged(MouseEvent e) {
         
