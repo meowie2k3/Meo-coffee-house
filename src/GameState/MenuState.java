@@ -33,6 +33,7 @@ public class MenuState extends GameState {
             p2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p2.png"));
             e1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/e1.png"));
             e2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/e2.png"));
+            
 
         } catch (Exception e) {
             e.printStackTrace();
