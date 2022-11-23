@@ -11,10 +11,7 @@ import Map.Background;
 
 public class MenuState extends GameState {
 
-    private BufferedImage p1;
-    private BufferedImage p2;
-    private BufferedImage e1;
-    private BufferedImage e2;
+    private BufferedImage p1, p2, e1, e2;
 
     private BufferedImage[] Option = {
         p1,
@@ -32,9 +29,12 @@ public class MenuState extends GameState {
             bg = new Background("/Backgrounds/bg.png", 1);
 
             bg.setVector(0, 0);
-
+            
+            //playButton
             p1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p1.png"));
             p2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p2.png"));
+
+            //exitButton
             e1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/e1.png"));
             e2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/e2.png"));
 
