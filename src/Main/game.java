@@ -16,7 +16,6 @@ public class game {
         window.setResizable(false);
         window.pack();
         window.setVisible(true);
-        //draw play button
          
         String audioFilePath = "Resources/soundEffect/meow.wav";
         SoundEffect player = new SoundEffect();
