@@ -133,3 +133,6 @@ public abstract class Entity {
         }
     }
 }
+
+
+// for Character: 1 0 2 2 2 3 1 1
