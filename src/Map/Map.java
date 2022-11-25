@@ -161,7 +161,7 @@ public class Map {
                     }
                 }
             }
-        }catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 
