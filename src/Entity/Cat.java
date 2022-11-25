@@ -370,6 +370,34 @@ public class Cat extends Entity {
         
     }
 
+    //bounding when cat is walking
+    public void bounding(){
+        if (getDirection()==0 || getDirection()==1 || getDirection()==2){
+            if (getY() == GamePanel.HEIGHT - 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+        if (getDirection()==0 || getDirection()==7 || getDirection()==6){
+            if (getX() == 0 + 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+        if (getDirection()==4 || getDirection()==5 || getDirection()==6){
+            if (getY() == 0 + 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+        if (getDirection()==2 || getDirection()==3 || getDirection()==4){
+            if (getX() == GamePanel.WIDTH - 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+    }
+
     public void update(){
 
         int slow = 120;

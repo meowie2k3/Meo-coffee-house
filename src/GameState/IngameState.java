@@ -71,32 +71,7 @@ public class IngameState extends GameState{
             catList.get(i).update();
             if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
                 catList.get(i).move(catList.get(i).getDirection());
-
-                //bounded
-                if (catList.get(i).getDirection()==0 || catList.get(i).getDirection()==1 || catList.get(i).getDirection()==2){
-                    if (catList.get(i).getY() == GamePanel.HEIGHT - 16){
-                        catList.get(i).setAction(STAND + catList.get(i).getDirection());
-                        catList.get(i).setAction(SIT);
-                    }
-                }
-                if (catList.get(i).getDirection()==0 || catList.get(i).getDirection()==7 || catList.get(i).getDirection()==6){
-                    if (catList.get(i).getX() == 0 + 16){
-                        catList.get(i).setAction(STAND + catList.get(i).getDirection());
-                        catList.get(i).setAction(SIT);
-                    }
-                }
-                if (catList.get(i).getDirection()==4 || catList.get(i).getDirection()==5 || catList.get(i).getDirection()==6){
-                    if (catList.get(i).getY() == 0 + 16){
-                        catList.get(i).setAction(STAND + catList.get(i).getDirection());
-                        catList.get(i).setAction(SIT);
-                    }
-                }
-                if (catList.get(i).getDirection()==2 || catList.get(i).getDirection()==3 || catList.get(i).getDirection()==4){
-                    if (catList.get(i).getX() == GamePanel.WIDTH - 16){
-                        catList.get(i).setAction(STAND + catList.get(i).getDirection());
-                        catList.get(i).setAction(SIT);
-                    }
-                }
+                catList.get(i).bounding();
             }
         }
 
