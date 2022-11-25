@@ -6,6 +6,7 @@ public class Furniture {
 
     private BufferedImage image;
     private String name;
+    
     //constructor
     public Furniture(String name, BufferedImage image){
         this.image = image;

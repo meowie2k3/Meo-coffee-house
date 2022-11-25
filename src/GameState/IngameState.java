@@ -70,8 +70,8 @@ public class IngameState extends GameState{
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-        //draw background
         try{
+            //draw background
             bg.draw(g);
             //draw map
             map.draw(g);

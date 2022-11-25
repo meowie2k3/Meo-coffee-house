@@ -67,10 +67,9 @@ public class Map {
     public void loadFurniture(){
         try{
             System.out.println("load furniture");
-            BufferedImage img = ImageIO.read(getClass().getResourceAsStream("/Furniture/PinkChair.png"));
-            Furniture tmp = new Furniture("chair", img);
-            furnitureList.add(tmp);
-            System.out.println("size: " + furnitureList.size());
+            String[] address = {"/Furniture/Chair.png", "/Furniture/Table.png", "/Furniture/Sink.png", "/Furniture/Stove.png", "/Furniture/Fridge.png"};
+            String[] name = {"Chair", "Table", "Sink", "Stove", "Fridge"};
+            
         }catch(Exception e){
             e.printStackTrace();
         }
