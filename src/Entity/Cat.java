@@ -398,6 +398,33 @@ public class Cat extends Entity {
         }
     }
 
+    //when we click on cat, it will do something
+    public void catDoSomething(){
+        //cat sleep -> sit
+        if (getCurentAction() == SLEEP) {
+            setAction(SIT);
+            return;
+        }
+        //cat sit -> 2 choice randome (walk or scratch)
+        //if choice is walk -> walk randomly, when it get to the edge, it will sit again
+        if (getCurentAction() == SIT || getCurentAction() == REVERSE_SIT) {
+            Random rand = new Random();
+            int choice = rand.nextInt(2);
+            if (choice == 0) {
+                walking();
+            } else {
+                setAction(SCRATCH);
+            }
+            return;
+        }
+        //cat walking -> sit    
+        if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
+            setAction(STAND + getDirection());
+            setAction(SIT);
+            return;
+        }
+    }
+
     public void update(){
 
         int slow = 120;

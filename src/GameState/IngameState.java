@@ -69,6 +69,7 @@ public class IngameState extends GameState{
         //update cat
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
+            //moving
             if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
                 catList.get(i).move(catList.get(i).getDirection());
                 catList.get(i).bounding();
@@ -119,29 +120,7 @@ public class IngameState extends GameState{
     public void mouseClicked(MouseEvent e) {
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
-                //cat sleep -> sit
-                if (catList.get(i).getCurentAction() == SLEEP) {
-                    catList.get(i).setAction(SIT);
-                    break;
-                }
-                //cat sit -> 2 choice randome (walk or scratch)
-                //if choice is walk -> walk randomly, when it get to the edge, it will sit again
-                if (catList.get(i).getCurentAction() == SIT || catList.get(i).getCurentAction() == REVERSE_SIT) {
-                    Random rand = new Random();
-                    int choice = rand.nextInt(2);
-                    if (choice == 0) {
-                        catList.get(i).walking();
-                    } else {
-                        catList.get(i).setAction(SCRATCH);
-                    }
-                    break;
-                }
-                //cat walking -> sit    
-                if (catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7) {
-                    catList.get(i).setAction(STAND + catList.get(i).getDirection());
-                    catList.get(i).setAction(SIT);
-                    break;
-                }
+                catList.get(i).catDoSomething();                
             }
         }
     }
