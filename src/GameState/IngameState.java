@@ -73,8 +73,41 @@ public class IngameState extends GameState{
                 catList.get(i).move(catList.get(i).getDirection());
                 if (catList.get(i).getX() <= 0 + 16 || catList.get(i).getX() >= GamePanel.WIDTH - 16 
                     || catList.get(i).getY() <= 0 + 16 || catList.get(i).getY() >= GamePanel.HEIGHT - 16) {
-                        
+
                     // System.out.print(catList.get(i).getX()+" "+catList.get(i).getY());
+                    //cat at left
+                    if (catList.get(i).getX() <= 0 + 16 && catList.get(i).getY() >= 0 + 16 && catList.get(i).getY() <= GamePanel.HEIGHT - 16) {
+                        catList.get(i).setPosition(16, catList.get(i).getY());
+                    }
+                    //cat at right
+                    if (catList.get(i).getX() >= GamePanel.WIDTH - 16 && catList.get(i).getY() >= 0 + 16 && catList.get(i).getY() <= GamePanel.HEIGHT - 16) {
+                        catList.get(i).setPosition(GamePanel.WIDTH - 16, catList.get(i).getY());
+                    }
+                    //cat at bottom
+                    if (catList.get(i).getY() >= GamePanel.HEIGHT - 16 && catList.get(i).getX() >= 0 + 16 && catList.get(i).getX() <= GamePanel.WIDTH - 16) {
+                        catList.get(i).setPosition(catList.get(i).getX(), GamePanel.HEIGHT - 16);
+                    }
+                    //cat at top
+                    if (catList.get(i).getY() <= 0 + 16 && catList.get(i).getX() >= 0 + 16 && catList.get(i).getX() <= GamePanel.WIDTH - 16) {
+                        catList.get(i).setPosition(catList.get(i).getX(), 16);
+                    }
+                    //cat at topleft coner
+                    if (catList.get(i).getX() <= 0 + 16 && catList.get(i).getY() <= 0 + 16) {
+                        catList.get(i).setPosition(16, 16);
+                    }
+                    //cat at topright coner
+                    if (catList.get(i).getX() >= GamePanel.WIDTH - 16 && catList.get(i).getY() <= 0 + 16) {
+                        catList.get(i).setPosition(GamePanel.WIDTH - 16, 16);
+                    }
+                    //cat at bottomleft coner
+                    if (catList.get(i).getX() <= 0 + 16 && catList.get(i).getY() >= GamePanel.HEIGHT - 16) {
+                        catList.get(i).setPosition(16, GamePanel.HEIGHT - 16);
+                    }
+                    //cat at bottomright coner
+                    if (catList.get(i).getX() >= GamePanel.WIDTH - 16 && catList.get(i).getY() >= GamePanel.HEIGHT - 16) {
+                        catList.get(i).setPosition(GamePanel.WIDTH - 16, GamePanel.HEIGHT - 16);
+                    }
+
                     catList.get(i).setAction(STAND + catList.get(i).getDirection());
                     catList.get(i).setAction(SIT);
                 }
@@ -131,10 +164,75 @@ public class IngameState extends GameState{
                     break;
                 }
                 if (catList.get(i).getCurentAction() == SIT || catList.get(i).getCurentAction() == REVERSE_SIT) {
+                    int[][] possibleDirection = { { 1, 2, 3, 4, 5 }, //cat at left
+                                                    { 0, 1, 5, 6, 7 }, //cat at right
+                                                    { 3, 4, 5, 6, 7 }, //cat at bottom
+                                                    { 0, 1, 2, 3, 7 }, //cat at top
+
+                                                    { 1, 2, 3}, //cat at topleft coner
+                                                    { 0, 1, 7}, //cat at topright coner
+                                                    { 3, 4, 5}, //cat at bottomleft coner
+                                                    { 5, 6, 7}, //cat at bottomright coner
+
+                                                    { 0, 1, 2, 3, 4, 5, 6, 7 }, //cat at center
+                                                };
+                    
                     Random rand = new Random();
-                    catList.get(i).setDirection(rand.nextInt(8));
-                    catList.get(i).setAction(WALK + catList.get(i).getDirection());
-                    break;
+                    //cat at left
+                    if (catList.get(i).getX() == 0 + 16 && catList.get(i).getY() >= 0 + 16 && catList.get(i).getY() <= GamePanel.HEIGHT - 16) {
+                        catList.get(i).setDirection(possibleDirection[0][rand.nextInt(5)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at right
+                    if (catList.get(i).getX() == GamePanel.WIDTH - 16 && catList.get(i).getY() >= 0 + 16 && catList.get(i).getY() <= GamePanel.HEIGHT - 16) {
+                        catList.get(i).setDirection(possibleDirection[1][rand.nextInt(5)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at bottom
+                    if (catList.get(i).getY() == GamePanel.HEIGHT - 16 && catList.get(i).getX() >= 0 + 16 && catList.get(i).getX() <= GamePanel.WIDTH - 16) {
+                        catList.get(i).setDirection(possibleDirection[2][rand.nextInt(5)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at top
+                    if (catList.get(i).getY() == 0 + 16 && catList.get(i).getX() >= 0 + 16 && catList.get(i).getX() <= GamePanel.WIDTH - 16) {
+                        catList.get(i).setDirection(possibleDirection[3][rand.nextInt(5)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at topleft coner
+                    if (catList.get(i).getX() == 0 + 16 && catList.get(i).getY() == 0 + 16) {
+                        catList.get(i).setDirection(possibleDirection[4][rand.nextInt(3)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at topright coner
+                    if (catList.get(i).getX() == GamePanel.WIDTH - 16 && catList.get(i).getY() == 0 + 16) {
+                        catList.get(i).setDirection(possibleDirection[5][rand.nextInt(3)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at bottomleft coner
+                    if (catList.get(i).getX() == 0 + 16 && catList.get(i).getY() == GamePanel.HEIGHT - 16) {
+                        catList.get(i).setDirection(possibleDirection[6][rand.nextInt(3)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at bottomright coner
+                    if (catList.get(i).getX() == GamePanel.WIDTH - 16 && catList.get(i).getY() == GamePanel.HEIGHT - 16) {
+                        catList.get(i).setDirection(possibleDirection[7][rand.nextInt(3)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    //cat at center
+                    if (catList.get(i).getX() >= 0 + 16 && catList.get(i).getX() <= GamePanel.WIDTH - 16 && catList.get(i).getY() >= 0 + 16 && catList.get(i).getY() <= GamePanel.HEIGHT - 16) {
+                        catList.get(i).setDirection(possibleDirection[8][rand.nextInt(8)]);
+                        catList.get(i).setAction(WALK + catList.get(i).getDirection());
+                        break;
+                    }
+                    
                 }
                 // if (catList.get(i).getCurentAction() == STAND) {
                 //     catList.get(i).setAction(WALK);

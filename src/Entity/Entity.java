@@ -98,7 +98,7 @@ public abstract class Entity {
 
     //command
     public void move(int direction){
-        if (x >= 0 + 16 || x <= GamePanel.WIDTH - 16 || y >= 0 + 16 || y <= GamePanel.HEIGHT - 16) {
+        if (x >= 0 + 16 && x <= GamePanel.WIDTH - 16 && y >= 0 + 16 && y <= GamePanel.HEIGHT - 16) {
             switch(direction){
                 case leftDown:
                     x -= moveSpeed;
