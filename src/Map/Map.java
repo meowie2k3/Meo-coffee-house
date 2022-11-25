@@ -2,7 +2,7 @@ package Map;
 
 import GameState.IngameState;
 import Entity.*;
-import Entity.Character;
+import Entity.character;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -47,6 +47,10 @@ public class Map {
 
     public int getCatNum() {
         return catNum;
+    }
+
+    public int getcharacterNum() {
+        return characterNum;
     }
 
     public int getX() {
@@ -98,7 +102,6 @@ public class Map {
             money = Integer.parseInt(br.readLine());
             toy = Integer.parseInt(br.readLine());
             catNum = Integer.parseInt(br.readLine());
-
             characterNum = Integer.parseInt(br.readLine());
             //System.out.println("user info" + food + " " + money + " " + toy + " " + catNum);
 
@@ -122,7 +125,7 @@ public class Map {
                 String curr = br.readLine();
                 //System.out.println("address " + curr);
 
-                Character tmp = new Character(IngameState.map, curr);
+                character tmp = new character(IngameState.map, curr);
                 String line = br.readLine();
                 String[] tokens = line.split(delims);
                 //System.out.println("Position " + Integer.parseInt(tokens[0]) +" " + Integer.parseInt(tokens[1]));
@@ -153,9 +156,14 @@ public class Map {
             writer.println(money);
             writer.println(toy);
             writer.println(catNum);
+            writer.println(characterNum);
             for (int i = 0; i < catNum; i++) {
                 writer.println(IngameState.catList.get(i).getAddress());
                 writer.println(IngameState.catList.get(i).getX() + " " + IngameState.catList.get(i).getY());
+            }
+            for (int i = 0; i < characterNum; i++) {
+                writer.println(IngameState.characterList.get(i).getAddress());
+                writer.println(IngameState.characterList.get(i).getX() + " " + IngameState.characterList.get(i).getY());
             }
             for (int i = 0; i < numRows; i++) {
                 for (int j = 0; j < numCols; j++) {
@@ -181,7 +189,7 @@ public class Map {
                     }
                 }
             }
-        }catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
 

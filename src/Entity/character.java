@@ -7,10 +7,11 @@ import javax.imageio.*;
 import java.awt.*;
 import java.awt.image.*;
 
-public class Character extends Entity {
+public class character extends Entity {
     //cat properties
     private String name;
-    
+    private String address;
+        
     // //emotion
     // private boolean isHungry;
     // private boolean isSleepy;
@@ -34,8 +35,9 @@ public class Character extends Entity {
     // private static final int UP = 4;
 
     //constructor
-    public Character(Map map, String address){
+    public character(Map map, String address){
         super(map);
+        this.address = address;
 
         //size for reading spritesheet
         width = 48;
@@ -87,14 +89,27 @@ public class Character extends Entity {
         // animation.setDelay(100);
     }
 
+    //getters
+    public String getName(){
+        return name;
+    }
+    
     public int getDirection(){
         return currentDirection;
     }
     public int getCurentAction(){
         return currentAction;
     }
-    
 
+    
+    public int getAction(){
+        return currentAction;
+    }
+    public String getAddress(){
+        return address;
+    }
+
+    //setters
     public void setDirection(int i){
         currentDirection = i;
     }
@@ -139,24 +154,22 @@ public class Character extends Entity {
         }
 
         animation.update();
-
-        // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
-        // + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
     }
 
-    //draw
-    public void draw(Graphics2D g){
-        setMapPosition();
-        // System.out.println(x + xmap - width /2);
-        // System.out.println(y + ymap - height / 2);
+
+    // //draw
+    // public void draw(Graphics2D g){
+    //     setMapPosition();
+    //     // System.out.println(x + xmap - width /2);
+    //     // System.out.println(y + ymap - height / 2);
         
-        g.drawImage(
-            animation.getImage(),
-            (int)(x + xmap - width /2),
-            (int)(y + ymap - height / 2),
-            null
-        );
-    }
+    //     g.drawImage(
+    //         animation.getImage(),
+    //         (int)(x + xmap - width /2),
+    //         (int)(y + ymap - height / 2),
+    //         null
+    //     );
+    // }
 
     
 }

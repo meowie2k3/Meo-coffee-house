@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import Main.*;
 import Map.*;
 import Entity.*;
-import Entity.Character;
+import Entity.character;
 
 public class IngameState extends GameState{
 
@@ -16,7 +16,7 @@ public class IngameState extends GameState{
 
     //cat properties
     public static ArrayList<Cat> catList;
-    public static ArrayList<Character> characterList;
+    public static ArrayList<character> characterList;
 
     private static final int SLEEP = 1;
     private static final int SIT = 2;
@@ -35,7 +35,7 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         catList = new ArrayList<Cat>();
-        characterList = new ArrayList<Character>();
+        characterList = new ArrayList<character>();
         map = new Map();
         
         //load user data
@@ -44,13 +44,13 @@ public class IngameState extends GameState{
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
-        String[] iconAddress = {"/Icon/coin.jpg"};
-        String[] iconName = {"money", "food", "toy", "cat"};
-        int[] iconValue = {map.getFood(), map.getMoney(), map.getToy(), map.getCatNum()};
-        for(int i=0;i<1;i++){
-            UxUi uiux = new UxUi(iconName[i],iconAddress[i], iconValue[i]);
-            uxui.add(uiux);
-        }
+        // String[] iconAddress = {"/Icon/coin.jpg"};
+        // String[] iconName = {"money", "food", "toy", "cat", "character"};
+        // int[] iconValue = {map.getFood(), map.getMoney(), map.getToy(), map.getCatNum(), map.getcharacterNum()};
+        // for(int i=0;i<1;i++){
+        //     UxUi uiux = new UxUi(iconName[i],iconAddress[i], iconValue[i]);
+        //     uxui.add(uiux);
+        // }
     }
 
     //update
@@ -64,6 +64,11 @@ public class IngameState extends GameState{
         }
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
+        }
+
+        //update character
+        if(characterList.size() != map.getcharacterNum()){
+            System.out.println("bug! " + characterList.size() + " " + map.getcharacterNum());
         }
         for(int i=0;i<characterList.size();i++){
             characterList.get(i).update();
