@@ -58,6 +58,9 @@ public class IngameState extends GameState{
         //update cat
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
+            if(catList.get(i).getCurentAction() == WALK){
+                catList.get(i).move(catList.get(i).getDirection());
+            }
         }
 
 
@@ -103,7 +106,18 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-
+        for (int i = 0; i < catList.size(); i++) {
+            if (catList.get(i).contains(e.getX(), e.getY())) {
+                if (catList.get(i).getCurentAction() == SLEEP) {
+                    catList.get(i).setAction(SIT);
+                    break;
+                }
+                if (catList.get(i).getCurentAction() == SIT) {
+                    catList.get(i).setAction(WALK);
+                    break;
+                }
+            }
+        }
     }
 
     public void mouseExited(MouseEvent e) {
