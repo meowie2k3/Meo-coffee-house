@@ -2,6 +2,8 @@ package Map;
 
 import GameState.IngameState;
 import Entity.*;
+import Entity.Character;
+
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*; // for reader
@@ -32,6 +34,7 @@ public class Map {
     private int money;
     private int toy;
     private int catNum;
+    private int characterNum;
 
     // constructor
     public Map() {
@@ -95,11 +98,12 @@ public class Map {
             money = Integer.parseInt(br.readLine());
             toy = Integer.parseInt(br.readLine());
             catNum = Integer.parseInt(br.readLine());
-            // System.out.println("user info" + food + " " + money + " " + toy + " " +
-            // catNum);
+
+            characterNum = Integer.parseInt(br.readLine());
+            //System.out.println("user info" + food + " " + money + " " + toy + " " + catNum);
 
             String delims = "\\s++";
-            for (int i = 0; i < catNum; i++) {
+            for(int i=0; i < catNum;i++){
                 String curr = br.readLine();
                 // System.out.println("address " + curr);
 
@@ -112,6 +116,21 @@ public class Map {
 
                 IngameState.catList.add(tmp);
             }
+            
+            delims = "\\s++";
+            for(int i=0; i < characterNum;i++){
+                String curr = br.readLine();
+                //System.out.println("address " + curr);
+
+                Character tmp = new Character(IngameState.map, curr);
+                String line = br.readLine();
+                String[] tokens = line.split(delims);
+                //System.out.println("Position " + Integer.parseInt(tokens[0]) +" " + Integer.parseInt(tokens[1]));
+                tmp.setPosition(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+                
+                IngameState.characterList.add(tmp);
+            }
+
             //load array map
             map = new int[numRows+1][numCols+1];
             for (int i = 0; i < numRows; i++) {
@@ -122,6 +141,7 @@ public class Map {
                 }
             }
         } catch (Exception e) {
+
             e.printStackTrace();
         }
     }

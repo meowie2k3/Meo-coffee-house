@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Main.*;
 import Map.*;
 import Entity.*;
+import Entity.Character;
 
 public class IngameState extends GameState{
 
@@ -15,6 +16,7 @@ public class IngameState extends GameState{
 
     //cat properties
     public static ArrayList<Cat> catList;
+    public static ArrayList<Character> characterList;
 
     private static final int SLEEP = 1;
     private static final int SIT = 2;
@@ -33,7 +35,7 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         catList = new ArrayList<Cat>();
-        uxui = new ArrayList<UxUi>();
+        characterList = new ArrayList<Character>();
         map = new Map();
         
         //load user data
@@ -63,11 +65,8 @@ public class IngameState extends GameState{
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
         }
-
-
-        //update uxui
-        for(int i=0;i<uxui.size();i++){
-            //uxui.get(i).update();
+        for(int i=0;i<characterList.size();i++){
+            characterList.get(i).update();
         }
     }
     public void draw(java.awt.Graphics2D g) {
@@ -78,6 +77,7 @@ public class IngameState extends GameState{
 
         try{
             //draw background
+
             bg.draw(g);
             //draw map
             map.draw(g);
@@ -85,7 +85,11 @@ public class IngameState extends GameState{
             for(int i=0;i<catList.size();i++){
                 catList.get(i).draw(g);
             }
-        }catch(Exception e){
+            for(int i=0;i<characterList.size();i++){
+                characterList.get(i).draw(g);
+            }
+
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
