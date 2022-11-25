@@ -98,42 +98,42 @@ public abstract class Entity {
 
     //command
     public void move(int direction){
-        if (x <= 0 + 16 || x >= GamePanel.WIDTH - 16 || y <= 0 + 16 || y >= GamePanel.HEIGHT - 16) {
-            return;
+        if (x >= 0 + 16 || x <= GamePanel.WIDTH - 16 || y >= 0 + 16 || y <= GamePanel.HEIGHT - 16) {
+            switch(direction){
+                case leftDown:
+                    x -= moveSpeed;
+                    y += moveSpeed;
+                    break;
+                case down:
+                    y += moveSpeed;
+                    break;
+                case rightDown:
+                    x += moveSpeed;
+                    y += moveSpeed;
+                    break;
+                case right:
+                    x += moveSpeed;
+                    break;
+                case rightUp:
+                    x += moveSpeed;
+                    y -= moveSpeed;
+                    break;
+                case up:
+                    y -= moveSpeed;
+                    break;
+                case leftUp:
+                    x -= moveSpeed;
+                    y -= moveSpeed;
+                    break;
+                case left:
+                    x -= moveSpeed;
+                    break;
+                default:
+                    System.out.println("Invalid direction");
+                    break;
+            }
         }
-        switch(direction){
-            case leftDown:
-                x -= moveSpeed;
-                y += moveSpeed;
-                break;
-            case down:
-                y += moveSpeed;
-                break;
-            case rightDown:
-                x += moveSpeed;
-                y += moveSpeed;
-                break;
-            case right:
-                x += moveSpeed;
-                break;
-            case rightUp:
-                x += moveSpeed;
-                y -= moveSpeed;
-                break;
-            case up:
-                y -= moveSpeed;
-                break;
-            case leftUp:
-                x -= moveSpeed;
-                y -= moveSpeed;
-                break;
-            case left:
-                x -= moveSpeed;
-                break;
-            default:
-                System.out.println("Invalid direction");
-                break;
-        }
+        
     }
     public void draw(Graphics2D g){
         setMapPosition();

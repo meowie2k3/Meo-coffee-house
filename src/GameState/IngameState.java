@@ -3,6 +3,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.print.attribute.standard.Sides;
+
 import Main.*;
 import Map.*;
 import Entity.*;
@@ -71,8 +73,10 @@ public class IngameState extends GameState{
                 catList.get(i).move(catList.get(i).getDirection());
                 if (catList.get(i).getX() <= 0 + 16 || catList.get(i).getX() >= GamePanel.WIDTH - 16 
                     || catList.get(i).getY() <= 0 + 16 || catList.get(i).getY() >= GamePanel.HEIGHT - 16) {
-                    
+                        
+                    // System.out.print(catList.get(i).getX()+" "+catList.get(i).getY());
                     catList.get(i).setAction(STAND + catList.get(i).getDirection());
+                    catList.get(i).setAction(SIT);
                 }
             }
         }
