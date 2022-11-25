@@ -381,8 +381,8 @@ public class Cat extends Entity {
             }
         }
 
-        if(nextAction == WALK){
-            if(currentAction == WALK) {}
+        if(nextAction >= WALK && nextAction <= WALK+7){
+            if(currentAction >= WALK && currentAction <= WALK+7) {}
             if(currentAction == SIT || currentAction == REVERSE_SIT){
                 currentAction = WALK;
                 animation.setFrames(sprites.get(WALK + currentDirection));
