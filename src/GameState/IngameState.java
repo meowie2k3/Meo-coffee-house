@@ -71,7 +71,8 @@ public class IngameState extends GameState{
             catList.get(i).update();
             if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
                 catList.get(i).move(catList.get(i).getDirection());
-                //đụ má khúc này ăn l roiiiiiiii, éc ô éc nhức cái đầu quá
+
+                //bounded
                 if (catList.get(i).getDirection()==0 || catList.get(i).getDirection()==1 || catList.get(i).getDirection()==2){
                     if (catList.get(i).getY() == GamePanel.HEIGHT - 16){
                         catList.get(i).setAction(STAND + catList.get(i).getDirection());
@@ -96,17 +97,8 @@ public class IngameState extends GameState{
                         catList.get(i).setAction(SIT);
                     }
                 }
-                
-                // if (catList.get(i).getX() == 0 + 16 || catList.get(i).getX() == GamePanel.WIDTH - 16 
-                //     || catList.get(i).getY() == 0 + 16 || catList.get(i).getY() == GamePanel.HEIGHT - 16) {
-                    
-                //     catList.get(i).setAction(STAND + catList.get(i).getDirection());
-                //     catList.get(i).setAction(SIT);
-                //     //System.out.println("cat at edge" + catList.get(i).getX() + " " + catList.get(i).getY() + "\n");
-                // }
             }
         }
-
 
         //update uxui
         for(int i=0;i<uxui.size();i++){
