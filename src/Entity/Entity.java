@@ -99,7 +99,7 @@ public abstract class Entity {
     //command
     public void move(int direction){
         if (x >= (0 + 16) && x <= (GamePanel.WIDTH - 16) && y >= (0 + 16.0) && y <= (GamePanel.HEIGHT - 16.0)) {
-            //System.out.println("can move");
+            System.out.println("can move");
             switch(direction){
                 case leftDown:
                     x -= moveSpeed;
