@@ -129,11 +129,12 @@ public class IngameState extends GameState{
                     catList.get(i).walking();
                     break;
                 }
-                
-                // if (catList.get(i).getCurentAction() == STAND) {
-                //     catList.get(i).setAction(WALK);
-                //     break;
-                // }
+                //cat walking -> sit    
+                if (catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7) {
+                    catList.get(i).setAction(STAND + catList.get(i).getDirection());
+                    catList.get(i).setAction(SIT);
+                    break;
+                }
             }
         }
     }
