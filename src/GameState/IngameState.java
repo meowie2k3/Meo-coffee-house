@@ -12,7 +12,6 @@ public class IngameState extends GameState{
 
     public static Map map;
     public static Background bg;
-    public static ArrayList<UxUi> uxui;
 
     //cat properties
     public static ArrayList<Cat> catList;
