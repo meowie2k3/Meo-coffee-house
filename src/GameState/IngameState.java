@@ -35,7 +35,9 @@ public class IngameState extends GameState{
         catList = new ArrayList<Cat>();
         uxui = new ArrayList<UxUi>();
         map = new Map();
-        //map.loadFurniture();
+        
+        //load user data
+        map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
@@ -74,8 +76,8 @@ public class IngameState extends GameState{
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-        //draw background
         try{
+            //draw background
             bg.draw(g);
             //draw map
             map.draw(g);

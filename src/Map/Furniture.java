@@ -6,9 +6,11 @@ public class Furniture {
 
     private BufferedImage image;
     private String name;
+    
     //constructor
     public Furniture(String name, BufferedImage image){
         this.image = image;
+        this.name = name;
     }
     //overwritten constructor just in case :>
     public Furniture(){
