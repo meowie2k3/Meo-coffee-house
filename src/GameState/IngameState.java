@@ -43,13 +43,6 @@ public class IngameState extends GameState{
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
-        // String[] iconAddress = {"/Icon/coin.jpg"};
-        // String[] iconName = {"money", "food", "toy", "cat", "character"};
-        // int[] iconValue = {map.getFood(), map.getMoney(), map.getToy(), map.getCatNum(), map.getcharacterNum()};
-        // for(int i=0;i<1;i++){
-        //     UxUi uiux = new UxUi(iconName[i],iconAddress[i], iconValue[i]);
-        //     uxui.add(uiux);
-        // }
     }
 
     //update
