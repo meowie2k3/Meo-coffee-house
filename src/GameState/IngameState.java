@@ -124,9 +124,16 @@ public class IngameState extends GameState{
                     catList.get(i).setAction(SIT);
                     break;
                 }
-                //cat sit -> walk randomly, when it get to the edge, it will sit again
+                //cat sit -> 2 choice randome (walk or scratch)
+                //if choice is walk -> walk randomly, when it get to the edge, it will sit again
                 if (catList.get(i).getCurentAction() == SIT || catList.get(i).getCurentAction() == REVERSE_SIT) {
-                    catList.get(i).walking();
+                    Random rand = new Random();
+                    int choice = rand.nextInt(2);
+                    if (choice == 0) {
+                        catList.get(i).walking();
+                    } else {
+                        catList.get(i).setAction(SCRATCH);
+                    }
                     break;
                 }
                 //cat walking -> sit    
