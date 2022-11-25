@@ -1,11 +1,13 @@
 package Entity;
 
 import Map.*;
+import Main.*;
 
 import java.util.ArrayList;
 import javax.imageio.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.util.Random;
 
 public class Cat extends Entity {
     //cat properties
@@ -284,6 +286,88 @@ public class Cat extends Entity {
         setDirection(direction);
         setAction(WALK + direction);
         super.move(direction);
+    }
+
+    //walking 
+    public void walking(){
+        int[][] possibleDirection = { { 1, 2, 3, 4, 5 }, //cat at left
+                                        { 0, 1, 5, 6, 7 }, //cat at right
+                                        { 3, 4, 5, 6, 7 }, //cat at bottom
+                                        { 0, 1, 2, 3, 7 }, //cat at top
+
+                                        { 1, 2, 3}, //cat at topleft coner
+                                        { 0, 1, 7}, //cat at topright coner
+                                        { 3, 4, 5}, //cat at bottomleft coner
+                                        { 5, 6, 7}, //cat at bottomright coner
+
+                                        { 0, 1, 2, 3, 4, 5, 6, 7 }, //cat at center
+                                    };
+        
+        Random rand = new Random();
+                    //cat at topleft coner
+                    if (getX() == 0 + 16 && getY() == 0 + 16) {
+                        setDirection(possibleDirection[4][rand.nextInt(3)]);
+                        //System.out.println("topleft " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at topright coner
+                    if (getX() == GamePanel.WIDTH - 16 && getY() == 0 + 16) {
+                        setDirection(possibleDirection[5][rand.nextInt(3)]);
+                        //System.out.println("topright " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at bottomleft coner
+                    if (getX() == 0 + 16 && getY() == GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[6][rand.nextInt(3)]);
+                        //System.out.println("bottomleft " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at bottomright coner
+                    if (getX() == GamePanel.WIDTH - 16 && getY() == GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[7][rand.nextInt(3)]);
+                        //System.out.println("bottomright " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at left
+                    if (getX() == 0 + 16 && getY() >= 0 + 16 && getY() <= GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[0][rand.nextInt(5)]);
+                        //System.out.println("left " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at right
+                    if (getX() == GamePanel.WIDTH - 16 && getY() >= 0 + 16 && getY() <= GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[1][rand.nextInt(5)]);
+                        //System.out.println("right " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at bottom
+                    if (getY() == GamePanel.HEIGHT - 16 && getX() >= 0 + 16 && getX() <= GamePanel.WIDTH - 16) {
+                        setDirection(possibleDirection[2][rand.nextInt(5)]);
+                        //System.out.println("bottom " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at top
+                    if (getY() == 0 + 16 && getX() >= 0 + 16 && getX() <= GamePanel.WIDTH - 16) {
+                        setDirection(possibleDirection[3][rand.nextInt(5)]);
+                        //System.out.println("top " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at center
+                    if (getX() > 0 + 16 && getX() < GamePanel.WIDTH - 16 && getY() > 0 + 16 && getY() < GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[8][rand.nextInt(8)]);
+                        //System.out.println("center " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+        
     }
 
     public void update(){
