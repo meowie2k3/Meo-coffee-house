@@ -282,7 +282,7 @@ public class Cat extends Entity {
     @Override
     public void move(int direction){
         setDirection(direction);
-        setAction(WALK);
+        setAction(WALK + direction);
         super.move(direction);
     }
 
@@ -339,17 +339,17 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(SLEEP_TO_SIT));
                 animation.setDelay(slow);
             }
-            if(currentAction == STAND){
+            if(currentAction >= STAND && currentAction <= STAND+7){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(STAND_TO_SIT));
                 animation.setDelay(slow);
             }
-            if(currentAction == WALK){
-                setAction(STAND);
-                currentAction = SIT;
-                animation.setFrames(sprites.get(STAND_TO_SIT));
-                animation.setDelay(slow);
-            }
+            // if(currentAction == WALK){
+            //     setAction(STAND);
+            //     currentAction = SIT;
+            //     animation.setFrames(sprites.get(STAND_TO_SIT));
+            //     animation.setDelay(slow);
+            // }
             if(currentAction == SCRATCH){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT));
@@ -364,7 +364,7 @@ public class Cat extends Entity {
                 }
             }
             if(currentAction == SIT || currentAction == REVERSE_SIT){
-                currentAction = STAND;
+                currentAction = STAND + currentDirection;
                 animation.setFrames(sprites.get(SIT_TO_STAND));
                 animation.setDelay(fast);
             }
@@ -374,8 +374,8 @@ public class Cat extends Entity {
             //     animation.setFrames(sprites.get(SIT_TO_STAND));
             //     animation.setDelay(slow);
             // }
-            if(currentAction == WALK){
-                currentAction = STAND;
+            if(currentAction >= WALK && currentAction <= WALK + 7){
+                currentAction = STAND + currentDirection;
                 animation.setFrames(sprites.get(STAND + currentDirection));
                 animation.setDelay(fast);
             }
@@ -384,7 +384,7 @@ public class Cat extends Entity {
         if(nextAction >= WALK && nextAction <= WALK+7){
             if(currentAction >= WALK && currentAction <= WALK+7) {}
             if(currentAction == SIT || currentAction == REVERSE_SIT){
-                currentAction = WALK;
+                currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
             }
@@ -394,8 +394,8 @@ public class Cat extends Entity {
             //     animation.setFrames(sprites.get(WALK + currentDirection));
             //     animation.setDelay(fast);
             // }
-            if(currentAction == STAND){
-                currentAction = WALK;
+            if(currentAction >= STAND && currentAction <= STAND+7){
+                currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
             }
@@ -434,6 +434,7 @@ public class Cat extends Entity {
             //     animation.setDelay(slow);
             // }
         }
+        
         animation.update();
 
         // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
