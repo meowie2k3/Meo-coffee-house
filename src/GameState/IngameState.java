@@ -10,7 +10,6 @@ public class IngameState extends GameState{
 
     public static Map map;
     public static Background bg;
-    public static ArrayList<UxUi> uxui;
 
     //cat properties
     public static ArrayList<Cat> catList;
@@ -32,7 +31,7 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         catList = new ArrayList<Cat>();
-        uxui = new ArrayList<UxUi>();
+
         map = new Map();
         
         //load user data
@@ -44,10 +43,6 @@ public class IngameState extends GameState{
         String[] iconAddress = {"/Icon/coin.jpg"};
         String[] iconName = {"money", "food", "toy", "cat"};
         int[] iconValue = {map.getFood(), map.getMoney(), map.getToy(), map.getCatNum()};
-        for(int i=0;i<1;i++){
-            UxUi uiux = new UxUi(iconName[i],iconAddress[i], iconValue[i]);
-            uxui.add(uiux);
-        }
     }
 
     //update
@@ -62,9 +57,6 @@ public class IngameState extends GameState{
 
 
         //update uxui
-        for(int i=0;i<uxui.size();i++){
-            //uxui.get(i).update();
-        }
     }
     public void draw(java.awt.Graphics2D g) {
         //draw map
