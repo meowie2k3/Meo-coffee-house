@@ -1,5 +1,6 @@
 package GameState;
 import java.awt.event.*;
+import java.lang.invoke.CallSite;
 import java.util.ArrayList;
 
 import Main.*;
@@ -56,6 +57,9 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
+        if(catList.size() != map.getCatNum()){
+            System.out.println("bug! " + catList.size() + " " + map.getCatNum());
+        }
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
         }
@@ -103,7 +107,21 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-
+        int x = e.getX();
+        int y = e.getY();
+        //System.out.println("mouse clicked at " + x + " " + y);
+        for(int i=0;i<catList.size();i++){
+            // System.out.println("cat " + i + " " + 
+            // catList.get(i).contains(x, y));
+            if(catList.get(i).contains(x, y)){
+                if(catList.get(i).getCurentAction()==SLEEP){
+                    catList.get(i).setAction(SIT);
+                }
+                if(catList.get(i).getCurentAction()==SIT){
+                    catList.get(i).setAction(SCRATCH);
+                }
+            }
+        }
     }
 
     public void mouseExited(MouseEvent e) {
@@ -111,6 +129,9 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        System.out.println("mouse moved " + x + " " + y);
         
     }
     public void mouseDragged(MouseEvent e) {
