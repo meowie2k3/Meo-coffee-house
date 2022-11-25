@@ -10,6 +10,7 @@ import java.awt.image.*;
 public class Cat extends Entity {
     //cat properties
     private String name;
+    private String address;
     
     //emotion
     private boolean isHungry;
@@ -43,6 +44,7 @@ public class Cat extends Entity {
     //constructor
     public Cat(Map map, String address){
         super(map);
+        this.address = address;
 
         //size for reading spritesheet
         width = 32;
@@ -253,6 +255,14 @@ public class Cat extends Entity {
     public int getCurentAction(){
         return currentAction;
     }
+
+    public int getAction(){
+        return currentAction;
+    }
+    public String getAddress(){
+        return address;
+    }
+
     //setters
     public void setHungry(boolean b){
         isHungry = b;
@@ -431,20 +441,5 @@ public class Cat extends Entity {
         // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 
         // + " " + currentAction + " " + animation.hasPlayedOnce() + " "+ animation.getLength());
     }
-
-    //draw
-    public void draw(Graphics2D g){
-        setMapPosition();
-        // System.out.println(x + xmap - width /2);
-        // System.out.println(y + ymap - height / 2);
-        
-        g.drawImage(
-            animation.getImage(),
-            (int)(x + xmap - width /2),
-            (int)(y + ymap - height / 2),
-            null
-        );
-    }
-
     
 }
