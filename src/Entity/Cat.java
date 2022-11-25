@@ -344,12 +344,12 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(STAND_TO_SIT));
                 animation.setDelay(slow);
             }
-            // if(currentAction == WALK){
-            //     setAction(STAND);
-            //     currentAction = SIT;
-            //     animation.setFrames(sprites.get(STAND_TO_SIT));
-            //     animation.setDelay(slow);
-            // }
+            if(currentAction == WALK){
+                setAction(STAND);
+                currentAction = SIT;
+                animation.setFrames(sprites.get(STAND_TO_SIT));
+                animation.setDelay(slow);
+            }
             if(currentAction == SCRATCH){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT));
@@ -357,10 +357,10 @@ public class Cat extends Entity {
             }
         }
 
-        if(nextAction == STAND){
-            if(currentAction == STAND){
+        if(nextAction >= STAND && nextAction <= STAND + 7){
+            if(currentAction >= STAND && currentAction <= STAND + 7){
                 if(animation.hasPlayedOnce()){
-                    animation.setFrames(sprites.get(STAND));
+                    animation.setFrames(sprites.get(STAND + currentDirection));
                 }
             }
             if(currentAction == SIT || currentAction == REVERSE_SIT){

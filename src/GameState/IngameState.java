@@ -69,6 +69,11 @@ public class IngameState extends GameState{
             catList.get(i).update();
             if(catList.get(i).getCurentAction() == WALK){
                 catList.get(i).move(catList.get(i).getDirection());
+                if (catList.get(i).getX() <= 0 + 16 || catList.get(i).getX() >= GamePanel.WIDTH - 16 
+                    || catList.get(i).getY() <= 0 + 16 || catList.get(i).getY() >= GamePanel.HEIGHT - 16) {
+                    
+                    catList.get(i).setAction(STAND + catList.get(i).getDirection());
+                }
             }
         }
 
