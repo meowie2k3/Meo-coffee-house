@@ -34,7 +34,9 @@ public class IngameState extends GameState{
         catList = new ArrayList<Cat>();
         uxui = new ArrayList<UxUi>();
         map = new Map();
-        //map.loadFurniture();
+        
+        //load user data
+        map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
