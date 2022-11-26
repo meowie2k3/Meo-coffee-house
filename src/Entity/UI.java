@@ -6,17 +6,18 @@ import javax.imageio.*;
 
 public class UI {
 
-    private BufferedImage coin, food;
+    private BufferedImage coin, food, cats;
     private Font font;
     private Cat cat;
 
     public UI(Cat cat)  {
         cat = cat;
         try {
-            coin = ImageIO.read(getClass().getResourceAsStream("/Coin/coin_store.png"));
-            food = ImageIO.read(getClass().getResourceAsStream("/Coin/food_store.png"));
+            coin = ImageIO.read(getClass().getResourceAsStream("/UI/coin_store.png"));
+            food = ImageIO.read(getClass().getResourceAsStream("/UI/food_store.png"));
+            cats = ImageIO.read(getClass().getResourceAsStream("/UI/cat_num.png"));
 
-            font = new Font("Source Code Pro",Font.PLAIN, 10);
+            font = new Font("Source Code Pro", Font.PLAIN, 10);
 
         }
         catch (Exception e) {
@@ -26,7 +27,8 @@ public class UI {
 
     public void draw(Graphics g)    {
         g.drawImage(coin, 5, 6, null);
-        g.drawImage(food, 5, 24, null);
+        g.drawImage(food, 50, 6, null);
+        g.drawImage(cats, 95, 6, null);
 
         g.setFont(font);
         g.setColor(Color.BLACK);
