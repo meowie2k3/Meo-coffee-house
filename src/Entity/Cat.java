@@ -1,11 +1,13 @@
 package Entity;
 
 import Map.*;
+import Main.*;
 
 import java.util.ArrayList;
 import javax.imageio.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.util.Random;
 
 public class Cat extends Entity {
     //cat properties
@@ -24,8 +26,6 @@ public class Cat extends Entity {
 
     //animation
     private ArrayList<BufferedImage[]> sprites;
-
-
     
     //animation actions
     private static final int SIT_TO_SLEEP = 0;
@@ -284,8 +284,145 @@ public class Cat extends Entity {
     @Override
     public void move(int direction){
         setDirection(direction);
-        setAction(WALK);
+        setAction(WALK + direction);
         super.move(direction);
+    }
+
+    //walking 
+    public void walking(){
+        int[][] possibleDirection = { { 1, 2, 3, 4, 5 }, //cat at left
+                                        { 0, 1, 5, 6, 7 }, //cat at right
+                                        { 3, 4, 5, 6, 7 }, //cat at bottom
+                                        { 0, 1, 2, 3, 7 }, //cat at top
+
+                                        { 1, 2, 3}, //cat at topleft coner
+                                        { 0, 1, 7}, //cat at topright coner
+                                        { 3, 4, 5}, //cat at bottomleft coner
+                                        { 5, 6, 7}, //cat at bottomright coner
+
+                                        { 0, 1, 2, 3, 4, 5, 6, 7 }, //cat at center
+                                    };
+        
+        Random rand = new Random();
+                    //cat at topleft coner
+                    if (getX() == 0 + 16 && getY() == 0 + 16) {
+                        setDirection(possibleDirection[4][rand.nextInt(3)]);
+                        //System.out.println("topleft " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at topright coner
+                    if (getX() == GamePanel.WIDTH - 16 && getY() == 0 + 16) {
+                        setDirection(possibleDirection[5][rand.nextInt(3)]);
+                        //System.out.println("topright " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at bottomleft coner
+                    if (getX() == 0 + 16 && getY() == GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[6][rand.nextInt(3)]);
+                        //System.out.println("bottomleft " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at bottomright coner
+                    if (getX() == GamePanel.WIDTH - 16 && getY() == GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[7][rand.nextInt(3)]);
+                        //System.out.println("bottomright " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at left
+                    if (getX() == 0 + 16 && getY() >= 0 + 16 && getY() <= GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[0][rand.nextInt(5)]);
+                        //System.out.println("left " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at right
+                    if (getX() == GamePanel.WIDTH - 16 && getY() >= 0 + 16 && getY() <= GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[1][rand.nextInt(5)]);
+                        //System.out.println("right " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at bottom
+                    if (getY() == GamePanel.HEIGHT - 16 && getX() >= 0 + 16 && getX() <= GamePanel.WIDTH - 16) {
+                        setDirection(possibleDirection[2][rand.nextInt(5)]);
+                        //System.out.println("bottom " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at top
+                    if (getY() == 0 + 16 && getX() >= 0 + 16 && getX() <= GamePanel.WIDTH - 16) {
+                        setDirection(possibleDirection[3][rand.nextInt(5)]);
+                        //System.out.println("top " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //cat at center
+                    if (getX() > 0 + 16 && getX() < GamePanel.WIDTH - 16 && getY() > 0 + 16 && getY() < GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[8][rand.nextInt(8)]);
+                        //System.out.println("center " + catList.get(i).getDirection() + " currenAction " + catList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+        
+    }
+
+    //bounding when cat is walking
+    public void bounding(){
+        if (getDirection()==0 || getDirection()==1 || getDirection()==2){
+            if (getY() == GamePanel.HEIGHT - 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+        if (getDirection()==0 || getDirection()==7 || getDirection()==6){
+            if (getX() == 0 + 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+        if (getDirection()==4 || getDirection()==5 || getDirection()==6){
+            if (getY() == 0 + 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+        if (getDirection()==2 || getDirection()==3 || getDirection()==4){
+            if (getX() == GamePanel.WIDTH - 16){
+                setAction(STAND + getDirection());
+                setAction(SIT);
+            }
+        }
+    }
+
+    //when we click on cat, it will do something
+    public void catDoSomething(){
+        //cat sleep -> sit
+        if (getCurentAction() == SLEEP) {
+            setAction(SIT);
+            return;
+        }
+        //cat sit -> 2 choice randome (walk or scratch)
+        //if choice is walk -> walk randomly, when it get to the edge, it will sit again
+        if (getCurentAction() == SIT || getCurentAction() == REVERSE_SIT) {
+            Random rand = new Random();
+            int choice = rand.nextInt(2);
+            if (choice == 0) {
+                walking();
+            } else {
+                setAction(SCRATCH);
+            }
+            return;
+        }
+        //cat walking -> sit    
+        if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
+            setAction(STAND + getDirection());
+            setAction(SIT);
+            return;
+        }
     }
 
     public void update(){
@@ -304,19 +441,6 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(SIT_TO_SLEEP));
                 animation.setDelay(slow);
                 
-            }
-            if(currentAction == STAND){
-                setAction(SIT);
-                currentAction = SLEEP;
-                //animation.setFrames(sprites.get(SIT_TO_SLEEP));
-                animation.setDelay(slow);
-            }
-            if(currentAction == WALK){
-                setAction(STAND);
-                setAction(SIT);
-                currentAction = SLEEP;
-                animation.setFrames(sprites.get(SIT_TO_SLEEP));
-                animation.setDelay(slow);
             }
         }
     
@@ -341,13 +465,7 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(SLEEP_TO_SIT));
                 animation.setDelay(slow);
             }
-            if(currentAction == STAND){
-                currentAction = SIT;
-                animation.setFrames(sprites.get(STAND_TO_SIT));
-                animation.setDelay(slow);
-            }
-            if(currentAction == WALK){
-                setAction(STAND);
+            if(currentAction >= STAND && currentAction <= STAND+7){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(STAND_TO_SIT));
                 animation.setDelay(slow);
@@ -359,50 +477,33 @@ public class Cat extends Entity {
             }
         }
 
-        if(nextAction == STAND){
-            if(currentAction == STAND){
+        if(nextAction >= STAND && nextAction <= STAND + 7){
+            if(currentAction >= STAND && currentAction <= STAND + 7){
                 if(animation.hasPlayedOnce()){
-                    animation.setFrames(sprites.get(STAND));
+                    animation.setFrames(sprites.get(STAND + currentDirection));
                 }
             }
             if(currentAction == SIT || currentAction == REVERSE_SIT){
-                currentAction = STAND;
+                currentAction = STAND + currentDirection;
                 animation.setFrames(sprites.get(SIT_TO_STAND));
                 animation.setDelay(fast);
             }
-            if(currentAction == SLEEP){
-                setAction(SIT);
-                currentAction = STAND;
-                animation.setFrames(sprites.get(SIT_TO_STAND));
-                animation.setDelay(slow);
-            }
-            if(currentAction == WALK){
-                currentAction = STAND;
+            if(currentAction >= WALK && currentAction <= WALK + 7){
+                currentAction = STAND + currentDirection;
                 animation.setFrames(sprites.get(STAND + currentDirection));
                 animation.setDelay(fast);
             }
         }
 
-        if(nextAction == WALK){
-            if(currentAction == WALK) {}
+        if(nextAction >= WALK && nextAction <= WALK+7){
+            if(currentAction >= WALK && currentAction <= WALK+7) {}
             if(currentAction == SIT || currentAction == REVERSE_SIT){
-                currentAction = WALK;
+                currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
             }
-            if(currentAction == SLEEP){
-                setAction(SIT);
-                currentAction = WALK;
-                animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(fast);
-            }
-            if(currentAction == STAND){
-                currentAction = WALK;
-                animation.setFrames(sprites.get(WALK + currentDirection));
-                animation.setDelay(fast);
-            }
-            if(currentAction == SCRATCH){
-                currentAction = WALK;
+            if(currentAction >= STAND && currentAction <= STAND+7){
+                currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
             }
@@ -422,20 +523,8 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(SIT_TO_SCRATCH));
                 animation.setDelay(slow);
             }
-            else if(currentAction == SLEEP || currentAction == STAND){
-                setAction(SIT);
-                currentAction = SCRATCH;
-                animation.setFrames(sprites.get(SIT_TO_SCRATCH));
-                animation.setDelay(slow);
-                
-            }
-            else if(currentAction == WALK){
-                setAction(STAND);
-                setAction(SIT);
-                animation.setFrames(sprites.get(SIT_TO_SCRATCH));
-                animation.setDelay(slow);
-            }
         }
+        
         animation.update();
 
         // System.out.println("current action " + currentAction + " currentFrame: " + animation.getFrame() 

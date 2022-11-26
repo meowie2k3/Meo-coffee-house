@@ -2,6 +2,9 @@ package GameState;
 import java.awt.event.*;
 import java.lang.invoke.CallSite;
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.print.attribute.standard.Sides;
 
 import Main.*;
 import Map.*;
@@ -17,11 +20,19 @@ public class IngameState extends GameState{
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
 
+    //animation actions
+    private static final int SIT_TO_SLEEP = 0;
     private static final int SLEEP = 1;
     private static final int SIT = 2;
+    private static final int STAND_TO_SIT = 3;
     private static final int WALK = 4;
     private static final int STAND = 12;
     private static final int SCRATCH = 20;
+    private static final int SIT_TO_SCRATCH = 20;
+    //reversible animation
+    private static final int SLEEP_TO_SIT = 21;
+    private static final int SIT_TO_STAND = 22;
+    private static final int REVERSE_SIT = 23;
     //private ArrayList<String> catAddress;
     
 
@@ -56,8 +67,12 @@ public class IngameState extends GameState{
         }
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
+            //moving
+            if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
+                catList.get(i).move(catList.get(i).getDirection());
+                catList.get(i).bounding();
+            }
         }
-
         //update character
         if(characterList.size() != map.getcharacterNum()){
             System.out.println("bug! " + characterList.size() + " " + map.getcharacterNum());
@@ -108,19 +123,10 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        //System.out.println("mouse clicked at " + x + " " + y);
-        for(int i=0;i<catList.size();i++){
-            // System.out.println("cat " + i + " " + 
-            // catList.get(i).contains(x, y));
-            if(catList.get(i).contains(x, y)){
-                if(catList.get(i).getCurentAction()==SLEEP){
-                    catList.get(i).setAction(SIT);
-                }
-                if(catList.get(i).getCurentAction()==SIT){
-                    catList.get(i).setAction(SCRATCH);
-                }
+
+        for (int i = 0; i < catList.size(); i++) {
+            if (catList.get(i).contains(e.getX(), e.getY())) {
+                catList.get(i).catDoSomething();                
             }
         }
     }
