@@ -381,7 +381,7 @@ public class Cat extends Entity {
         if (countingTime){
             long finish = System.currentTimeMillis();
             long timeElapsed = finish - start;
-            System.out.println(timeElapsed + " " + limit);
+            //System.out.println(timeElapsed + " " + limit);
             if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
                 if (timeElapsed > limit){
                     countingTime = false;
