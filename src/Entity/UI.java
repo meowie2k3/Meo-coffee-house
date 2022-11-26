@@ -6,7 +6,7 @@ import javax.imageio.*;
 
 public class UI {
 
-    private BufferedImage coin;
+    private BufferedImage coin, food;
     private Font font;
     private Cat cat;
 
@@ -14,6 +14,7 @@ public class UI {
         cat = cat;
         try {
             coin = ImageIO.read(getClass().getResourceAsStream("/Coin/coin_store.png"));
+            food = ImageIO.read(getClass().getResourceAsStream("/Coin/food_store.png"));
 
             font = new Font("Source Code Pro",Font.PLAIN, 10);
 
@@ -25,6 +26,7 @@ public class UI {
 
     public void draw(Graphics g)    {
         g.drawImage(coin, 5, 6, null);
+        g.drawImage(food, 5, 24, null);
 
         g.setFont(font);
         g.setColor(Color.BLACK);
