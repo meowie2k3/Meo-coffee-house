@@ -367,58 +367,120 @@ public class Cat extends Entity {
                         setAction(WALK + getDirection());
                         return;
                     }
-        
+    }
+
+    //timing
+    private boolean countingTime = false;
+    private long start = 0;
+    private long limit = 0;
+    public boolean getCountingTime(){
+        return countingTime;
+    }
+    public void setCountingTime(){
+        Random rand = new Random();
+        if (countingTime){
+            long finish = System.currentTimeMillis();
+            long timeElapsed = finish - start;
+            System.out.println(timeElapsed + " " + limit);
+            if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
+                if (timeElapsed > limit){
+                    countingTime = false;
+                    limit = rand.nextInt(20000)+1000;
+                    setCountingTime();
+                    setAction(STAND + getDirection());
+                    setAction(SIT);
+                    return;
+                }   
+            }
+            if (getCurentAction() == SIT || getCurentAction() == REVERSE_SIT) {
+                if (timeElapsed > limit){
+                    countingTime = false;
+                    setAction(SLEEP);
+                    return;
+                }   
+            }
+        }
+        else{
+            start = System.currentTimeMillis();
+            countingTime = true;
+        }
     }
 
     //bounding when cat is walking
     public void bounding(){
+        Random rand = new Random();
         if (getDirection()==0 || getDirection()==1 || getDirection()==2){
             if (getY() == GamePanel.HEIGHT - 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
         }
         if (getDirection()==0 || getDirection()==7 || getDirection()==6){
             if (getX() == 0 + 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
         }
         if (getDirection()==4 || getDirection()==5 || getDirection()==6){
             if (getY() == 0 + 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
         }
         if (getDirection()==2 || getDirection()==3 || getDirection()==4){
             if (getX() == GamePanel.WIDTH - 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
         }
+        setCountingTime();
     }
 
     //when we click on cat, it will do something
     public void catDoSomething(){
+        Random rand = new Random();
         //cat sleep -> sit
         if (getCurentAction() == SLEEP) {
+            countingTime = false;
+            limit = rand.nextInt(20000)+1000;
+            setCountingTime();
             setAction(SIT);
             return;
         }
         //cat sit -> 2 choice randome (walk or scratch)
         //if choice is walk -> walk randomly, when it get to the edge, it will sit again
         if (getCurentAction() == SIT || getCurentAction() == REVERSE_SIT) {
-            Random rand = new Random();
             int choice = rand.nextInt(2);
             if (choice == 0) {
+                countingTime = false;
+                limit = rand.nextInt(10000)+1000;
+                setCountingTime();
                 walking();
             } else {
                 setAction(SCRATCH);
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
             }
             return;
         }
         //cat walking -> sit    
         if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
+            countingTime = false;
+            limit = rand.nextInt(20000)+1000;
+            setCountingTime();
             setAction(STAND + getDirection());
             setAction(SIT);
             return;
@@ -426,7 +488,9 @@ public class Cat extends Entity {
     }
 
     public void update(){
-
+        // long finish = System.currentTimeMillis();
+        // long timeElapsed = finish - start;
+        // System.out.println(countingTime+" "+timeElapsed+" "+limit);
         int slow = 120;
         int fast = 60;
         //set animation
@@ -452,6 +516,7 @@ public class Cat extends Entity {
                     animation.setFrames(sprites.get(REVERSE_SIT));
                     animation.setDelay(slow);
                 }
+                setCountingTime();
             }
             if(currentAction == REVERSE_SIT){
                 if(animation.hasPlayedOnce()){
@@ -459,6 +524,7 @@ public class Cat extends Entity {
                     animation.setFrames(sprites.get(SIT));
                     animation.setDelay(slow);
                 }
+                setCountingTime();
             }
             if(currentAction == SLEEP){
                 currentAction = SIT;
