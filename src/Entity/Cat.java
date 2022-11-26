@@ -442,19 +442,6 @@ public class Cat extends Entity {
                 animation.setDelay(slow);
                 
             }
-            // if(currentAction == STAND){
-            //     setAction(SIT);
-            //     currentAction = SLEEP;
-            //     //animation.setFrames(sprites.get(SIT_TO_SLEEP));
-            //     animation.setDelay(slow);
-            // }
-            // if(currentAction == WALK){
-            //     setAction(STAND);
-            //     setAction(SIT);
-            //     currentAction = SLEEP;
-            //     animation.setFrames(sprites.get(SIT_TO_SLEEP));
-            //     animation.setDelay(slow);
-            // }
         }
     
         if(nextAction == SIT){
@@ -483,12 +470,6 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(STAND_TO_SIT));
                 animation.setDelay(slow);
             }
-            // if(currentAction == WALK){
-            //     setAction(STAND);
-            //     currentAction = SIT;
-            //     animation.setFrames(sprites.get(STAND_TO_SIT));
-            //     animation.setDelay(slow);
-            // }
             if(currentAction == SCRATCH){
                 currentAction = SIT;
                 animation.setFrames(sprites.get(SIT));
@@ -507,12 +488,6 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(SIT_TO_STAND));
                 animation.setDelay(fast);
             }
-            // if(currentAction == SLEEP){
-            //     setAction(SIT);
-            //     currentAction = STAND;
-            //     animation.setFrames(sprites.get(SIT_TO_STAND));
-            //     animation.setDelay(slow);
-            // }
             if(currentAction >= WALK && currentAction <= WALK + 7){
                 currentAction = STAND + currentDirection;
                 animation.setFrames(sprites.get(STAND + currentDirection));
@@ -527,22 +502,11 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
             }
-            // if(currentAction == SLEEP){
-            //     setAction(SIT);
-            //     currentAction = WALK;
-            //     animation.setFrames(sprites.get(WALK + currentDirection));
-            //     animation.setDelay(fast);
-            // }
             if(currentAction >= STAND && currentAction <= STAND+7){
                 currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
             }
-            // if(currentAction == SCRATCH){
-            //     currentAction = WALK;
-            //     animation.setFrames(sprites.get(WALK + currentDirection));
-            //     animation.setDelay(fast);
-            // }
         }
 
         if(nextAction == SCRATCH){
@@ -559,19 +523,6 @@ public class Cat extends Entity {
                 animation.setFrames(sprites.get(SIT_TO_SCRATCH));
                 animation.setDelay(slow);
             }
-            // else if(currentAction == SLEEP || currentAction == STAND){
-            //     setAction(SIT);
-            //     currentAction = SCRATCH;
-            //     animation.setFrames(sprites.get(SIT_TO_SCRATCH));
-            //     animation.setDelay(slow);
-                
-            // }
-            // else if(currentAction == WALK){
-            //     setAction(STAND);
-            //     setAction(SIT);
-            //     animation.setFrames(sprites.get(SIT_TO_SCRATCH));
-            //     animation.setDelay(slow);
-            // }
         }
         
         animation.update();
