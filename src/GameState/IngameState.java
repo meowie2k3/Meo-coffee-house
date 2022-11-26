@@ -1,5 +1,6 @@
 package GameState;
 import java.awt.event.*;
+import java.lang.invoke.CallSite;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,15 +9,16 @@ import javax.print.attribute.standard.Sides;
 import Main.*;
 import Map.*;
 import Entity.*;
+import Entity.character;
 
 public class IngameState extends GameState{
 
     public static Map map;
     public static Background bg;
-    public static ArrayList<UxUi> uxui;
 
     //cat properties
     public static ArrayList<Cat> catList;
+    public static ArrayList<character> characterList;
 
     //animation actions
     private static final int SIT_TO_SLEEP = 0;
@@ -43,7 +45,7 @@ public class IngameState extends GameState{
     //file abstract method
     public void init() {
         catList = new ArrayList<Cat>();
-        uxui = new ArrayList<UxUi>();
+        characterList = new ArrayList<character>();
         map = new Map();
         
         //load user data
@@ -52,13 +54,6 @@ public class IngameState extends GameState{
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
-        String[] iconAddress = {"/Icon/coin.jpg"};
-        String[] iconName = {"money", "food", "toy", "cat"};
-        int[] iconValue = {map.getFood(), map.getMoney(), map.getToy(), map.getCatNum()};
-        for(int i=0;i<1;i++){
-            UxUi uiux = new UxUi(iconName[i],iconAddress[i], iconValue[i]);
-            uxui.add(uiux);
-        }
     }
 
     //update
@@ -67,6 +62,9 @@ public class IngameState extends GameState{
         //map.update();
 
         //update cat
+        if(catList.size() != map.getCatNum()){
+            System.out.println("bug! " + catList.size() + " " + map.getCatNum());
+        }
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
             //moving
@@ -75,10 +73,12 @@ public class IngameState extends GameState{
                 catList.get(i).bounding();
             }
         }
-
-        //update uxui
-        for(int i=0;i<uxui.size();i++){
-            //uxui.get(i).update();
+        //update character
+        if(characterList.size() != map.getcharacterNum()){
+            System.out.println("bug! " + characterList.size() + " " + map.getcharacterNum());
+        }
+        for(int i=0;i<characterList.size();i++){
+            characterList.get(i).update();
         }
     }
     public void draw(java.awt.Graphics2D g) {
@@ -89,6 +89,7 @@ public class IngameState extends GameState{
 
         try{
             //draw background
+
             bg.draw(g);
             //draw map
             map.draw(g);
@@ -96,7 +97,11 @@ public class IngameState extends GameState{
             for(int i=0;i<catList.size();i++){
                 catList.get(i).draw(g);
             }
-        }catch(Exception e){
+            for(int i=0;i<characterList.size();i++){
+                characterList.get(i).draw(g);
+            }
+
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
@@ -118,6 +123,7 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
+
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
                 catList.get(i).catDoSomething();                
@@ -130,6 +136,9 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        //System.out.println("mouse moved " + x + " " + y);
         
     }
     public void mouseDragged(MouseEvent e) {

@@ -58,19 +58,19 @@ public class Cat extends Entity {
         sleepCost = 1;
         playCost = 1;
 
-        //default emotion
+        //def ault emotion
         isHungry = false;
         isSleepy = false;
         isBored = false;
 
-        //hash cat animation image 
-        try{
+        //hash cat animation image   
+        try {
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream(address));
             sprites = new ArrayList<BufferedImage[]>();
 
             //get sitToSleep animation
             BufferedImage[] sitToSleep = new BufferedImage[8];
-            int tmp =0;
+            int tmp = 0;
             for(int i = 0; i < 2; i++){
                 for(int j = 0; j < 4; j++){
                     sitToSleep[tmp] = spritesheet.getSubimage(

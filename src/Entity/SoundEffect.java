@@ -51,8 +51,9 @@ public class SoundEffect implements LineListener{
                         ex.printStackTrace();
                     }
                 }
-                 
-                audioClip.close();
+                
+                audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+                // audioClip.close();
                  
             } catch (UnsupportedAudioFileException ex) {
                 System.out.println("The specified audio file is not supported.");
