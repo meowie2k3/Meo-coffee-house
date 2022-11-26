@@ -123,10 +123,9 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
-
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
-                catList.get(i).catDoSomething();                
+                catList.get(i).catDoSomething();          
             }
         }
     }
@@ -136,9 +135,9 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        //System.out.println("mouse moved " + x + " " + y);
+        // int x = e.getX();
+        // int y = e.getY();
+        // System.out.println("mouse moved " + x + " " + y);
         
     }
     public void mouseDragged(MouseEvent e) {
