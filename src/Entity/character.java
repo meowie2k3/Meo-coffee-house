@@ -3,12 +3,17 @@ package Entity;
 import Map.*;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import javax.imageio.*;
+
+import Main.GamePanel;
+
 import java.awt.*;
 import java.awt.image.*;
 
 public class character extends Entity {
-    //cat properties
+    //character properties
     private String name;
     private String address;
         
@@ -62,6 +67,7 @@ public class character extends Entity {
                 height);
             sprites.add(stand);
 
+            //get walk animation
             int[] myNum = {1, 0, 2, 2, 2, 3, 1, 1};
             for(int k= 0; k < 8; k++){
                 int i = myNum[k];
@@ -125,6 +131,182 @@ public class character extends Entity {
         super.move(direction);
     }
 
+    public void walking(){
+        int[][] possibleDirection = { { 1, 2, 3, 4, 5 }, //character at left
+                                        { 0, 1, 5, 6, 7 }, //character at right
+                                        { 3, 4, 5, 6, 7 }, //character at bottom
+                                        { 0, 1, 2, 3, 7 }, //character at top
+
+                                        { 1, 2, 3}, //character at topleft coner
+                                        { 0, 1, 7}, //character at topright coner
+                                        { 3, 4, 5}, //character at bottomleft coner
+                                        { 5, 6, 7}, //character at bottomright coner
+
+                                        { 0, 1, 2, 3, 4, 5, 6, 7 }, //character at center
+                                    };
+        
+        Random rand = new Random();
+                    //character at topleft coner
+                    if (getX() == 0 + 16 && getY() == 0 + 16) {
+                        setDirection(possibleDirection[4][rand.nextInt(3)]);
+                        //System.out.println("topleft " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at topright coner
+                    if (getX() == GamePanel.WIDTH - 16 && getY() == 0 + 16) {
+                        setDirection(possibleDirection[5][rand.nextInt(3)]);
+                        //System.out.println("topright " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at bottomleft coner
+                    if (getX() == 0 + 16 && getY() == GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[6][rand.nextInt(3)]);
+                        //System.out.println("bottomleft " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at bottomright coner
+                    if (getX() == GamePanel.WIDTH - 16 && getY() == GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[7][rand.nextInt(3)]);
+                        //System.out.println("bottomright " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at left
+                    if (getX() == 0 + 16 && getY() >= 0 + 16 && getY() <= GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[0][rand.nextInt(5)]);
+                        //System.out.println("left " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at right
+                    if (getX() == GamePanel.WIDTH - 16 && getY() >= 0 + 16 && getY() <= GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[1][rand.nextInt(5)]);
+                        //System.out.println("right " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at bottom
+                    if (getY() == GamePanel.HEIGHT - 16 && getX() >= 0 + 16 && getX() <= GamePanel.WIDTH - 16) {
+                        setDirection(possibleDirection[2][rand.nextInt(5)]);
+                        //System.out.println("bottom " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at top
+                    if (getY() == 0 + 16 && getX() >= 0 + 16 && getX() <= GamePanel.WIDTH - 16) {
+                        setDirection(possibleDirection[3][rand.nextInt(5)]);
+                        //System.out.println("top " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+                    //character at center
+                    if (getX() > 0 + 16 && getX() < GamePanel.WIDTH - 16 && getY() > 0 + 16 && getY() < GamePanel.HEIGHT - 16) {
+                        setDirection(possibleDirection[8][rand.nextInt(8)]);
+                        //System.out.println("center " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
+                        setAction(WALK + getDirection());
+                        return;
+                    }
+    }
+
+    //timing
+    private boolean countingTime = false;
+    private long start = 0;
+    private long limit = 0;
+    public boolean getCountingTime(){
+        return countingTime;
+    }
+    public void setCountingTime(){
+        Random rand = new Random();
+        if (countingTime){
+            long finish = System.currentTimeMillis();
+            long timeElapsed = finish - start;
+            //System.out.println(timeElapsed + " " + limit);
+            if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
+                if (timeElapsed > limit){
+                    countingTime = false;
+                    limit = rand.nextInt(20000)+1000;
+                    setCountingTime();
+                    setAction(STAND);
+                    return;
+                }   
+            }
+            // if (getCurentAction() == SIT || getCurentAction() == REVERSE_SIT) {
+            //     if (timeElapsed > limit){
+            //         countingTime = false;
+            //         setAction(SLEEP);
+            //         return;
+            //     }   
+            // }
+        }
+        else{
+            start = System.currentTimeMillis();
+            countingTime = true;
+        }
+    }
+
+    //bounding when character is walking
+    public void bounding(){
+        Random rand = new Random();
+        if (getDirection() == 0 || getDirection() == 1 || getDirection() == 2){
+            if (getY() == GamePanel.HEIGHT - 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
+                setAction(STAND);
+            }
+        }
+        if (getDirection() == 0 || getDirection() == 7 || getDirection() == 6){
+            if (getX() == 0 + 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
+                setAction(STAND);
+            }
+        }
+        if (getDirection() == 4 || getDirection() == 5 || getDirection() == 6){
+            if (getY() == 0 + 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
+                setAction(STAND);
+            }
+        }
+        if (getDirection() == 2 || getDirection() == 3 || getDirection() == 4){
+            if (getX() == GamePanel.WIDTH - 16){
+                countingTime = false;
+                limit = rand.nextInt(20000)+1000;
+                setCountingTime();
+                setAction(STAND);
+            }
+        }
+        setCountingTime();
+    }
+
+    //when we click on character, it will do something
+    public void charDoSomething(){
+        Random rand = new Random();
+        //character stand -> move
+
+        if (getCurentAction() == STAND) {
+            countingTime = false;
+            limit = rand.nextInt(10000)+1000;
+            setCountingTime();
+            walking();
+            return;
+        }
+        //character walking -> stand    
+        if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
+            countingTime = false;
+            limit = rand.nextInt(20000)+1000;
+            setCountingTime();
+            setAction(STAND);
+            return;
+        }
+    }
+
     public void update(){
 
         int slow = 120;
@@ -134,7 +316,9 @@ public class character extends Entity {
             if(currentAction == STAND){
                 if(animation.hasPlayedOnce()){
                     animation.setFrames(sprites.get(STAND));
+                    animation.setDelay(slow);
                 }
+                setCountingTime();
             }
             
             if(currentAction == WALK){
@@ -144,10 +328,10 @@ public class character extends Entity {
             }
         }
     
-        if(nextAction == WALK){
-            if(currentAction == WALK) {}
+        if(nextAction >= WALK && nextAction <= WALK+7){
+            if(nextAction >= WALK && nextAction <= WALK+7) {}
             if(currentAction == STAND){
-                currentAction = WALK;
+                currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
                 animation.setDelay(fast);
             }
@@ -156,6 +340,7 @@ public class character extends Entity {
         animation.update();
     }
 
+    
 
     // //draw
     // public void draw(Graphics2D g){

@@ -217,7 +217,7 @@ public class Cat extends Entity {
             sprites.add(reverseSit);
 
 
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
         }
         animation = new Animation();

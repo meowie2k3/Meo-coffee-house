@@ -25,7 +25,7 @@ public class IngameState extends GameState{
     public static ArrayList<character> characterList;
 
     //animation actions
-    private static final int SIT_TO_SLEEP = 0;
+    private static final int SIT_TO_SLEEP = 0; 
     private static final int SLEEP = 1;
     private static final int SIT = 2;
     private static final int STAND_TO_SIT = 3;
@@ -135,6 +135,12 @@ public class IngameState extends GameState{
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
                 catList.get(i).catDoSomething();          
+            }
+        }
+
+        for (int i = 0; i < characterList.size(); i++) {
+            if (characterList.get(i).contains(e.getX(), e.getY())) {
+                characterList.get(i).charDoSomething();          
             }
         }
     }
