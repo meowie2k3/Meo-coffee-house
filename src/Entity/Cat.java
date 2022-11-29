@@ -58,7 +58,7 @@ public class Cat extends Entity {
         sleepCost = 1;
         playCost = 1;
 
-        //def ault emotion
+        //default emotion
         isHungry = false;
         isSleepy = false;
         isBored = false;

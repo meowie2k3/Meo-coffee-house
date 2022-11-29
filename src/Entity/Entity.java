@@ -13,6 +13,7 @@ public abstract class Entity {
     //block properties
     protected Map map;
     protected int catSize;
+    protected int charSize;
     protected double xmap;
     protected double ymap;
 
@@ -49,6 +50,7 @@ public abstract class Entity {
     public Entity(Map map){
         this.map = map;
         catSize = map.getCatSize();
+        charSize = map.getcharacterNum();
     }
 
     //getters
