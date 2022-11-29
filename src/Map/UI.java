@@ -3,17 +3,14 @@ package Map;
 import java.awt.image.*;
 import java.awt.*;
 import javax.imageio.*;
-import Entity.*;
+import GameState.IngameState;
 
 public class UI {
 
     private BufferedImage coin, food, cats;
     private Font font;
-    // private Cat cat;
-    private Map m;
 
-    public UI(Map m)  {
-        m = m;
+    public UI()  {
         try {
             coin = ImageIO.read(getClass().getResourceAsStream("/UI/coin_store.png"));
             food = ImageIO.read(getClass().getResourceAsStream("/UI/food_store.png"));
@@ -36,13 +33,13 @@ public class UI {
         g.setColor(Color.BLACK);
 
         //MONEY        
-        g.drawString("100", 20, 14);
-        // g.drawString(m.getMoney() + "", 20, 16);
+        //g.drawString("100", 20, 14);
+        g.drawString(IngameState.map.getMoney() + "", 20, 16);
         //FOOD
-        g.drawString("100", 65, 14);
-        // g.drawString(m.getFood() + "", 65, 14);
+        //g.drawString("100", 65, 14);
+        g.drawString(IngameState.map.getFood() + "", 65, 14);
         //NUMBER OF CATS        
-        g.drawString("100", 110, 14);
-        // g.drawString(m.getCatNum() + "", 0, 0);
+        //g.drawString("100", 110, 14);
+        g.drawString(IngameState.map.getCatNum() + "", 110, 14);
     }
 }

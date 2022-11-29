@@ -18,8 +18,6 @@ public class IngameState extends GameState{
 
     //ui
     private UI ui;
-    private Cat cat;
-    private Map m;
 
     //cat properties
     public static ArrayList<Cat> catList;
@@ -60,7 +58,7 @@ public class IngameState extends GameState{
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
         //UI
-        ui = new UI(m);
+        ui = new UI();
     }
 
     //update
