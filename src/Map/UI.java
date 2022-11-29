@@ -9,12 +9,11 @@ public class UI {
 
     private BufferedImage coin, food, cats;
     private Font font;
-    private Cat cat;
+    // private Cat cat;
+    private Map m;
 
-    private Map map;
-
-    public UI(Cat cat)  {
-        cat = cat;
+    public UI(Map m)  {
+        m = m;
         try {
             coin = ImageIO.read(getClass().getResourceAsStream("/UI/coin_store.png"));
             food = ImageIO.read(getClass().getResourceAsStream("/UI/food_store.png"));
@@ -29,13 +28,21 @@ public class UI {
     }
 
     public void draw(Graphics g)    {
-        g.drawImage(coin, 5, 6, null);
-        g.drawImage(food, 50, 6, null);
-        g.drawImage(cats, 95, 6, null);
+        g.drawImage(coin, 5, 4, null);
+        g.drawImage(food, 50, 4, null);
+        g.drawImage(cats, 95, 4, null);
 
         g.setFont(font);
         g.setColor(Color.BLACK);
 
-        g.drawString("100", 20, 17);
+        //MONEY        
+        g.drawString("100", 20, 14);
+        // g.drawString(m.getMoney() + "", 20, 16);
+        //FOOD
+        g.drawString("100", 65, 14);
+        // g.drawString(m.getFood() + "", 65, 14);
+        //NUMBER OF CATS        
+        g.drawString("100", 110, 14);
+        // g.drawString(m.getCatNum() + "", 0, 0);
     }
 }
