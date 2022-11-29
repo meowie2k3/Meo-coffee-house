@@ -16,6 +16,10 @@ public class IngameState extends GameState{
     public static Map map;
     public static Background bg;
 
+    //ui
+    private UI ui;
+    private Cat cat;
+
     //cat properties
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
@@ -54,6 +58,8 @@ public class IngameState extends GameState{
         
         bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
 
+        //UI
+        ui = new UI(cat);
     }
 
     //update
@@ -100,6 +106,9 @@ public class IngameState extends GameState{
             for(int i=0;i<characterList.size();i++){
                 characterList.get(i).draw(g);
             }
+
+            //draw UI
+            ui.draw(g);
 
         } catch(Exception e) {
             e.printStackTrace();
