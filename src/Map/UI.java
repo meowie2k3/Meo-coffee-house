@@ -1,14 +1,17 @@
-package Entity;
+package Map;
 
 import java.awt.image.*;
 import java.awt.*;
 import javax.imageio.*;
+import Entity.*;
 
 public class UI {
 
     private BufferedImage coin, food, cats;
     private Font font;
     private Cat cat;
+
+    private Map map;
 
     public UI(Cat cat)  {
         cat = cat;
