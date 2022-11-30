@@ -229,13 +229,13 @@ public class character extends Entity {
                     return;
                 }   
             }
-            if (getCurentAction() == STAND) {
-                if (timeElapsed > limit){
-                    countingTime = false;
-                    setAction(STAND);
-                    return;
-                }   
-            }
+            // if (getCurentAction() == STAND) {
+            //     if (timeElapsed > limit){
+            //         countingTime = false;
+            //         setAction(STAND);
+            //         return;
+            //     }   
+            // }
         }
         else{
             start = System.currentTimeMillis();
@@ -324,11 +324,7 @@ public class character extends Entity {
         }
     
         if(nextAction >= WALK && nextAction <= WALK+7){
-            if(nextAction >= WALK && nextAction <= WALK+7) {
-                if(animation.hasPlayedOnce()){
-                    animation.setFrames(sprites.get(WALK + currentDirection));
-                }
-            }
+            if(currentAction >= WALK && currentAction <= WALK+7) {}
             if(currentAction == STAND){
                 currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
@@ -341,19 +337,19 @@ public class character extends Entity {
 
     
 
-    //draw
-    public void draw(Graphics2D g){
-        setMapPosition();
-        // System.out.println(x + xmap - width /2);
-        // System.out.println(y + ymap - height / 2);
+    // //draw
+    // public void draw(Graphics2D g){
+    //     setMapPosition();
+    //     // System.out.println(x + xmap - width /2);
+    //     // System.out.println(y + ymap - height / 2);
         
-        g.drawImage(
-            animation.getImage(),
-            (int)(x + xmap - width /2),
-            (int)(y + ymap - height / 2),
-            null
-        );
-    }
+    //     g.drawImage(
+    //         animation.getImage(),
+    //         (int)(x + xmap - width /2),
+    //         (int)(y + ymap - height / 2),
+    //         null
+    //     );
+    // }
 
     
 }
