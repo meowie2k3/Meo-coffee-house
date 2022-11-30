@@ -5,12 +5,14 @@ import java.awt.image.*;
 public class Furniture {
 
     private BufferedImage image;
-    private String name;
+    private int x;
+    private int y;
     
     //constructor
-    public Furniture(String name, BufferedImage image){
+    public Furniture(BufferedImage image, int x, int y) {
         this.image = image;
-        this.name = name;
+        this.x = x;
+        this.y = y;
     }
     //overwritten constructor just in case :>
     public Furniture(){
@@ -20,8 +22,11 @@ public class Furniture {
     public BufferedImage getImage(){
         return image;
     }
-    public String getName(){
-        return name;
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
     }
     public void setImage(BufferedImage image){
         this.image = image;
