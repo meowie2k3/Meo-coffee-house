@@ -121,10 +121,10 @@ public class character extends Entity {
     }
     
     @Override
-    public void move(int direction){
+    public void move(int direction, int halfsize){
         setDirection(direction);
         setAction(WALK + direction);
-        super.move(direction);
+        super.move(direction, halfsize);
     }
 
     public void walking(){
@@ -317,7 +317,7 @@ public class character extends Entity {
             }
             
             if(currentAction >= WALK && currentAction <= WALK+7){
-                setAction(STAND);
+                currentAction = STAND;
                 animation.setFrames(sprites.get(STAND));
                 animation.setDelay(slow);
             }

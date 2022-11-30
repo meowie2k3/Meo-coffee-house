@@ -99,9 +99,9 @@ public abstract class Entity {
     }
 
     //command
-    public void move(int direction){
+    public void move(int direction, int halfsize){
         //System.out.println(getX()+" "+getY());
-        if ((getX() >= (0 + 16) && getX() <= (GamePanel.WIDTH - 16)) && (getY() >= (0 + 16.0) && getY() <= (GamePanel.HEIGHT - 16.0))) {
+        if ((getX() >= (0 + halfsize) && getX() <= (GamePanel.WIDTH - halfsize)) && (getY() >= (0 + halfsize) && getY() <= (GamePanel.HEIGHT - halfsize))) {
             //System.out.println("moving");
             switch(direction){
                 case leftDown:

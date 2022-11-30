@@ -282,10 +282,10 @@ public class Cat extends Entity {
     }
     
     @Override
-    public void move(int direction){
+    public void move(int direction, int halfsize){
         setDirection(direction);
         setAction(WALK + direction);
-        super.move(direction);
+        super.move(direction, halfsize);
     }
 
     //walking 

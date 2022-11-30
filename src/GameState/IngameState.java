@@ -75,7 +75,7 @@ public class IngameState extends GameState{
             catList.get(i).update();
             //moving
             if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
-                catList.get(i).move(catList.get(i).getDirection());
+                catList.get(i).move(catList.get(i).getDirection(), 16);
                 catList.get(i).bounding();
             }
         }
@@ -88,7 +88,7 @@ public class IngameState extends GameState{
             characterList.get(i).update();
             //moving
             if(characterList.get(i).getCurentAction() >= WALK && characterList.get(i).getCurentAction() <= WALK+7){
-                characterList.get(i).move(characterList.get(i).getDirection());
+                characterList.get(i).move(characterList.get(i).getDirection(), 24);
                 characterList.get(i).bounding();
             }
         }
