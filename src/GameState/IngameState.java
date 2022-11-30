@@ -55,7 +55,7 @@ public class IngameState extends GameState{
         map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
         
-        bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
+        bg = new Background("/Backgrounds/WoodenFloor.png", 0);
 
         //UI
         ui = new UI();
