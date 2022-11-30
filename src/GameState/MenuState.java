@@ -27,7 +27,7 @@ public class MenuState extends GameState {
         
         try {
             bg = new Background("/Backgrounds/bg.png", 0);
-
+            
 
             p1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p1.png"));
             p2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p2.png"));
