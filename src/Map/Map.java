@@ -24,11 +24,6 @@ public class Map {
     private int numCols = 8;
     // furiture
     private ArrayList<Furniture> furnitureList;
-    public static final int Chair = 1;
-    public static final int Table = 2;
-    public static final int Sink = 3;
-    public static final int Wardrobe = 4;
-    public static final int Fridge = 5;
     // user instance
     private int food;
     private int money;
@@ -77,14 +72,14 @@ public class Map {
     public void loadFurniture() {
         try {
             //System.out.println("load furniture");
-            String[] address = { "/Furniture/Chair.png", "/Furniture/Table.png",
-                    "/Furniture/Sink.png", "/Furniture/Wardrobe.png", "/Furniture/Fridge.png" };
-            String[] name = { "Chair", "Table", "Sink", "Wardrobe", "Fridge" };
+            String[] address = {"/Furniture/DrinkBar.png", "/Furniture/Chair.png", "/Furniture/Table.png"};
+            int[] x = {139, 0, 0};
+            int[] y = {0, 0, 0};
             furnitureList = new ArrayList<Furniture>();
             for (int i = 0; i < address.length; i++) {
                 
                 BufferedImage image = ImageIO.read(getClass().getResourceAsStream(address[i]));
-                furnitureList.add(new Furniture(name[i], image));
+                furnitureList.add(new Furniture(image, x[i], y[i]));
                 //System.out.println(address[i] + " loaded");
             }
 
@@ -181,10 +176,13 @@ public class Map {
     public void draw(Graphics2D g) {
         //System.out.println("furniture " + furnitureList.size());
         try {
+            //draw drink bar first
+            g.drawImage(furnitureList.get(0).getImage(), furnitureList.get(0).getX(),
+                furnitureList.get(0).getY(), null);
             for (int i = 0; i < numRows; i++) {
                 for (int j = 0; j < numCols; j++) {
                     if (map[i][j] != 0) {
-                        g.drawImage(furnitureList.get(map[i][j] - 1).getImage(),
+                        g.drawImage(furnitureList.get(map[i][j]).getImage(),
                                 j * furnitureSize, i * furnitureSize, null);
                     }
                 }

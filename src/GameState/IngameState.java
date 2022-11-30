@@ -55,7 +55,7 @@ public class IngameState extends GameState{
         map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
         
-        bg = new Background("/Backgrounds/TestbgIngameState.png", 0);
+        bg = new Background("/Backgrounds/WoodenFloor.png", 0);
 
         //UI
         ui = new UI();
@@ -63,8 +63,6 @@ public class IngameState extends GameState{
 
     //update
     public void update() {
-        //update map
-        //map.update();
 
         //update cat
         if(catList.size() != map.getCatNum()){
@@ -85,6 +83,7 @@ public class IngameState extends GameState{
         for(int i=0;i<characterList.size();i++){
             characterList.get(i).update();
         }
+        
     }
     public void draw(java.awt.Graphics2D g) {
         //draw map
@@ -97,7 +96,7 @@ public class IngameState extends GameState{
 
             bg.draw(g);
             //draw map
-            map.draw(g);
+            
             //draw cat
             for(int i=0;i<catList.size();i++){
                 catList.get(i).draw(g);
@@ -108,6 +107,7 @@ public class IngameState extends GameState{
 
             //draw UI
             ui.draw(g);
+            map.draw(g);
 
         } catch(Exception e) {
             e.printStackTrace();
