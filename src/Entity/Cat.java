@@ -58,7 +58,7 @@ public class Cat extends Entity {
         sleepCost = 1;
         playCost = 1;
 
-        //def ault emotion
+        //default emotion
         isHungry = false;
         isSleepy = false;
         isBored = false;
@@ -217,7 +217,7 @@ public class Cat extends Entity {
             sprites.add(reverseSit);
 
 
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
         }
         animation = new Animation();
@@ -282,10 +282,10 @@ public class Cat extends Entity {
     }
     
     @Override
-    public void move(int direction){
+    public void move(int direction, int halfsize){
         setDirection(direction);
         setAction(WALK + direction);
-        super.move(direction);
+        super.move(direction, halfsize);
     }
 
     //walking 

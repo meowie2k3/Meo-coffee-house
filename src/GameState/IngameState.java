@@ -24,7 +24,7 @@ public class IngameState extends GameState{
     public static ArrayList<character> characterList;
 
     //animation actions
-    private static final int SIT_TO_SLEEP = 0;
+    private static final int SIT_TO_SLEEP = 0; 
     private static final int SLEEP = 1;
     private static final int SIT = 2;
     private static final int STAND_TO_SIT = 3;
@@ -72,16 +72,22 @@ public class IngameState extends GameState{
             catList.get(i).update();
             //moving
             if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
-                catList.get(i).move(catList.get(i).getDirection());
+                catList.get(i).move(catList.get(i).getDirection(), 16);
                 catList.get(i).bounding();
             }
         }
+
         //update character
         if(characterList.size() != map.getcharacterNum()){
             System.out.println("bug! " + characterList.size() + " " + map.getcharacterNum());
         }
         for(int i=0;i<characterList.size();i++){
             characterList.get(i).update();
+            //moving
+            if(characterList.get(i).getCurentAction() >= WALK && characterList.get(i).getCurentAction() <= WALK+7){
+                characterList.get(i).move(characterList.get(i).getDirection(), 24);
+                characterList.get(i).bounding();
+            }
         }
         
     }
@@ -136,6 +142,12 @@ public class IngameState extends GameState{
                 catList.get(i).catDoSomething();          
             }
         }
+
+        for (int i = 0; i < characterList.size(); i++) {
+            if (characterList.get(i).contains(e.getX(), e.getY())) {
+                characterList.get(i).charDoSomething();          
+            }
+        }   
     }
 
     public void mouseExited(MouseEvent e) {
