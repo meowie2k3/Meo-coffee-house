@@ -16,9 +16,10 @@ public class GamePanel extends JPanel
     implements Runnable, KeyListener,MouseListener, MouseMotionListener{
 
     //dimension
+    public static final int SCALE = 3;
     public static final int WIDTH = 320;
     public static final int HEIGHT = 240;
-    public static final int SCALE = 3;
+    
 
     //game threading, set FPS to 60
     private Thread thread;
@@ -108,7 +109,7 @@ public class GamePanel extends JPanel
 
     private void drawToScreen(){
         Graphics g2 = getGraphics();
-        g2.drawImage(image, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
+        g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
         g2.dispose();
     }
 

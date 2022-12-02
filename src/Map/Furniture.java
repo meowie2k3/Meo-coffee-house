@@ -5,41 +5,30 @@ import java.awt.image.*;
 public class Furniture {
 
     private BufferedImage image;
-    private int type;
-    private String name;
-    private String function;
-
-    //block type
-    public static final int BLOCKED = 0;
-    public static final int NORMAL = 1;
-
+    private int x;
+    private int y;
+    
     //constructor
-    public Furniture(BufferedImage image){
+    public Furniture(BufferedImage image, int x, int y) {
         this.image = image;
-        this.type = type;
+        this.x = x;
+        this.y = y;
     }
     //overwritten constructor just in case :>
     public Furniture(){
 
     }
-
     //setters and getters
     public BufferedImage getImage(){
         return image;
     }
-    public int getType(){
-        return type;
+    public int getX(){
+        return x;
     }
-    public String name(){
-        return name;
-    }
-    public String function(){
-        return function;
+    public int getY(){
+        return y;
     }
     public void setImage(BufferedImage image){
         this.image = image;
-    }
-    public void setType(int type){
-        this.type = type;
     }
 }

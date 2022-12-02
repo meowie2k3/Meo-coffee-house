@@ -13,6 +13,7 @@ public abstract class Entity {
     //block properties
     protected Map map;
     protected int catSize;
+    protected int charSize;
     protected double xmap;
     protected double ymap;
 
@@ -49,6 +50,7 @@ public abstract class Entity {
     public Entity(Map map){
         this.map = map;
         catSize = map.getCatSize();
+        charSize = map.getcharacterNum();
     }
 
     //getters
@@ -97,39 +99,59 @@ public abstract class Entity {
     }
 
     //command
-    public void move(int direction){
-        switch(direction){
-            case leftDown:
-                x -= moveSpeed;
-                y += moveSpeed;
-                break;
-            case down:
-                y += moveSpeed;
-                break;
-            case rightDown:
-                x += moveSpeed;
-                y += moveSpeed;
-                break;
-            case right:
-                x += moveSpeed;
-                break;
-            case rightUp:
-                x += moveSpeed;
-                y -= moveSpeed;
-                break;
-            case up:
-                y -= moveSpeed;
-                break;
-            case leftUp:
-                x -= moveSpeed;
-                y -= moveSpeed;
-                break;
-            case left:
-                x -= moveSpeed;
-                break;
-            default:
-                System.out.println("Invalid direction");
-                break;
+    public void move(int direction, int halfsize){
+        //System.out.println(getX()+" "+getY());
+        if ((getX() >= (0 + halfsize) && getX() <= (GamePanel.WIDTH - halfsize)) && (getY() >= (0 + halfsize) && getY() <= (GamePanel.HEIGHT - halfsize))) {
+            //System.out.println("moving");
+            switch(direction){
+                case leftDown:
+                    x -= moveSpeed;
+                    y += moveSpeed;
+                    break;
+                case down:
+                    y += moveSpeed;
+                    break;
+                case rightDown:
+                    x += moveSpeed;
+                    y += moveSpeed;
+                    break;
+                case right:
+                    x += moveSpeed;
+                    break;
+                case rightUp:
+                    x += moveSpeed;
+                    y -= moveSpeed;
+                    break;
+                case up:
+                    y -= moveSpeed;
+                    break;
+                case leftUp:
+                    x -= moveSpeed;
+                    y -= moveSpeed;
+                    break;
+                case left:
+                    x -= moveSpeed;
+                    break;
+                default:
+                    System.out.println("Invalid direction");
+                    break;
+            }
         }
+        
+    }
+    public void draw(Graphics2D g){
+        setMapPosition();
+        // System.out.println(x + xmap - width /2);
+        // System.out.println(y + ymap - height / 2);
+        
+        g.drawImage(
+            animation.getImage(),
+            (int)(x + xmap - width /2),
+            (int)(y + ymap - height / 2),
+            null
+        );
     }
 }
+
+
+// for Character: 1 0 2 2 2 3 1 1
