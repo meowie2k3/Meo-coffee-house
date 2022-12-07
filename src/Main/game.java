@@ -1,5 +1,6 @@
 package Main;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -17,9 +18,14 @@ public class game {
         window.pack();
         window.setVisible(true);
          
+        ImageIcon logo = new ImageIcon("Resources/Icon/money.jpg");
+        window.setIconImage(logo.getImage());
+        
         String audioFilePath = "Resources/soundEffect/meow.wav";
         SoundEffect player = new SoundEffect();
         player.play(audioFilePath);
+
+        
         
     }
 }
