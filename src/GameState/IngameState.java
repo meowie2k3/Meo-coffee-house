@@ -43,6 +43,7 @@ public class IngameState extends GameState{
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
+        
     }
     
     //file abstract method
@@ -86,9 +87,13 @@ public class IngameState extends GameState{
             //moving
             if(characterList.get(i).getCurentAction() >= WALK && characterList.get(i).getCurentAction() <= WALK+7){
                 characterList.get(i).move(characterList.get(i).getDirection(), 24);
-                characterList.get(i).bounding();
+                // characterList.get(i).bounding();
             }
+            
         }
+        for (int i = 0; i < characterList.size(); i++) {
+            characterList.get(i).walkingIn(i);
+        }   
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -102,18 +107,22 @@ public class IngameState extends GameState{
 
             bg.draw(g);
             //draw map
+
+            //draw UI
+            ui.draw(g);
+            map.draw(g);
             
             //draw cat
             for(int i=0;i<catList.size();i++){
                 catList.get(i).draw(g);
             }
+
+            //draw characters
             for(int i=0;i<characterList.size();i++){
                 characterList.get(i).draw(g);
             }
 
-            //draw UI
-            ui.draw(g);
-            map.draw(g);
+            
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -143,11 +152,11 @@ public class IngameState extends GameState{
             }
         }
 
-        for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).contains(e.getX(), e.getY())) {
-                characterList.get(i).charDoSomething();          
-            }
-        }   
+        // for (int i = 0; i < characterList.size(); i++) {
+        //     if (characterList.get(i).contains(e.getX(), e.getY())) {
+        //         characterList.get(i).charDoSomething();          
+        //     }
+        // }   
     }
 
     public void mouseExited(MouseEvent e) {
@@ -158,6 +167,7 @@ public class IngameState extends GameState{
         // int x = e.getX();
         // int y = e.getY();
         // System.out.println("mouse moved " + x + " " + y);
+        
         
     }
     public void mouseDragged(MouseEvent e) {
