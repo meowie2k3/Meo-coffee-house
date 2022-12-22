@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import Main.GamePanel;
 import Map.Background;
+import Map.SoundEffect;
 
 public class MenuState extends GameState {
 
@@ -19,6 +20,7 @@ public class MenuState extends GameState {
     };
     
     private Background bg;
+    private SoundEffect soundEffect;
 
     private int currentChoice = 2;
 
@@ -27,7 +29,7 @@ public class MenuState extends GameState {
         
         try {
             bg = new Background("/Backgrounds/bg.png", 0);
-            
+            soundEffect = new SoundEffect(GamePanel.WIDTH - 20, GamePanel.HEIGHT - 20);
 
             p1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p1.png"));
             p2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p2.png"));
@@ -50,6 +52,7 @@ public class MenuState extends GameState {
     public void draw(Graphics2D g){
         //draw bg
         bg.draw(g);
+        soundEffect.draw(g);
 
         //draw
         g.drawImage(p1, 121, 120, null);

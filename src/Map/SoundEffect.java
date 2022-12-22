@@ -18,19 +18,32 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.awt.Graphics2D;
 
+import Main.GamePanel;
+
 
 public class SoundEffect{
     private Clip clip;
     private int lastFrame;
     private BufferedImage playing;
     private BufferedImage muted;
-    //size 20x20
 
-    public SoundEffect(){
+    //position
+    private double x;
+    private double y;
+    private int size = 20;
+
+    public SoundEffect(double x, double y){
         try{
-            playing = ImageIO.read(getClass().getResourceAsStream("Resources/UI/Playing.png"));
-            muted = ImageIO.read(getClass().getResourceAsStream("Resources/UI/Muted.png"));
+            this.x = x;
+            this.y = y;
+            
+            playing = ImageIO.read(getClass().getResourceAsStream("/UI/Playing.png"));
+            
+            muted = ImageIO.read(getClass().getResourceAsStream("/UI/Muted.png"));
+
             loadClip(new File("Resources/soundEffect/meow.wav"));
+
+            clip.start();
         }
         catch(Exception e){
         e.printStackTrace();
@@ -79,14 +92,39 @@ public class SoundEffect{
             System.out.println("Start");
             clip.start();
         }
-
     }
+
+    public double getX(){
+        return x;
+    }
+    public double getY(){
+        return y;
+    }
+    public int getWidth(){
+        return size;
+    }
+    public int getHeight(){
+        return size;
+    }
+
+    public boolean contains(int x, int y){
+        int scale = GamePanel.SCALE;
+        if(x >= this.getX() * scale - this.getWidth() * scale / 2 && 
+        x <= this.getX() * scale + this.getWidth() * scale / 2 && 
+        y >= this.getY() * scale - this.getHeight() * scale / 2 && 
+        y <= this.getY() * scale + this.getHeight() * scale / 2)
+        {
+            return true;
+        }
+        else return false;
+    }
+    
     public void draw(Graphics2D g){
         if(clip.isRunning()){
-            g.drawImage(playing, 0, 0, null);
+            g.drawImage(playing, (int)x,(int) y, null);
         }
         else{
-            g.drawImage(muted, 0, 0, null);
+            g.drawImage(muted, (int)x, (int)y, null);
         }
     }
 
