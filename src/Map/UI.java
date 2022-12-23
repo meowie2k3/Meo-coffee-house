@@ -3,12 +3,17 @@ package Map;
 import java.awt.image.*;
 import java.awt.*;
 import javax.imageio.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 import GameState.IngameState;
 
 public class UI {
 
     private BufferedImage coin, food, cats;
     private Font font;
+
+    private JButton shop;
 
     public UI()  {
         try {
@@ -25,6 +30,7 @@ public class UI {
     }
 
     public void draw(Graphics g)    {
+
         g.drawImage(coin, 5, 4, null);
         g.drawImage(food, 50, 4, null);
         g.drawImage(cats, 95, 4, null);
