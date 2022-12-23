@@ -76,13 +76,14 @@ public class SoundEffect{
     public void pause(){
         if (clip != null && clip.isRunning()) {
             lastFrame = clip.getFramePosition();
-            System.out.println("Stop");
+            //System.out.println("Stop");
             clip.stop();
         }
     }
     public void resume() {
 
         if (clip != null && clip.isRunning()==false) {
+            loadClip(new File("Resources/soundEffect/meow.wav"));
             // Make sure we haven't passed the end of the file...
             if (lastFrame < clip.getFrameLength()) {
                 clip.setFramePosition(lastFrame);
@@ -90,9 +91,9 @@ public class SoundEffect{
             else{
                 clip.setFramePosition(0);
             }
-            System.out.println("Start");
+            //System.out.println("Start");
             clip.start();
-            System.out.println("Started");
+            //System.out.println("Started");
         }
     }
 
