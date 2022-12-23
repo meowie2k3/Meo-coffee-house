@@ -1,6 +1,5 @@
 package Map;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
  
@@ -44,6 +43,7 @@ public class SoundEffect{
             loadClip(new File("Resources/soundEffect/meow.wav"));
 
             clip.start();
+
         }
         catch(Exception e){
         e.printStackTrace();
@@ -82,15 +82,17 @@ public class SoundEffect{
     }
     public void resume() {
 
-        if (clip != null && !clip.isRunning()) {
+        if (clip != null && clip.isRunning()==false) {
             // Make sure we haven't passed the end of the file...
             if (lastFrame < clip.getFrameLength()) {
                 clip.setFramePosition(lastFrame);
-            } else {
+            } 
+            else{
                 clip.setFramePosition(0);
             }
             System.out.println("Start");
             clip.start();
+            System.out.println("Started");
         }
     }
 
@@ -117,6 +119,15 @@ public class SoundEffect{
             return true;
         }
         else return false;
+    }
+
+    public void toggle(){
+        if(clip.isRunning()){
+            pause();
+        }
+        else{
+            resume();
+        }
     }
     
     public void draw(Graphics2D g){

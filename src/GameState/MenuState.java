@@ -47,6 +47,7 @@ public class MenuState extends GameState {
     }
     public void update(){
         bg.update();
+        //soundEffect.update();
     }
     
     public void draw(Graphics2D g){
@@ -87,29 +88,6 @@ public class MenuState extends GameState {
     }
 
     public void keyPressed(int k){
-        if(k == KeyEvent.VK_ENTER){
-            selectedMenu();
-        }
-        if(k == KeyEvent.VK_W){
-            if(currentChoice > 0){
-                currentChoice--;
-            }
-        }
-        if(k == KeyEvent.VK_S){
-            if(currentChoice < Option.length - 1){
-                currentChoice++;
-            }
-        }
-        if(k == KeyEvent.VK_UP){
-            if(currentChoice > 0){
-                currentChoice--;
-            }
-        }
-        if(k == KeyEvent.VK_DOWN){
-            if(currentChoice < Option.length - 1){
-                currentChoice++;
-            }
-        }
     }
 
     public void keyReleased(int k){
@@ -123,18 +101,28 @@ public class MenuState extends GameState {
     }
     public void mouseClicked(MouseEvent e) {
         //System.out.println("Mouse Clicked");
-        selectedMenu();
+        int x = (int) e.getX();
+        int y = (int) e.getY();
+        if(currentChoice == 0 || currentChoice == 1){
+            selectedMenu();
+        }
+        else if(soundEffect.contains(x, y)){
+            soundEffect.toggle();
+        }
+
     }
     public void mouseExited(MouseEvent e) {
     }
     public void mouseMoved(MouseEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
+        //System.out.println("Mouse Moved " + x + " " + y);
         int scale = GamePanel.SCALE;
-        int left = 135 * scale;
-        int right = 190 * scale;
+        int left = 128 * scale;
+        int right = 193 * scale;
         int top = 140 * scale;
-        
+        int bottom = 183 * scale;
+
         if(x > left && x < right && y > 0*scale*20 + top - 45 && y < 0*scale*20 + top + 25){
             currentChoice = 0;
         }
@@ -144,6 +132,7 @@ public class MenuState extends GameState {
         if(x < left || x > right || y < 0*scale*20 + top - 45 || (y > 0*scale*20 + top + 25 && y < 1*scale*20 + top - 2) || y > 1*scale*20 + top + 68)   {
             currentChoice = 2;
         }
+
     }
     public void mouseDragged(MouseEvent e) {
         
