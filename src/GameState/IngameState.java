@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.lang.invoke.CallSite;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import javax.print.attribute.standard.Sides;
 
@@ -16,14 +17,14 @@ public class IngameState extends GameState{
     public static Map map;
     public static Background bg;
 
-    //ui
+    // ui
     private UI ui;
 
     //cat properties
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
 
-    //animation actions
+    // animation actions
     private static final int SIT_TO_SLEEP = 0; 
     private static final int SLEEP = 1;
     private static final int SIT = 2;
@@ -32,68 +33,87 @@ public class IngameState extends GameState{
     private static final int STAND = 12;
     private static final int SCRATCH = 20;
     private static final int SIT_TO_SCRATCH = 20;
-    //reversible animation
+    // reversible animation
     private static final int SLEEP_TO_SIT = 21;
     private static final int SIT_TO_STAND = 22;
     private static final int REVERSE_SIT = 23;
-    //private ArrayList<String> catAddress;
+    // private ArrayList<String> catAddress;
     
 
-    //constructor
+    // constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
         
     }
     
-    //file abstract method
+    // file abstract method
     public void init() {
         catList = new ArrayList<Cat>();
         characterList = new ArrayList<character>();
         map = new Map();
         
-        //load user data
+        // load user data
         map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
         
         bg = new Background("/Backgrounds/WoodenFloor.png", 0);
 
-        //UI
+        // UI
         ui = new UI();
     }
 
-    //update
+    // update
     public void update() {
 
-        //update cat
+        // update cat
         if(catList.size() != map.getCatNum()){
             System.out.println("bug! " + catList.size() + " " + map.getCatNum());
         }
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
-            //moving
+            // moving
             if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
                 catList.get(i).move(catList.get(i).getDirection(), 16);
                 catList.get(i).bounding();
             }
         }
 
-        //update character
+        // update character
         if(characterList.size() != map.getcharacterNum()){
             System.out.println("bug! " + characterList.size() + " " + map.getcharacterNum());
         }
         for(int i=0;i<characterList.size();i++){
             characterList.get(i).update();
-            //moving
+            // moving
             if(characterList.get(i).getCurentAction() >= WALK && characterList.get(i).getCurentAction() <= WALK+7){
                 characterList.get(i).move(characterList.get(i).getDirection(), 24);
                 // characterList.get(i).bounding();
             }
             
         }
+        int countIn = 0;
+
         for (int i = 0; i < characterList.size(); i++) {
+            if (characterList.get(i).getX() == 170 && characterList.get(i).getY() == 75 ||
+                characterList.get(i).getX() == 210 && characterList.get(i).getY() == 75 ||
+                characterList.get(i).getX() == 260 && characterList.get(i).getY() == 75 ||
+                characterList.get(i).getX() == 310 && characterList.get(i).getY() == 75) {
+                    countIn++;
+                }
+
+            // if (countIn == 2) {
+            //     try {
+            //         TimeUnit.SECONDS.sleep(1);
+            //     } catch (InterruptedException e) {
+            //         // TODO Auto-generated catch block
+            //         e.printStackTrace();
+            //     }
+            // }
+
             characterList.get(i).walkingIn(i);
-        }   
+            
+        }
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -151,6 +171,8 @@ public class IngameState extends GameState{
                 catList.get(i).catDoSomething();          
             }
         }
+
+        
 
         // for (int i = 0; i < characterList.size(); i++) {
         //     if (characterList.get(i).contains(e.getX(), e.getY())) {
