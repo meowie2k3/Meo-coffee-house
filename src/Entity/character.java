@@ -136,87 +136,84 @@ public class character extends Entity {
     // way == 0: character goes in
     // way == 1: characrer goes out
     public int way = 0;
+    public int finalX, finalY;
 
     public void walkingIn(int order){
-        int finalX, finalY;
+        
         if (way == 0) {
             if (order == 0) {finalX = 170; finalY = 75;} 
             else if (order == 1) {finalX = 210; finalY = 75;} 
             else if (order == 2) {finalX = 260; finalY = 75;}
             else {finalX = 310; finalY = 75;}
+            
+            // get in and move up
+            if (getX() == finalX && getY() > finalY) {
+                setDirection(5);
+                setAction(WALK + getDirection());
+                return;
+                
+            }
+
+            // get in and move right
+            if (getX() < finalX && getY() > finalY) {
+                setDirection(3);
+                setAction(WALK + getDirection());
+                return;
+            }
+
+            // arrived the position
+            if (getX() == finalX && getY() == finalY) {
+                // setAction(STAND);
+                way = 1;
+                // setDirection(1);
+                // setAction(WALK + getDirection());
+                return;   
+            }
+            
+            // if (getX() ==  finalX && getY() == finalY) {
+            //     // get out and move down
+                
+            // }
+            
         }
+
         else {
             if (order == 0) {finalX = 24; finalY = 130;} 
             else if (order == 1) {finalX = 24; finalY = 150;} 
             else if (order == 2) {finalX = 24; finalY = 170;}
             else {finalX = 24; finalY = 190;}
-        }
-        
-        // horizontal
-        if (getX() == finalX && getY() > finalY) {
-            // getting in
-            if (way == 0) {
-                // move up
-                setDirection(5);
+
+            // get out and move down
+            if (getX() > finalX && getY() < finalY) {
+                setDirection(1);
+                setAction(WALK + getDirection());
+                return;   
+                
+            }
+
+            // get out and move left
+            if (getX() > finalX && getY() == finalY) {                
+                setDirection(7);
                 setAction(WALK + getDirection());
                 return;
             }
-            // getting out
-            else {
-                // move down
+
+            // arrive the initial place
+            if (getX() == finalX && getY() == finalY) {
+                setAction(STAND);
+                // way = 0;
                 // setDirection(1);
                 // setAction(WALK + getDirection());
-                // return;
+                return;   
             }
+
         }
-
-        if (getX() > finalX && getY() == finalY) {
-            if (way == 1) {
-                // move down
-                setDirection(7);
-                setAction(WALK + getDirection());
-                return;
-            }
-        }
-        
-        if (getX() < finalX && getY() > finalY) {
-            if (way == 0) {
-                setDirection(3);
-                setAction(WALK + getDirection());
-                return;
-            }
-            else {
-                setDirection(7);
-                setAction(WALK + getDirection());
-                return;
-            }
-            
-        }
-
-        if (getX() == finalX && getY() == finalY) {
-            // setAction(STAND);
-            
-            // try {
-            //     TimeUnit.SECONDS.sleep(1);
-            // } catch (InterruptedException e) {
-            //     // TODO Auto-generated catch block
-            //     e.printStackTrace();
-            // }
-
-            way = 1;
-            setDirection(1);
-            setAction(WALK + getDirection());
-
-            return;
-        }
-
-        if (getX() < 0 && getY() > finalY) {
-            setAction(STAND);
-            return;
-        }
-
-
-        
+        // try {
+        //     TimeUnit.SECONDS.sleep(1);
+        // } catch (InterruptedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
     }
 
