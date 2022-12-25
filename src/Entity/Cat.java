@@ -28,18 +28,18 @@ public class Cat extends Entity {
     private ArrayList<BufferedImage[]> sprites;
     
     //animation actions
-    private static final int SIT_TO_SLEEP = 0;
-    private static final int SLEEP = 1;
-    private static final int SIT = 2;
-    private static final int STAND_TO_SIT = 3;
-    private static final int WALK = 4;
-    private static final int STAND = 12;
-    private static final int SCRATCH = 20;
-    private static final int SIT_TO_SCRATCH = 20;
+    public static final int SIT_TO_SLEEP = 0;
+    public static final int SLEEP = 1;
+    public static final int SIT = 2;
+    public static final int STAND_TO_SIT = 3;
+    public static final int WALK = 4;
+    public static final int STAND = 12;
+    public static final int SCRATCH = 20;
+    public static final int SIT_TO_SCRATCH = 20;
     //reversible animation
-    private static final int SLEEP_TO_SIT = 21;
-    private static final int SIT_TO_STAND = 22;
-    private static final int REVERSE_SIT = 23;
+    public static final int SLEEP_TO_SIT = 21;
+    public static final int SIT_TO_STAND = 22;
+    public static final int REVERSE_SIT = 23;
 
     //constructor
     public Cat(Map map, String address){
