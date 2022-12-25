@@ -38,9 +38,9 @@ public class SoundEffect{
             this.y = y;
             this.address = address;
             
-            playing = ImageIO.read(getClass().getResourceAsStream("/UI/Playing.png"));
+            playing = ImageIO.read(getClass().getResourceAsStream("/UI/Playing-noBG.png"));
             
-            muted = ImageIO.read(getClass().getResourceAsStream("/UI/Muted.png"));
+            muted = ImageIO.read(getClass().getResourceAsStream("/UI/Muted-noBG.png"));
 
             loadClip(new File(address));
 

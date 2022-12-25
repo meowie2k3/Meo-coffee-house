@@ -29,8 +29,8 @@ public class MenuState extends GameState {
         
         try {
             bg = new Background("/Backgrounds/bg.png", 0);
-            soundEffect = new SoundEffect(GamePanel.WIDTH - 20,
-            GamePanel.HEIGHT - 20,
+            soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
+            GamePanel.HEIGHT - 23,
             "Resources/soundEffect/meow.wav", true);
 
             p1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p1.png"));

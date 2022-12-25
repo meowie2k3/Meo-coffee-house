@@ -34,8 +34,8 @@ public class IngameState extends GameState{
         characterList = new ArrayList<character>();
         map = new Map();
 
-        soundEffect = new SoundEffect(GamePanel.WIDTH - 20,
-            GamePanel.HEIGHT - 20,
+        soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
+        GamePanel.HEIGHT - 23,
             "Resources/soundEffect/meow.wav", false);
         
         //load user data
