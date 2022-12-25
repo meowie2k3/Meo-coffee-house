@@ -25,24 +25,28 @@ public class SoundEffect{
     private int lastFrame;
     private BufferedImage playing;
     private BufferedImage muted;
+    private String address;
 
     //position
     private double x;
     private double y;
     private int size = 20;
 
-    public SoundEffect(double x, double y){
+    public SoundEffect(double x, double y, String address, boolean initstate){
         try{
             this.x = x;
             this.y = y;
+            this.address = address;
             
             playing = ImageIO.read(getClass().getResourceAsStream("/UI/Playing.png"));
             
             muted = ImageIO.read(getClass().getResourceAsStream("/UI/Muted.png"));
 
-            loadClip(new File("Resources/soundEffect/meow.wav"));
+            loadClip(new File(address));
 
-            clip.start();
+            if(initstate){
+                clip.start();
+            }
 
         }
         catch(Exception e){
@@ -83,7 +87,7 @@ public class SoundEffect{
     public void resume() {
 
         if (clip != null && clip.isRunning()==false) {
-            loadClip(new File("Resources/soundEffect/meow.wav"));
+            loadClip(new File(address));
             // Make sure we haven't passed the end of the file...
             if (lastFrame < clip.getFrameLength()) {
                 clip.setFramePosition(lastFrame);
@@ -97,12 +101,6 @@ public class SoundEffect{
         }
     }
 
-    public double getX(){
-        return x;
-    }
-    public double getY(){
-        return y;
-    }
     public int getWidth(){
         return size;
     }
@@ -112,14 +110,14 @@ public class SoundEffect{
 
     public boolean contains(int x, int y){
         int scale = GamePanel.SCALE;
-        if(x >= this.getX() * scale - this.getWidth() * scale / 2 && 
-        x <= this.getX() * scale + this.getWidth() * scale / 2 && 
-        y >= this.getY() * scale - this.getHeight() * scale / 2 && 
-        y <= this.getY() * scale + this.getHeight() * scale / 2)
-        {
+        //x and y of the button are top left corner
+        if(x >= this.x*scale 
+        && x <= this.x*scale + size*scale 
+        && y >= this.y*scale 
+        && y <= this.y*scale + size*scale){
             return true;
         }
-        else return false;
+        return false;
     }
 
     public void toggle(){

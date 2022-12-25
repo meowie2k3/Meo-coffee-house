@@ -29,7 +29,9 @@ public class MenuState extends GameState {
         
         try {
             bg = new Background("/Backgrounds/bg.png", 0);
-            soundEffect = new SoundEffect(GamePanel.WIDTH - 20, GamePanel.HEIGHT - 20);
+            soundEffect = new SoundEffect(GamePanel.WIDTH - 20,
+            GamePanel.HEIGHT - 20,
+            "Resources/soundEffect/meow.wav", true);
 
             p1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p1.png"));
             p2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Option/p2.png"));
@@ -79,6 +81,7 @@ public class MenuState extends GameState {
     private void selectedMenu(){
         if(currentChoice == 0){
             //continue
+            soundEffect.pause();
             gsm.setState(GameStateManager.INGAMESTATE);
         }
         if(currentChoice ==  1){
