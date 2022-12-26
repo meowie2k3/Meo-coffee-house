@@ -217,104 +217,7 @@ public class character extends Entity {
 
     }
 
-    // //timing
-    // private boolean countingTime = false;
-    // private long start = 0;
-    // private long limit = 0;
-    // public boolean getCountingTime(){
-    //     return countingTime;
-    // }
-    // public void setCountingTime(){
-    //     if (countingTime){
-    //         long finish = System.currentTimeMillis();
-    //         long timeElapsed = finish - start;
-    //         //System.out.println(timeElapsed + " " + limit);
-    //         if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
-    //             if (timeElapsed > limit){
-    //                 countingTime = false;
-    //                 limit = 3000;
-    //                 setCountingTime();
-    //                 setAction(STAND);
-    //                 return;
-    //             }   
-    //         }
-    //         // if (getCurentAction() == STAND) {
-    //         //     if (timeElapsed > limit){
-    //         //         countingTime = false;
-    //         //         setAction(STAND);
-    //         //         return;
-    //         //     }   
-    //         // }
-    //     }
-    //     else{
-    //         start = System.currentTimeMillis();
-    //         countingTime = true;
-    //     }
-    // }
-
-    // when character is walking
-    // public void bounding(){
-    //     Random rand = new Random();
-    //     if (getDirection() == 0 || getDirection() == 1 || getDirection() == 2){
-    //         if (getY() == GamePanel.HEIGHT - 24){
-    //             countingTime = false;
-    //             limit = rand.nextInt(20000)+1000;
-    //             setCountingTime();
-    //             setAction(STAND);
-    //         }
-    //     }
-    //     if (getDirection() == 0 || getDirection() == 7 || getDirection() == 6){
-    //         if (getX() == 0 + 24){
-    //             countingTime = false;
-    //             limit = rand.nextInt(20000)+1000;
-    //             setCountingTime();
-    //             setAction(STAND);
-    //         }
-    //     }
-    //     if (getDirection() == 4 || getDirection() == 5 || getDirection() == 6){
-    //         if (getY() == 0 + 24){
-    //             countingTime = false;
-    //             limit = rand.nextInt(20000)+1000;
-    //             setCountingTime();
-    //             setAction(STAND);
-    //         }
-    //     }
-    //     if (getDirection() == 2 || getDirection() == 3 || getDirection() == 4){
-    //         if (getX() == GamePanel.WIDTH - 24){
-    //             countingTime = false;
-    //             limit = rand.nextInt(20000)+1000;
-    //             setCountingTime();
-    //             setAction(STAND);
-    //         }
-    //     }
-    //     setCountingTime();
-    // }
-
-    //when we click on character, it will do something
-    public void charDoSomething(){
-        Random rand = new Random();
-        //character stand -> move
-
-        walkingIn(1);
-        return;
-
-        // if (getCurentAction() == STAND) {
-        //     countingTime = false;
-        //     limit = rand.nextInt(10000)+1000;
-        //     setCountingTime();
-        //     walking();
-        //     return;
-        // }
-        // //character walking -> stand    
-        // if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
-        //     countingTime = false;
-        //     limit = rand.nextInt(20000)+1000;
-        //     setCountingTime();
-        //     setAction(STAND);
-        //     return;
-        // }
-    }
-
+    public int tempDirection = -1;
     public void update(){
         int slow = 120;
         int fast = 60;
@@ -334,9 +237,18 @@ public class character extends Entity {
                 animation.setDelay(slow);
             }
         }
-    
+        
+
         if(nextAction >= WALK && nextAction <= WALK+7){
-            if(currentAction >= WALK && currentAction <= WALK+7) {}
+            
+            if(currentAction >= WALK && currentAction <= WALK+7) {
+                if (tempDirection != currentDirection) {
+                    animation.setFrames(sprites.get(WALK + currentDirection));
+                    animation.setDelay(slow);
+                    tempDirection = currentDirection;
+                }
+                
+            }
             if(currentAction == STAND){
                 currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
