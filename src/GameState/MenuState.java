@@ -124,15 +124,25 @@ public class MenuState extends GameState {
         int left = 128 * scale;
         int right = 193 * scale;
         int top = 140 * scale;
-        int bottom = 183 * scale;
 
-        if(x > left && x < right && y > 0*scale*20 + top - 45 && y < 0*scale*20 + top + 25){
+        if(x > left 
+        && x < right 
+        && y > 0*scale*20 + top - 45 
+        && y < 0*scale*20 + top + 25){
             currentChoice = 0;
         }
-        if(x > left && x < right && y > 1*scale*20 + top - 2 && y < 1*scale*20 + top + 68){
+        if(x > left 
+        && x < right 
+        && y > 1*scale*20 + top - 2 
+        && y < 1*scale*20 + top + 68){
             currentChoice = 1;
         }
-        if(x < left || x > right || y < 0*scale*20 + top - 45 || (y > 0*scale*20 + top + 25 && y < 1*scale*20 + top - 2) || y > 1*scale*20 + top + 68)   {
+        if(x < left 
+        || x > right 
+        || y < 0*scale*20 + top - 45 
+        || (y > 0*scale*20 + top + 25 && y < 1*scale*20 + top - 2) 
+        || y > 1*scale*20 + top + 68)
+        {
             currentChoice = 2;
         }
 
