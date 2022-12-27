@@ -3,6 +3,9 @@ import java.awt.event.*;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 import Main.*;
@@ -16,19 +19,21 @@ public class IngameState extends GameState{
     public static Background bg;
     private SoundEffect soundEffect;
 
-    //ui
+    // ui
     private UI ui;
 
     //cat properties
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
+
     //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
+        
     }
     
-    //file abstract method
+    // file abstract method
     public void init() {
         catList = new ArrayList<Cat>();
         characterList = new ArrayList<character>();
@@ -38,20 +43,20 @@ public class IngameState extends GameState{
         GamePanel.HEIGHT - 23,
             "Resources/soundEffect/meow.wav", false);
         
-        //load user data
+        // load user data
         map.loadFurniture();
         map.loadUserSavedGame("/UserSavedGame/User1.map");
         
         bg = new Background("/Backgrounds/WoodenFloor.png", 0);
 
-        //UI
+        // UI
         ui = new UI();
     }
 
-    //update
+    // update
     public void update() {
 
-        //update cat
+        // update cat
         if(catList.size() != map.getCatNum()){
             System.out.println("bug! " + catList.size() + " " + map.getCatNum());
         }
@@ -64,7 +69,7 @@ public class IngameState extends GameState{
             }
         }
 
-        //update character
+        // update character
         if(characterList.size() != map.getcharacterNum()){
             System.out.println("bug! " + characterList.size() + " " + map.getcharacterNum());
         }
@@ -73,8 +78,22 @@ public class IngameState extends GameState{
             //moving
             if(characterList.get(i).getCurentAction() >= Cat.WALK && characterList.get(i).getCurentAction() <= Cat.WALK+7){
                 characterList.get(i).move(characterList.get(i).getDirection(), 24);
-                characterList.get(i).bounding();
+                // characterList.get(i).bounding();
             }
+            
+        }
+        for (int i = 0; i < characterList.size(); i++) {
+            if (characterList.get(i).getX() == characterList.get(i).getfinalX() && characterList.get(i).getY() == characterList.get(i).getfinalY()) {
+                
+                // characterList.get(i).payMoney();
+
+            }
+        }
+        
+
+        for (int i = 0; i < characterList.size(); i++) {
+            characterList.get(i).walkingIn(i);
+
         }
         
     }
@@ -84,7 +103,7 @@ public class IngameState extends GameState{
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-        try{
+  try{
             //draw background
 
             bg.draw(g);
@@ -149,6 +168,7 @@ public class IngameState extends GameState{
         // int x = e.getX();
         // int y = e.getY();
         // System.out.println("mouse moved " + x + " " + y);
+        
         
     }
     public void mouseDragged(MouseEvent e) {
