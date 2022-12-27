@@ -2,18 +2,22 @@
 1000
 500
 3
-2
+4
 /Cats/creme_000.png
 100 50
 /Cats/dark_000.png
 100 200
 /Cats/pink_000.png
 130 200
-/Character and Furniture/Bear-Sheet.png
-24  130
+/Character and Furniture/Shiba-Sheet.png
+24 130
 /Character and Furniture/Blackcat-Sheet.png
-24  150
-    
+24 150
+/Character and Furniture/Hedgedog-Sheet.png
+24 170
+/Character and Furniture/Rabbit-Sheet.png
+24 190
+
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 0 0 0 1 0 0 0 0

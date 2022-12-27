@@ -3,6 +3,8 @@ import java.awt.event.*;
 import java.lang.invoke.CallSite;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.print.attribute.standard.Sides;
@@ -92,27 +94,18 @@ public class IngameState extends GameState{
             }
             
         }
-        int countIn = 0;
+        for (int i = 0; i < characterList.size(); i++) {
+            if (characterList.get(i).getX() == characterList.get(i).getfinalX() && characterList.get(i).getY() == characterList.get(i).getfinalY()) {
+                
+                // characterList.get(i).payMoney();
+
+            }
+        }
+        
 
         for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).getX() == 170 && characterList.get(i).getY() == 75 ||
-                characterList.get(i).getX() == 210 && characterList.get(i).getY() == 75 ||
-                characterList.get(i).getX() == 260 && characterList.get(i).getY() == 75 ||
-                characterList.get(i).getX() == 310 && characterList.get(i).getY() == 75) {
-                    countIn++;
-                }
-
-            // if (countIn == 2) {
-            //     try {
-            //         TimeUnit.SECONDS.sleep(1);
-            //     } catch (InterruptedException e) {
-            //         // TODO Auto-generated catch block
-            //         e.printStackTrace();
-            //     }
-            // }
-
             characterList.get(i).walkingIn(i);
-            
+
         }
         
     }

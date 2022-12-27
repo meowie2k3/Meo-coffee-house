@@ -4,6 +4,8 @@ import Map.*;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.*;
@@ -46,7 +48,7 @@ public class character extends Entity {
         height = 48;
 
         //physics
-        moveSpeed = 1;
+        moveSpeed = 0.8;
 
         //hash character animation image 
         try {
@@ -112,6 +114,12 @@ public class character extends Entity {
     public String getAddress(){
         return address;
     }
+    public int getfinalX() {
+        return finalX;
+    }
+    public int getfinalY() {
+        return finalY;
+    }
 
     //setters
     public void setDirection(int i){
@@ -138,13 +146,13 @@ public class character extends Entity {
     public int way = 0;
     public int finalX, finalY;
 
-    public void walkingIn(int order){
+    public  void  walkingIn(int order){
         
         if (way == 0) {
             if (order == 0) {finalX = 170; finalY = 75;} 
-            else if (order == 1) {finalX = 210; finalY = 75;} 
-            else if (order == 2) {finalX = 260; finalY = 75;}
-            else {finalX = 310; finalY = 75;}
+            else if (order == 1) {finalX = 200; finalY = 75;} 
+            else if (order == 2) {finalX = 230; finalY = 75;}
+            else {finalX = 260; finalY = 75;}
             
             // get in and move up
             if (getX() == finalX && getY() > finalY) {
@@ -259,6 +267,9 @@ public class character extends Entity {
         animation.update();
     }
 
+    public void payMoney() {
+        
+    }
     
 
     
