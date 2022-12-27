@@ -177,6 +177,7 @@ public class Map {
         //System.out.println("furniture " + furnitureList.size());
         try {
             //draw drink bar first
+            //System.out.println("furniture " + furnitureList.get(0).getX() + " " + furnitureList.get(0).getY());
             g.drawImage(furnitureList.get(0).getImage(), furnitureList.get(0).getX(),
                 furnitureList.get(0).getY(), null);
             for (int i = 0; i < numRows; i++) {
