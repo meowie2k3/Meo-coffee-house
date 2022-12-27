@@ -1,13 +1,12 @@
 package GameState;
 import java.awt.event.*;
-import java.lang.invoke.CallSite;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import javax.print.attribute.standard.Sides;
 
 import Main.*;
 import Map.*;
@@ -18,6 +17,7 @@ public class IngameState extends GameState{
 
     public static Map map;
     public static Background bg;
+    private SoundEffect soundEffect;
 
     // ui
     private UI ui;
@@ -26,23 +26,7 @@ public class IngameState extends GameState{
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
 
-    // animation actions
-    private static final int SIT_TO_SLEEP = 0; 
-    private static final int SLEEP = 1;
-    private static final int SIT = 2;
-    private static final int STAND_TO_SIT = 3;
-    private static final int WALK = 4;
-    private static final int STAND = 12;
-    private static final int SCRATCH = 20;
-    private static final int SIT_TO_SCRATCH = 20;
-    // reversible animation
-    private static final int SLEEP_TO_SIT = 21;
-    private static final int SIT_TO_STAND = 22;
-    private static final int REVERSE_SIT = 23;
-    // private ArrayList<String> catAddress;
-    
-
-    // constructor
+    //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
@@ -54,6 +38,10 @@ public class IngameState extends GameState{
         catList = new ArrayList<Cat>();
         characterList = new ArrayList<character>();
         map = new Map();
+
+        soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
+        GamePanel.HEIGHT - 23,
+            "Resources/soundEffect/meow.wav", false);
         
         // load user data
         map.loadFurniture();
@@ -74,8 +62,8 @@ public class IngameState extends GameState{
         }
         for(int i=0;i<catList.size();i++){
             catList.get(i).update();
-            // moving
-            if(catList.get(i).getCurentAction() >= WALK && catList.get(i).getCurentAction() <= WALK+7){
+            //moving
+            if(catList.get(i).getCurentAction() >= Cat.WALK && catList.get(i).getCurentAction() <= Cat.WALK+7){
                 catList.get(i).move(catList.get(i).getDirection(), 16);
                 catList.get(i).bounding();
             }
@@ -87,8 +75,8 @@ public class IngameState extends GameState{
         }
         for(int i=0;i<characterList.size();i++){
             characterList.get(i).update();
-            // moving
-            if(characterList.get(i).getCurentAction() >= WALK && characterList.get(i).getCurentAction() <= WALK+7){
+            //moving
+            if(characterList.get(i).getCurentAction() >= Cat.WALK && characterList.get(i).getCurentAction() <= Cat.WALK+7){
                 characterList.get(i).move(characterList.get(i).getDirection(), 24);
                 // characterList.get(i).bounding();
             }
@@ -115,27 +103,24 @@ public class IngameState extends GameState{
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-        try{
+  try{
             //draw background
 
             bg.draw(g);
             //draw map
-
-            //draw UI
-            ui.draw(g);
-            map.draw(g);
+            soundEffect.draw(g);
             
             //draw cat
             for(int i=0;i<catList.size();i++){
                 catList.get(i).draw(g);
             }
-
-            //draw characters
             for(int i=0;i<characterList.size();i++){
                 characterList.get(i).draw(g);
             }
 
-            
+            //draw UI
+            ui.draw(g);
+            map.draw(g);
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -159,19 +144,20 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
+        if(soundEffect.contains(e.getX(), e.getY())){
+            soundEffect.toggle();
+        }
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
                 catList.get(i).catDoSomething();          
             }
         }
 
-        
-
-        // for (int i = 0; i < characterList.size(); i++) {
-        //     if (characterList.get(i).contains(e.getX(), e.getY())) {
-        //         characterList.get(i).charDoSomething();          
-        //     }
-        // }   
+        for (int i = 0; i < characterList.size(); i++) {
+            if (characterList.get(i).contains(e.getX(), e.getY())) {
+                characterList.get(i).charDoSomething();          
+            }
+        }
     }
 
     public void mouseExited(MouseEvent e) {

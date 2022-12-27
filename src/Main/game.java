@@ -1,9 +1,10 @@
 package Main;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Entity.SoundEffect;
+import Map.SoundEffect;
 
 import java.awt.*;
 
@@ -17,9 +18,8 @@ public class game {
         window.pack();
         window.setVisible(true);
          
-        String audioFilePath = "Resources/soundEffect/meow.wav";
-        SoundEffect player = new SoundEffect();
-        player.play(audioFilePath);
+        ImageIcon logo = new ImageIcon("Resources/Icon/money.jpg");
+        window.setIconImage(logo.getImage());
         
     }
 }

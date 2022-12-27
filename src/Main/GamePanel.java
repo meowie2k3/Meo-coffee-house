@@ -2,8 +2,6 @@ package Main;
 
 import javax.swing.*;
 
-import Entity.SoundEffect;
-
 import java.awt.*;
 import java.awt.event.*;
 

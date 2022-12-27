@@ -28,18 +28,18 @@ public class Cat extends Entity {
     private ArrayList<BufferedImage[]> sprites;
     
     //animation actions
-    private static final int SIT_TO_SLEEP = 0;
-    private static final int SLEEP = 1;
-    private static final int SIT = 2;
-    private static final int STAND_TO_SIT = 3;
-    private static final int WALK = 4;
-    private static final int STAND = 12;
-    private static final int SCRATCH = 20;
-    private static final int SIT_TO_SCRATCH = 20;
+    public static final int SIT_TO_SLEEP = 0;
+    public static final int SLEEP = 1;
+    public static final int SIT = 2;
+    public static final int STAND_TO_SIT = 3;
+    public static final int WALK = 4;
+    public static final int STAND = 12;
+    public static final int SCRATCH = 20;
+    public static final int SIT_TO_SCRATCH = 20;
     //reversible animation
-    private static final int SLEEP_TO_SIT = 21;
-    private static final int SIT_TO_STAND = 22;
-    private static final int REVERSE_SIT = 23;
+    public static final int SLEEP_TO_SIT = 21;
+    public static final int SIT_TO_STAND = 22;
+    public static final int REVERSE_SIT = 23;
 
     //constructor
     public Cat(Map map, String address){
@@ -373,6 +373,8 @@ public class Cat extends Entity {
     private boolean countingTime = false;
     private long start = 0;
     private long limit = 0;
+    private int timeSitToSleep = 30000;
+    private int timeWalking = 10000;
     public boolean getCountingTime(){
         return countingTime;
     }
@@ -385,7 +387,7 @@ public class Cat extends Entity {
             if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
                 if (timeElapsed > limit){
                     countingTime = false;
-                    limit = rand.nextInt(20000)+1000;
+                    limit = rand.nextInt(timeSitToSleep)+1000;
                     setCountingTime();
                     setAction(STAND + getDirection());
                     setAction(SIT);
@@ -412,7 +414,7 @@ public class Cat extends Entity {
         if (getDirection()==0 || getDirection()==1 || getDirection()==2){
             if (getY() == GamePanel.HEIGHT - 16){
                 countingTime = false;
-                limit = rand.nextInt(20000)+1000;
+                limit = rand.nextInt(timeSitToSleep)+1000;
                 setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
@@ -421,7 +423,7 @@ public class Cat extends Entity {
         if (getDirection()==0 || getDirection()==7 || getDirection()==6){
             if (getX() == 0 + 16){
                 countingTime = false;
-                limit = rand.nextInt(20000)+1000;
+                limit = rand.nextInt(timeSitToSleep)+1000;
                 setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
@@ -430,7 +432,7 @@ public class Cat extends Entity {
         if (getDirection()==4 || getDirection()==5 || getDirection()==6){
             if (getY() == 0 + 16){
                 countingTime = false;
-                limit = rand.nextInt(20000)+1000;
+                limit = rand.nextInt(timeSitToSleep)+1000;
                 setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
@@ -439,7 +441,7 @@ public class Cat extends Entity {
         if (getDirection()==2 || getDirection()==3 || getDirection()==4){
             if (getX() == GamePanel.WIDTH - 16){
                 countingTime = false;
-                limit = rand.nextInt(20000)+1000;
+                limit = rand.nextInt(timeSitToSleep)+1000;
                 setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
@@ -454,7 +456,7 @@ public class Cat extends Entity {
         //cat sleep -> sit
         if (getCurentAction() == SLEEP) {
             countingTime = false;
-            limit = rand.nextInt(20000)+1000;
+            limit = rand.nextInt(timeSitToSleep)+1000;
             setCountingTime();
             setAction(SIT);
             return;
@@ -465,13 +467,13 @@ public class Cat extends Entity {
             int choice = rand.nextInt(2);
             if (choice == 0) {
                 countingTime = false;
-                limit = rand.nextInt(10000)+1000;
+                limit = rand.nextInt(timeWalking)+1000;
                 setCountingTime();
                 walking();
             } else {
                 setAction(SCRATCH);
                 countingTime = false;
-                limit = rand.nextInt(20000)+1000;
+                limit = rand.nextInt(timeSitToSleep)+1000;
                 setCountingTime();
             }
             return;
@@ -479,7 +481,7 @@ public class Cat extends Entity {
         //cat walking -> sit    
         if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
             countingTime = false;
-            limit = rand.nextInt(20000)+1000;
+            limit = rand.nextInt(timeSitToSleep)+1000;
             setCountingTime();
             setAction(STAND + getDirection());
             setAction(SIT);
