@@ -38,6 +38,11 @@ public class Map {
     public Map() {
     }
 
+    // setters
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     // getters
     public int getCatSize() {
         return catSize;
