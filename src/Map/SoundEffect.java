@@ -130,14 +130,14 @@ public class SoundEffect{
     }
     
     public void draw(Graphics2D g){
-        g.drawImage(playing, (int)x,(int) y, null);
+        // g.drawImage(playing, (int)x,(int) y, null);
 
-        // if(clip.isRunning()){
-        //     g.drawImage(playing, (int)x,(int) y, null);
-        // }
-        // else{
-        //     g.drawImage(muted, (int)x, (int)y, null);
-        // }
+        if(clip.isRunning()){
+            g.drawImage(playing, (int)x,(int) y, null);
+        }
+        else{
+            g.drawImage(muted, (int)x, (int)y, null);
+        }
     }
 
 }

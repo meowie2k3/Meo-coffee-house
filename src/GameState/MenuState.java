@@ -82,7 +82,6 @@ public class MenuState extends GameState {
         if(currentChoice == 0){
 
             soundEffect.pause();
-            // soundEffect.resume();
             gsm.setState(GameStateManager.INGAMESTATE);
         }
         if(currentChoice ==  1){
