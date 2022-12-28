@@ -170,12 +170,13 @@ public class IngameState extends GameState{
 
         // for character
         for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).contains(e.getX(), e.getY())) {
+            if (characterList.get(i).contains(e.getX(), e.getY()) && 
+            characterList.get(i).getX() == characterList.get(i).getfinalX() &&
+            characterList.get(i).getY() == characterList.get(i).getfinalY()) {
                 // walking
                 characterList.get(i).way = 1;    
                 characterList.get(i).setAction(2);  
-                IngameState.map.setMoney(IngameState.map.getMoney()+200);
-                
+                IngameState.map.setMoney(IngameState.map.getMoney()+50);
             }
         }
 
