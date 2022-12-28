@@ -109,6 +109,7 @@ public class IngameState extends GameState{
             //draw background
 
             bg.draw(g);
+
             //draw map
             soundEffect.draw(g);
 

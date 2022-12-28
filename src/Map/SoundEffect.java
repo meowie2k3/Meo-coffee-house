@@ -38,9 +38,9 @@ public class SoundEffect{
             this.y = y;
             this.address = address;
             
-            playing = ImageIO.read(getClass().getResourceAsStream("/UI/Playing-noBG.png"));
+            playing = ImageIO.read(getClass().getResourceAsStream("/UI/unmute.png"));
             
-            muted = ImageIO.read(getClass().getResourceAsStream("/UI/Muted-noBG.png"));
+            muted = ImageIO.read(getClass().getResourceAsStream("/UI/mute.png"));
 
             loadClip(new File(address));
 
@@ -111,10 +111,10 @@ public class SoundEffect{
     public boolean contains(int x, int y){
         int scale = GamePanel.SCALE;
         //x and y of the button are top left corner
-        if(x >= this.x*scale 
-        && x <= this.x*scale + size*scale 
-        && y >= this.y*scale 
-        && y <= this.y*scale + size*scale){
+        if (x > 297*scale
+        && x < 304*scale
+        && y > 218*scale
+        && y < 229*scale)   {
             return true;
         }
         return false;
@@ -130,6 +130,8 @@ public class SoundEffect{
     }
     
     public void draw(Graphics2D g){
+        // g.drawImage(playing, (int)x,(int) y, null);
+
         if(clip.isRunning()){
             g.drawImage(playing, (int)x,(int) y, null);
         }
