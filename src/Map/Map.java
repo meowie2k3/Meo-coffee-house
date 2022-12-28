@@ -3,6 +3,7 @@ package Map;
 import GameState.IngameState;
 import Entity.*;
 import Entity.character;
+import Main.*;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -78,7 +79,7 @@ public class Map {
         try {
             //System.out.println("load furniture");
             String[] address = {"/Furniture/DrinkBar.png", "/Furniture/Chair.png", "/Furniture/Table.png"};
-            int[] x = {139, 0, 0};
+            int[] x = {130, 0, 0};
             int[] y = {0, 0, 0};
             furnitureList = new ArrayList<Furniture>();
             for (int i = 0; i < address.length; i++) {
@@ -198,11 +199,34 @@ public class Map {
         }
     }
 
+    //check if x and y is on furniture
+    public boolean containsFurniture(int x, int y){
+        int scale = GamePanel.SCALE;
+        if (x>=furnitureList.get(0).getX()*scale && x<=(furnitureList.get(0).getX()+furnitureList.get(0).getWidth())*scale &&
+            y>=furnitureList.get(0).getY()*scale && y<=(furnitureList.get(0).getY()+furnitureList.get(0).getHeight())*scale){
+            return true;
+        }
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                if (map[i][j] != 0) {
+                    if (x>=j*furnitureSize*scale && x<=(j*furnitureSize+furnitureList.get(map[i][j]).getWidth())*scale &&
+                        y>=i*furnitureSize*scale && y<=(i*furnitureSize+furnitureList.get(map[i][j]).getHeight())*scale){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     // draw function
     public void draw(Graphics2D g) {
         //System.out.println("furniture " + furnitureList.size());
         try {
             //draw drink bar first
+            // int scale = GamePanel.SCALE;
+            // System.out.println("furniture " + (furnitureList.get(0).getX()+furnitureList.get(0).getWidth())*scale + " " + 
+            //                                 (furnitureList.get(0).getY()+furnitureList.get(0).getHeight())*scale);
             g.drawImage(furnitureList.get(0).getImage(), furnitureList.get(0).getX(),
                 furnitureList.get(0).getY(), null);
             for (int i = 0; i < numRows; i++) {

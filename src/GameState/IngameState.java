@@ -180,6 +180,13 @@ public class IngameState extends GameState{
 
             }
         }
+
+        // if (map.containsFurniture(e.getX(), e.getY())) {
+        //     System.out.println("furniture");
+        // }
+        // else {
+        //     System.out.println("no furniture");
+        // }
     }
 
     public void mouseExited(MouseEvent e) {

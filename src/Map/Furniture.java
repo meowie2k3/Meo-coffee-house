@@ -1,6 +1,7 @@
 package Map;
 
 import java.awt.image.*;
+import Main.*;
 
 public class Furniture {
 
@@ -31,4 +32,11 @@ public class Furniture {
     public void setImage(BufferedImage image){
         this.image = image;
     }
+    public int getWidth(){
+        return image.getWidth();
+    }
+    public int getHeight(){
+        return image.getHeight();
+    }
+    
 }
