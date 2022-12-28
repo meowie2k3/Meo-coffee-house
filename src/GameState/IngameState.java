@@ -26,6 +26,13 @@ public class IngameState extends GameState{
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
     public static ArrayList<character> bartenderList;
+    private static final String[] characterAddress = new String[] {
+        "/Character and Furniture/Shiba-Sheet.png",
+        "/Character and Furniture/Blackcat-Sheet.png",
+        "/Character and Furniture/Hedgedog-Sheet.png",
+        "/Character and Furniture/Rabbit-Sheet.png",
+        "RabbitMon-Sheet.png"
+    };
 
     //constructor
     public IngameState(GameStateManager gsm){
@@ -83,8 +90,12 @@ public class IngameState extends GameState{
             }            
         }
         for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).way == 0) characterList.get(i).walkingIn(i);
+            if (characterList.get(i).way == 0)  {
+                characterList.get(i).walkingIn(i);
+            }
+
             else characterList.get(i).walkingOut(i);
+
         }
 
         // update bartender
