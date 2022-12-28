@@ -50,7 +50,6 @@ public class character extends Entity {
         "/Drinks/cafe expresso.png",
         "/Drinks/cappucinno.png",
         "/Drinks/chocolate milkshake.png",
-        "/Drinks/coffee pack.png",
         "/Drinks/cream milkshake.png",
         "/Drinks/frapuccino.png",
         "/Drinks/french press.png",
@@ -266,6 +265,7 @@ public class character extends Entity {
         if (getX() == finalX && getY() == finalY) {
             if (popup == null) {
                 Random rand = new Random();
+                // there are 23 drinks
                 int pos = rand.nextInt(23);
                 String chosen = drinkAddress[pos];
                 PopUp drink = new PopUp(getX(), getY(), chosen);
