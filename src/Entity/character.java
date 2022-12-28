@@ -266,7 +266,7 @@ public class character extends Entity {
         if (getX() == finalX && getY() == finalY) {
             if (popup == null) {
                 Random rand = new Random();
-                int pos = rand.nextInt(24);
+                int pos = rand.nextInt(23);
                 String chosen = drinkAddress[pos];
                 PopUp drink = new PopUp(getX(), getY(), chosen);
                 popup = drink;
