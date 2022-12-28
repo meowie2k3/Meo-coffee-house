@@ -21,13 +21,6 @@ public class character extends Entity {
     private String address;
 
     private PopUp popup;
-        
-
-    private final int iconSize = 16;
-    private final int padSize = 24;
-    private final int charSize = 48;
-    private final int spacing = 5;
-
     //animation
     private ArrayList<BufferedImage[]> sprites;
 
@@ -366,12 +359,11 @@ public class character extends Entity {
     }
 
     public boolean containPopup(int x, int y){
-        if(x > this.x - iconSize/2 && x < this.x + iconSize/2){
-            if(y > this.y - charSize / 2 - spacing - padSize/2 - iconSize/2 && y < this.y - charSize / 2 - spacing - padSize/2 + iconSize/2){
-                return true;
-            }
+        if(popup!=null){
+            return popup.contains(x, y);
         }
         return false;
+        
     }
 
     public void payMoney() {
