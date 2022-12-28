@@ -22,7 +22,7 @@ public class MenuState extends GameState {
     private Background bg;
     private SoundEffect soundEffect;
 
-    private int currentChoice = 2;
+    private int currentChoice = 2, muteChoice = 1;
 
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
@@ -80,7 +80,7 @@ public class MenuState extends GameState {
 
     private void selectedMenu(){
         if(currentChoice == 0){
-            //continue
+
             soundEffect.pause();
             gsm.setState(GameStateManager.INGAMESTATE);
         }
@@ -104,12 +104,11 @@ public class MenuState extends GameState {
     }
     public void mouseClicked(MouseEvent e) {
         //System.out.println("Mouse Clicked");
-        int x = (int) e.getX();
-        int y = (int) e.getY();
+        
         if(currentChoice == 0 || currentChoice == 1){
             selectedMenu();
         }
-        else if(soundEffect.contains(x, y)){
+        else if(currentChoice == 2 && muteChoice == 1){
             soundEffect.toggle();
         }
 
@@ -119,7 +118,7 @@ public class MenuState extends GameState {
     public void mouseMoved(MouseEvent e) {
         int x = (int) e.getX();
         int y = (int) e.getY();
-        //System.out.println("Mouse Moved " + x + " " + y);
+        // System.out.println("Mouse Moved " + x + " " + y);
         int scale = GamePanel.SCALE;
         int left = 128 * scale;
         int right = 193 * scale;
@@ -128,21 +127,32 @@ public class MenuState extends GameState {
         if(x > left 
         && x < right 
         && y > 0*scale*20 + top - 45 
-        && y < 0*scale*20 + top + 25){
+        && y < 0*scale*20 + top + 25)   {
             currentChoice = 0;
+            muteChoice = 0;
         }
         if(x > left 
         && x < right 
         && y > 1*scale*20 + top - 2 
-        && y < 1*scale*20 + top + 68){
+        && y < 1*scale*20 + top + 68)   {
             currentChoice = 1;
+            muteChoice = 0;
         }
         if(x < left 
         || x > right 
         || y < 0*scale*20 + top - 45 
         || (y > 0*scale*20 + top + 25 && y < 1*scale*20 + top - 2) 
-        || y > 1*scale*20 + top + 68)
-        {
+        || y > 1*scale*20 + top + 68)   {   
+            
+            if (x > 297*scale
+            && x < 304*scale
+            && y > 218*scale
+            && y < 229*scale)   {
+                    muteChoice = 1;
+                }
+            else {
+                muteChoice = 0;
+            }
             currentChoice = 2;
         }
 
