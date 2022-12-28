@@ -214,10 +214,13 @@ public class character extends Entity {
             return;
         }
 
-        // arrive the initial place
+        // arrive the final place
         if (getX() == finalX && getY() == finalY) {
-            clearPopUp();
-            setAction(STAND);
+            
+            countingTime = false;
+            way = 0;
+            // characterList.get(i).setAction(4);
+            walkingIn(order);            
             return;   
         }
 
