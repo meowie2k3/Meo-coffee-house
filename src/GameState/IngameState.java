@@ -181,13 +181,14 @@ public class IngameState extends GameState{
 
         // for character
         for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).contains(e.getX(), e.getY()) && 
+            if (characterList.get(i).containPopup(e.getX(), e.getY()) && 
             characterList.get(i).getX() == characterList.get(i).getfinalX() &&
             characterList.get(i).getY() == characterList.get(i).getfinalY()) {
                 // walking
                 characterList.get(i).way = 1;    
                 characterList.get(i).setAction(2);  
-                IngameState.map.setMoney(IngameState.map.getMoney()+50);
+                map.setMoney(map.getMoney()+50);
+                map.SaveUserData("Resources/UserSavedGame/User1.map");
             }
         }
 
@@ -204,9 +205,9 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        // int x = e.getX();
-        // int y = e.getY();
-        // System.out.println("mouse moved " + x + " " + y);
+        //int x = e.getX() / 3;
+        //int y = e.getY() / 3;
+        //System.out.println("mouse moved " + x + " " + y);
         
         
     }
