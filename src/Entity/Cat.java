@@ -451,6 +451,8 @@ public class Cat extends Entity {
             }
             
         }
+
+        //bounding with furniture
         int scale = GamePanel.SCALE;
         //System.out.println(getX()*scale + " " + getY()*scale);
         if (map.containsFurniture(getX()*scale, getY()*scale)){
