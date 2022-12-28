@@ -22,7 +22,6 @@ public class IngameState extends GameState{
     //cat properties
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
-    public static ArrayList<Furniture> furnitureList;
     //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
@@ -141,10 +140,11 @@ public class IngameState extends GameState{
             }
         }
 
-        for (int i = 0; i < furnitureList.size(); i++) {
-            if (furnitureList.get(i).contains(e.getX(), e.getY())) {
-                System.out.println("furniture clicked");         
-            }
+        if (map.containsFurniture(e.getX(), e.getY())) {
+            System.out.println("furniture");
+        }
+        else {
+            System.out.println("no furniture");
         }
     }
 

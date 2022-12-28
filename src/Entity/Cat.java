@@ -419,6 +419,7 @@ public class Cat extends Entity {
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
+            
         }
         if (getDirection()==0 || getDirection()==7 || getDirection()==6){
             if (getX() == 0 + 16){

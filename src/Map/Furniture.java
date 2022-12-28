@@ -38,17 +38,5 @@ public class Furniture {
     public int getHeight(){
         return image.getHeight();
     }
-
-    //check if x and y is on object
-    public boolean contains(int x, int y){
-        int scale = GamePanel.SCALE;
-        if(x >= this.getX() * scale - this.getWidth() * scale / 2 && 
-        x <= this.getX() * scale + this.getWidth() * scale / 2 && 
-        y >= this.getY() * scale - this.getHeight() * scale / 2 && 
-        y <= this.getY() * scale + this.getHeight() * scale / 2)
-        {
-            return true;
-        }
-        else return false;
-    }
+    
 }
