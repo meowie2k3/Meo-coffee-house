@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-12-28T12:33:14.818Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="FfcLfGKHCV9SeFaNv8VP" version="20.7.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-28T12:38:06.442Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="KnxPDUlpF4FRWXv4lIAR" version="20.7.4" type="github">
   <diagram id="FRdmvYPjBGOGSEBnkxZ-" name="Page-1">
-    <mxGraphModel dx="624" dy="1180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+    <mxGraphModel dx="312" dy="590" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -180,16 +180,16 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="cf3qDIkEEJ8GJpdYXo22-5" value="character" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
-          <mxGeometry x="660" y="1160" width="280" height="230" as="geometry" />
+          <mxGeometry x="660" y="1160" width="280" height="250" as="geometry" />
         </mxCell>
-        <mxCell id="cf3qDIkEEJ8GJpdYXo22-6" value="- name: String&#xa;- address: String&#xa;- sprites: ArrayList&lt;BufferedImage[]&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cf3qDIkEEJ8GJpdYXo22-5">
-          <mxGeometry y="26" width="280" height="54" as="geometry" />
+        <mxCell id="cf3qDIkEEJ8GJpdYXo22-6" value="- name: String&#xa;- address: String&#xa;- sprites: ArrayList&lt;BufferedImage[]&gt;&#xa;- popup: PopUp" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cf3qDIkEEJ8GJpdYXo22-5">
+          <mxGeometry y="26" width="280" height="74" as="geometry" />
         </mxCell>
         <mxCell id="cf3qDIkEEJ8GJpdYXo22-7" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="cf3qDIkEEJ8GJpdYXo22-5">
-          <mxGeometry y="80" width="280" height="8" as="geometry" />
+          <mxGeometry y="100" width="280" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="cf3qDIkEEJ8GJpdYXo22-8" value="+ Cat(Map map, String address): void&#xa;+ getter&#xa;+ setter&#xa;+ move(int direction, int halfsize) {redefines move}&#xa;+ walking(): void&#xa;+ setCountingTime(): void&#xa;+ bounding(): void&#xa;+ catDoSomething(): void&#xa;+ update(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cf3qDIkEEJ8GJpdYXo22-5">
-          <mxGeometry y="88" width="280" height="142" as="geometry" />
+        <mxCell id="cf3qDIkEEJ8GJpdYXo22-8" value="+ character(Map map, String address): void&#xa;+ setter and getter&#xa;+ move(int direction, int halfsize) {redefined move}&#xa;+" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="cf3qDIkEEJ8GJpdYXo22-5">
+          <mxGeometry y="108" width="280" height="142" as="geometry" />
         </mxCell>
         <mxCell id="cf3qDIkEEJ8GJpdYXo22-10" value="Inheritance" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lRz5HqzyhUnMGmeiLU8S-59" target="cf3qDIkEEJ8GJpdYXo22-5">
           <mxGeometry relative="1" as="geometry">
