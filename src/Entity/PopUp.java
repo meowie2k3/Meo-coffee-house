@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import Map.*;
+import Main.GamePanel;
 
 public class PopUp {
     //position of object that have pop up
@@ -18,7 +19,7 @@ public class PopUp {
     private final int padSize = 24;
     private final int charSize = 48;
 
-    private final int spacing = 5;
+    private final int spacing = 2;
     
     public PopUp(double x, double y, String address){
         this.x = x ;
@@ -33,13 +34,23 @@ public class PopUp {
         }
     }
 
+    public boolean contains(int x, int y){
+        int scale = GamePanel.SCALE;
+        int x1 = (int) this.x - iconSize/2;
+        int y1 = (int) this.y - charSize / 4 - spacing - padSize/2 - iconSize/2;
+        int x2 = x1 + iconSize;
+        int y2 = y1 + iconSize;
+        if(x1*scale <= x && x <= x2*scale && y1*scale <= y && y <= y2*scale) return true;
+        return false;
+    }
+
 
 
     public void draw(Graphics2D g){
         g.drawImage(whitePad,(int) x - padSize/2,
-        (int)y - charSize / 2 - spacing - padSize, null);
+        (int)y - charSize / 2 - spacing/2 - padSize/2, null);
         g.drawImage(icon,(int) x - iconSize/2,
-        (int)y - charSize / 2 - spacing - padSize/2 - iconSize/2, null);
+        (int)y - charSize/4 - spacing - padSize/2 - iconSize/2, null);
 
         
     }
