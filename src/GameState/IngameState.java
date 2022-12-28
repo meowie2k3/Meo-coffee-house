@@ -118,6 +118,7 @@ public class IngameState extends GameState{
             //draw background
 
             bg.draw(g);
+
             //draw map
             soundEffect.draw(g);
 
@@ -168,6 +169,7 @@ public class IngameState extends GameState{
         if(soundEffect.contains(e.getX(), e.getY())){
             soundEffect.toggle();
         }
+        
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
                 catList.get(i).catDoSomething();          
