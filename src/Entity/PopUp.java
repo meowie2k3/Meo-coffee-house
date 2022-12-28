@@ -8,12 +8,17 @@ import javax.imageio.ImageIO;
 import Map.*;
 
 public class PopUp {
+    //position of object that have pop up
     private int x;
     private int y;
     private BufferedImage icon;
     private BufferedImage whitePad;
 
-    private final int spacing = 10;
+    private final int iconSize = 16;
+    private final int padSize = 24;
+    private final int charSize = 48;
+
+    private final int spacing = 5;
     
     public PopUp(int x, int y, String address){
         this.x = x;
@@ -26,10 +31,23 @@ public class PopUp {
         catch(Exception e){
             e.printStackTrace();
         }
-        
+    }
+
+    public boolean contain(int x, int y){
+        if(x > this.x - iconSize/2 && x < this.x + iconSize/2){
+            if(y > this.y - charSize / 2 - spacing - padSize/2 - iconSize/2 && y < this.y - charSize / 2 - spacing - padSize/2 + iconSize/2){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void draw(Graphics2D g){
+        g.drawImage(whitePad, x - padSize/2,
+        y - charSize / 2 - spacing - padSize, null);
+        g.drawImage(icon, x - iconSize/2,
+        y - charSize / 2 - spacing - padSize/2 - iconSize/2, null);
+
         
     }
 
