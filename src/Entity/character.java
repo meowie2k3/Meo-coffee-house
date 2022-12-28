@@ -170,7 +170,39 @@ public class character extends Entity {
     public void move(int direction, int halfsize){
         setDirection(direction);
         setAction(WALK + direction);
-        super.move(direction, halfsize);
+        switch(direction){
+            case leftDown:
+                x -= moveSpeed;
+                y += moveSpeed;
+                break;
+            case down:
+                y += moveSpeed;
+                break;
+            case rightDown:
+                x += moveSpeed;
+                y += moveSpeed;
+                break;
+            case right:
+                x += moveSpeed;
+                break;
+            case rightUp:
+                x += moveSpeed;
+                y -= moveSpeed;
+                break;
+            case up:
+                y -= moveSpeed;
+                break;
+            case leftUp:
+                x -= moveSpeed;
+                y -= moveSpeed;
+                break;
+            case left:
+                x -= moveSpeed;
+                break;
+            default:
+                System.out.println("Invalid direction");
+                break;
+        }
     }
     
     public int finalX, finalY;
@@ -178,10 +210,10 @@ public class character extends Entity {
 
     public void walkingOut(int order) {
         clearPopUp();
-        if (order == 0) {finalX = 24; finalY = 130;} 
-        else if (order == 1) {finalX = 24; finalY = 150;} 
-        else if (order == 2) {finalX = 24; finalY = 170;}
-        else {finalX = 24; finalY = 190;}
+        if (order == 0) {finalX = -24; finalY = 130;} 
+        else if (order == 1) {finalX = -24; finalY = 150;} 
+        else if (order == 2) {finalX = -24; finalY = 170;}
+        else {finalX = -24; finalY = 190;}
 
         // get out and move down
         if (getX() > finalX && getY() < finalY) {
@@ -261,8 +293,7 @@ public class character extends Entity {
     //timing
     private boolean countingTime = false;
     private long start = 0;
-    private long limit = 6000;
-    private int timeOrder = 5000;
+    private long limit = 10000;
     public boolean getCountingTime(){
         return countingTime;
     }
