@@ -19,6 +19,8 @@ public class character extends Entity {
     //character properties
     private String name;
     private String address;
+
+    private PopUp popup;
         
     // //emotion
     // private boolean isHungry;
@@ -29,6 +31,11 @@ public class character extends Entity {
     // private int foodCost;
     // private int sleepCost;
     // private int playCost;
+
+    private final int iconSize = 16;
+    private final int padSize = 24;
+    private final int charSize = 48;
+    private final int spacing = 5;
 
     //animation
     private ArrayList<BufferedImage[]> sprites;
@@ -267,8 +274,29 @@ public class character extends Entity {
         animation.update();
     }
 
+    public void clearPopUp(){
+        popup = null;
+    }
+
+    public boolean containPopup(int x, int y){
+        if(x > this.x - iconSize/2 && x < this.x + iconSize/2){
+            if(y > this.y - charSize / 2 - spacing - padSize/2 - iconSize/2 && y < this.y - charSize / 2 - spacing - padSize/2 + iconSize/2){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void payMoney() {
-        
+        popup = new PopUp(this.x, this.y, "/UI/coin.jpg");
+    }
+
+    @Override
+    public void draw(Graphics2D g){
+        super.draw(g);
+        if(popup!=null){
+            popup.draw(g);
+        }
     }
     
 
