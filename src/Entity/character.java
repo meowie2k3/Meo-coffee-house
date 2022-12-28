@@ -4,6 +4,9 @@ import Map.*;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.imageio.*;
 
@@ -45,7 +48,7 @@ public class character extends Entity {
         height = 48;
 
         //physics
-        moveSpeed = 0.3;
+        moveSpeed = 0.8;
 
         //hash character animation image 
         try {
@@ -69,7 +72,7 @@ public class character extends Entity {
                 int i = myNum[k];
                 BufferedImage[] walk = new BufferedImage[3];
                 tmp = 0;
-                for(int j= 0; j < 3; j++){
+                for (int j= 0; j < 3; j++) {
                     walk[tmp] = spritesheet.getSubimage(
                         j * width, 
                         i * height, 
@@ -79,6 +82,7 @@ public class character extends Entity {
                 }
                 sprites.add(walk);
             }
+            
 
 
         } catch(Exception e) {
@@ -110,6 +114,12 @@ public class character extends Entity {
     public String getAddress(){
         return address;
     }
+    public int getfinalX() {
+        return finalX;
+    }
+    public int getfinalY() {
+        return finalY;
+    }
 
     //setters
     public void setDirection(int i){
@@ -127,194 +137,107 @@ public class character extends Entity {
         super.move(direction, halfsize);
     }
 
-    public void walking(){
-        int[][] possibleDirection = { { 1, 2, 3, 4, 5 }, //character at left
-                                        { 0, 1, 5, 6, 7 }, //character at right
-                                        { 3, 4, 5, 6, 7 }, //character at bottom
-                                        { 0, 1, 2, 3, 7 }, //character at top
-
-                                        { 1, 2, 3}, //character at topleft coner
-                                        { 0, 1, 7}, //character at topright coner
-                                        { 3, 4, 5}, //character at bottomleft coner
-                                        { 5, 6, 7}, //character at bottomright coner
-
-                                        { 0, 1, 2, 3, 4, 5, 6, 7 }, //character at center
-                                    };
+    public void walkingOut() {
         
-        Random rand = new Random();
-        //character at topleft coner
-        if (getX() == 0 + 24 && getY() == 0 + 24) {
-            setDirection(possibleDirection[4][rand.nextInt(3)]);
-            //System.out.println("topleft " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at topright coner
-        if (getX() == GamePanel.WIDTH - 24 && getY() == 0 + 24) {
-            setDirection(possibleDirection[5][rand.nextInt(3)]);
-            //System.out.println("topright " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at bottomleft coner
-        if (getX() == 0 + 24 && getY() == GamePanel.HEIGHT - 24) {
-            setDirection(possibleDirection[6][rand.nextInt(3)]);
-            //System.out.println("bottomleft " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at bottomright coner
-        if (getX() == GamePanel.WIDTH - 24 && getY() == GamePanel.HEIGHT - 24) {
-            setDirection(possibleDirection[7][rand.nextInt(3)]);
-            //System.out.println("bottomright " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at left
-        if (getX() == 0 + 24 && getY() >= 0 + 24 && getY() <= GamePanel.HEIGHT - 24) {
-            setDirection(possibleDirection[0][rand.nextInt(5)]);
-            //System.out.println("left " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at right
-        if (getX() == GamePanel.WIDTH - 24 && getY() >= 0 + 24 && getY() <= GamePanel.HEIGHT - 24) {
-            setDirection(possibleDirection[1][rand.nextInt(5)]);
-            //System.out.println("right " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at bottom
-        if (getY() == GamePanel.HEIGHT - 24 && getX() >= 0 + 24 && getX() <= GamePanel.WIDTH - 24) {
-            setDirection(possibleDirection[2][rand.nextInt(5)]);
-            //System.out.println("bottom " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at top
-        if (getY() == 0 + 24 && getX() >= 0 + 24 && getX() <= GamePanel.WIDTH - 24) {
-            setDirection(possibleDirection[3][rand.nextInt(5)]);
-            //System.out.println("top " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
-        //character at center
-        if (getX() > 0 + 24 && getX() < GamePanel.WIDTH - 24 && getY() > 0 + 24 && getY() < GamePanel.HEIGHT - 24) {
-            setDirection(possibleDirection[8][rand.nextInt(8)]);
-            //System.out.println("center " + characterList.get(i).getDirection() + " currenAction " + characterList.get(i).getCurentAction());
-            setAction(WALK + getDirection());
-            return;
-        }
     }
 
-    //timing
-    private boolean countingTime = false;
-    private long start = 0;
-    private long limit = 0;
-    public boolean getCountingTime(){
-        return countingTime;
-    }
-    public void setCountingTime(){
-        Random rand = new Random();
-        if (countingTime){
-            long finish = System.currentTimeMillis();
-            long timeElapsed = finish - start;
-            //System.out.println(timeElapsed + " " + limit);
-            if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
-                if (timeElapsed > limit){
-                    countingTime = false;
-                    limit = rand.nextInt(20000)+1000;
-                    setCountingTime();
-                    setAction(STAND);
-                    return;
-                }   
+    // way == 0: character goes in
+    // way == 1: characrer goes out
+    public int way = 0;
+    public int finalX, finalY;
+
+    public  void  walkingIn(int order){
+        
+        if (way == 0) {
+            if (order == 0) {finalX = 170; finalY = 75;} 
+            else if (order == 1) {finalX = 200; finalY = 75;} 
+            else if (order == 2) {finalX = 230; finalY = 75;}
+            else {finalX = 260; finalY = 75;}
+            
+            // get in and move up
+            if (getX() == finalX && getY() > finalY) {
+                setDirection(5);
+                setAction(WALK + getDirection());
+                return;
+                
             }
-            // if (getCurentAction() == STAND) {
-            //     if (timeElapsed > limit){
-            //         countingTime = false;
-            //         setAction(STAND);
-            //         return;
-            //     }   
+
+            // get in and move right
+            if (getX() < finalX && getY() > finalY) {
+                setDirection(3);
+                setAction(WALK + getDirection());
+                return;
+            }
+
+            // arrived the position
+            if (getX() == finalX && getY() == finalY) {
+                // setAction(STAND);
+                way = 1;
+                // setDirection(1);
+                // setAction(WALK + getDirection());
+                return;   
+            }
+            
+            // if (getX() ==  finalX && getY() == finalY) {
+            //     // get out and move down
+                
             // }
+            
         }
-        else{
-            start = System.currentTimeMillis();
-            countingTime = true;
+
+        else {
+            if (order == 0) {finalX = 24; finalY = 130;} 
+            else if (order == 1) {finalX = 24; finalY = 150;} 
+            else if (order == 2) {finalX = 24; finalY = 170;}
+            else {finalX = 24; finalY = 190;}
+
+            // get out and move down
+            if (getX() > finalX && getY() < finalY) {
+                setDirection(1);
+                setAction(WALK + getDirection());
+                return;   
+                
+            }
+
+            // get out and move left
+            if (getX() > finalX && getY() == finalY) {                
+                setDirection(7);
+                setAction(WALK + getDirection());
+                return;
+            }
+
+            // arrive the initial place
+            if (getX() == finalX && getY() == finalY) {
+                setAction(STAND);
+                // way = 0;
+                // setDirection(1);
+                // setAction(WALK + getDirection());
+                return;   
+            }
+
         }
+        // try {
+        //     TimeUnit.SECONDS.sleep(1);
+        // } catch (InterruptedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
+
     }
 
-    //bounding when character is walking
-    public void bounding(){
-        Random rand = new Random();
-        if (getDirection() == 0 || getDirection() == 1 || getDirection() == 2){
-            if (getY() == GamePanel.HEIGHT - 24){
-                countingTime = false;
-                limit = rand.nextInt(20000)+1000;
-                setCountingTime();
-                setAction(STAND);
-            }
-        }
-        if (getDirection() == 0 || getDirection() == 7 || getDirection() == 6){
-            if (getX() == 0 + 24){
-                countingTime = false;
-                limit = rand.nextInt(20000)+1000;
-                setCountingTime();
-                setAction(STAND);
-            }
-        }
-        if (getDirection() == 4 || getDirection() == 5 || getDirection() == 6){
-            if (getY() == 0 + 24){
-                countingTime = false;
-                limit = rand.nextInt(20000)+1000;
-                setCountingTime();
-                setAction(STAND);
-            }
-        }
-        if (getDirection() == 2 || getDirection() == 3 || getDirection() == 4){
-            if (getX() == GamePanel.WIDTH - 24){
-                countingTime = false;
-                limit = rand.nextInt(20000)+1000;
-                setCountingTime();
-                setAction(STAND);
-            }
-        }
-        setCountingTime();
-    }
-
-    //when we click on character, it will do something
-    public void charDoSomething(){
-        Random rand = new Random();
-        //character stand -> move
-
-        if (getCurentAction() == STAND) {
-            countingTime = false;
-            limit = rand.nextInt(10000)+1000;
-            setCountingTime();
-            walking();
-            return;
-        }
-        //character walking -> stand    
-        if (getCurentAction() >= WALK && getCurentAction() <= WALK+7) {
-            countingTime = false;
-            limit = rand.nextInt(20000)+1000;
-            setCountingTime();
-            setAction(STAND);
-            return;
-        }
-    }
-
+    public int tempDirection = -1;
     public void update(){
         int slow = 120;
         int fast = 60;
         //set animation
         if(nextAction == STAND){
-            if(currentAction == STAND){
-                if(animation.hasPlayedOnce()){
-                    animation.setFrames(sprites.get(STAND));
-                    animation.setDelay(slow);
-                }
-                setCountingTime();
-            }
+            // if(currentAction == STAND){
+            //     if(animation.hasPlayedOnce()){
+            //         animation.setFrames(sprites.get(STAND));
+            //         animation.setDelay(slow);
+            //     }
+            //     // setCountingTime();
+            // }
             
             if(currentAction >= WALK && currentAction <= WALK+7){
                 currentAction = STAND;
@@ -322,9 +245,18 @@ public class character extends Entity {
                 animation.setDelay(slow);
             }
         }
-    
+        
+
         if(nextAction >= WALK && nextAction <= WALK+7){
-            if(currentAction >= WALK && currentAction <= WALK+7) {}
+            
+            if(currentAction >= WALK && currentAction <= WALK+7) {
+                if (tempDirection != currentDirection) {
+                    animation.setFrames(sprites.get(WALK + currentDirection));
+                    animation.setDelay(slow);
+                    tempDirection = currentDirection;
+                }
+                
+            }
             if(currentAction == STAND){
                 currentAction = WALK + currentDirection;
                 animation.setFrames(sprites.get(WALK + currentDirection));
@@ -335,21 +267,10 @@ public class character extends Entity {
         animation.update();
     }
 
-    
-
-    // //draw
-    // public void draw(Graphics2D g){
-    //     setMapPosition();
-    //     // System.out.println(x + xmap - width /2);
-    //     // System.out.println(y + ymap - height / 2);
+    public void payMoney() {
         
-    //     g.drawImage(
-    //         animation.getImage(),
-    //         (int)(x + xmap - width /2),
-    //         (int)(y + ymap - height / 2),
-    //         null
-    //     );
-    // }
+    }
+    
 
     
 }

@@ -31,6 +31,7 @@ public class Map {
     private int toy;
     private int catNum;
     private int characterNum;
+    private int bartenderNum;
 
     // constructor
     public Map() {
@@ -47,6 +48,10 @@ public class Map {
 
     public int getcharacterNum() {
         return characterNum;
+    }
+
+    public int getbartenderNum() {
+        return bartenderNum;
     }
 
     public int getX() {
@@ -99,6 +104,7 @@ public class Map {
             toy = Integer.parseInt(br.readLine());
             catNum = Integer.parseInt(br.readLine());
             characterNum = Integer.parseInt(br.readLine());
+            bartenderNum = Integer.parseInt(br.readLine());
             //System.out.println("user info" + food + " " + money + " " + toy + " " + catNum);
 
             String delims = "\\s++";
@@ -130,6 +136,21 @@ public class Map {
                 IngameState.characterList.add(tmp);
             }
 
+            delims = "\\s++";
+            for(int i=0; i < bartenderNum;i++){
+                String curr = br.readLine();
+                //System.out.println("address " + curr);
+
+                character tmp = new character(IngameState.map, curr);
+                String line = br.readLine();
+                String[] tokens = line.split(delims);
+                //System.out.println("Position " + Integer.parseInt(tokens[0]) +" " + Integer.parseInt(tokens[1]));
+                tmp.setPosition(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+                
+                IngameState.bartenderList.add(tmp);
+            }
+            
+
             //load array map
             map = new int[numRows+1][numCols+1];
             for (int i = 0; i < numRows; i++) {
@@ -153,6 +174,7 @@ public class Map {
             writer.println(toy);
             writer.println(catNum);
             writer.println(characterNum);
+            writer.println(bartenderNum);
             for (int i = 0; i < catNum; i++) {
                 writer.println(IngameState.catList.get(i).getAddress());
                 writer.println(IngameState.catList.get(i).getX() + " " + IngameState.catList.get(i).getY());
@@ -160,6 +182,10 @@ public class Map {
             for (int i = 0; i < characterNum; i++) {
                 writer.println(IngameState.characterList.get(i).getAddress());
                 writer.println(IngameState.characterList.get(i).getX() + " " + IngameState.characterList.get(i).getY());
+            }
+            for (int i = 0; i < bartenderNum; i++) {
+                writer.println(IngameState.bartenderList.get(i).getAddress());
+                writer.println(IngameState.bartenderList.get(i).getX() + " " + IngameState.bartenderList.get(i).getY());
             }
             for (int i = 0; i < numRows; i++) {
                 for (int j = 0; j < numCols; j++) {
