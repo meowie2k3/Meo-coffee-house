@@ -153,9 +153,9 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        System.out.println("mouse moved " + x + " " + y);
+        // int x = e.getX();
+        // int y = e.getY();
+        // System.out.println("mouse moved " + x + " " + y);
         
     }
     public void mouseDragged(MouseEvent e) {
