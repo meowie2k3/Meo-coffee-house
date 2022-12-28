@@ -11,7 +11,7 @@ import java.awt.*;
 public class game {
     public static void main(String[] args){
         
-        JFrame window = new JFrame("Meow Coffee House");   
+        JFrame window = new JFrame("Meow Coffee House");  
         window.setContentPane(new GamePanel());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
