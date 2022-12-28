@@ -429,15 +429,17 @@ public class Cat extends Entity {
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
+            
         }
         if (getDirection()==4 || getDirection()==5 || getDirection()==6){
-            if (getY() == 0 + 16){
+            if (getY() == 0 + 32){
                 countingTime = false;
                 limit = rand.nextInt(timeSitToSleep)+1000;
                 setCountingTime();
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
+            
         }
         if (getDirection()==2 || getDirection()==3 || getDirection()==4){
             if (getX() == GamePanel.WIDTH - 16){
@@ -447,7 +449,17 @@ public class Cat extends Entity {
                 setAction(STAND + getDirection());
                 setAction(SIT);
             }
+            
         }
+        int scale = GamePanel.SCALE;
+        //System.out.println(getX()*scale + " " + getY()*scale);
+        if (map.containsFurniture(getX()*scale, getY()*scale)){
+            countingTime = false;
+            limit = rand.nextInt(timeSitToSleep)+1000;
+            setCountingTime();
+            setAction(STAND + getDirection());
+            setAction(SIT);
+        } 
         setCountingTime();
     }
 
