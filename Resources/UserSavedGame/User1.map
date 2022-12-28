@@ -1,28 +1,28 @@
 100
-1000
+2400
 500
 3
 4
 1
 /Cats/11creme.png
-100 50
+150 224
 /Cats/3brown.png
-100 200
+111 157
 /Cats/5green.png
-130 200
+154 92
 /Character and Furniture/Shiba-Sheet.png
-93 130
+170 89
 /Character and Furniture/Blackcat-Sheet.png
-188 150
+200 75
 /Character and Furniture/Hedgedog-Sheet.png
-230 97
+230 83
 /Character and Furniture/Rabbit-Sheet.png
-260 75
+251 190
 /Character and Furniture/Bear-Sheet.png
 200 40
 0 0 0 0 0 0 0 0 
+1 2 1 0 0 0 0 0 
 0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
-0 0 0 0 0 0 0 0 
+0 0 0 0 0 1 0 0 
+0 0 0 0 1 2 1 0 
+0 0 0 0 0 1 0 0 
