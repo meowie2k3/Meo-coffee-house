@@ -7,6 +7,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.*;
 
 import Main.*;
 import Map.*;
@@ -27,9 +31,14 @@ public class IngameState extends GameState{
     public static ArrayList<character> characterList;
     public static ArrayList<character> bartenderList;
 
+    //shop
+    private Shop shop;
+    private JButton s1, s2;
+
     //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
+        // gsm.add(s1);
         init();
         
     }
@@ -53,6 +62,19 @@ public class IngameState extends GameState{
 
         // UI
         ui = new UI();
+
+        // Shop
+        shop = new Shop();
+        
+        JButton s1 = new JButton(new ImageIcon("s1.png"));  
+        s1.setBounds(5, 650, 30, 30);      
+        s1.setBackground(Color.WHITE);
+        s1.setBorderPainted(false);
+
+        JButton s2 = new JButton(new ImageIcon("s2.png"));  
+        s2.setBounds(5, 650, 30, 30);      
+        s2.setBackground(Color.WHITE);
+        s2.setBorderPainted(false);
     }
 
     // update
@@ -102,10 +124,7 @@ public class IngameState extends GameState{
         }
         for(int i=0;i<bartenderList.size();i++){
             bartenderList.get(i).update();
-        }
-        
-
-        
+        }     
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -114,7 +133,7 @@ public class IngameState extends GameState{
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-  try{
+    try{
             //draw background
 
             bg.draw(g);
@@ -131,6 +150,9 @@ public class IngameState extends GameState{
             //draw UI
             ui.draw(g);
             map.draw(g);
+
+            // //draw shop
+            // shop.draw(g);
             
             //draw cat
             for(int i=0;i<catList.size();i++){
@@ -196,13 +218,22 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        // int x = e.getX();
-        // int y = e.getY();
+        int x = e.getX();
+        int y = e.getY();
         // System.out.println("mouse moved " + x + " " + y);
         
         
     }
     public void mouseDragged(MouseEvent e) {
         
+    }
+
+    public static void add(JButton s1) {
+    }
+
+    public static void remove(JButton s1) {
+    }
+
+    public static void add(JPanel panel) {
     }
 }
