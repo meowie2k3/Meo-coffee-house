@@ -1,5 +1,6 @@
 package Map;
 
+import GameState.GameStateManager;
 import GameState.IngameState;
 import Entity.*;
 import Entity.character;
@@ -35,6 +36,11 @@ public class Map {
 
     // constructor
     public Map() {
+    }
+
+    // setters
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     // getters
@@ -97,6 +103,7 @@ public class Map {
     // load .map files into memory
     public void loadUserSavedGame(String address) {
         try {
+            
             InputStream in = getClass().getResourceAsStream(address);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             food = Integer.parseInt(br.readLine());

@@ -80,20 +80,11 @@ public class IngameState extends GameState{
             //moving
             if(characterList.get(i).getCurentAction() >= Cat.WALK && characterList.get(i).getCurentAction() <= Cat.WALK+7){
                 characterList.get(i).move(characterList.get(i).getDirection(), 24);
-                // characterList.get(i).bounding();
-            }
-            
+            }            
         }
         for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).getX() == characterList.get(i).getfinalX() && characterList.get(i).getY() == characterList.get(i).getfinalY()) {
-                
-                // characterList.get(i).payMoney();
-
-            }
-        }
-        for (int i = 0; i < characterList.size(); i++) {
-            characterList.get(i).walkingIn(i);
-
+            if (characterList.get(i).way == 0) characterList.get(i).walkingIn(i);
+            else characterList.get(i).walkingOut(i);
         }
 
         // update bartender
@@ -114,10 +105,11 @@ public class IngameState extends GameState{
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-  try{
+     try{
             //draw background
 
             bg.draw(g);
+
             //draw map
             soundEffect.draw(g);
 
@@ -154,6 +146,7 @@ public class IngameState extends GameState{
     public void keyReleased(int k) {
         
     }
+    
     //mouse event listener
     public void mousePressed(MouseEvent e) {
         
@@ -168,16 +161,21 @@ public class IngameState extends GameState{
         if(soundEffect.contains(e.getX(), e.getY())){
             soundEffect.toggle();
         }
+        // for cat
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
                 catList.get(i).catDoSomething();          
             }
         }
 
+        // for character
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).contains(e.getX(), e.getY())) {
-                // characterList.get(i).charDoSomething();          
-
+                // walking
+                characterList.get(i).way = 1;    
+                characterList.get(i).setAction(2);  
+                IngameState.map.setMoney(IngameState.map.getMoney()+200);
+                
             }
         }
 
