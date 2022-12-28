@@ -25,6 +25,7 @@ public class IngameState extends GameState{
     //cat properties
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
+    public static ArrayList<character> bartenderList;
 
     //constructor
     public IngameState(GameStateManager gsm){
@@ -37,6 +38,7 @@ public class IngameState extends GameState{
     public void init() {
         catList = new ArrayList<Cat>();
         characterList = new ArrayList<character>();
+        bartenderList = new ArrayList<character>();
         map = new Map();
 
         soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
@@ -89,12 +91,21 @@ public class IngameState extends GameState{
 
             }
         }
-        
-
         for (int i = 0; i < characterList.size(); i++) {
             characterList.get(i).walkingIn(i);
 
         }
+
+        // update bartender
+        if (bartenderList.size() != map.getbartenderNum()) {
+            System.out.println("bug! " + bartenderList.size() + " " + map.getbartenderNum());
+        }
+        for(int i=0;i<bartenderList.size();i++){
+            bartenderList.get(i).update();
+        }
+        
+
+        
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -110,18 +121,28 @@ public class IngameState extends GameState{
 
             //draw map
             soundEffect.draw(g);
+
+            //draw bartender
+            for (int i = 0; i < bartenderList.size(); i++) {
+                bartenderList.get(i).draw(g);
+            }
+
+
+            //draw UI
+            ui.draw(g);
+            map.draw(g);
             
             //draw cat
             for(int i=0;i<catList.size();i++){
                 catList.get(i).draw(g);
             }
+
+            //draw characters
             for(int i=0;i<characterList.size();i++){
                 characterList.get(i).draw(g);
             }
 
-            //draw UI
-            ui.draw(g);
-            map.draw(g);
+            
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -157,9 +178,17 @@ public class IngameState extends GameState{
 
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).contains(e.getX(), e.getY())) {
-                characterList.get(i).walkingIn(i);        
+                // characterList.get(i).charDoSomething();          
+
             }
         }
+
+        // if (map.containsFurniture(e.getX(), e.getY())) {
+        //     System.out.println("furniture");
+        // }
+        // else {
+        //     System.out.println("no furniture");
+        // }
     }
 
     public void mouseExited(MouseEvent e) {
