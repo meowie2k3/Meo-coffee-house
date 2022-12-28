@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-12-28T10:18:43.363Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="gZ_f9DgwS7BM7ef_-ruw" version="20.3.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-28T10:30:33.482Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="-reQwlxAah-ZiAieb8-e" version="20.3.0" type="github">
   <diagram id="FRdmvYPjBGOGSEBnkxZ-" name="Page-1">
-    <mxGraphModel dx="538" dy="1126" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+    <mxGraphModel dx="269" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -143,6 +143,9 @@
         <mxCell id="lRz5HqzyhUnMGmeiLU8S-59" value="+ Entity( Map map): void&#xa;+ getX(): int&#xa;+ getY(): int&#xa;+ getDirection(): int&#xa;+ getCurrentAction(): int&#xa;+ getWidth(): int&#xa;+ getHeight(): int&#xa;+ setPosition(double x, double y): void&#xa;+ setDirection(int direction): void&#xa;+setMapPosition(): void&#xa;+ contains(int x, int y): boolean&#xa;+ move(int direction, int halfsize): void&#xa;+ draw(Graphics2D g): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="lRz5HqzyhUnMGmeiLU8S-56">
           <mxGeometry y="218" width="270" height="192" as="geometry" />
         </mxCell>
+        <mxCell id="lRz5HqzyhUnMGmeiLU8S-69" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="lRz5HqzyhUnMGmeiLU8S-60" target="lRz5HqzyhUnMGmeiLU8S-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="lRz5HqzyhUnMGmeiLU8S-60" value="Animation" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
           <mxGeometry x="910" y="116" width="250" height="260" as="geometry" />
         </mxCell>
@@ -159,6 +162,18 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="870" y="290" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="lRz5HqzyhUnMGmeiLU8S-65" value="Cat" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="910" y="456" width="250" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="lRz5HqzyhUnMGmeiLU8S-66" value="- name: String&#xa;- address: String&#xa;- isHungry: boolean&#xa;- isSleepy: boolean&#xa;- isBored: boolean&#xa;- foodCost: int&#xa;- sleepCost: int&#xa;- playCost: int&#xa;- sprites: ArrayList&lt;BufferedImage[]&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="lRz5HqzyhUnMGmeiLU8S-65">
+          <mxGeometry y="26" width="250" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="lRz5HqzyhUnMGmeiLU8S-67" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="lRz5HqzyhUnMGmeiLU8S-65">
+          <mxGeometry y="160" width="250" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="lRz5HqzyhUnMGmeiLU8S-68" value="+ Cat(Map map, String address): void&#xa;+ getter&#xa;+ setter&#xa;+ Override" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="lRz5HqzyhUnMGmeiLU8S-65">
+          <mxGeometry y="168" width="250" height="142" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
