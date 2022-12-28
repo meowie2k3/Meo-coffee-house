@@ -21,7 +21,7 @@ public class PopUp {
     private final int spacing = 5;
     
     public PopUp(double x, double y, String address){
-        this.x = x;
+        this.x = x ;
         this.y = y;
         try{
             icon = ImageIO.read(getClass().getResourceAsStream(address));
