@@ -177,6 +177,7 @@ public class IngameState extends GameState{
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).contains(e.getX(), e.getY())) {
                 // characterList.get(i).charDoSomething();          
+
             }
         }
     }
