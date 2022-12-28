@@ -22,15 +22,6 @@ public class character extends Entity {
 
     private PopUp popup;
         
-    // //emotion
-    // private boolean isHungry;
-    // private boolean isSleepy;
-    // private boolean isBored;
-
-    // //cost
-    // private int foodCost;
-    // private int sleepCost;
-    // private int playCost;
 
     private final int iconSize = 16;
     private final int padSize = 24;
