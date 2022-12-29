@@ -253,12 +253,12 @@ public class IngameState extends GameState{
     public void mouseMoved(MouseEvent e) {
         // int x = e.getX();
         // int y = e.getY();
-        // System.out.println("mouse moved " + x + " " + y);
-        int scale = GamePanel.SCALE;
-        int left = 3*scale;
-        int right = 33*scale;
-        int top = 209*scale;
-        int bottom = 239*scale;
+        // // System.out.println("mouse moved " + x + " " + y);
+        // int scale = GamePanel.SCALE;
+        // int left = 3*scale;
+        // int right = 33*scale;
+        // int top = 209*scale;
+        // int bottom = 239*scale;
 
         // if (x > left && x < right && y > top && y < bottom && time == 0) {
         //     shopChoice = 1;
