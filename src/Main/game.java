@@ -1,6 +1,7 @@
 package Main;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,6 +21,16 @@ public class game {
          
         ImageIcon logo = new ImageIcon("Resources/Icon/money.jpg");
         window.setIconImage(logo.getImage());
+
+        // JFrame f = new JFrame();
+        
+        // f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // f.setSize(500, 500);
+        // f.setResizable(false);
+        // // window.pack();
+        // JButton p = new JButton();
+        // f.add(p);
+        // f.setVisible(true);
         
     }
 }

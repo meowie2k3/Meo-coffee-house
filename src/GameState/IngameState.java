@@ -9,8 +9,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
 
 import Main.*;
 import Map.*;
@@ -39,13 +42,16 @@ public class IngameState extends GameState{
     };
 
     //shop
-    private Shop shop;
-    private JButton s1, s2;
+    // private Shop shop;
+    private BufferedImage s1, s2;
+    private int shopChoice = 0, time = 0;
+    private BufferedImage[] option = {s1};
+
+    private JPanel panel;
 
     //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
-        // gsm.add(s1);
         init();
         
     }
@@ -70,18 +76,18 @@ public class IngameState extends GameState{
         // UI
         ui = new UI();
 
-        // Shop
-        shop = new Shop();
+        // // Shop
+        // shop = new Shop();
         
-        JButton s1 = new JButton(new ImageIcon("s1.png"));  
-        s1.setBounds(5, 650, 30, 30);      
-        s1.setBackground(Color.WHITE);
-        s1.setBorderPainted(false);
+        // JButton s1 = new JButton(new ImageIcon("s1.png"));  
+        // s1.setBounds(5, 650, 30, 30);      
+        // s1.setBackground(Color.WHITE);
+        // s1.setBorderPainted(false);
 
-        JButton s2 = new JButton(new ImageIcon("s2.png"));  
-        s2.setBounds(5, 650, 30, 30);      
-        s2.setBackground(Color.WHITE);
-        s2.setBorderPainted(false);
+        // JButton s2 = new JButton(new ImageIcon("s2.png"));  
+        // s2.setBounds(5, 650, 30, 30);      
+        // s2.setBackground(Color.WHITE);
+        // s2.setBorderPainted(false);
     }
 
     // update
@@ -153,8 +159,10 @@ public class IngameState extends GameState{
             ui.draw(g);
             map.draw(g);
 
-            // //draw shop
+            //draw shop
             // shop.draw(g);
+            s1 = ImageIO.read(getClass().getResourceAsStream("/UI/s1.png"));
+            s2 = ImageIO.read(getClass().getResourceAsStream("/UI/s2.png"));
             
             //draw cat
             for(int i=0;i<catList.size();i++){
@@ -170,6 +178,16 @@ public class IngameState extends GameState{
 
         } catch(Exception e) {
             e.printStackTrace();
+        }
+
+        g.drawImage(s1, 3, 209, null);
+        for (int i = 0; i < option.length; i++) {
+            if (shopChoice == 1 && time == 1)   {
+                g.drawImage(s2, 3, 209, null);
+            }
+            else if (shopChoice == 0 && time == 0)  {
+                g.drawImage(s1, 3, 209, null);
+            }
         }
     }
     //key event listener
@@ -220,6 +238,23 @@ public class IngameState extends GameState{
         // else {
         //     System.out.println("no furniture");
         // }
+        int x = e.getX();
+        int y = e.getY();
+        System.out.println("mouse moved " + x + " " + y);
+        int scale = GamePanel.SCALE;
+        int left = 3*scale;
+        int right = 33*scale;
+        int top = 209*scale;
+        int bottom = 239*scale;
+
+        if (x > left && x < right && y > top && y < bottom ) {
+             
+        //     panel.setVisible(true);
+        //     // time = 1;
+        
+            // System.exit(0);
+        }
+        
     }
 
     public void mouseExited(MouseEvent e) {
@@ -230,19 +265,24 @@ public class IngameState extends GameState{
         // int x = e.getX();
         // int y = e.getY();
         // System.out.println("mouse moved " + x + " " + y);
+        int scale = GamePanel.SCALE;
+        int left = 3*scale;
+        int right = 33*scale;
+        int top = 209*scale;
+        int bottom = 239*scale;
+
+        if (x > left && x < right && y > top && y < bottom && time == 0) {
+            shopChoice = 1;
+            time = 1;
+        }
+        if (x > left && x < right && y > top && y < bottom && time == 1)    {
+            shopChoice = 0;
+            time = 0;
+        }
         
         
     }
     public void mouseDragged(MouseEvent e) {
         
-    }
-
-    public static void add(JButton s1) {
-    }
-
-    public static void remove(JButton s1) {
-    }
-
-    public static void add(JPanel panel) {
     }
 }
