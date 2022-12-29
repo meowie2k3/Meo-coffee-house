@@ -43,11 +43,11 @@ public class IngameState extends GameState{
 
     //shop
     // private Shop shop;
-    private BufferedImage s1, s2;
-    private int shopChoice = 0, time = 0;
-    private BufferedImage[] option = {s1};
+    private BufferedImage s1;
+    // private int shopChoice = 0, time = 0;
+    // private BufferedImage[] option = {s1};
 
-    private JPanel panel;
+    // private JPanel panel;
 
     //constructor
     public IngameState(GameStateManager gsm){
@@ -133,6 +133,8 @@ public class IngameState extends GameState{
         for(int i=0;i<bartenderList.size();i++){
             bartenderList.get(i).update();
         }     
+
+        map.SaveUserData("Resources/UserSavedGame/User1.map");
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -162,7 +164,7 @@ public class IngameState extends GameState{
             //draw shop
             // shop.draw(g);
             s1 = ImageIO.read(getClass().getResourceAsStream("/UI/s1.png"));
-            s2 = ImageIO.read(getClass().getResourceAsStream("/UI/s2.png"));
+            // s2 = ImageIO.read(getClass().getResourceAsStream("/UI/s2.png"));
             
             //draw cat
             for(int i=0;i<catList.size();i++){
@@ -181,14 +183,14 @@ public class IngameState extends GameState{
         }
 
         g.drawImage(s1, 3, 209, null);
-        for (int i = 0; i < option.length; i++) {
-            if (shopChoice == 1 && time == 1)   {
-                g.drawImage(s2, 3, 209, null);
-            }
-            else if (shopChoice == 0 && time == 0)  {
-                g.drawImage(s1, 3, 209, null);
-            }
-        }
+        // for (int i = 0; i < option.length; i++) {
+        //     if (shopChoice == 1 && time == 1)   {
+        //         g.drawImage(s2, 3, 209, null);
+        //     }
+        //     else if (shopChoice == 0 && time == 0)  {
+        //         g.drawImage(s1, 3, 209, null);
+        //     }
+        // }
     }
     //key event listener
     public void keyPressed(int k) {
@@ -228,7 +230,7 @@ public class IngameState extends GameState{
                 characterList.get(i).way = 1;    
                 characterList.get(i).setAction(2);  
                 map.setMoney(map.getMoney()+50);
-                map.SaveUserData("Resources/UserSavedGame/User1.map");
+                
             }
         }
 
@@ -253,6 +255,7 @@ public class IngameState extends GameState{
         //     // time = 1;
         
             // System.exit(0);
+            gsm.setState(GameStateManager.SHOPSTATE);
         }
         
     }
