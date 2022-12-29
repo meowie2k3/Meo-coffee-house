@@ -1,41 +1,40 @@
 package Entity;
 
-import GameState.GameStateManager;
-import GameState.IngameState;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Shop extends IngameState implements ActionListener{
+//Chi xinh dep hihi
+public class Shop extends JPanel implements ActionListener{
+
+    int c = 0;
     
-    private Border line;
+    Border line;
+    JButton s1, s2;
 
-    // private JButton shop;
+    JPanel panel, panell, panelr, panelCat, panelFood;
 
-    private JPanel panel, panell, panelr, panelCat;
-
-    private JButton bCat, bFood;
+    JButton bCat, bFood;
 
     //Cats
-    private JButton c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16;
+    JButton c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16;
 
     //Foods
-    private JButton f1, f2, f3, f4;    
+    JButton f1, f2, f3, f4;
 
     ArrayList<JButton> cats = new ArrayList<JButton>();
 
-    public Shop(GameStateManager gsm) {
-        super(gsm);
+    public Shop()  {
 
         line = BorderFactory.createLineBorder(new Color(125, 125, 0));
 
-        panel = new JPanel();
-        panel.setBounds(20, 75, 900, 560);
-        panel.setBackground(new Color(204, 164, 115)); 
-        panel.setBorder(line);   
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));   
+        this.setBounds(20, 75, 900, 560);
+        this.setBackground(new Color(204, 164, 115)); 
+        this.setBorder(line);   
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));   
 
         panell = new JPanel();
         panell.setPreferredSize(new Dimension(155, 530));
@@ -69,23 +68,23 @@ public class Shop extends IngameState implements ActionListener{
         panell.add(bFood);
 
         //16 cats
-        c1 = new JButton("Black", new ImageIcon("/Cats/catToBuy/1black.png"));
-        c2 = new JButton("Blue", new ImageIcon("/Cats/catToBuy/2blue.png"));   
-        c3 = new JButton("Brown", new ImageIcon("/Cats/catToBuy/3brown.png"));   
-        c4 = new JButton("Grey", new ImageIcon("/Cats/catToBuy/4grey.png"));     
-        c5 = new JButton("Green", new ImageIcon("/Cats/catToBuy/5green.png")); 
-        c6 = new JButton("Pink", new ImageIcon("/Cats/catToBuy/6pink.png"));        
-        c7 = new JButton("Red", new ImageIcon("/Cats/catToBuy/7red.png"));        
-        c8 = new JButton("White", new ImageIcon("/Cats/catToBuy/8white.png"));      
-        c9 = new JButton("Calico", new ImageIcon("/Cats/catToBuy/9calico.png"));     
-        c10 = new JButton("Clown", new ImageIcon("/Cats/catToBuy/10clown.png"));     
-        c11 = new JButton("Creme", new ImageIcon("/Cats/catToBuy/11creme.png"));     
-        c12 = new JButton("Grey Point", new ImageIcon("/Cats/catToBuy/12grey_point.png"));  
-        c13 = new JButton("Grey Tabby", new ImageIcon("/Cats/catToBuy/13grey_tabby.png"));   
-        c14 = new JButton("Orange Tabby", new ImageIcon("/Cats/catToBuy/14orange_tabby.png")); 
-        c15 = new JButton("Radioactive", new ImageIcon("/Cats/catToBuy/15radioactive.png"));        
-        c16 = new JButton("Seal Point", new ImageIcon("/Cats/catToBuy/16seal_point.png"));      
-
+        c1 = new JButton("Black", new ImageIcon("1black.png"));
+        c2 = new JButton("Blue", new ImageIcon("2blue.png"));   
+        c3 = new JButton("Brown", new ImageIcon("3brown.png"));   
+        c4 = new JButton("Grey", new ImageIcon("4grey.png"));     
+        c5 = new JButton("Green", new ImageIcon("5green.png")); 
+        c6 = new JButton("Pink", new ImageIcon("6pink.png"));        
+        c7 = new JButton("Red", new ImageIcon("7red.png"));        
+        c8 = new JButton("White", new ImageIcon("8white.png"));      
+        c9 = new JButton("Calico", new ImageIcon("9calico.png"));     
+        c10 = new JButton("Clown", new ImageIcon("10clown.png"));     
+        c11 = new JButton("Creme", new ImageIcon("11creme.png"));     
+        c12 = new JButton("Grey Point", new ImageIcon("12grey_point.png"));  
+        c13 = new JButton("Grey Tabby", new ImageIcon("13grey_tabby.png"));   
+        c14 = new JButton("Orange Tabby", new ImageIcon("14orange_tabby.png")); 
+        c15 = new JButton("Radioactive", new ImageIcon("15radioactive.png"));        
+        c16 = new JButton("Seal Point", new ImageIcon("16seal_point.png"));      
+        
         cats.add(c1);
         cats.add(c2);
         cats.add(c3);        
@@ -111,22 +110,57 @@ public class Shop extends IngameState implements ActionListener{
             cats.get(i).setBackground(new Color(255, 255, 240));
             cats.get(i).setFocusPainted(false);
         }
+        
+
+        //food for cats buttons
+        f1 = new JButton("Food 1");
+        f1.setVerticalTextPosition(SwingConstants.BOTTOM);
+        f1.setHorizontalTextPosition(SwingConstants.CENTER);
+        f1.setBackground(Color.WHITE);
+
+        f2 = new JButton("Food 2");
+        f2.setVerticalTextPosition(SwingConstants.BOTTOM);
+        f2.setHorizontalTextPosition(SwingConstants.CENTER);
+        f2.setBackground(Color.WHITE);
+
+        f3 = new JButton("Food 3");
+        f3.setVerticalTextPosition(SwingConstants.BOTTOM);
+        f3.setHorizontalTextPosition(SwingConstants.CENTER);
+        f3.setBackground(Color.WHITE);
+
+        f4 = new JButton("Food 4");
+        f4.setVerticalTextPosition(SwingConstants.BOTTOM);
+        f4.setHorizontalTextPosition(SwingConstants.CENTER);
+        f4.setBackground(Color.WHITE);
 
         bCat.addActionListener(e -> {
-            panel.remove(panelr);
+            this.remove(panelr);
             // panel.remove(panelFood);
-            panel.add(panelCat);
-            panel.revalidate();
-            panel.repaint();
+            this.add(panelCat);
+            this.revalidate();
+            this.repaint();
         });
         
-        panelr.setVisible(true);
-        panel.setVisible(false);
-        panel.add(panell);
-        panel.add(panelr);
 
+        bFood.addActionListener(e -> {
+            this.remove(panelr);
+            // panel.remove(panelCat);
+            this.add(panelFood);
+            this.revalidate();
+            this.repaint();
+        });
+
+        
+
+        panelr.setVisible(true);
+        this.add(panell);
+        this.add(panelr);
+
+        
+        this.setVisible(false);
+        
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e)  {
         for (int i = 0; i < 8; i++)   {
@@ -175,4 +209,3 @@ public class Shop extends IngameState implements ActionListener{
         }
     }
 }
-
