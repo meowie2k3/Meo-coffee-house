@@ -38,6 +38,11 @@ public class Map {
     public Map() {
     }
 
+    // setters
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     // getters
     public int getCatSize() {
         return catSize;
@@ -80,7 +85,7 @@ public class Map {
         try {
             //System.out.println("load furniture");
             String[] address = {"/Furniture/DrinkBar.png", "/Furniture/Chair.png", "/Furniture/Table.png"};
-            int[] x = {130, 0, 0};
+            int[] x = {140, 0, 0};
             int[] y = {0, 0, 0};
             furnitureList = new ArrayList<Furniture>();
             for (int i = 0; i < address.length; i++) {
@@ -162,6 +167,7 @@ public class Map {
                     map[i][j] = Integer.parseInt(tokens[j]);
                 }
             }
+            br.close();
         } catch (Exception e) {
 
             e.printStackTrace();

@@ -33,6 +33,13 @@ public class IngameState extends GameState{
     public static ArrayList<Cat> catList;
     public static ArrayList<character> characterList;
     public static ArrayList<character> bartenderList;
+    private static final String[] characterAddress = new String[] {
+        "/Character and Furniture/Shiba-Sheet.png",
+        "/Character and Furniture/Blackcat-Sheet.png",
+        "/Character and Furniture/Hedgedog-Sheet.png",
+        "/Character and Furniture/Rabbit-Sheet.png",
+        "RabbitMon-Sheet.png"
+    };
 
     //shop
     // private Shop shop;
@@ -108,19 +115,14 @@ public class IngameState extends GameState{
             //moving
             if(characterList.get(i).getCurentAction() >= Cat.WALK && characterList.get(i).getCurentAction() <= Cat.WALK+7){
                 characterList.get(i).move(characterList.get(i).getDirection(), 24);
-                // characterList.get(i).bounding();
-            }
-            
+            }            
         }
         for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).getX() == characterList.get(i).getfinalX() && characterList.get(i).getY() == characterList.get(i).getfinalY()) {
-                
-                // characterList.get(i).payMoney();
+            if (characterList.get(i).way == 0)  {
+                characterList.get(i).walkingIn(i);
+            }
 
-            }
-        }
-        for (int i = 0; i < characterList.size(); i++) {
-            characterList.get(i).walkingIn(i);
+            else characterList.get(i).walkingOut(i);
 
         }
 
@@ -139,7 +141,7 @@ public class IngameState extends GameState{
         //g.setColor(java.awt.Color.WHITE);
         //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
-    try{
+     try{
             //draw background
 
             bg.draw(g);
@@ -195,6 +197,7 @@ public class IngameState extends GameState{
     public void keyReleased(int k) {
         
     }
+    
     //mouse event listener
     public void mousePressed(MouseEvent e) {
         
@@ -209,17 +212,23 @@ public class IngameState extends GameState{
         if(soundEffect.contains(e.getX(), e.getY())){
             soundEffect.toggle();
         }
-        
+        // for cat
         for (int i = 0; i < catList.size(); i++) {
             if (catList.get(i).contains(e.getX(), e.getY())) {
                 catList.get(i).catDoSomething();          
             }
         }
 
+        // for character
         for (int i = 0; i < characterList.size(); i++) {
-            if (characterList.get(i).contains(e.getX(), e.getY())) {
-                // characterList.get(i).charDoSomething();          
-
+            if (characterList.get(i).containPopup(e.getX(), e.getY()) && 
+            characterList.get(i).getX() == characterList.get(i).getfinalX() &&
+            characterList.get(i).getY() == characterList.get(i).getfinalY()) {
+                // walking
+                characterList.get(i).way = 1;    
+                characterList.get(i).setAction(2);  
+                map.setMoney(map.getMoney()+50);
+                map.SaveUserData("Resources/UserSavedGame/User1.map");
             }
         }
 
@@ -253,8 +262,8 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        // int x = e.getX();
+        // int y = e.getY();
         // System.out.println("mouse moved " + x + " " + y);
         int scale = GamePanel.SCALE;
         int left = 3*scale;
