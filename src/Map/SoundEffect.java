@@ -111,10 +111,10 @@ public class SoundEffect{
     public boolean contains(int x, int y){
         int scale = GamePanel.SCALE;
         //x and y of the button are top left corner
-        if (x > 297*scale
-        && x < 304*scale
+        if (x > 295*scale
+        && x < 320*scale
         && y > 218*scale
-        && y < 229*scale)   {
+        && y < 235*scale)   {
             return true;
         }
         return false;
