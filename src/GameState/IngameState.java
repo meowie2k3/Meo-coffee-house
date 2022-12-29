@@ -271,14 +271,14 @@ public class IngameState extends GameState{
         int top = 209*scale;
         int bottom = 239*scale;
 
-        if (x > left && x < right && y > top && y < bottom && time == 0) {
-            shopChoice = 1;
-            time = 1;
-        }
-        if (x > left && x < right && y > top && y < bottom && time == 1)    {
-            shopChoice = 0;
-            time = 0;
-        }
+        // if (x > left && x < right && y > top && y < bottom && time == 0) {
+        //     shopChoice = 1;
+        //     time = 1;
+        // }
+        // if (x > left && x < right && y > top && y < bottom && time == 1)    {
+        //     shopChoice = 0;
+        //     time = 0;
+        // }
         
         
     }
