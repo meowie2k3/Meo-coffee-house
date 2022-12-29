@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 //Chi xinh dep hihi
-public class Shop extends JPanel implements ActionListener{
+public class Shop implements ActionListener{
 
     int c = 0;
     
@@ -31,10 +31,10 @@ public class Shop extends JPanel implements ActionListener{
 
         line = BorderFactory.createLineBorder(new Color(125, 125, 0));
 
-        this.setBounds(20, 75, 900, 560);
-        this.setBackground(new Color(204, 164, 115)); 
-        this.setBorder(line);   
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));   
+        panel.setBounds(20, 75, 900, 560);
+        panel.setBackground(new Color(204, 164, 115)); 
+        panel.setBorder(line);   
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));   
 
         panell = new JPanel();
         panell.setPreferredSize(new Dimension(155, 530));
@@ -134,31 +134,37 @@ public class Shop extends JPanel implements ActionListener{
         f4.setBackground(Color.WHITE);
 
         bCat.addActionListener(e -> {
-            this.remove(panelr);
+            panel.remove(panelr);
             // panel.remove(panelFood);
-            this.add(panelCat);
-            this.revalidate();
-            this.repaint();
+            panel.add(panelCat);
+            panel.revalidate();
+            panel.repaint();
         });
         
 
         bFood.addActionListener(e -> {
-            this.remove(panelr);
+            panel.remove(panelr);
             // panel.remove(panelCat);
-            this.add(panelFood);
-            this.revalidate();
-            this.repaint();
+            panel.add(panelFood);
+            panel.revalidate();
+            panel.repaint();
         });
 
         
 
         panelr.setVisible(true);
-        this.add(panell);
-        this.add(panelr);
+        panel.add(panell);
+        panel.add(panelr);
+        
+        panel.setVisible(false);
+        
+    }
 
-        
-        this.setVisible(false);
-        
+    public void appear()    {
+        panel.setVisible(true);
+    }
+    public void disappear() {
+        panel.setVisible(false);
     }
 
     @Override
