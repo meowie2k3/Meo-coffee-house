@@ -36,10 +36,10 @@ public class PopUp {
 
     public boolean contains(int x, int y){
         int scale = GamePanel.SCALE;
-        int x1 = (int) this.x - iconSize/2;
-        int y1 = (int) this.y - charSize / 4 - spacing - padSize/2 - iconSize/2;
-        int x2 = x1 + iconSize;
-        int y2 = y1 + iconSize;
+        int x1 = (int) this.x - padSize/2;
+        int y1 = (int) this.y - charSize / 4 - spacing - padSize;
+        int x2 = x1 + padSize;
+        int y2 = y1 + padSize;
         if(x1*scale <= x && x <= x2*scale && y1*scale <= y && y <= y2*scale) return true;
         return false;
     }
