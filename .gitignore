@@ -4,6 +4,7 @@
 # Log file
 *.log
 *.json
+*.map
 
 # BlueJ files
 *.ctxt
