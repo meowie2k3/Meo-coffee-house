@@ -4,6 +4,8 @@
 # Log file
 *.log
 *.json
+
+# User save game files
 *.map
 
 # BlueJ files
