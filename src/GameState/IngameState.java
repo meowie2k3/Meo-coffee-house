@@ -2,16 +2,7 @@ package GameState;
 import java.awt.event.*;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
 
@@ -47,7 +38,6 @@ public class IngameState extends GameState{
     // private int shopChoice = 0, time = 0;
     // private BufferedImage[] option = {s1};
 
-    // private JPanel panel;
 
     //constructor
     public IngameState(GameStateManager gsm){

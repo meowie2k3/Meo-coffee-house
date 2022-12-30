@@ -1,5 +1,5 @@
 # Meow Coffee House
-A cat game built with java swing
+A cat coffee game built by java swing
 # Member:
 Minh Huy,
 Tri Dung,

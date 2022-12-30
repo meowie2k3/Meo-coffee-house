@@ -1,9 +1,5 @@
 package Entity;
 
-import java.awt.event.*;
-
-import org.w3c.dom.events.MouseEvent;
-
 import java.awt.*;
 
 import Map.*;

@@ -5,7 +5,6 @@ import Main.*;
 
 import java.util.ArrayList;
 import javax.imageio.*;
-import java.awt.*;
 import java.awt.image.*;
 import java.util.Random;
 
