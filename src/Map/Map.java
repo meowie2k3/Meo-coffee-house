@@ -241,7 +241,9 @@ public class Map {
                 for (int j = 0; j < numCols; j++) {
                     if (map[i][j] != 0) {
                         g.drawImage(furnitureList.get(map[i][j]).getImage(),
-                                j * furnitureSize, i * furnitureSize, null);
+                                j * furnitureSize,
+                                i * furnitureSize, 
+                                null);
                     }
                 }
             }
