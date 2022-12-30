@@ -93,8 +93,13 @@ public class ShopState extends GameState{
         g.drawImage(s2, 3, 209, null);
 
         if (choice == 1)    {
-            //
+            g.drawImage(c1, 85, 40, null);
+            g.drawImage(c2, 145, 40, null);
+            g.drawImage(c3, 205, 40, null);
+            g.drawImage(c4, 265, 40, null);
+            // choice = 0;
         }
+
     }
 
     public void keyPressed(int k)  {}
