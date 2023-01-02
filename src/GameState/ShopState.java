@@ -93,10 +93,29 @@ public class ShopState extends GameState{
         g.drawImage(s2, 3, 209, null);
 
         if (choice == 1)    {
-            g.drawImage(c1, 85, 40, null);
-            g.drawImage(c2, 145, 40, null);
-            g.drawImage(c3, 205, 40, null);
-            g.drawImage(c4, 265, 40, null);
+            //first row
+            g.drawImage(c1, 85, 45, null);
+            g.drawImage(c2, 145, 45, null);
+            g.drawImage(c3, 205, 45, null);
+            g.drawImage(c4, 265, 45, null);
+
+            //second row
+            g.drawImage(c5, 85, 85, null);
+            g.drawImage(c6, 145, 85, null);
+            g.drawImage(c7, 205, 85, null);
+            g.drawImage(c8, 265, 85, null);
+
+            //third row
+            g.drawImage(c9, 85, 125, null);
+            g.drawImage(c10, 145, 125, null);
+            g.drawImage(c11, 205, 125, null);
+            g.drawImage(c12, 265, 125, null);
+
+            //last row
+            g.drawImage(c13, 85, 165, null);
+            g.drawImage(c14, 145, 165, null);
+            g.drawImage(c15, 205, 165, null);
+            g.drawImage(c16, 265, 165, null);
             // choice = 0;
         }
 
