@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import Map.*;
 import Main.GamePanel;
 
 public class PopUp {
