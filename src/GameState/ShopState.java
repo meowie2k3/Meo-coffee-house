@@ -41,24 +41,24 @@ public class ShopState extends GameState{
         this.gsm = gsm;
 
         try {
-            bg = new Background("/Backgrounds/shop.png", 0);
+            bg = new Background("Resources/Backgrounds/shop.png", 0);
             
-            c1 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c1.png"));
-            c2 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c2.png"));
-            c3 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c3.png"));
-            c4 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c4.png"));
-            c5 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c5.png"));
-            c6 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c6.png"));
-            c7 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c7.png"));
-            c8 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c8.png"));
-            c9 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c9.png"));
-            c10 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c10.png"));
-            c11 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c11.png"));
-            c12 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c12.png"));
-            c13 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c13.png"));
-            c14 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c14.png"));
-            c15 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c15.png"));
-            c16 = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/Shop/c16.png"));
+            c1 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c1.png"));
+            c2 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c2.png"));
+            c3 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c3.png"));
+            c4 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c4.png"));
+            c5 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c5.png"));
+            c6 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c6.png"));
+            c7 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c7.png"));
+            c8 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c8.png"));
+            c9 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c9.png"));
+            c10 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c10.png"));
+            c11 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c11.png"));
+            c12 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c12.png"));
+            c13 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c13.png"));
+            c14 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c14.png"));
+            c15 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c15.png"));
+            c16 = ImageIO.read(getClass().getResourceAsStream("Resources/Backgrounds/Shop/c16.png"));
 
             s2 = ImageIO.read(getClass().getResourceAsStream("/UI/s2.png"));
       
