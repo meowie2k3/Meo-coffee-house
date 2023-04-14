@@ -15,6 +15,8 @@ public class LineGameState extends GameState {
     private int level = 5;
     private int boardSize = 2 * level - 1;
 
+    public static final int BALL_SIZE = 24;
+
     private int[][] board;
 
     private String[] address =new String[]{
