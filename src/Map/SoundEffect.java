@@ -30,7 +30,8 @@ public class SoundEffect{
     //position
     private double x;
     private double y;
-    private int size = 20;
+    private int sizeX = 20;
+    private int sizeY = 14;
 
     public SoundEffect(double x, double y, String address, boolean initstate){
         try{
@@ -102,19 +103,19 @@ public class SoundEffect{
     }
 
     public int getWidth(){
-        return size;
+        return sizeX;
     }
     public int getHeight(){
-        return size;
+        return sizeY;
     }
 
     public boolean contains(int x, int y){
         int scale = GamePanel.SCALE;
         //x and y of the button are top left corner
-        if (x > 295*scale
-        && x < 320*scale
-        && y > 218*scale
-        && y < 235*scale)   {
+        if (x >= this.x * scale
+        && x <= (this.x + sizeX) * scale
+        && y >= this.y * scale
+        && y <= (this.y + sizeY) * scale)   {
             return true;
         }
         return false;
