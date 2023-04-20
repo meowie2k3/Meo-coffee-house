@@ -15,9 +15,7 @@ public class LineGameState extends GameState {
     private int level = 5;
     private int boardSize = 2 * level - 1;
 
-    public static final int BALL_SIZE = 24;
-
-    private int[][] board;
+    public static final int BALL_SIZE = 20;
 
     private String[] address =new String[]{
         "/Balls/1.png"
@@ -25,9 +23,8 @@ public class LineGameState extends GameState {
     
     public LineGameState(GameStateManager gsm) {
         this.gsm = gsm;
-        bg = new Background("/UI/LineBoard.png", 0);
+        bg = new Background("Resources/Backgrounds/bg_Line.png", 0);
         score = 0;
-        board = new int[boardSize+1][boardSize+1];
     }
 
     public void init() {
