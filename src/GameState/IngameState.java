@@ -124,7 +124,7 @@ public class IngameState extends GameState{
             bartenderList.get(i).update();
         }     
 
-        map.SaveUserData("Resources/UserSavedGame/User1.map");
+        
         
     }
     public void draw(java.awt.Graphics2D g) {
@@ -201,6 +201,7 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
+        map.SaveUserData("Resources/UserSavedGame/User1.map");
         if(soundEffect.contains(e.getX(), e.getY())){
             soundEffect.toggle();
         }
