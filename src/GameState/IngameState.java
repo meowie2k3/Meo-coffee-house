@@ -16,6 +16,7 @@ public class IngameState extends GameState{
     public static Map map;
     public static Background bg;
     private SoundEffect soundEffect;
+    private LinePlaying linePlaying;
 
     // ui
     private UI ui;
@@ -56,6 +57,8 @@ public class IngameState extends GameState{
         soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
         GamePanel.HEIGHT - 23,
             "Resources/soundEffect/meow.wav", false);
+
+        linePlaying = new LinePlaying(3, 177, true);
         
         // load user data
         map.loadFurniture();
@@ -65,19 +68,6 @@ public class IngameState extends GameState{
 
         // UI
         ui = new UI();
-
-        // // Shop
-        // shop = new Shop();
-        
-        // JButton s1 = new JButton(new ImageIcon("s1.png"));  
-        // s1.setBounds(5, 650, 30, 30);      
-        // s1.setBackground(Color.WHITE);
-        // s1.setBorderPainted(false);
-
-        // JButton s2 = new JButton(new ImageIcon("s2.png"));  
-        // s2.setBounds(5, 650, 30, 30);      
-        // s2.setBackground(Color.WHITE);
-        // s2.setBorderPainted(false);
     }
 
     // update
@@ -140,21 +130,19 @@ public class IngameState extends GameState{
 
             //draw map
             soundEffect.draw(g);
+            linePlaying.draw(g);
 
             //draw bartender
             for (int i = 0; i < bartenderList.size(); i++) {
                 bartenderList.get(i).draw(g);
             }
 
-
             //draw UI
             ui.draw(g);
             map.draw(g);
 
             //draw shop
-            // shop.draw(g);
             s1 = ImageIO.read(getClass().getResourceAsStream("/UI/s1.png"));
-            // s2 = ImageIO.read(getClass().getResourceAsStream("/UI/s2.png"));
             
             //draw cat
             for(int i=0;i<catList.size();i++){
@@ -172,15 +160,8 @@ public class IngameState extends GameState{
             e.printStackTrace();
         }
 
-        g.drawImage(s1, 3, 209, null);
-        // for (int i = 0; i < option.length; i++) {
-        //     if (shopChoice == 1 && time == 1)   {
-        //         g.drawImage(s2, 3, 209, null);
-        //     }
-        //     else if (shopChoice == 0 && time == 0)  {
-        //         g.drawImage(s1, 3, 209, null);
-        //     }
-        // }
+        g.drawImage(s1, 3, 207, null);
+
     }
     //key event listener
     public void keyPressed(int k) {
@@ -211,6 +192,10 @@ public class IngameState extends GameState{
             }
         }
 
+        if (linePlaying.contains(e.getX(), e.getY()))   {
+            gsm.setState(GameStateManager.LINESTATE);
+        }
+
         // for character
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).containPopup(e.getX(), e.getY()) && 
@@ -223,13 +208,6 @@ public class IngameState extends GameState{
                 
             }
         }
-
-        // if (map.containsFurniture(e.getX(), e.getY())) {
-        //     System.out.println("furniture");
-        // }
-        // else {
-        //     System.out.println("no furniture");
-        // }
         int x = e.getX();
         int y = e.getY();
         System.out.println("mouse moved " + x + " " + y);
@@ -240,11 +218,6 @@ public class IngameState extends GameState{
         int bottom = 239*scale;
 
         if (x > left && x < right && y > top && y < bottom ) {
-             
-        //     panel.setVisible(true);
-        //     // time = 1;
-        
-            // System.exit(0);
             gsm.setState(GameStateManager.SHOPSTATE);
         }
         
@@ -255,23 +228,6 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        // int x = e.getX();
-        // int y = e.getY();
-        // // System.out.println("mouse moved " + x + " " + y);
-        // int scale = GamePanel.SCALE;
-        // int left = 3*scale;
-        // int right = 33*scale;
-        // int top = 209*scale;
-        // int bottom = 239*scale;
-
-        // if (x > left && x < right && y > top && y < bottom && time == 0) {
-        //     shopChoice = 1;
-        //     time = 1;
-        // }
-        // if (x > left && x < right && y > top && y < bottom && time == 1)    {
-        //     shopChoice = 0;
-        //     time = 0;
-        // }
         
         
     }

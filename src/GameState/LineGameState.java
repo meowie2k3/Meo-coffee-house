@@ -5,8 +5,9 @@ import java.awt.event.MouseEvent;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
 
-import Map.Background;
-import Entity.Ball;
+import Map.*;
+import Entity.*;
+import Main.GamePanel;
 
 public class LineGameState extends GameState {
 
@@ -16,6 +17,9 @@ public class LineGameState extends GameState {
     private int boardSize = 2 * level - 1;
 
     public static final int BALL_SIZE = 20;
+    
+    private SoundEffect soundEffect;
+    private LinePlaying linePlaying;
 
     private String[] address =new String[]{
         "/Balls/1.png"
@@ -23,18 +27,26 @@ public class LineGameState extends GameState {
     
     public LineGameState(GameStateManager gsm) {
         this.gsm = gsm;
-        bg = new Background("Resources/Backgrounds/bg_Line.png", 0);
+        init();
         score = 0;
     }
 
     public void init() {
-        
+        bg = new Background("/Backgrounds/bg_Line.png", 0);
+
+        soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
+        GamePanel.HEIGHT - 23,
+            "Resources/soundEffect/meow.wav", false);
+
+        linePlaying = new LinePlaying(3, 207, false);
     }
     public void update(){
         bg.update();
     }
     public void draw(Graphics2D g){
         bg.draw(g);
+        soundEffect.draw(g);
+        linePlaying.draw(g);
     }
     public void keyPressed(int k){
     }
@@ -46,7 +58,14 @@ public class LineGameState extends GameState {
     }
     public void mouseEntered(MouseEvent e) {
     }
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {    
+        if(soundEffect.contains(e.getX(), e.getY())){
+            soundEffect.toggle();
+        }    
+
+        if (linePlaying.contains(e.getX(), e.getY()))   {
+            gsm.setState(GameStateManager.INGAMESTATE);
+        }
     }
     public void mouseExited(MouseEvent e) {
     }
