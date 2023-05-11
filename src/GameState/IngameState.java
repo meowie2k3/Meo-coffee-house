@@ -17,6 +17,7 @@ public class IngameState extends GameState{
     public static Background bg;
     private SoundEffect soundEffect;
     private LinePlaying linePlaying;
+    private Shop shop;
 
     // ui
     private UI ui;
@@ -33,18 +34,11 @@ public class IngameState extends GameState{
         "RabbitMon-Sheet.png"
     };
 
-    //shop
-    // private Shop shop;
-    private BufferedImage s1;
-    // private int shopChoice = 0, time = 0;
-    // private BufferedImage[] option = {s1};
-
 
     //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
-        
     }
     
     // file abstract method
@@ -59,6 +53,8 @@ public class IngameState extends GameState{
             "Resources/soundEffect/meow.wav", false);
 
         linePlaying = new LinePlaying(3, 177, true);
+
+        shop = new Shop(3, GamePanel.HEIGHT - 23, true);
         
         // load user data
         map.loadFurniture();
@@ -118,19 +114,14 @@ public class IngameState extends GameState{
         
     }
     public void draw(java.awt.Graphics2D g) {
-        //draw map
-        //clear screen
-        //g.setColor(java.awt.Color.WHITE);
-        //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
      try{
-            //draw background
-
             bg.draw(g);
 
             //draw map
             soundEffect.draw(g);
             linePlaying.draw(g);
+            shop.draw(g);
 
             //draw bartender
             for (int i = 0; i < bartenderList.size(); i++) {
@@ -141,8 +132,6 @@ public class IngameState extends GameState{
             ui.draw(g);
             map.draw(g);
 
-            //draw shop
-            s1 = ImageIO.read(getClass().getResourceAsStream("/UI/s1.png"));
             
             //draw cat
             for(int i=0;i<catList.size();i++){
@@ -159,8 +148,6 @@ public class IngameState extends GameState{
         } catch(Exception e) {
             e.printStackTrace();
         }
-
-        g.drawImage(s1, 3, 207, null);
 
     }
     //key event listener
@@ -182,6 +169,7 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
+        // sound
         if(soundEffect.contains(e.getX(), e.getY())){
             soundEffect.toggle();
         }
@@ -192,8 +180,14 @@ public class IngameState extends GameState{
             }
         }
 
+        // play Line 98
         if (linePlaying.contains(e.getX(), e.getY()))   {
             gsm.setState(GameStateManager.LINESTATE);
+        }
+
+        // shopping
+        if (shop.contains(e.getX(), e.getY()))  {
+            gsm.setState(GameStateManager.SHOPSTATE);
         }
 
         // for character
@@ -207,18 +201,6 @@ public class IngameState extends GameState{
                 map.setMoney(map.getMoney()+50);
                 
             }
-        }
-        int x = e.getX();
-        int y = e.getY();
-        System.out.println("mouse moved " + x + " " + y);
-        int scale = GamePanel.SCALE;
-        int left = 3*scale;
-        int right = 33*scale;
-        int top = 209*scale;
-        int bottom = 239*scale;
-
-        if (x > left && x < right && y > top && y < bottom ) {
-            gsm.setState(GameStateManager.SHOPSTATE);
         }
         
     }
