@@ -21,7 +21,7 @@ public class LineGameState extends GameState {
     private SoundEffect soundEffect;
     private LinePlaying linePlaying;
 
-    public BufferedImage scoreUI, ballUI;
+    public BufferedImage lineIU;
 
     private String[] address =new String[]{
         "/Balls/1.png"
@@ -30,8 +30,7 @@ public class LineGameState extends GameState {
     public LineGameState(GameStateManager gsm) {
         this.gsm = gsm;
         try {
-            scoreUI = ImageIO.read(getClass().getResourceAsStream("/UI/scoreUI.png"));            
-            ballUI = ImageIO.read(getClass().getResourceAsStream("/UI/ballUI.png"));
+            lineIU = ImageIO.read(getClass().getResourceAsStream("/UI/LineUI.png"));  
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,8 +55,7 @@ public class LineGameState extends GameState {
         bg.draw(g);
         soundEffect.draw(g);
         linePlaying.draw(g);
-        g.drawImage(scoreUI, 66, 13, null);  
-        g.drawImage(ballUI, 155, 13, null);
+        g.drawImage(lineIU, 66, 12, null);  
     }
     public void keyPressed(int k){
     }
