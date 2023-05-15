@@ -13,8 +13,8 @@ public class LinePlaying {
     //position
     private double x;
     private double y;
-    private int sizeX = 30;
-    private int sizeY = 30;
+    private int sizeX = 13;
+    private int sizeY = 16;
     boolean state;
 
     public LinePlaying(double x, double y, boolean initstate){
