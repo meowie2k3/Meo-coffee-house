@@ -30,7 +30,9 @@ public class GameStateManager {
         currentState = state;
         gameStates.get(currentState).init();
     }
-
+    public void saveData(){
+        gameStates.get(currentState).saveData();
+    }
     public void update(){
         gameStates.get(currentState).update();
     }

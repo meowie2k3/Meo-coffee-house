@@ -50,6 +50,7 @@ public class MenuState extends GameState {
         bg.update();
         //soundEffect.update();
     }
+    public void saveData(){}
     
     public void draw(Graphics2D g){
         //draw bg

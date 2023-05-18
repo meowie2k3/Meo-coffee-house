@@ -110,8 +110,11 @@ public class IngameState extends GameState{
             bartenderList.get(i).update();
         }     
 
-        map.SaveUserData("Resources/UserSavedGame/User1.map");
+        //map.SaveUserData("Resources/UserSavedGame/User1.map");
         
+    }
+    public void saveData() {
+        map.SaveUserData("Resources/UserSavedGame/User1.map");
     }
     public void draw(java.awt.Graphics2D g) {
 

@@ -1,6 +1,5 @@
 package Map;
 
-import GameState.GameStateManager;
 import GameState.IngameState;
 import Entity.*;
 import Entity.character;

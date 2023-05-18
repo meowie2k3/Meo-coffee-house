@@ -39,6 +39,8 @@ public class LineGameState extends GameState {
         score = 0;
     }
 
+    public void saveData(){}
+
     public void init() {
         bg = new Background("/Backgrounds/bg_Line.png", 0);
 
