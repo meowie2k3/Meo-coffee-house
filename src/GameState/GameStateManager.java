@@ -31,7 +31,10 @@ public class GameStateManager {
         gameStates.get(currentState).init();
     }
     public void saveData(){
-        gameStates.get(currentState).saveData();
+        //save all game state
+        for(int i = 0; i < gameStates.size(); i++){
+            gameStates.get(i).saveData();
+        }
     }
     public void update(){
         gameStates.get(currentState).update();
