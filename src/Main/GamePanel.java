@@ -81,7 +81,7 @@ public class GamePanel extends JPanel
 
             elapsed = System.nanoTime() - start;
 
-            wait = Math.abs(targetTime - elapsed) / 1000000;
+            wait = targetTime - elapsed / 1000000;
 
             try{
                 Thread.sleep(wait);
