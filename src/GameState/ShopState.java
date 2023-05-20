@@ -71,6 +71,7 @@ public class ShopState extends GameState{
 
     public void init() {}
     public void update()   {}
+    public void saveData(){}
 
     public void draw(Graphics2D g)    {
         g.setColor(new Color(204, 164, 115));
