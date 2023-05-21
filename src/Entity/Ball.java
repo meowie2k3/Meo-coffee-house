@@ -6,6 +6,8 @@ import java.util.*;
 import javax.imageio.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
+import javax.swing.text.LabelView;
+
 import java.io.IOException;
 import java.net.URL;
 import Main.GamePanel;
@@ -18,14 +20,13 @@ public class Ball {
     // position and direction
     protected double x;
     protected double y;
-    protected int currentDirection = 3;
+    protected char currentDirection ;
 
     // animation
     protected Animation animation;
     protected int currentAction;
     protected int nextAction;
-    protected int previousAction;// just in case
-    protected int commandAction;// command for next action
+
 
     // movement physics :>
     protected double moveSpeed;
@@ -37,13 +38,16 @@ public class Ball {
     public final char left = 'L';
 
     private BufferedImage img;
-    private boolean isClicked_;
+    private boolean isClicked_ = false;
     private int level = 0;
     private int colorCode;
     private String address = "";
 
     // animation
-    private BufferedImage[] sprites;
+    // private ArrayList<BufferedImage[]> sprites;
+    private BufferedImage[] Lv1;
+    private BufferedImage[] Lv2;
+    private BufferedImage[] Lv2Clicked;
 
     private int ballSize = 15;
     private static final int STAND = 0;
@@ -87,15 +91,23 @@ public class Ball {
             level = 0;
             colorCode = color_id;
 
-            BufferedImage img = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
+            BufferedImage img1 = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
+            BufferedImage img2 = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
+            BufferedImage img2Clicked = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
 
-            BufferedImage[] sprites = new BufferedImage[1];
-            sprites[0] = img;
+            Lv1 = new BufferedImage[1];
+            Lv2 = new BufferedImage[1];
+            Lv2Clicked = new BufferedImage[1];
+
+            Lv1[0] = img;
+            Lv2[1] = img2;
+            Lv2Clicked[0] = img2Clicked;
             
             animation = new Animation();
             currentAction = STAND;
             nextAction = STAND;
-            animation.setFrames(sprites);
+            isClicked_ = false;
+            animation.setFrames(Lv1);
             animation.setDelay(100);
 
         } catch (Exception e) {
@@ -104,32 +116,8 @@ public class Ball {
 
     }
 
-    public void draw(Graphics2D g) {
-        g.drawImage(img, (int) x * ballSize,
-                (int) y * ballSize, null);
-    }
-
-    public boolean contains(int x, int y) {
-        int scale = GamePanel.SCALE;
-        int x1 = (int) this.x - ballSize / 2;
-        int y1 = (int) this.y - ballSize / 2;
-        int x2 = x1 + ballSize / 2;
-        int y2 = y1 + ballSize / 2;
-        if (x1 * scale <= x && x <= x2 * scale && y1 * scale <= y && y <= y2 * scale)
-            return true;
-        return false;
-    }
-
-    public void setDirection(int i) {
-        currentDirection = i;
-    }
-
-    public void setAction(int i) {
-        nextAction = i;
-        update();
-    }
-
     public void move(char direction) {
+        isClicked_ = true;
         setDirection(direction);
         setAction(WALK + direction);
         switch (direction) {
@@ -185,43 +173,52 @@ public class Ball {
         }
     }
 
-    public int tempDirection = -1;
-
     public void update() {
         int slow = 120;
         int fast = 60;
         // set animation
         if (nextAction == STAND) {
-            if (currentAction == STAND) {
+            // Ball standing still
+            if (currentAction == STAND && !isClicked_) {
                 if (animation.hasPlayedOnce()) {
-                    animation.setFrames(sprites);
-                    animation.setDelay(slow);
+                    animation.setFrames(Lv2);
+                    animation.setDelay(fast);
                 }
                 // setCountingTime();
             }
+            // Ball standing still but is clicked
+            if (currentAction == STAND && isClicked_) {
+                if (animation.hasPlayedOnce()) {
+                    animation.setFrames(Lv2Clicked);
+                    animation.setDelay(fast);
+                }
+                // setCountingTime();
+            }
+            
 
+            // Ball stop moving
             if (currentAction >= WALK) {
+                isClicked_ = false;
                 currentAction = STAND;
-                animation.setFrames(sprites);
-                animation.setDelay(slow);
+                animation.setFrames(Lv2);
+                animation.setDelay(fast);
 
             }
         }
 
         if (nextAction >= WALK) {
-
+            // Ball keep moving
             if (currentAction >= WALK) {
-                if (tempDirection != currentDirection) {
-                    animation.setFrames(sprites);
-                    animation.setDelay(slow);
-                    tempDirection = currentDirection;
-                }
-
+                animation.setFrames(Lv2Clicked);
+                animation.setDelay(fast);
             }
+
+            // Ball start to move
             if (currentAction == STAND) {
+                isClicked_ = true;
                 currentAction = WALK + currentDirection;
-                animation.setFrames(sprites);
-                animation.setDelay(slow);
+                animation.setFrames(Lv2);
+                animation.setDelay(fast);
 
             }
 
@@ -231,12 +228,28 @@ public class Ball {
 
     }
 
+    // Setter & Getter
+
+    public void setDirection(char d) {
+        currentDirection = d;
+    }
+
+    public void setAction(int i) {
+        nextAction = i;
+        update();
+    }
+
+
     public int getX() {
         return (int) x;
     }
 
     public int getY() {
         return (int) y;
+    }
+
+    public int getSize() {
+        return ballSize;
     }
 
     public boolean isClicked() {
@@ -249,6 +262,24 @@ public class Ball {
 
     public int getColor() {
         return colorCode;
+    }
+
+    public void draw(Graphics2D g) {
+        g.drawImage(img, (int) x * ballSize,
+                (int) y * ballSize, null);
+    }
+
+    public boolean contains(int x, int y) {
+        isClicked_ = true;
+        animation.setFrames(Lv2);
+        int scale = GamePanel.SCALE;
+        int x1 = (int) this.x - ballSize / 2;
+        int y1 = (int) this.y - ballSize / 2;
+        int x2 = x1 + ballSize / 2;
+        int y2 = y1 + ballSize / 2;
+        if (x1 * scale <= x && x <= x2 * scale && y1 * scale <= y && y <= y2 * scale)
+            return true;
+        return false;
     }
 
 }
