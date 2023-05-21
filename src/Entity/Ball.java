@@ -92,14 +92,14 @@ public class Ball {
             colorCode = color_id;
 
             BufferedImage img1 = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
-            BufferedImage img2 = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
-            BufferedImage img2Clicked = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
+            BufferedImage img2 = ImageIO.read(getClass().getResource(colorAddressLv2[color_id - 1]));
+            BufferedImage img2Clicked = ImageIO.read(getClass().getResource(colorAddressLv2Clicked[color_id - 1]));
 
             Lv1 = new BufferedImage[1];
             Lv2 = new BufferedImage[1];
             Lv2Clicked = new BufferedImage[1];
 
-            Lv1[0] = img;
+            Lv1[0] = img1;
             Lv2[1] = img2;
             Lv2Clicked[0] = img2Clicked;
             
