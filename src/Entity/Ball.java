@@ -1,25 +1,41 @@
 package Entity;
 
-import Map.*;
-import Map.Map;
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import javax.imageio.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.net.URL;
 import Main.GamePanel;
 import GameState.LineGameState;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.imageio.*;
-import java.awt.*;
 import java.awt.image.*;
 
-public class Ball extends Entity {
-    private int x;
-    private int y;
+public class Ball {
+    // position and direction
+    protected double x;
+    protected double y;
+    protected int currentDirection = 3;
+
+    // animation
+    protected Animation animation;
+    protected int currentAction;
+    protected int nextAction;
+    protected int previousAction;// just in case
+    protected int commandAction;// command for next action
+
+    // movement physics :>
+    protected double moveSpeed;
+
+    // movement
+    public final char down = 'D';
+    public final char right = 'R';
+    public final char up = 'U';
+    public final char left = 'L';
+
     private BufferedImage img;
     private boolean isClicked_;
     private int level = 0;
@@ -27,7 +43,7 @@ public class Ball extends Entity {
     private String address = "";
 
     // animation
-    private ArrayList<BufferedImage[]> sprites;
+    private BufferedImage[] sprites;
 
     private int ballSize = 15;
     private static final int STAND = 0;
@@ -53,9 +69,17 @@ public class Ball extends Entity {
             "/Balls/Lv2/redC.png", // id: 6
             "/Balls/Lv2/yellowC.png", // id: 7
     };
+    private String[] colorAddressLv2Clicked = {
+            "/Balls/Lv2_Clicked/blackC.png", // id: 1
+            "/Balls/Lv2_Clicked/blueC.png", // id: 2
+            "/Balls/Lv2_Clicked/cyanC.png", // id: 3
+            "/Balls/Lv2_Clicked/greenC.png", // id: 4
+            "/Balls/Lv2_Clicked/purpleC.png", // id: 5
+            "/Balls/Lv2_Clicked/redC.png", // id: 6
+            "/Balls/Lv2_Clicked/yellowC.png", // id: 7
+    };
 
-    public Ball(Map map, int x_pos, int y_pos, int color_id, int lvl) {
-        super(map);
+    public Ball(int x_pos, int y_pos, int color_id, int lvl) {
         this.address = colorAddressLv1[color_id - 1];
         try {
             x = x_pos;
@@ -63,40 +87,15 @@ public class Ball extends Entity {
             level = 0;
             colorCode = color_id;
 
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream(colorAddressLv1[color_id - 1]));
-            sprites = new ArrayList<BufferedImage[]>();
-            int tmp;
+            BufferedImage img = ImageIO.read(getClass().getResource(colorAddressLv1[color_id - 1]));
 
-            // get stand animation
-            BufferedImage[] stand = new BufferedImage[1];
-            tmp = 0;
-            stand[tmp] = spritesheet.getSubimage(
-                    1 * ballSize,
-                    0 * ballSize,
-                    ballSize,
-                    ballSize);
-            sprites.add(stand);
-
-            // get walk animation
-            int[] myNum = { 1, 0, 2, 2, 2, 3, 1, 1 };
-            for (int k = 0; k < 8; k++) {
-                int i = myNum[k];
-                BufferedImage[] walk = new BufferedImage[1];
-                tmp = 0;
-                for (int j = 0; j < 3; j++) {
-                    walk[tmp] = spritesheet.getSubimage(
-                            j * ballSize,
-                            i * ballSize,
-                            ballSize,
-                            ballSize);
-                    tmp++;
-                }
-                sprites.add(walk);
-            }
+            BufferedImage[] sprites = new BufferedImage[1];
+            sprites[0] = img;
+            
             animation = new Animation();
             currentAction = STAND;
             nextAction = STAND;
-            animation.setFrames(sprites.get(currentAction));
+            animation.setFrames(sprites);
             animation.setDelay(100);
 
         } catch (Exception e) {
@@ -105,36 +104,9 @@ public class Ball extends Entity {
 
     }
 
-    public void move_(String direction) {
-        char d;
-        for (int i = 0; i < direction.length(); i++) {
-            d = direction.charAt(i);
-            switch (d) {
-                case 'U':
-                    x--;
-
-                    break;
-                case 'D':
-                    x++;
-
-                    break;
-                case 'L':
-                    y--;
-
-                    break;
-                case 'R':
-                    y++;
-
-                    break;
-            }
-
-        }
-    }
-
     public void draw(Graphics2D g) {
-        g.drawImage(img, x * LineGameState.BALL_SIZE,
-                y * LineGameState.BALL_SIZE, null);
-
+        g.drawImage(img, (int) x * ballSize,
+                (int) y * ballSize, null);
     }
 
     public boolean contains(int x, int y) {
@@ -157,34 +129,17 @@ public class Ball extends Entity {
         update();
     }
 
-    @Override
-    public void move(int direction, int halfsize) {
+    public void move(char direction) {
         setDirection(direction);
         setAction(WALK + direction);
         switch (direction) {
-            case leftDown:
-                x -= moveSpeed;
-                y += moveSpeed;
-                break;
             case down:
-                y += moveSpeed;
-                break;
-            case rightDown:
-                x += moveSpeed;
                 y += moveSpeed;
                 break;
             case right:
                 x += moveSpeed;
                 break;
-            case rightUp:
-                x += moveSpeed;
-                y -= moveSpeed;
-                break;
             case up:
-                y -= moveSpeed;
-                break;
-            case leftUp:
-                x -= moveSpeed;
                 y -= moveSpeed;
                 break;
             case left:
@@ -198,54 +153,6 @@ public class Ball extends Entity {
 
     public int finalX, finalY;
     public int way;
-
-    public void walkingIn(int order) {
-        if (order == 0) {
-            finalX = 170;
-            finalY = 75;
-        } else if (order == 1) {
-            finalX = 200;
-            finalY = 75;
-        } else if (order == 2) {
-            finalX = 230;
-            finalY = 75;
-        } else {
-            finalX = 260;
-            finalY = 75;
-        }
-
-        // get in and move up
-        if (getX() == finalX && getY() > finalY) {
-            setDirection(5);
-            setAction(WALK + getDirection());
-            return;
-
-        }
-
-        // get in and move right
-        if (getX() < finalX && getY() > finalY) {
-            setDirection(3);
-            setAction(WALK + getDirection());
-            return;
-        }
-
-        // arrived the position
-        if (getX() == finalX && getY() == finalY) {
-            if (popup == null) {
-                Random rand = new Random();
-                // there are 23 drinks
-                int pos = rand.nextInt(23);
-                String chosen = drinkAddress[pos];
-                PopUp drink = new PopUp(getX(), getY(), chosen);
-                popup = drink;
-            }
-
-            setAction(STAND);
-            setCountingTime();
-            return;
-        }
-
-    }
 
     // timing
     private boolean countingTime = false;
@@ -287,25 +194,25 @@ public class Ball extends Entity {
         if (nextAction == STAND) {
             if (currentAction == STAND) {
                 if (animation.hasPlayedOnce()) {
-                    animation.setFrames(sprites.get(STAND));
+                    animation.setFrames(sprites);
                     animation.setDelay(slow);
                 }
                 // setCountingTime();
             }
 
-            if (currentAction >= WALK && currentAction <= WALK + 7) {
+            if (currentAction >= WALK) {
                 currentAction = STAND;
-                animation.setFrames(sprites.get(STAND));
+                animation.setFrames(sprites);
                 animation.setDelay(slow);
 
             }
         }
 
-        if (nextAction >= WALK && nextAction <= WALK + 7) {
+        if (nextAction >= WALK) {
 
-            if (currentAction >= WALK && currentAction <= WALK + 7) {
+            if (currentAction >= WALK) {
                 if (tempDirection != currentDirection) {
-                    animation.setFrames(sprites.get(WALK + currentDirection));
+                    animation.setFrames(sprites);
                     animation.setDelay(slow);
                     tempDirection = currentDirection;
                 }
@@ -313,7 +220,7 @@ public class Ball extends Entity {
             }
             if (currentAction == STAND) {
                 currentAction = WALK + currentDirection;
-                animation.setFrames(sprites.get(WALK + currentDirection));
+                animation.setFrames(sprites);
                 animation.setDelay(slow);
 
             }
@@ -325,11 +232,11 @@ public class Ball extends Entity {
     }
 
     public int getX() {
-        return x;
+        return (int) x;
     }
 
     public int getY() {
-        return y;
+        return (int) y;
     }
 
     public boolean isClicked() {
