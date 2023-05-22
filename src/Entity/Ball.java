@@ -116,7 +116,11 @@ public class Ball {
 
     }
 
-    public void move(char direction) {
+    // The move function below will be called in the LinegameState, 
+    // by using a loop through each character in the description
+    // provided by A-Star algorithm. 
+
+    public void move(char direction) { 
         isClicked_ = true;
         setDirection(direction);
         setAction(WALK + direction);
@@ -239,6 +243,9 @@ public class Ball {
         update();
     }
 
+    public String getDescription() {
+        return moveDescription;
+    }
 
     public int getX() {
         return (int) x;
