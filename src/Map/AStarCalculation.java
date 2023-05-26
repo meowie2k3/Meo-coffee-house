@@ -72,12 +72,12 @@ public class AStarCalculation {
         // only 4 directions
         return ((double) Math.abs(row - dest.first) + Math.abs(col - dest.second));
     }
-
-    private static void tracePath(cell[][] cellDetails, Pair dest) {
-        System.out.println("\nThe Path is ");
+    
+    //result rules: U -> up, D -> down, L -> left, R -> right, return false if any error
+    private static String tracePath(cell[][] cellDetails, Pair dest) {
         int row = dest.first;
         int col = dest.second;
-
+        String res = "";
         Stack<Pair> Path = new Stack<Pair>();
 
         while (!(cellDetails[row][col].parent_i == row && cellDetails[row][col].parent_j == col)) {
@@ -92,29 +92,46 @@ public class AStarCalculation {
         while (!Path.empty()) {
             Pair p = Path.peek();
             Path.pop();
-            System.out.print("-> (" + p.first + ", " + p.second + ") ");
+            if (!Path.empty()) {
+                Pair p2 = Path.peek();
+                if (p.first == p2.first) {
+                    if (p.second > p2.second) {
+                        res += "L";
+                    } else {
+                        res += "R";
+                    }
+                } else {
+                    if (p.first > p2.first) {
+                        res += "U";
+                    } else {
+                        res += "D";
+                    }
+                }
+            }
         }
-        return;
+        return res;
     }
 
-    static void AStarSearch(int[][] grid, Pair src, Pair dest) {
+    static String AStarSearch(int[][] grid, Pair src, Pair dest) {
+
+        String res = "";
 
         // source valid check
         if (!isValid(src.first, src.second)) {
-            System.out.println("Source is invalid");
-            return;
+            //System.out.println("Source is invalid");
+            return "false";
         }
 
         // destination valid check
         if (!isValid(dest.first, dest.second)) {
-            System.out.println("Destination is invalid");
-            return;
+            //System.out.println("Destination is invalid");
+            return "false";
         }
 
         // destination blocked check
         if (!isUnBlocked(grid, dest.first, dest.second)) {
-            System.out.println("Destination is blocked");
-            return;
+            //System.out.println("Destination is blocked");
+            return "false";
         }
 
         // Create a closed list and initialise it to false which
@@ -200,9 +217,9 @@ public class AStarCalculation {
                         cellDetails[row][col].parent_i = i;
                         cellDetails[row][col].parent_j = j;
                         System.out.println("The destination cell is found\n");
-                        tracePath(cellDetails, dest);
+                        res = tracePath(cellDetails, dest);
                         foundDest = true;
-                        return;
+                        return res;
                     } else {
                         gNew = cellDetails[i][j].g + 1.0;
                         hNew = calculateHValue(row, col, dest);
@@ -223,8 +240,9 @@ public class AStarCalculation {
             }
         }
         if (foundDest == false) {
-            System.out.println("Failed to find the Destination Cell\n");
+            //System.out.println("Failed to find the Destination Cell\n");
+            return "false";
         }
-        return;
+        return "false";
     }
 }
