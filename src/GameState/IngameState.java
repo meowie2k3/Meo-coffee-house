@@ -16,6 +16,8 @@ public class IngameState extends GameState{
     public static Map map;
     public static Background bg;
     private SoundEffect soundEffect;
+    private LinePlaying linePlaying;
+    private Shop shop;
 
     // ui
     private UI ui;
@@ -32,18 +34,11 @@ public class IngameState extends GameState{
         "RabbitMon-Sheet.png"
     };
 
-    //shop
-    // private Shop shop;
-    private BufferedImage s1;
-    // private int shopChoice = 0, time = 0;
-    // private BufferedImage[] option = {s1};
-
 
     //constructor
     public IngameState(GameStateManager gsm){
         this.gsm = gsm;
         init();
-        
     }
     
     // file abstract method
@@ -56,6 +51,10 @@ public class IngameState extends GameState{
         soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
         GamePanel.HEIGHT - 23,
             "Resources/soundEffect/meow.wav", false);
+
+        linePlaying = new LinePlaying(3, 177, true);
+
+        shop = new Shop(3, GamePanel.HEIGHT - 23, true);
         
         // load user data
         map.loadFurniture();
@@ -65,19 +64,6 @@ public class IngameState extends GameState{
 
         // UI
         ui = new UI();
-
-        // // Shop
-        // shop = new Shop();
-        
-        // JButton s1 = new JButton(new ImageIcon("s1.png"));  
-        // s1.setBounds(5, 650, 30, 30);      
-        // s1.setBackground(Color.WHITE);
-        // s1.setBorderPainted(false);
-
-        // JButton s2 = new JButton(new ImageIcon("s2.png"));  
-        // s2.setBounds(5, 650, 30, 30);      
-        // s2.setBackground(Color.WHITE);
-        // s2.setBorderPainted(false);
     }
 
     // update
@@ -124,37 +110,31 @@ public class IngameState extends GameState{
             bartenderList.get(i).update();
         }     
 
-        map.SaveUserData("Resources/UserSavedGame/User1.map");
+        //map.SaveUserData("Resources/UserSavedGame/User1.map");
         
     }
+    public void saveData() {
+        map.SaveUserData("Resources/UserSavedGame/User1.map");
+    }
     public void draw(java.awt.Graphics2D g) {
-        //draw map
-        //clear screen
-        //g.setColor(java.awt.Color.WHITE);
-        //g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 
      try{
-            //draw background
-
             bg.draw(g);
 
             //draw map
             soundEffect.draw(g);
+            linePlaying.draw(g);
+            shop.draw(g);
 
             //draw bartender
             for (int i = 0; i < bartenderList.size(); i++) {
                 bartenderList.get(i).draw(g);
             }
 
-
             //draw UI
             ui.draw(g);
             map.draw(g);
 
-            //draw shop
-            // shop.draw(g);
-            s1 = ImageIO.read(getClass().getResourceAsStream("/UI/s1.png"));
-            // s2 = ImageIO.read(getClass().getResourceAsStream("/UI/s2.png"));
             
             //draw cat
             for(int i=0;i<catList.size();i++){
@@ -172,15 +152,6 @@ public class IngameState extends GameState{
             e.printStackTrace();
         }
 
-        g.drawImage(s1, 3, 209, null);
-        // for (int i = 0; i < option.length; i++) {
-        //     if (shopChoice == 1 && time == 1)   {
-        //         g.drawImage(s2, 3, 209, null);
-        //     }
-        //     else if (shopChoice == 0 && time == 0)  {
-        //         g.drawImage(s1, 3, 209, null);
-        //     }
-        // }
     }
     //key event listener
     public void keyPressed(int k) {
@@ -201,6 +172,7 @@ public class IngameState extends GameState{
         
     }
     public void mouseClicked(MouseEvent e) {
+        // sound
         if(soundEffect.contains(e.getX(), e.getY())){
             soundEffect.toggle();
         }
@@ -209,6 +181,16 @@ public class IngameState extends GameState{
             if (catList.get(i).contains(e.getX(), e.getY())) {
                 catList.get(i).catDoSomething();          
             }
+        }
+
+        // play Line 98
+        if (linePlaying.contains(e.getX(), e.getY()))   {
+            gsm.setState(GameStateManager.LINESTATE);
+        }
+
+        // shopping
+        if (shop.contains(e.getX(), e.getY()))  {
+            gsm.setState(GameStateManager.SHOPSTATE);
         }
 
         // for character
@@ -223,30 +205,6 @@ public class IngameState extends GameState{
                 
             }
         }
-
-        // if (map.containsFurniture(e.getX(), e.getY())) {
-        //     System.out.println("furniture");
-        // }
-        // else {
-        //     System.out.println("no furniture");
-        // }
-        int x = e.getX();
-        int y = e.getY();
-        System.out.println("mouse moved " + x + " " + y);
-        int scale = GamePanel.SCALE;
-        int left = 3*scale;
-        int right = 33*scale;
-        int top = 209*scale;
-        int bottom = 239*scale;
-
-        if (x > left && x < right && y > top && y < bottom ) {
-             
-        //     panel.setVisible(true);
-        //     // time = 1;
-        
-            // System.exit(0);
-            gsm.setState(GameStateManager.SHOPSTATE);
-        }
         
     }
 
@@ -255,23 +213,6 @@ public class IngameState extends GameState{
     }
     //mouse motion listener
     public void mouseMoved(MouseEvent e) {
-        // int x = e.getX();
-        // int y = e.getY();
-        // // System.out.println("mouse moved " + x + " " + y);
-        // int scale = GamePanel.SCALE;
-        // int left = 3*scale;
-        // int right = 33*scale;
-        // int top = 209*scale;
-        // int bottom = 239*scale;
-
-        // if (x > left && x < right && y > top && y < bottom && time == 0) {
-        //     shopChoice = 1;
-        //     time = 1;
-        // }
-        // if (x > left && x < right && y > top && y < bottom && time == 1)    {
-        //     shopChoice = 0;
-        //     time = 0;
-        // }
         
         
     }
