@@ -1,5 +1,10 @@
 package Map;
 
+import java.awt.Graphics2D;
+import java.util.Random;
+
+import javax.swing.DefaultRowSorter;    
+
 import Entity.Ball;
 
 public class Board {
@@ -8,10 +13,105 @@ public class Board {
     //board[i][j].color: null -> không có, 1 -> màu đỏ, 2 -> màu xanh, 3 -> màu vàng, 4 -> màu tím, 5 -> màu xám, 6 -> màu cam, 7 -> màu đen
     //board[i][j].level: 0 -> nhỏ, 1 -> lớn
 
-    public Board(){
-        
+    public Board(){  
+        Random random = new Random();
+        for (int i=0; i<3; i++){
+            int x= random.nextInt(9);
+            int y= random.nextInt(9);
+            int color = random.nextInt(7) + 1;
+            addBigBall(x, y, color);
+        }
     }
     
+    //click board
+    public void click(int x, int y){
+    }
+
+    //contains board
+    public boolean contains(int x, int y){
+        if (x>=199 && x<=762 && y>=114 && y<=678){
+            //System.out.println("true");
+            return true;
+        }
+        //System.out.println("false");
+        return false;
+    }
+
+    //return position
+    public int mousePositionX(int x,int y){
+        int square = 62;
+        if (x>=200 && x<=200+square){
+            return 0;
+        }
+        if (x>=200+square && x<=200+2*square){
+            return 1;
+        }
+        if (x>=200+2*square && x<=200+3*square){
+            return 2;
+        }
+        if (x>=200+3*square && x<=200+4*square){
+            return 3;
+        }
+        if (x>=200+4*square && x<=200+5*square){
+            return 4;
+        }
+        if (x>=200+5*square && x<=200+6*square){
+            return 5;
+        }
+        if (x>=200+6*square && x<=200+7*square){
+            return 6;
+        }
+        if (x>=200+7*square && x<=200+8*square){
+            return 7;
+        }
+        if (x>=200+8*square && x<=200+9*square){
+            return 8;
+        }        
+        return 0;
+    }
+    public int mousePositionY(int x, int y){
+        int square = 62;
+        if (y>=115 && y<=115+square){
+            return 0;
+        }
+        if (y>=115+square && y<=115+2*square){
+            return 1;
+        }
+        if (y>=115+2*square && y<=115+3*square){
+            return 2;
+        }
+        if (y>=115+3*square && y<=115+4*square){
+            return 3;
+        }
+        if (y>=115+4*square && y<=115+5*square){
+            return 4;
+        }
+        if (y>=115+5*square && y<=115+6*square){
+            return 5;
+        }
+        if (y>=115+6*square && y<=115+7*square){
+            return 6;
+        }
+        if (y>=115+7*square && y<=115+8*square){
+            return 7;
+        }
+        if (y>=115+8*square && y<=115+9*square){
+            return 8;
+        }        
+        return 0;
+    }
+    
+    //draw board
+    public void draw(Graphics2D g){
+        for (int i=0; i<9; i++){
+            for (int j=0; j<9; j++){
+                if (board[i][j] != null){
+                    board[i][j].draw(g);
+                }
+            }
+        }
+    }
+
     //xóa ball
     public void deleteBall(int x, int y){
         board[x][y] = null;
