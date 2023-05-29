@@ -243,6 +243,10 @@ public class Ball {
         update();
     }
 
+    public void setDescription(String description) {
+        moveDescription = description;
+    }
+
     public String getDescription() {
         return moveDescription;
     }
