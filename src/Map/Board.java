@@ -1,9 +1,7 @@
 package Map;
 
 import java.awt.Graphics2D;
-import java.util.Random;
-
-import javax.swing.DefaultRowSorter;    
+import java.util.Random;  
 
 import Entity.Ball;
 
@@ -15,16 +13,35 @@ public class Board {
 
     public Board(){  
         Random random = new Random();
-        for (int i=0; i<3; i++){
-            int x= random.nextInt(9);
-            int y= random.nextInt(9);
-            int color = random.nextInt(7) + 1;
-            addBigBall(x, y, color);
+        // for (int i=0; i<3; i++){
+        //     int x= random.nextInt(9);
+        //     int y= random.nextInt(9);
+        //     int color = random.nextInt(7) + 1;
+        //     addBigBall(x, y, color);
+        // }
+        addBigBall(0,0, 1);
+        addBigBall(0,1, 2);
+        addBigBall(0,2, 3);
+    }
+
+    public void update(){
+        //update all ball
+        for (int i=0; i<9; i++){
+            for (int j=0; j<9; j++){
+                if (board[i][j]!=null){
+                    board[i][j].update();
+                }
+            }
         }
     }
     
     //click board
     public void click(int x, int y){
+        //System.out.println(x + " " + y); //checked
+        if(board[x][y]!=null){
+            board[x][y].click();
+        }
+
     }
 
     //contains board

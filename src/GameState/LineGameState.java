@@ -54,6 +54,7 @@ public class LineGameState extends GameState {
     }
     public void update(){
         bg.update();
+        board.update();
     }
     public void draw(Graphics2D g){
         bg.draw(g);
