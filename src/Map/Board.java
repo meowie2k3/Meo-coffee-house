@@ -3,7 +3,9 @@ package Map;
 import java.awt.Graphics2D;
 import java.beans.BeanProperty;
 import java.beans.beancontext.BeanContext;
-import java.util.Random;  
+import java.util.Random;
+
+import javax.sql.rowset.serial.SerialJavaObject;
 
 import Entity.Ball;
 
@@ -53,7 +55,7 @@ public class Board {
     //click board
     public void click(int x, int y){
         Random random = new Random();
-        // System.out.println(x + " " + y); //checked
+        //System.out.println(x + " " + y); //checked
         // System.out.println(board[x][y]);
 
         boolean isClickedBall = false;
@@ -75,7 +77,13 @@ public class Board {
                 board[x][y].unclick();
                 return;
             }
-            if (board[x][y]==null || board[x][y].getLevel()==0){
+            if (board[x][y]!=null && board[x][y].getLevel()==1){
+                board[x][y].click();  
+                board[savei][savej].unclick();
+            }
+            //condition to move
+            if ((board[x][y]==null || board[x][y].getLevel()==0) ){
+                //System.out.println(AStarCalculation.AStarInstruction(board, savei, savej, x, y));
                 addBigBall(x, y, board[savei][savej].getColor());
                 deleteBall(savei, savej);
                 checkDeleteBall(x, y);
@@ -206,7 +214,7 @@ public class Board {
         board[x][y] = new Ball(x, y, color, 1);
     }
 
-    //kiểm tra xóa ball, khi nào: ball từ nhỏ -> lớn, ball mới di chuyển đến vị trí mới, hưng sẽ gọi
+    //kiểm tra xóa ball, khi nào: ball từ nhỏ -> lớn, ball mới di chuyển đến vị trí mới
     public void checkDeleteBall(int x, int y){
         // count1 sẽ đếm số bóng hàng ngang
         int count1 = 1;

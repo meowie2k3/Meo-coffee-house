@@ -113,7 +113,7 @@ public class AStarCalculation {
         return res;
     }
 
-    static String AStarInstruction(Ball grid[][], int xStart, int yStart, int xDest, int yDest){
+    static String AStarInstruction(Ball[][] grid, int xStart, int yStart, int xDest, int yDest){
         int[][] gridRes = new int[ROW][COL];
         for (int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
@@ -128,7 +128,6 @@ public class AStarCalculation {
         Pair src = new Pair(xStart, yStart);
         Pair dest = new Pair(xDest, yDest);
         return AStarSearch(gridRes, src, dest);
-
     }
 
     static String AStarSearch(int[][] grid, Pair src, Pair dest) {
