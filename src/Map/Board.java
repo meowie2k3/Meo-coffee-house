@@ -1,6 +1,8 @@
 package Map;
 
 import java.awt.Graphics2D;
+import java.beans.BeanProperty;
+import java.beans.beancontext.BeanContext;
 import java.util.Random;  
 
 import Entity.Ball;
@@ -13,15 +15,28 @@ public class Board {
 
     public Board(){  
         Random random = new Random();
-        // for (int i=0; i<3; i++){
-        //     int x= random.nextInt(9);
-        //     int y= random.nextInt(9);
-        //     int color = random.nextInt(7) + 1;
-        //     addBigBall(x, y, color);
-        // }
-        addBigBall(0,0, 1);
-        addBigBall(0,1, 2);
-        addBigBall(0,2, 3);
+        for (int i=0; i<3; i++){
+            int x, y;
+            do {
+                x= random.nextInt(9);
+                y= random.nextInt(9);
+            } while (board[x][y]!=null);
+            int color = random.nextInt(7) + 1;
+            addBigBall(x, y, color);
+        }
+
+        for (int i=0; i<3; i++){
+            int x, y;
+            do {
+                x= random.nextInt(9);
+                y= random.nextInt(9);
+            } while (board[x][y]!=null);
+            int color = random.nextInt(7) + 1;
+            addSmallBall(x, y, color);
+        }
+        // addBigBall(0,0, 1);
+        // addBigBall(0,1, 2);
+        // addBigBall(0,2, 3);
     }
 
     public void update(){
@@ -37,9 +52,56 @@ public class Board {
     
     //click board
     public void click(int x, int y){
-        //System.out.println(x + " " + y); //checked
-        if(board[x][y]!=null){
-            board[x][y].click();
+        Random random = new Random();
+        // System.out.println(x + " " + y); //checked
+        // System.out.println(board[x][y]);
+
+        boolean isClickedBall = false;
+        int savei = 0, savej = 0;
+        for (int i=0; i<9; i++){
+            for (int j=0; j<9; j++){
+                if (board[i][j]!=null){
+                    if (board[i][j].isClicked()){
+                    savei = i;
+                    savej = j;
+                    isClickedBall = true;
+                    break;
+                }}
+            }
+        }
+
+        if (isClickedBall){
+            if (savei == x && savej == y){
+                board[x][y].unclick();
+                return;
+            }
+            if (board[x][y]==null || board[x][y].getLevel()==0){
+                addBigBall(x, y, board[savei][savej].getColor());
+                deleteBall(savei, savej);
+                checkDeleteBall(x, y);
+                for (int i=0; i<9; i++){
+                    for (int j=0; j<9; j++){
+                        if (board[i][j]!=null){
+                            if (board[i][j].getLevel()==0){
+                                addBigBall(i, j, board[i][j].getColor());
+                                checkDeleteBall(i, j);
+                        }}
+                    }
+                }
+                for (int i=0; i<3; i++){
+                    int a, b;
+                    do {
+                        a= random.nextInt(9);
+                        b= random.nextInt(9);
+                    } while (board[a][b]!=null);
+                    int color = random.nextInt(7) + 1;
+                    addSmallBall(a, b, color);
+                }
+            }
+        } else {
+            if (board[x][y]!=null){
+                board[x][y].click();
+            }
         }
 
     }
@@ -148,14 +210,19 @@ public class Board {
     public void checkDeleteBall(int x, int y){
         // count1 sẽ đếm số bóng hàng ngang
         int count1 = 1;
+        int color_id = board[x][y].getColor();
 
         // kiểm tra hàng ngang phải
         int i = x;
         int j = y;
+
         while (j>=0 && j<8){
-            if (board[i][j].getColor() == board[i][j+1].getColor()){
-                count1++;
-                j++;
+            if (board[i][j+1] != null){
+                if (color_id == board[i][j+1].getColor()){
+                    count1++;
+                    j++;
+                }
+                else break;
             }
             else break;
         }
@@ -163,9 +230,12 @@ public class Board {
         // kiểm tra hàng ngang trái
         j = y;
         while (j>0 && j<=8){
-            if (board[i][j].getColor() == board[i][j-1].getColor()){
-                count1++;
-                j--;
+            if (board[i][j-1] != null){
+                if (color_id == board[i][j-1].getColor()){
+                    count1++;
+                    j--;
+                }
+                else break;
             }
             else break;
         }
@@ -174,10 +244,14 @@ public class Board {
         if (count1 >= 5){
             // xóa bóng hàng ngang
             j = y;
+            deleteBall(i, j);
             while (j>=0 && j<8){
-                if (board[i][j].getColor() == board[i][j+1].getColor()){
-                    deleteBall(i, j);
-                    j++;
+                if (board[i][j+1] != null){
+                    if (color_id == board[i][j+1].getColor()){
+                        deleteBall(i, j+1);
+                        j++;
+                    }
+                    else break;
                 }
                 else break;
             }
@@ -185,9 +259,12 @@ public class Board {
             // xóa bóng hàng ngang
             j = y;
             while (j>0 && j<=8){
-                if (board[i][j].getColor() == board[i][j-1].getColor()){
-                    deleteBall(i, j);
-                    j--;
+                if (board[i][j-1] != null){
+                    if (color_id == board[i][j-1].getColor()){
+                        deleteBall(i, j-1);
+                        j--;
+                    }
+                    else break;
                 }
                 else break;
             }
@@ -200,9 +277,12 @@ public class Board {
         i = x;
         j = y;
         while (i>=0 && i<8){
-            if (board[i][j].getColor() == board[i+1][j].getColor()){
-                count2++;
-                i++;
+            if (board[i+1][j] != null){
+                if (color_id == board[i+1][j].getColor()){
+                    count2++;
+                    i++;
+                }
+                else break;
             }
             else break;
         }
@@ -210,9 +290,12 @@ public class Board {
         // kiểm tra hàng dọc dưới
         i = x;
         while (i>0 && i<=8){
-            if (board[i][j].getColor() == board[i-1][j].getColor()){
-                count2++;
-                i--;
+            if (board[i-1][j] != null){
+                if (color_id == board[i-1][j].getColor()){
+                    count2++;
+                    i--;
+                }
+                else break;
             }
             else break;
         }
@@ -221,10 +304,14 @@ public class Board {
         if (count2 >= 5){
             // xóa bóng hàng dọc trên
             i = x;
+            deleteBall(i, j);
             while (i>=0 && i<8){
-                if (board[i][j].getColor() == board[i+1][j].getColor()){
-                    deleteBall(i, j);
-                    i++;
+                if (board[i+1][j] != null){
+                    if (color_id == board[i+1][j].getColor()){
+                        deleteBall(i+1, j);
+                        i++;
+                    }
+                    else break;
                 }
                 else break;
             }
@@ -232,9 +319,12 @@ public class Board {
             // xóa bóng hàng dọc dưới
             i = x;
             while (i>0 && i<=8){
-                if (board[i][j].getColor() == board[i-1][j].getColor()){
-                    deleteBall(i, j);
-                    i--;
+                if (board[i-1][j] != null){
+                    if (color_id == board[i-1][j].getColor()){
+                        deleteBall(i-1, j);
+                        i--;
+                    }
+                    else break;
                 }
                 else break;
             }
@@ -247,10 +337,13 @@ public class Board {
         i = x;
         j = y;
         while (i>=0 && i<8 && j>=0 && j<8){
-            if (board[i][j].getColor() == board[i+1][j+1].getColor()){
-                count3++;
-                i++;
-                j++;
+            if (board[i+1][j+1] != null){
+                if (color_id == board[i+1][j+1].getColor()){
+                    count3++;
+                    i++;
+                    j++;
+                }
+                else break;
             }
             else break;
         }
@@ -259,10 +352,13 @@ public class Board {
         i = x;
         j = y;
         while (i>0 && i<=8 && j>0 && j<=8){
-            if (board[i][j].getColor() == board[i-1][j-1].getColor()){
-                count3++;
-                i--;
-                j--;
+            if (board[i-1][j-1] != null){
+                if (color_id == board[i-1][j-1].getColor()){
+                    count3++;
+                    i--;
+                    j--;
+                }
+                else break;
             }
             else break;
         }
@@ -272,11 +368,15 @@ public class Board {
             // xóa bóng hàng chéo xuôi trên
             i = x;
             j = y;
+            deleteBall(i, j);
             while (i>=0 && i<8 && j>=0 && j<8){
-                if (board[i][j].getColor() == board[i+1][j+1].getColor()){
-                    deleteBall(i, j);
-                    i++;
-                    j++;
+                if (board[i+1][j+1] != null){
+                    if (color_id == board[i+1][j+1].getColor()){
+                        deleteBall(i+1, j+1);
+                        i++;
+                        j++;
+                    }
+                    else break;
                 }
                 else break;
             }
@@ -285,10 +385,13 @@ public class Board {
             i = x;
             j = y;
             while (i>0 && i<=8 && j>0 && j<=8){
-                if (board[i][j].getColor() == board[i-1][j-1].getColor()){
-                    deleteBall(i, j);
-                    i--;
-                    j--;
+                if (board[i-1][j-1] != null){
+                    if (color_id == board[i-1][j-1].getColor()){
+                        deleteBall(i-1, j-1);
+                        i--;
+                        j--;
+                    }
+                    else break;
                 }
                 else break;
             }
@@ -301,10 +404,13 @@ public class Board {
         i = x;
         j = y;
         while (i>=0 && i<8 && j>0 && j<=8){
-            if (board[i][j].getColor() == board[i+1][j-1].getColor()){
-                count4++;
-                i++;
-                j--;
+            if (board[i+1][j-1] != null){
+                if (color_id == board[i+1][j-1].getColor()){
+                    count4++;
+                    i++;
+                    j--;
+                }
+                else break;
             }
             else break;
         }
@@ -313,10 +419,13 @@ public class Board {
         i = x;
         j = y;
         while (i>0 && i<=8 && j>=0 && j<8){
-            if (board[i][j].getColor() == board[i-1][j+1].getColor()){
-                count4++;
-                i--;
-                j++;
+            if (board[i-1][j+1] != null){
+                if (color_id == board[i-1][j+1].getColor()){
+                    count4++;
+                    i--;
+                    j++;
+                }
+                else break;
             }
             else break;
         }
@@ -326,11 +435,15 @@ public class Board {
             // xóa bóng hàng chéo ngược trên
             i = x;
             j = y;
+            deleteBall(i, j);
             while (i>=0 && i<8 && j>0 && j<=8){
-                if (board[i][j].getColor() == board[i+1][j-1].getColor()){
-                    deleteBall(i, j);
-                    i++;
-                    j--;
+                if (board[i+1][j-1] != null){
+                    if (color_id == board[i+1][j-1].getColor()){
+                        deleteBall(i+1, j-1);
+                        i++;
+                        j--;
+                    }
+                    else break;
                 }
                 else break;
             }
@@ -339,15 +452,16 @@ public class Board {
             i = x;
             j = y;
             while (i>0 && i<=8 && j>=0 && j<8){
-                if (board[i][j].getColor() == board[i-1][j+1].getColor()){
-                    deleteBall(i, j);
-                    i--;
-                    j++;
+                if (board[i-1][j+1] != null){
+                    if (color_id == board[i-1][j+1].getColor()){
+                        deleteBall(i-1, j+1);
+                        i--;
+                        j++;
+                    }
+                    else break;
                 }
                 else break;
             }
         }
-
     }
-
 }

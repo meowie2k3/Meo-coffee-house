@@ -126,6 +126,10 @@ public class Ball {
         isClicked_ = true;
     }
 
+    public void unclick(){
+        isClicked_ = false;
+    }
+
     public boolean isClicked() {
         return isClicked_;
     }
