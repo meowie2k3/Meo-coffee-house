@@ -23,6 +23,8 @@ public class LineGameState extends GameState {
 
     public BufferedImage lineIU;
 
+    private Board board = new Board();
+
     private String[] address =new String[]{
         "/Balls/1.png"
     };
@@ -39,6 +41,8 @@ public class LineGameState extends GameState {
         score = 0;
     }
 
+    public void saveData(){}
+
     public void init() {
         bg = new Background("/Backgrounds/bg_Line.png", 0);
 
@@ -50,11 +54,13 @@ public class LineGameState extends GameState {
     }
     public void update(){
         bg.update();
+        board.update();
     }
     public void draw(Graphics2D g){
         bg.draw(g);
         soundEffect.draw(g);
         linePlaying.draw(g);
+        board.draw(g);
         g.drawImage(lineIU, 66, 12, null);  
     }
     public void keyPressed(int k){
@@ -62,6 +68,7 @@ public class LineGameState extends GameState {
     public void keyReleased(int k){
     }
     public void mousePressed(MouseEvent e) {
+        //System.out.println(e.getX() + " " + e.getY());
     }
     public void mouseReleased(MouseEvent e) {
     }
@@ -74,6 +81,11 @@ public class LineGameState extends GameState {
 
         if (linePlaying.contains(e.getX(), e.getY()))   {
             gsm.setState(GameStateManager.INGAMESTATE);
+        }
+
+        if (board.contains(e.getX(), e.getY())) {
+            //System.out.println(board.mousePositionX(e.getX(), e.getY()) + " " + board.mousePositionY(e.getX(), e.getY()));
+            board.click(board.mousePositionX(e.getX(), e.getY()), board.mousePositionY(e.getX(), e.getY()));
         }
     }
     public void mouseExited(MouseEvent e) {
