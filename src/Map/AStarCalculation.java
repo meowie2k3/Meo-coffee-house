@@ -125,14 +125,12 @@ public class AStarCalculation {
                 }
             }
         }
-        Pair src = new Pair(xStart, yStart);
-        Pair dest = new Pair(xDest, yDest);
+        Pair src = new Pair(yStart, xStart);
+        Pair dest = new Pair(yDest, xDest);
         return AStarSearch(gridRes, src, dest);
     }
 
     static String AStarSearch(int[][] grid, Pair src, Pair dest) {
-
-        String res = "";
 
         // source valid check
         if (!isValid(src.first, src.second)) {
@@ -235,9 +233,8 @@ public class AStarCalculation {
                         cellDetails[row][col].parent_i = i;
                         cellDetails[row][col].parent_j = j;
                         //System.out.println("The destination cell is found\n");
-                        res = tracePath(cellDetails, dest);
                         foundDest = true;
-                        return res;
+                        return tracePath(cellDetails, dest);
                     } else {
                         gNew = cellDetails[i][j].g + 1.0;
                         hNew = calculateHValue(row, col, dest);

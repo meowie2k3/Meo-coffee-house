@@ -1,7 +1,6 @@
 package Map;
 
 import java.awt.Graphics2D;
-import java.beans.BeanProperty;
 import java.beans.beancontext.BeanContext;
 import java.util.Random;
 
@@ -63,8 +62,10 @@ public class Board {
         }
 
         if (justMoved == true && isMoving() == false) {
-            //board[choosedX][choosedY].unclick();
-            board[destinationX][destinationY].unclick();
+            board[choosedX][choosedY].unclick();
+            //board[destinationX][destinationY].unclick();
+            //System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY + " destinationX: " + destinationX
+                    //+ " destinationY: " + destinationY);
             afterMoveAction(choosedX, choosedY, destinationX, destinationY);
             justMoved = false;
             choosedX = -1;
@@ -76,19 +77,20 @@ public class Board {
 
     public void afterMoveAction(int savei, int savej, int x, int y) {
         Random random = new Random();
-        addBigBall(x, y, board[savei][savej].getColor());
-        deleteBall(savei, savej);
         
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] != null) {
                     if (board[i][j].getLevel() == 0) {
-                        addBigBall(i, j, board[i][j].getColor());
-                        if(checkDeleteBall(x, y)) score += 100;
+                        board[i][j].levelUp();
+                        if(checkDeleteBall(i, j)) score += 100;
                     }
                 }
             }
         }
+        addBigBall(x, y, board[savei][savej].getColor());
+        deleteBall(savei, savej);
+        checkDeleteBall(x, y);
         for (int i = 0; i < 3; i++) {
             int a, b;
             do {
@@ -154,11 +156,12 @@ public class Board {
             
             // condition to move
             if ((board[x][y] == null || board[x][y].getLevel() == 0)) {
-                String instruction = AStarCalculation.AStarInstruction(board, choosedY,choosedX, y, x);
-                System.out.println("From " + choosedY + " " + choosedX + " to " + x + " " + y);
+                //System.out.println("From " + choosedX + " " + choosedY + " to " + x + " " + y);
+                String instruction = AStarCalculation.AStarInstruction(board, choosedX,choosedY, x, y);
+                
                 destinationX = x;
                 destinationY = y;
-                System.out.println(instruction);
+                //System.out.println(instruction);
                 if (instruction == "false") {
                     board[choosedX][choosedY].unclick();
                     choosedX = -1;
