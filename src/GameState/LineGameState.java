@@ -85,7 +85,7 @@ public class LineGameState extends GameState {
 
         if (board.contains(e.getX(), e.getY())) {
             //System.out.println(board.mousePositionX(e.getX(), e.getY()) + " " + board.mousePositionY(e.getX(), e.getY()));
-            board.click(board.mousePositionX(e.getX(), e.getY()), board.mousePositionY(e.getX(), e.getY()));
+            board.click(board.mousePositionX(e.getX(), e.getY()),board.mousePositionY(e.getX(), e.getY()));
         }
     }
     public void mouseExited(MouseEvent e) {

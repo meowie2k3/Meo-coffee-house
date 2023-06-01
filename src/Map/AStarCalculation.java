@@ -63,9 +63,9 @@ public class AStarCalculation {
 
     private static boolean isDestination(int row, int col, Pair dest) {
         if (row == dest.first && col == dest.second)
-            return (true);
+            return true;
         else
-            return (false);
+            return false;
     }
 
     private static double calculateHValue(int row, int col, Pair dest) {
@@ -113,11 +113,11 @@ public class AStarCalculation {
         return res;
     }
 
-    static String AStarInstruction(Ball grid[][], int xStart, int yStart, int xDest, int yDest){
+    static String AStarInstruction(Ball[][] grid, int xStart, int yStart, int xDest, int yDest){
         int[][] gridRes = new int[ROW][COL];
         for (int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
-                if(grid[i][j] == null && grid[i][j].getLevel() == 0){
+                if(grid[i][j] == null || grid[i][j].getLevel() == 0){
                     gridRes[i][j] = 1;
                 }
                 else{
@@ -125,15 +125,12 @@ public class AStarCalculation {
                 }
             }
         }
-        Pair src = new Pair(xStart, yStart);
-        Pair dest = new Pair(xDest, yDest);
+        Pair src = new Pair(yStart, xStart);
+        Pair dest = new Pair(yDest, xDest);
         return AStarSearch(gridRes, src, dest);
-
     }
 
     static String AStarSearch(int[][] grid, Pair src, Pair dest) {
-
-        String res = "";
 
         // source valid check
         if (!isValid(src.first, src.second)) {
@@ -235,10 +232,9 @@ public class AStarCalculation {
                         // Set the Parent of the destination cell
                         cellDetails[row][col].parent_i = i;
                         cellDetails[row][col].parent_j = j;
-                        System.out.println("The destination cell is found\n");
-                        res = tracePath(cellDetails, dest);
+                        //System.out.println("The destination cell is found\n");
                         foundDest = true;
-                        return res;
+                        return tracePath(cellDetails, dest);
                     } else {
                         gNew = cellDetails[i][j].g + 1.0;
                         hNew = calculateHValue(row, col, dest);
