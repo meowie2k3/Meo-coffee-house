@@ -63,9 +63,10 @@ public class Board {
 
         if (justMoved == true && isMoving() == false) {
             board[choosedX][choosedY].unclick();
-            //board[destinationX][destinationY].unclick();
-            //System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY + " destinationX: " + destinationX
-                    //+ " destinationY: " + destinationY);
+            // board[destinationX][destinationY].unclick();
+            // System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY + "
+            // destinationX: " + destinationX
+            // + " destinationY: " + destinationY);
             afterMoveAction(choosedX, choosedY, destinationX, destinationY);
             justMoved = false;
             choosedX = -1;
@@ -77,13 +78,14 @@ public class Board {
 
     public void afterMoveAction(int savei, int savej, int x, int y) {
         Random random = new Random();
-        
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] != null) {
                     if (board[i][j].getLevel() == 0) {
                         board[i][j].levelUp();
-                        if(checkDeleteBall(i, j)) score += 100;
+                        if (checkDeleteBall(i, j))
+                            score += 100;
                     }
                 }
             }
@@ -119,7 +121,7 @@ public class Board {
     public void click(int x, int y) {
 
         // check if any balls is moving
-        if(justMoved == true && isMoving() == true){
+        if (justMoved == true && isMoving() == true) {
             return;
         }
 
@@ -153,15 +155,16 @@ public class Board {
                 choosedX = x;
                 choosedY = y;
             }
-            
+
             // condition to move
             if ((board[x][y] == null || board[x][y].getLevel() == 0)) {
-                //System.out.println("From " + choosedX + " " + choosedY + " to " + x + " " + y);
-                String instruction = AStarCalculation.AStarInstruction(board, choosedX,choosedY, x, y);
-                
+                // System.out.println("From " + choosedX + " " + choosedY + " to " + x + " " +
+                // y);
+                String instruction = AStarCalculation.AStarInstruction(board, choosedX, choosedY, x, y);
+
                 destinationX = x;
                 destinationY = y;
-                //System.out.println(instruction);
+                // System.out.println(instruction);
                 if (instruction == "false") {
                     board[choosedX][choosedY].unclick();
                     choosedX = -1;
@@ -170,7 +173,7 @@ public class Board {
                     destinationY = -1;
                     return;
                 } else {
-                    board[choosedX][choosedY].move(instruction);        
+                    board[choosedX][choosedY].move(instruction);
                     justMoved = true;
                 }
             }
