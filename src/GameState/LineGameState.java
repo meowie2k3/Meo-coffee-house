@@ -19,7 +19,7 @@ public class LineGameState extends GameState {
     public static final int BALL_SIZE = 20;
     
     private SoundEffect soundEffect;
-    private LinePlaying linePlaying;
+    private Line98 linePlaying;
 
     public BufferedImage lineIU;
 
@@ -47,10 +47,10 @@ public class LineGameState extends GameState {
         bg = new Background("/Backgrounds/bg_Line.png", 0);
 
         soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
-        GamePanel.HEIGHT - 23,
+        GamePanel.HEIGHT - 20,
             "Resources/soundEffect/meow.wav", false);
 
-        linePlaying = new LinePlaying(3, 207, false);
+        linePlaying = new Line98(3, 3, false);
     }
     public void update(){
         bg.update();

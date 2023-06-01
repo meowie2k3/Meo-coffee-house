@@ -16,7 +16,7 @@ public class IngameState extends GameState{
     public static Map map;
     public static Background bg;
     private SoundEffect soundEffect;
-    private LinePlaying linePlaying;
+    private Line98 linePlaying;
     private Shop shop;
 
     // ui
@@ -49,12 +49,12 @@ public class IngameState extends GameState{
         map = new Map();
 
         soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
-        GamePanel.HEIGHT - 23,
+        GamePanel.HEIGHT - 20,
             "Resources/soundEffect/meow.wav", false);
 
-        linePlaying = new LinePlaying(3, 177, true);
+        linePlaying = new Line98(3, GamePanel.HEIGHT - 42, true);
 
-        shop = new Shop(3, GamePanel.HEIGHT - 23, true);
+        shop = new Shop(3, GamePanel.HEIGHT - 20, true);
         
         // load user data
         map.loadFurniture();
