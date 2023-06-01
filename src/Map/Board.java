@@ -77,6 +77,7 @@ public class Board {
     }
 
     public void afterMoveAction(int savei, int savej, int x, int y) {
+        System.out.println("Perform after move action");
         Random random = new Random();
 
         for (int i = 0; i < 9; i++) {
@@ -271,6 +272,12 @@ public class Board {
                 }
             }
         }
+        // //draw score board
+        // g.setColor(Color.WHITE);
+        // g.fillRect(0, 0, 200, 800);
+        // g.setColor(Color.BLACK);
+        // g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        // g.drawString("Score: " + score, 10, 50);
     }
 
     // xóa ball
