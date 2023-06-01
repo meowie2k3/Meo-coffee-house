@@ -62,11 +62,16 @@ public class Board {
         }
 
         if (justMoved == true && isMoving() == false) {
-            board[choosedX][choosedY].unclick();
-            // board[destinationX][destinationY].unclick();
-            // System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY + "
-            // destinationX: " + destinationX
-            // + " destinationY: " + destinationY);
+            addBigBall(destinationX, destinationY, 
+            board[choosedX][choosedY].getColor());
+
+            deleteBall(choosedX, choosedY);
+            board[destinationX][destinationY].unclick();
+            checkDeleteBall(destinationX, destinationY);
+            
+            System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY 
+            + " destinationX: " + destinationX
+            + " destinationY: " + destinationY);
             afterMoveAction(choosedX, choosedY, destinationX, destinationY);
             justMoved = false;
             choosedX = -1;
@@ -91,9 +96,7 @@ public class Board {
                 }
             }
         }
-        addBigBall(x, y, board[savei][savej].getColor());
-        deleteBall(savei, savej);
-        checkDeleteBall(x, y);
+        
         for (int i = 0; i < 3; i++) {
             int a, b;
             do {
