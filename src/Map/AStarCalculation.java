@@ -63,9 +63,9 @@ public class AStarCalculation {
 
     private static boolean isDestination(int row, int col, Pair dest) {
         if (row == dest.first && col == dest.second)
-            return (true);
+            return true;
         else
-            return (false);
+            return false;
     }
 
     private static double calculateHValue(int row, int col, Pair dest) {
@@ -97,15 +97,15 @@ public class AStarCalculation {
                 Pair p2 = Path.peek();
                 if (p.first == p2.first) {
                     if (p.second > p2.second) {
-                        res += "L";
-                    } else {
-                        res += "R";
-                    }
-                } else {
-                    if (p.first > p2.first) {
                         res += "U";
                     } else {
                         res += "D";
+                    }
+                } else {
+                    if (p.first > p2.first) {
+                        res += "L";
+                    } else {
+                        res += "R";
                     }
                 }
             }
@@ -117,7 +117,7 @@ public class AStarCalculation {
         int[][] gridRes = new int[ROW][COL];
         for (int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
-                if(grid[i][j] == null && grid[i][j].getLevel() == 0){
+                if(grid[i][j] == null || grid[i][j].getLevel() == 0){
                     gridRes[i][j] = 1;
                 }
                 else{
@@ -234,7 +234,7 @@ public class AStarCalculation {
                         // Set the Parent of the destination cell
                         cellDetails[row][col].parent_i = i;
                         cellDetails[row][col].parent_j = j;
-                        System.out.println("The destination cell is found\n");
+                        //System.out.println("The destination cell is found\n");
                         res = tracePath(cellDetails, dest);
                         foundDest = true;
                         return res;

@@ -2,11 +2,9 @@ package Entity;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.AnnotatedArrayType;
 
 import javax.imageio.ImageIO;
 import Main.GamePanel;
-import java.util.Random;
 
 public class Ball {
     // position and direction
@@ -17,10 +15,10 @@ public class Ball {
     protected Animation animation;
 
     // movement
-    public final char down = 'D';
-    public final char right = 'R';
-    public final char up = 'U';
-    public final char left = 'L';
+    public static final char down = 'D';
+    public static final char right = 'R';
+    public static final char up = 'U';
+    public static final char left = 'L';
 
     private boolean isClicked_;
     private int level;
@@ -97,8 +95,10 @@ public class Ball {
     // The move function below will be called in the LinegameState, 
     // by using a loop through each character in the description
     // provided by A-Star algorithm. 
+    public void move(String instruction) { 
+        for(int i=0;i<instruction.length();i++){
 
-    public void move(char direction) { 
+        }
     }
 
     public void update() {

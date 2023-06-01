@@ -81,9 +81,18 @@ public class Board {
                 board[x][y].click();  
                 board[savei][savej].unclick();
             }
+            String instruction = AStarCalculation.AStarInstruction(board, savei, savej, x, y);
             //condition to move
-            if ((board[x][y]==null || board[x][y].getLevel()==0) ){
+            if ((board[x][y]==null || board[x][y].getLevel()==0)){
                 //System.out.println(AStarCalculation.AStarInstruction(board, savei, savej, x, y));
+                if(instruction == "false"){
+                    board[savei][savej].unclick();
+                    return;
+                }
+                else{
+                    board[savei][savej].move(instruction);
+                    
+                }
                 addBigBall(x, y, board[savei][savej].getColor());
                 deleteBall(savei, savej);
                 checkDeleteBall(x, y);
