@@ -116,7 +116,8 @@ public class Ball {
         animation.update();
 
         if (instruction != "") {
-            System.out.println("instruction: " + instruction);
+            isMoving = true;
+            //System.out.println("instruction: " + instruction);
             if (instruction.charAt(0) == 'D') {
                 y += 1;
             } else if (instruction.charAt(0) == 'R') {

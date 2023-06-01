@@ -97,15 +97,15 @@ public class AStarCalculation {
                 Pair p2 = Path.peek();
                 if (p.first == p2.first) {
                     if (p.second > p2.second) {
-                        res += "U";
-                    } else {
-                        res += "D";
-                    }
-                } else {
-                    if (p.first > p2.first) {
                         res += "L";
                     } else {
                         res += "R";
+                    }
+                } else {
+                    if (p.first > p2.first) {
+                        res += "U";
+                    } else {
+                        res += "D";
                     }
                 }
             }

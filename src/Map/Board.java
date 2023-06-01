@@ -20,6 +20,8 @@ public class Board {
     private int destinationX = -1;
     private int destinationY = -1;
 
+    private int score = 0;
+
     // board[i][j].color: null -> không có, 1 -> màu đỏ, 2 -> màu xanh, 3 -> màu
     // vàng, 4 -> màu tím, 5 -> màu xám, 6 -> màu cam, 7 -> màu đen
     // board[i][j].level: 0 -> nhỏ, 1 -> lớn
@@ -61,7 +63,8 @@ public class Board {
         }
 
         if (justMoved == true && isMoving() == false) {
-            board[choosedX][choosedY].unclick();
+            //board[choosedX][choosedY].unclick();
+            board[destinationX][destinationY].unclick();
             afterMoveAction(choosedX, choosedY, destinationX, destinationY);
             justMoved = false;
             choosedX = -1;
@@ -75,13 +78,13 @@ public class Board {
         Random random = new Random();
         addBigBall(x, y, board[savei][savej].getColor());
         deleteBall(savei, savej);
-        checkDeleteBall(x, y);
+        
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] != null) {
                     if (board[i][j].getLevel() == 0) {
                         addBigBall(i, j, board[i][j].getColor());
-                        checkDeleteBall(i, j);
+                        if(checkDeleteBall(x, y)) score += 100;
                     }
                 }
             }
@@ -151,7 +154,8 @@ public class Board {
             
             // condition to move
             if ((board[x][y] == null || board[x][y].getLevel() == 0)) {
-                String instruction = AStarCalculation.AStarInstruction(board, choosedX, choosedY, x, y);
+                String instruction = AStarCalculation.AStarInstruction(board, choosedY,choosedX, y, x);
+                System.out.println("From " + choosedY + " " + choosedX + " to " + x + " " + y);
                 destinationX = x;
                 destinationY = y;
                 System.out.println(instruction);
@@ -168,7 +172,7 @@ public class Board {
                 }
             }
         } else {
-            if (board[x][y] != null) {
+            if (board[x][y] != null && board[x][y].getLevel() == 1) {
                 board[x][y].click();
                 choosedX = x;
                 choosedY = y;
@@ -280,10 +284,12 @@ public class Board {
 
     // kiểm tra xóa ball, khi nào: ball từ nhỏ -> lớn, ball mới di chuyển đến vị trí
     // mới
-    public void checkDeleteBall(int x, int y) {
+    public boolean checkDeleteBall(int x, int y) {
         // count1 sẽ đếm số bóng hàng ngang
         int count1 = 1;
         int color_id = board[x][y].getColor();
+
+        boolean res = false;
 
         // kiểm tra hàng ngang phải
         int i = x;
@@ -315,6 +321,7 @@ public class Board {
 
         // xóa bóng
         if (count1 >= 5) {
+            res = true;
             // xóa bóng hàng ngang
             j = y;
             deleteBall(i, j);
@@ -375,6 +382,7 @@ public class Board {
 
         // xóa bóng
         if (count2 >= 5) {
+            res = true;
             // xóa bóng hàng dọc trên
             i = x;
             deleteBall(i, j);
@@ -438,6 +446,7 @@ public class Board {
 
         // xóa bóng
         if (count3 >= 5) {
+            res = true;
             // xóa bóng hàng chéo xuôi trên
             i = x;
             j = y;
@@ -505,6 +514,7 @@ public class Board {
 
         // xóa bóng
         if (count4 >= 5) {
+            res = true;
             // xóa bóng hàng chéo ngược trên
             i = x;
             j = y;
@@ -536,5 +546,6 @@ public class Board {
                     break;
             }
         }
+        return res;
     }
 }
