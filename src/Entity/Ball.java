@@ -20,6 +20,10 @@ public class Ball {
     public static final char up = 'U';
     public static final char left = 'L';
 
+    private String instruction = "";
+
+    private boolean isMoving;
+
     private boolean isClicked_;
     private int level;
     private int colorCode;
@@ -96,9 +100,12 @@ public class Ball {
     // by using a loop through each character in the description
     // provided by A-Star algorithm. 
     public void move(String instruction) { 
-        for(int i=0;i<instruction.length();i++){
+        this.instruction = instruction;
+        isMoving = true;
+    }
 
-        }
+    public boolean isMoving() {
+        return isMoving;
     }
 
     public void update() {
@@ -107,6 +114,24 @@ public class Ball {
         else animation.setFrames(Lv2);
 
         animation.update();
+
+        if (instruction != "") {
+            System.out.println("instruction: " + instruction);
+            if (instruction.charAt(0) == 'D') {
+                y += 1;
+            } else if (instruction.charAt(0) == 'R') {
+                x += 1;
+            } else if (instruction.charAt(0) == 'U') {
+                y -= 1;
+            } else if (instruction.charAt(0) == 'L') {
+                x -= 1;
+            } 
+            // cut the first character of the instruction
+            instruction = instruction.substring(1);
+        }
+        else{
+            isMoving = false;
+        }
 
     }
 
