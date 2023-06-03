@@ -55,8 +55,13 @@ public class AStarCalculation {
         return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL);
     }
 
-    private static boolean isUnBlocked(int[][] grid, int row, int col) {
-        return grid[row][col] == 1;
+    private static boolean isBlocked(int[][] grid, int row, int col) {
+        if(grid[row][col] == 1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     private static boolean isDestination(int row, int col, Pair dest) {
@@ -95,15 +100,15 @@ public class AStarCalculation {
                 Pair p2 = Path.peek();
                 if (p.first == p2.first) {
                     if (p.second > p2.second) {
-                        res += "U";
-                    } else {
-                        res += "D";
-                    }
-                } else {
-                    if (p.first > p2.first) {
                         res += "L";
                     } else {
                         res += "R";
+                    }
+                } else {
+                    if (p.first > p2.first) {
+                        res += "U";
+                    } else {
+                        res += "D";
                     }
                 }
             }
@@ -113,6 +118,8 @@ public class AStarCalculation {
 
     static String AStarInstruction(Ball[][] grid, int xStart, int yStart, int xDest, int yDest){
         int[][] gridRes = new int[ROW][COL];
+        System.out.println("starting point: " + xStart + " " + yStart);
+        System.out.println("destination point: " + xDest + " " + yDest);
         for (int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
                 if(grid[i][j] != null && grid[i][j].getLevel() == 1){
@@ -151,7 +158,7 @@ public class AStarCalculation {
         }
 
         // destination blocked check
-        if (!isUnBlocked(grid, dest.first, dest.second)) {
+        if (isBlocked(grid, dest.first, dest.second)) {
             //System.out.println("Destination is blocked");
             return "false";
         }
@@ -210,16 +217,16 @@ public class AStarCalculation {
             closedList[i][j] = true;
 
             ArrayList<Pair> successors = new ArrayList<Pair>();
-            if (isValid(i - 1, j) && isUnBlocked(grid, i - 1, j)) {
+            if (isValid(i - 1, j)) {
                 successors.add(new Pair(i - 1, j));
             }
-            if (isValid(i + 1, j) && isUnBlocked(grid, i + 1, j)) {
+            if (isValid(i + 1, j)) {
                 successors.add(new Pair(i + 1, j));
             }
-            if (isValid(i, j + 1) && isUnBlocked(grid, i, j + 1)) {
+            if (isValid(i, j + 1)) {
                 successors.add(new Pair(i, j + 1));
             }
-            if (isValid(i, j - 1) && isUnBlocked(grid, i, j - 1)) {
+            if (isValid(i, j - 1)) {
                 successors.add(new Pair(i, j - 1));
             }
             
@@ -247,7 +254,7 @@ public class AStarCalculation {
                 int row = successor.first;
                 int col = successor.second;
 
-                if (isValid(row, col) && closedList[row][col] == false && isUnBlocked(grid, row, col)) {
+                if (isValid(row, col) && closedList[row][col] == false && !isBlocked(grid, row, col)) {
                     if (isDestination(row, col, dest)) {
                         // Set the Parent of the destination cell
                         cellDetails[row][col].parent_i = i;

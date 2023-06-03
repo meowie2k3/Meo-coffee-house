@@ -160,11 +160,11 @@ public class Board {
             if ((board[x][y] == null || board[x][y].getLevel() == 0)) {
                 // System.out.println("From " + choosedX + " " + choosedY + " to " + x + " " +
                 // y);
-                String instruction = AStarCalculation.AStarInstruction(board, choosedX, choosedY, x, y);
+                String instruction = AStarCalculation.AStarInstruction(board, choosedY, choosedX, y, x);
 
                 destinationX = x;
                 destinationY = y;
-                // System.out.println(instruction);
+                System.out.println(instruction);
                 if (instruction == "false") {
                     board[choosedX][choosedY].unclick();
                     choosedX = -1;
