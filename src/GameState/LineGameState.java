@@ -14,8 +14,6 @@ public class LineGameState extends GameState {
 
     private Background bg;
     public static int score;
-
-    public static final int BALL_SIZE = 20;
     
     private SoundEffect soundEffect;
     private Line98 linePlaying;
@@ -51,7 +49,7 @@ public class LineGameState extends GameState {
     public void update(){
         bg.update();
         board.update();
-        System.out.println(score);
+        //System.out.println(score);
     }
     public void draw(Graphics2D g){
         bg.draw(g);
