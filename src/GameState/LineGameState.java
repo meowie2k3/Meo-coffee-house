@@ -62,7 +62,7 @@ public class LineGameState extends GameState {
         // use #F56C45
         g.setColor(new Color(245, 108, 69));
         g.setFont(g.getFont().deriveFont(10f));
-        g.drawString("" + score, 44*GamePanel.SCALE, 10*GamePanel.SCALE);
+        g.drawString("" + score, 43*GamePanel.SCALE, 9*GamePanel.SCALE);
     }
     public void keyPressed(int k){
     }
