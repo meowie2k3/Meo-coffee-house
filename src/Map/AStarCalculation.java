@@ -117,14 +117,22 @@ public class AStarCalculation {
         int[][] gridRes = new int[ROW][COL];
         for (int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
-                if(grid[i][j] == null || grid[i][j].getLevel() == 0){
-                    gridRes[i][j] = 1;
+                if(grid[i][j] != null && grid[i][j].getLevel() == 1){
+                    gridRes[j][i] = 0;
                 }
                 else{
-                    gridRes[i][j] = 0;
+                    gridRes[j][i] = 1;
                 }
             }
         }
+        //print grid res
+        for (int i = 0; i < ROW; i++){
+            for(int j = 0; j < COL; j++){
+                System.out.print(gridRes[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
         Pair src = new Pair(xStart, yStart);
         Pair dest = new Pair(xDest, yDest);
         return AStarSearch(gridRes, src, dest);
@@ -204,16 +212,16 @@ public class AStarCalculation {
             closedList[i][j] = true;
 
             ArrayList<Pair> successors = new ArrayList<Pair>();
-            if (isValid(i - 1, j)) {
+            if (isValid(i - 1, j) && isUnBlocked(grid, i - 1, j)) {
                 successors.add(new Pair(i - 1, j));
             }
-            if (isValid(i + 1, j)) {
+            if (isValid(i + 1, j) && isUnBlocked(grid, i + 1, j)) {
                 successors.add(new Pair(i + 1, j));
             }
-            if (isValid(i, j + 1)) {
+            if (isValid(i, j + 1) && isUnBlocked(grid, i, j + 1)) {
                 successors.add(new Pair(i, j + 1));
             }
-            if (isValid(i, j - 1)) {
+            if (isValid(i, j - 1) && isUnBlocked(grid, i, j - 1)) {
                 successors.add(new Pair(i, j - 1));
             }
             
