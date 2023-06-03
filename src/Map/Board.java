@@ -1,10 +1,8 @@
 package Map;
 
 import java.awt.Graphics2D;
-import java.beans.beancontext.BeanContext;
 import java.util.Random;
-
-import javax.sql.rowset.serial.SerialJavaObject;
+import GameState.LineGameState;
 
 import Entity.Ball;
 
@@ -18,8 +16,6 @@ public class Board {
 
     private int destinationX = -1;
     private int destinationY = -1;
-
-    private int score = 0;
 
     // board[i][j].color: null -> không có, 1 -> màu đỏ, 2 -> màu xanh, 3 -> màu
     // vàng, 4 -> màu tím, 5 -> màu xám, 6 -> màu cam, 7 -> màu đen
@@ -69,9 +65,9 @@ public class Board {
             board[destinationX][destinationY].unclick();
             checkDeleteBall(destinationX, destinationY);
             
-            System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY 
-            + " destinationX: " + destinationX
-            + " destinationY: " + destinationY);
+            // System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY 
+            // + " destinationX: " + destinationX
+            // + " destinationY: " + destinationY);
             afterMoveAction(choosedX, choosedY, destinationX, destinationY);
             justMoved = false;
             choosedX = -1;
@@ -82,7 +78,7 @@ public class Board {
     }
 
     public void afterMoveAction(int savei, int savej, int x, int y) {
-        System.out.println("Perform after move action");
+        //System.out.println("Perform after move action");
         Random random = new Random();
 
         for (int i = 0; i < 9; i++) {
@@ -91,7 +87,7 @@ public class Board {
                     if (board[i][j].getLevel() == 0) {
                         board[i][j].levelUp();
                         if (checkDeleteBall(i, j))
-                            score += 100;
+                            LineGameState.score += 100;
                     }
                 }
             }
@@ -275,12 +271,8 @@ public class Board {
                 }
             }
         }
-        // //draw score board
-        // g.setColor(Color.WHITE);
-        // g.fillRect(0, 0, 200, 800);
-        // g.setColor(Color.BLACK);
-        // g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        // g.drawString("Score: " + score, 10, 50);
+        //draw score board
+
     }
 
     // xóa ball
@@ -345,6 +337,7 @@ public class Board {
                 if (board[i][j + 1] != null) {
                     if (color_id == board[i][j + 1].getColor()) {
                         deleteBall(i, j + 1);
+                        res = true;
                         j++;
                     } else
                         break;
@@ -358,6 +351,7 @@ public class Board {
                 if (board[i][j - 1] != null) {
                     if (color_id == board[i][j - 1].getColor()) {
                         deleteBall(i, j - 1);
+                        res = true;
                         j--;
                     } else
                         break;
@@ -406,6 +400,7 @@ public class Board {
                 if (board[i + 1][j] != null) {
                     if (color_id == board[i + 1][j].getColor()) {
                         deleteBall(i + 1, j);
+                        res = true;
                         i++;
                     } else
                         break;
@@ -419,6 +414,7 @@ public class Board {
                 if (board[i - 1][j] != null) {
                     if (color_id == board[i - 1][j].getColor()) {
                         deleteBall(i - 1, j);
+                        res = true;
                         i--;
                     } else
                         break;
@@ -471,6 +467,7 @@ public class Board {
                 if (board[i + 1][j + 1] != null) {
                     if (color_id == board[i + 1][j + 1].getColor()) {
                         deleteBall(i + 1, j + 1);
+                        res = true;
                         i++;
                         j++;
                     } else
@@ -486,6 +483,7 @@ public class Board {
                 if (board[i - 1][j - 1] != null) {
                     if (color_id == board[i - 1][j - 1].getColor()) {
                         deleteBall(i - 1, j - 1);
+                        res = true;
                         i--;
                         j--;
                     } else
@@ -539,6 +537,7 @@ public class Board {
                 if (board[i + 1][j - 1] != null) {
                     if (color_id == board[i + 1][j - 1].getColor()) {
                         deleteBall(i + 1, j - 1);
+                        res = true;
                         i++;
                         j--;
                     } else
@@ -554,6 +553,7 @@ public class Board {
                 if (board[i - 1][j + 1] != null) {
                     if (color_id == board[i - 1][j + 1].getColor()) {
                         deleteBall(i - 1, j + 1);
+                        res = true;
                         i--;
                         j++;
                     } else

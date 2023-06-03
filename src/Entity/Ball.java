@@ -118,7 +118,7 @@ public class Ball {
 
         if (!instruction.equals("")) {
             isMoving = true;
-            System.out.println("instruction:" + instruction);
+            //System.out.println("instruction:" + instruction);
             if (instruction.charAt(0) == 'D') {
                 y += 1;
             } else if (instruction.charAt(0) == 'R') {

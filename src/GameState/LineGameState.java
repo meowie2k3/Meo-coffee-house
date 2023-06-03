@@ -1,5 +1,6 @@
 package GameState;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.image.*;
@@ -12,27 +13,22 @@ import Main.GamePanel;
 public class LineGameState extends GameState {
 
     private Background bg;
-    private int score;
-    private int level = 5;
-    private int boardSize = 2 * level - 1;
+    public static int score;
 
     public static final int BALL_SIZE = 20;
     
     private SoundEffect soundEffect;
     private Line98 linePlaying;
 
-    public BufferedImage lineIU;
+    public BufferedImage lineUI;
 
     private Board board = new Board();
 
-    private String[] address =new String[]{
-        "/Balls/1.png"
-    };
     
     public LineGameState(GameStateManager gsm) {
         this.gsm = gsm;
         try {
-            lineIU = ImageIO.read(getClass().getResourceAsStream("/UI/LineUI.png"));  
+            lineUI = ImageIO.read(getClass().getResourceAsStream("/UI/LineUI.png"));  
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,13 +51,20 @@ public class LineGameState extends GameState {
     public void update(){
         bg.update();
         board.update();
+        System.out.println(score);
     }
     public void draw(Graphics2D g){
         bg.draw(g);
         soundEffect.draw(g);
         linePlaying.draw(g);
         board.draw(g);
-        g.drawImage(lineIU, 66, 12, null);  
+        g.drawImage(lineUI, 66, 12, null);  
+
+        //draw score
+        // use #F56C45
+        g.setColor(new Color(245, 108, 69));
+        g.setFont(g.getFont().deriveFont(10f));
+        g.drawString("" + score, 44*GamePanel.SCALE, 10*GamePanel.SCALE);
     }
     public void keyPressed(int k){
     }

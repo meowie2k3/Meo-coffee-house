@@ -31,6 +31,7 @@ public class Line98 {
         }
     }
 
+
     public int getWidth(){
         return sizeX;
     }
