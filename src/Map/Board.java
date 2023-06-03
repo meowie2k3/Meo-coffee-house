@@ -122,6 +122,7 @@ public class Board {
 
     // click board
     public void click(int x, int y) {
+        Random random = new Random();
 
         // check if any balls is moving
         if (justMoved == true && isMoving() == true) {
@@ -178,6 +179,16 @@ public class Board {
                 } else {
                     board[choosedX][choosedY].move(instruction);
                     justMoved = true;
+                }
+
+                if (board[x][y].getLevel() == 0){
+                    int a, b;
+                    do {
+                        a = random.nextInt(9);
+                        b = random.nextInt(9);
+                    } while (board[a][b] != null);
+                    int color = random.nextInt(7) + 1;
+                    addBigBall(a, b, color);
                 }
             }
         } else {
