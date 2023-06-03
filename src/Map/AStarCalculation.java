@@ -1,11 +1,9 @@
 package Map;
 
 import java.lang.Math;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.Stack;
-import java.util.Comparator;
+import java.util.*;
 import Entity.Ball;
+//import collection
 
 class Pair {
     int first, second;
@@ -225,8 +223,21 @@ public class AStarCalculation {
                 successors.add(new Pair(i, j - 1));
             }
             
-            // this is where the magic happens
-            successors.sort(Comparator.comparingDouble(pair -> calculateHValue(pair.first, pair.second, dest)));
+            // sort the successors, smallest calculateHValue to largest
+            Collections.sort(successors, new Comparator<Pair>() {
+                @Override
+                public int compare(Pair p1, Pair p2) {
+                    double h1 = calculateHValue(p1.first, p1.second, dest);
+                    double h2 = calculateHValue(p2.first, p2.second, dest);
+                    if (h1 < h2) {
+                        return -1;
+                    } else if (h1 > h2) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
 
             // To store the 'g', 'h' and 'f' of the 4 successors
             double gNew, hNew, fNew;
