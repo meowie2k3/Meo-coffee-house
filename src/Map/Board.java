@@ -179,16 +179,17 @@ public class Board {
                 } else {
                     board[choosedX][choosedY].move(instruction);
                     justMoved = true;
-                }
-
-                if (board[x][y].getLevel() == 0){
-                    int a, b;
-                    do {
-                        a = random.nextInt(9);
-                        b = random.nextInt(9);
-                    } while (board[a][b] != null);
-                    int color = random.nextInt(7) + 1;
-                    addBigBall(a, b, color);
+                    if (board[x][y].getLevel() == 0){
+                        int a, b;
+                        do {
+                            a = random.nextInt(9);
+                            b = random.nextInt(9);
+                        } while (board[a][b] != null);
+                        int color = random.nextInt(7) + 1;
+                        addBigBall(a, b, color);
+                        if (checkDeleteBall(a, b))
+                            LineGameState.score += 100;
+                    }
                 }
             }
         } else {
@@ -198,7 +199,6 @@ public class Board {
                 choosedY = y;
             }
         }
-
     }
 
     // contains board
