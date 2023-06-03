@@ -63,12 +63,15 @@ public class Board {
 
             deleteBall(choosedX, choosedY);
             board[destinationX][destinationY].unclick();
-            checkDeleteBall(destinationX, destinationY);
+            if (checkDeleteBall(destinationX, destinationY)){
+                LineGameState.score += 100;
+            } else {
             
             // System.out.println("choosedX: " + choosedX + " choosedY: " + choosedY 
             // + " destinationX: " + destinationX
             // + " destinationY: " + destinationY);
-            afterMoveAction(choosedX, choosedY, destinationX, destinationY);
+                afterMoveAction(choosedX, choosedY, destinationX, destinationY);
+            }
             justMoved = false;
             choosedX = -1;
             choosedY = -1;
