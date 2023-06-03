@@ -164,7 +164,7 @@ public class Board {
 
                 destinationX = x;
                 destinationY = y;
-                System.out.println(instruction);
+                // System.out.println(instruction);
                 if (instruction == "false") {
                     board[choosedX][choosedY].unclick();
                     choosedX = -1;

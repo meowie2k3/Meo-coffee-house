@@ -118,8 +118,8 @@ public class AStarCalculation {
 
     static String AStarInstruction(Ball[][] grid, int xStart, int yStart, int xDest, int yDest){
         int[][] gridRes = new int[ROW][COL];
-        System.out.println("starting point: " + xStart + " " + yStart);
-        System.out.println("destination point: " + xDest + " " + yDest);
+        // System.out.println("starting point: " + xStart + " " + yStart);
+        // System.out.println("destination point: " + xDest + " " + yDest);
         for (int i = 0; i < ROW; i++){
             for(int j = 0; j < COL; j++){
                 if(grid[i][j] != null && grid[i][j].getLevel() == 1){
@@ -131,13 +131,13 @@ public class AStarCalculation {
             }
         }
         //print grid res
-        for (int i = 0; i < ROW; i++){
-            for(int j = 0; j < COL; j++){
-                System.out.print(gridRes[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
+        // for (int i = 0; i < ROW; i++){
+        //     for(int j = 0; j < COL; j++){
+        //         System.out.print(gridRes[i][j] + " ");
+        //     }
+        //     System.out.println();
+        // }
+        // System.out.println();
         Pair src = new Pair(xStart, yStart);
         Pair dest = new Pair(xDest, yDest);
         return AStarSearch(gridRes, src, dest);
