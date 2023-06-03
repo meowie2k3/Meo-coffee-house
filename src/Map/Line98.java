@@ -6,18 +6,18 @@ import java.awt.Graphics2D;
 
 import Main.GamePanel;
 
-public class LinePlaying {
+public class Line98 {
     
     private BufferedImage p1, p2;
 
     //position
     private double x;
     private double y;
-    private int sizeX = 30;
-    private int sizeY = 30;
+    private int sizeX = 15;
+    private int sizeY = 15;
     boolean state;
 
-    public LinePlaying(double x, double y, boolean initstate){
+    public Line98(double x, double y, boolean initstate){
         try{
             this.state = initstate;
             this.x = x;
@@ -30,6 +30,7 @@ public class LinePlaying {
             e.printStackTrace();
         }
     }
+
 
     public int getWidth(){
         return sizeX;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
 import java.util.Comparator;
+import Entity.Ball;
 
 class Pair {
     int first, second;
@@ -62,9 +63,9 @@ public class AStarCalculation {
 
     private static boolean isDestination(int row, int col, Pair dest) {
         if (row == dest.first && col == dest.second)
-            return (true);
+            return true;
         else
-            return (false);
+            return false;
     }
 
     private static double calculateHValue(int row, int col, Pair dest) {
@@ -96,15 +97,15 @@ public class AStarCalculation {
                 Pair p2 = Path.peek();
                 if (p.first == p2.first) {
                     if (p.second > p2.second) {
-                        res += "L";
-                    } else {
-                        res += "R";
-                    }
-                } else {
-                    if (p.first > p2.first) {
                         res += "U";
                     } else {
                         res += "D";
+                    }
+                } else {
+                    if (p.first > p2.first) {
+                        res += "L";
+                    } else {
+                        res += "R";
                     }
                 }
             }
@@ -112,9 +113,24 @@ public class AStarCalculation {
         return res;
     }
 
-    static String AStarSearch(int[][] grid, Pair src, Pair dest) {
+    static String AStarInstruction(Ball[][] grid, int xStart, int yStart, int xDest, int yDest){
+        int[][] gridRes = new int[ROW][COL];
+        for (int i = 0; i < ROW; i++){
+            for(int j = 0; j < COL; j++){
+                if(grid[i][j] == null || grid[i][j].getLevel() == 0){
+                    gridRes[i][j] = 1;
+                }
+                else{
+                    gridRes[i][j] = 0;
+                }
+            }
+        }
+        Pair src = new Pair(xStart, yStart);
+        Pair dest = new Pair(xDest, yDest);
+        return AStarSearch(gridRes, src, dest);
+    }
 
-        String res = "";
+    static String AStarSearch(int[][] grid, Pair src, Pair dest) {
 
         // source valid check
         if (!isValid(src.first, src.second)) {
@@ -216,10 +232,9 @@ public class AStarCalculation {
                         // Set the Parent of the destination cell
                         cellDetails[row][col].parent_i = i;
                         cellDetails[row][col].parent_j = j;
-                        System.out.println("The destination cell is found\n");
-                        res = tracePath(cellDetails, dest);
+                        //System.out.println("The destination cell is found\n");
                         foundDest = true;
-                        return res;
+                        return tracePath(cellDetails, dest);
                     } else {
                         gNew = cellDetails[i][j].g + 1.0;
                         hNew = calculateHValue(row, col, dest);

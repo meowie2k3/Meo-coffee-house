@@ -1,5 +1,6 @@
 package GameState;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.image.*;
@@ -12,25 +13,20 @@ import Main.GamePanel;
 public class LineGameState extends GameState {
 
     private Background bg;
-    private int score;
-    private int level = 5;
-    private int boardSize = 2 * level - 1;
-
-    public static final int BALL_SIZE = 20;
+    public static int score;
     
     private SoundEffect soundEffect;
-    private LinePlaying linePlaying;
+    private Line98 linePlaying;
 
-    public BufferedImage lineIU;
+    public BufferedImage lineUI;
 
-    private String[] address =new String[]{
-        "/Balls/1.png"
-    };
+    private Board board = new Board();
+
     
     public LineGameState(GameStateManager gsm) {
         this.gsm = gsm;
         try {
-            lineIU = ImageIO.read(getClass().getResourceAsStream("/UI/LineUI.png"));  
+            lineUI = ImageIO.read(getClass().getResourceAsStream("/UI/LineUI.png"));  
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,25 +41,35 @@ public class LineGameState extends GameState {
         bg = new Background("/Backgrounds/bg_Line.png", 0);
 
         soundEffect = new SoundEffect(GamePanel.WIDTH - 23,
-        GamePanel.HEIGHT - 23,
+        GamePanel.HEIGHT - 20,
             "Resources/soundEffect/meow.wav", false);
 
-        linePlaying = new LinePlaying(3, 207, false);
+        linePlaying = new Line98(3, 3, false);
     }
     public void update(){
         bg.update();
+        board.update();
+        //System.out.println(score);
     }
     public void draw(Graphics2D g){
         bg.draw(g);
         soundEffect.draw(g);
         linePlaying.draw(g);
-        g.drawImage(lineIU, 66, 12, null);  
+        board.draw(g);
+        g.drawImage(lineUI, 66, 12, null);  
+
+        //draw score
+        // use #F56C45
+        g.setColor(new Color(245, 108, 69));
+        g.setFont(g.getFont().deriveFont(10f));
+        g.drawString("" + score, 44*GamePanel.SCALE, 10*GamePanel.SCALE);
     }
     public void keyPressed(int k){
     }
     public void keyReleased(int k){
     }
     public void mousePressed(MouseEvent e) {
+        //System.out.println(e.getX() + " " + e.getY());
     }
     public void mouseReleased(MouseEvent e) {
     }
@@ -76,6 +82,11 @@ public class LineGameState extends GameState {
 
         if (linePlaying.contains(e.getX(), e.getY()))   {
             gsm.setState(GameStateManager.INGAMESTATE);
+        }
+
+        if (board.contains(e.getX(), e.getY())) {
+            //System.out.println(board.mousePositionX(e.getX(), e.getY()) + " " + board.mousePositionY(e.getX(), e.getY()));
+            board.click(board.mousePositionX(e.getX(), e.getY()),board.mousePositionY(e.getX(), e.getY()));
         }
     }
     public void mouseExited(MouseEvent e) {
