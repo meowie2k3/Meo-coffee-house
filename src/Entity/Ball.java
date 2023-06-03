@@ -8,11 +8,11 @@ import Main.GamePanel;
 
 public class Ball {
     // position and direction
-    protected double x;
-    protected double y;
+    private double x;
+    private double y;
 
     // animation
-    protected Animation animation;
+    private Animation animation;
 
     // movement
     public static final char down = 'D';
@@ -187,18 +187,4 @@ public class Ball {
                 null);
         }
     }
-
-    public boolean contains(int x, int y) {
-        isClicked_ = true;
-        animation.setFrames(Lv2);
-        int scale = GamePanel.SCALE;
-        int x1 = (int) this.x - ballSize / 2;
-        int y1 = (int) this.y - ballSize / 2;
-        int x2 = x1 + ballSize / 2;
-        int y2 = y1 + ballSize / 2;
-        if (x1 * scale <= x && x <= x2 * scale && y1 * scale <= y && y <= y2 * scale)
-            return true;
-        return false;
-    }
-
 }
