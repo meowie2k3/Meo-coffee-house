@@ -216,7 +216,8 @@ public class AStarCalculation {
             if (isValid(i, j - 1)) {
                 successors.add(new Pair(i, j - 1));
             }
-
+            
+            // this is where the magic happens
             successors.sort(Comparator.comparingDouble(pair -> calculateHValue(pair.first, pair.second, dest)));
 
             // To store the 'g', 'h' and 'f' of the 4 successors
