@@ -18,13 +18,13 @@ class Pair {
 }
 
 class pPair {
-    double first;
+    int first;
     Pair second;
 
     pPair() {
     }
 
-    pPair(double first, Pair second) {
+    pPair(int first, Pair second) {
         this.first = first;
         this.second = second;
     }
@@ -35,7 +35,7 @@ class cell {
     // Note that 0 <= i <= ROW-1 & 0 <= j <= COL-1
     int parent_i, parent_j;
     // f = g + h
-    double f, g, h;
+    int f, g, h;
 }
 
 public class AStarCalculation {
@@ -71,10 +71,10 @@ public class AStarCalculation {
             return false;
     }
 
-    private static double calculateHValue(int row, int col, Pair dest) {
+    private static int calculateHValue(int row, int col, Pair dest) {
         // Manhattan distance
         // only 4 directions
-        return ((double) Math.abs(row - dest.first) + Math.abs(col - dest.second));
+        return Math.abs(row - dest.first) + Math.abs(col - dest.second);
     }
     
     //result rules: U -> up, D -> down, L -> left, R -> right, return false if any error
@@ -83,6 +83,15 @@ public class AStarCalculation {
         int col = dest.second;
         String res = "";
         Stack<Pair> Path = new Stack<Pair>();
+
+        // System.out.println("Cell Details:");
+        // for (int i = 0; i < ROW; i++) {
+        //     System.out.print("[");
+        //     for (int j = 0; j < COL; j++) {
+        //         System.out.print(cellDetails[i][j].f+ " ");
+        //     }
+        //     System.out.println("]");
+        // }
 
         while (!(cellDetails[row][col].parent_i == row && cellDetails[row][col].parent_j == col)) {
             Path.push(new Pair(row, col));
@@ -113,6 +122,7 @@ public class AStarCalculation {
                 }
             }
         }
+        
         return res;
     }
 
@@ -132,10 +142,11 @@ public class AStarCalculation {
         }
         //print grid res
         // for (int i = 0; i < ROW; i++){
+        //     System.out.print("{ ");
         //     for(int j = 0; j < COL; j++){
-        //         System.out.print(gridRes[i][j] + " ");
+        //         System.out.print(gridRes[i][j] + ", ");
         //     }
-        //     System.out.println();
+        //     System.out.println("},");
         // }
         // System.out.println();
         Pair src = new Pair(xStart, yStart);
@@ -163,14 +174,10 @@ public class AStarCalculation {
             return "false";
         }
 
-        // Create a closed list and initialise it to false which
-        // means that no cell has been included yet
-        // This closed list is implemented as a boolean 2D array
         boolean[][] closedList = new boolean[ROW][COL];
         memset(closedList, false, ROW);
 
-        // Declare a 2D array of structure to hold the details
-        // of that cell
+        // Declare a 2D array of structure to hold the details of that cell
         cell[][] cellDetails = new cell[ROW][COL];
 
         int i, j;
@@ -178,9 +185,9 @@ public class AStarCalculation {
         for (i = 0; i < ROW; i++) {
             for (j = 0; j < COL; j++) {
                 cellDetails[i][j] = new cell();
-                cellDetails[i][j].f = Double.MAX_VALUE;
-                cellDetails[i][j].g = Double.MAX_VALUE;
-                cellDetails[i][j].h = Double.MAX_VALUE;
+                cellDetails[i][j].f = Integer.MAX_VALUE;
+                cellDetails[i][j].g = Integer.MAX_VALUE;
+                cellDetails[i][j].h = Integer.MAX_VALUE;
                 cellDetails[i][j].parent_i = -1;
                 cellDetails[i][j].parent_j = -1;
             }
@@ -189,27 +196,28 @@ public class AStarCalculation {
         // Initialising the parameters of the starting node
         i = src.first;
         j = src.second;
-        cellDetails[i][j].f = 0.0;
-        cellDetails[i][j].g = 0.0;
-        cellDetails[i][j].h = 0.0;
+        cellDetails[i][j].f = 0;
+        cellDetails[i][j].g = 0;
+        cellDetails[i][j].h = 0;
         cellDetails[i][j].parent_i = i;
         cellDetails[i][j].parent_j = j;
 
-        Set<pPair> openList = new java.util.HashSet<pPair>();
+        ArrayList<pPair> openList = new ArrayList<pPair>();
 
-        // Put the starting cell on the open list and set its
-        // f as 0
-        openList.add(new pPair(0.0, new Pair(i, j)));
+        // Put the starting cell on the open list and set its f as 0
+        openList.add(new pPair(0, new Pair(i, j)));
 
-        // We set this boolean value as false as initially
-        // the destination is not reached.
+        // We set this boolean value as false as initially the destination is not reached.
         boolean foundDest = false;
 
         while (!openList.isEmpty()) {
-            pPair p = openList.iterator().next();
+            pPair p = openList.get(0);
+
+            //print p
+            //System.out.println("p: " + p.first + " " + p.second.first + " " + p.second.second);
 
             // Remove this vertex from the open list
-            openList.remove(p);
+            openList.remove(0);
 
             // Add this vertex to the closed list
             i = p.second.first;
@@ -234,8 +242,8 @@ public class AStarCalculation {
             Collections.sort(successors, new Comparator<Pair>() {
                 @Override
                 public int compare(Pair p1, Pair p2) {
-                    double h1 = calculateHValue(p1.first, p1.second, dest);
-                    double h2 = calculateHValue(p2.first, p2.second, dest);
+                    int h1 = calculateHValue(p1.first, p1.second, dest);
+                    int h2 = calculateHValue(p2.first, p2.second, dest);
                     if (h1 < h2) {
                         return -1;
                     } else if (h1 > h2) {
@@ -246,15 +254,21 @@ public class AStarCalculation {
                 }
             });
 
+            //print successors
+            // System.out.println("successors: ");
+            // for (Pair p1 : successors) {
+            //     System.out.println(p1.first + " " + p1.second);
+            // }
+
             // To store the 'g', 'h' and 'f' of the 4 successors
-            double gNew, hNew, fNew;
+            int gNew, hNew, fNew;
 
             // Looping through all the successors
             for (Pair successor : successors) {
                 int row = successor.first;
                 int col = successor.second;
 
-                if (isValid(row, col) && closedList[row][col] == false && !isBlocked(grid, row, col)) {
+                if (isValid(row, col)) {
                     if (isDestination(row, col, dest)) {
                         // Set the Parent of the destination cell
                         cellDetails[row][col].parent_i = i;
@@ -262,12 +276,13 @@ public class AStarCalculation {
                         //System.out.println("The destination cell is found\n");
                         foundDest = true;
                         return tracePath(cellDetails, dest);
-                    } else {
-                        gNew = cellDetails[i][j].g + 1.0;
+                    } else if(!closedList[row][col] && !isBlocked(grid, row, col)){
+                        gNew = cellDetails[i][j].g + 1;
                         hNew = calculateHValue(row, col, dest);
                         fNew = gNew + hNew;
+                        //System.out.println("fNew: " + fNew);
 
-                        if (cellDetails[row][col].f == Double.MAX_VALUE || cellDetails[row][col].f > fNew) {
+                        if (cellDetails[row][col].f == Integer.MAX_VALUE || cellDetails[row][col].f > fNew) {
                             openList.add(new pPair(fNew, new Pair(row, col)));
 
                             // Update the details of this cell
