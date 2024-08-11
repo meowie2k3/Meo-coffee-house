@@ -3,36 +3,36 @@
 Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where you can play with cats, feed them, and serve food and beverages to customers. You can also earn money by playing a mini-game called "Line98," which you can use to buy more cats and supplies. Your cats will interact with you in delightful ways, adding charm and fun to your shop.
 
 ## 📖 Table of Contents
-- [Game Overview](#game-overview)
-- [Features](#features)
-- [Getting Started](#getting-started)
+- [Game Overview 🐱](#game-overview-🐱)
+- [Features 🌟](#features-🌟)
+- [Getting Started 🚀](#getting-started-🚀)
   - [Installation](#installation)
   - [How to Play](#how-to-play)
-- [In-Game Mechanics](#in-game-mechanics)
+- [In-Game Mechanics 🛠️](#in-game-mechanics-🛠️)
   - [Cats](#cats)
   - [Customer Service](#customer-service)
   - [Shop Management](#shop-management)
   - [Mini-Game: Line98](#mini-game-line98)
   - [Economy](#economy)
-- [States](#states)
+- [States 🖼️](#states-🖼️)
   - [Menu State](#menu-state)
   - [Ingame State](#ingame-state)
   - [Shop State](#shop-state)
   - [Line98 State](#line98-state)
-- [Demo](#demo)
+- [Demo 📸](#demo-📸)
   - [Cat Interactions](#cat-interactions)
   - [Customer Service](#customer-service)
   - [Line98 Mini-Game](#line98-mini-game)
-- [Team Members](#team-members)
-- [Future Updates](#future-updates)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+- [Team Members 👥](#team-members-👥)
+- [Future Updates 🔮](#future-updates-🔮)
+- [Contributing 🤝](#contributing-🤝)
+- [License 📜](#license-📜)
+- [Contact 📧](#contact-📧)
 
-## 🐱 Game Overview
+## Game Overview 🐱
 **Meow Coffee House** lets you create a cozy environment where customers can enjoy food, drinks, and the company of adorable cats. Keep your cats happy, serve customers, and expand your shop by earning money through both your business and the "Line98" mini-game.
 
-## 🌟 Features
+## Features 🌟
 - **Play with Cats**: Interact with cats that have unique behaviors. They might move, stand, sit, or sleep.
 - **Feed the Cats**: Keep your cats well-fed with a variety of cat foods.
 - **Serve Customers**: Prepare and serve food and beverages to customers.
@@ -40,7 +40,7 @@ Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where 
 - **Mini-Game "Line98"**: Play "Line98" to earn extra money for buying food and cats.
 - **Interactive Cats**: Click on the cats to see them randomly react, such as moving, standing, or sitting. Their normal state is sleeping.
 
-## 🚀 Getting Started
+## Getting Started 🚀
 
 ### Installation
 1. Clone the repository:
@@ -64,7 +64,7 @@ Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where 
 4. **Play Line98**: Access the "Line98" mini-game to earn extra money.
 5. **Shop**: Use your earnings to buy new cats, food, and upgrades.
 
-## 🛠️ In-Game Mechanics
+## In-Game Mechanics 🛠️
 
 ### Cats
 - There are many kinds of cats, and they will react to your actions on them.
@@ -87,7 +87,7 @@ Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where 
 - Balance your earnings from customer service and the mini-game to grow your shop.
 - Invest wisely in upgrades and new items.
 
-## 🖼️ State
+## States 🖼️
 
 ### Menu State: 
   
@@ -105,7 +105,7 @@ Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where 
   
   <div align ="center"><img src="Resources/readme/line98.png" alt="Line98 State" width="50%"/></div>
 
-## 📸 Demo
+## Demo 📸
 
 ### Cat Interactions
 <div align ="center"><img src="Resources/readme/cats.gif" alt="Cat Interaction"/></div>
@@ -116,19 +116,19 @@ Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where 
 ### Line98 Mini-Game
 <div align ="center"><img src="Resources/readme/line98.gif" alt="Line98 Mini-Game"/></div>
 
-## 👥 Team Members
+## Team Members 👥
 Minh Huy, Tri Dung, Yen Chi, Tan Hung, Khanh Quynh
 
-## 🔮 Future Updates
+## Future Updates 🔮
 - **New Foods**: Adding more foods.
 - **Expanded Menu**: Introducing more food and drink options for customers.
 - **Decorations**: Customization options for your shop.
 
-## 🤝 Contributing
+## Contributing 🤝
 Contributions are welcome! If you’d like to contribute, please fork the repository and create a pull request. For major changes, please open an issue to discuss your ideas first.
 
-## 📜 License
+## License 📜
+...
 
-
-## 📧 Contact
+## Contact 📧
 For questions or suggestions, please contact ...
