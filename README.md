@@ -30,9 +30,11 @@ Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where 
 - [Contact](#contact)
 
 <h2 id="game-overview">🐱 Game Overview</h2>
+
 **Meow Coffee House** lets you create a cozy environment where customers can enjoy food, drinks, and the company of adorable cats. Keep your cats happy, serve customers, and expand your shop by earning money through both your business and the "Line98" mini-game.
 
 <h2 id="features">🌟 Features</h2>
+
 - **Play with Cats**: Interact with cats that have unique behaviors. They might move, stand, sit, or sleep.
 - **Feed the Cats**: Keep your cats well-fed with a variety of cat foods.
 - **Serve Customers**: Prepare and serve food and beverages to customers.
@@ -120,6 +122,7 @@ Welcome to **Meow Coffee House**! Manage your own cat-themed coffee shop, where 
 Minh Huy, Tri Dung, Yen Chi, Tan Hung, Khanh Quynh
 
 <h2 id="future-updates">🔮 Future Updates</h2>
+
 - **New Foods**: Adding more foods.
 - **Expanded Menu**: Introducing more food and drink options for customers.
 - **Decorations**: Customization options for your shop.
